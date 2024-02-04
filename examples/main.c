@@ -16,6 +16,7 @@
 #include "main.h"
 #include <io.h>
 #include "osqp.h"
+#include "procesar_informacion_entrada.h"
 #include "registrar_errores.h"
 #include "tipos_optimizacion.h"
 #include "verificar_entradas.h"
@@ -41,14 +42,15 @@
 
   
     // Se crean variables para almacenar los datos de los CSV
-    informacion_entrada_t informacion_sistema;
-
+    informacion_entrada_t   informacion_sistema;
+    informacion_procesada_t informacion_procesada;
     //Se define la estructura donde van a ir contenidas las matrices del problema de optimizacion
     //problema_optimizacion_t problema_optimizacion = { 0 };
 
     // Se asume éxito inicialmente.
     int estado = EXITO;
 
+  
     //Se establece como idioma el español.
     ajustes_idioma();
 

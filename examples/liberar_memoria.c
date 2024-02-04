@@ -67,6 +67,8 @@ void liberar_memoria_csvs(informacion_entrada_t* informacion_sistema) {
 
 }
 
+
+
 void finalizar_problema_optimizacion(problema_optimizacion_t* problema_optimizacion) {
   /*En este subprograma se liberan las posiciones en memoria reservadas a las matrices para la resolucion del
   problema*/

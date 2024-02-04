@@ -335,6 +335,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClCompile Include="..\examples\verificar_vehiculos.c" />
     <ClCompile Include="calcular_dimensiones_problema.c" />
     <ClCompile Include="preparar_problema_optimizacion.c" />
+    <ClCompile Include="procesar_informacion_entrada.c" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="F:\osqp1feb\osqp-1.0.0.beta1\build\ZERO_CHECK.vcxproj">
@@ -366,6 +367,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClInclude Include="operaciones_fecha.h" />
     <ClInclude Include="operaciones_string.h" />
     <ClInclude Include="preparar_problema_optimizacion.h" />
+    <ClInclude Include="procesar_informacion_entrada.h" />
     <ClInclude Include="tipos_optimizacion.h" />
     <ClInclude Include="validaciones.h" />
     <ClInclude Include="verificar_baterias.h" />

@@ -7,7 +7,7 @@
 #include <wctype.h>
 
 
-
+#define NUMERO_TERMINALES 12
 
   //Tipo que sirve para almacenar la posicion de una fecha en los
   //csvs.
@@ -215,23 +215,43 @@ typedef struct {
     int       numero_terminal;
     int       punto_inicio;
     int       punto_final;
-    struct tm fecha_inicio;
-    struct tm fecha_final;
+    struct tm *fecha_inicio;
+    struct tm* fecha_final;
     float     bateria_inicial;
     float     bateria_final;
     float     capacidad_bateria;
     char*     modo_carga;
 }vehiculos_t;
 
+//numero_vehiculos -> numero de vehiculos en el sistema 
+//vehiculos-> variable que sirve para almacenar la informacion de un vehiculo
 typedef struct {
     int     numero_vehiculos;
     vehiculos_t vehiculos;
 }informacion_vehiculos_t;
 
+//Struct que sirve para almacenar la informacion relevante de las 
+// baterías conectadas al sistema
+// Considerar_objetivo boolean type 
+// int numero_terminal -> numero de terminal al que está conectado el vehículo
+// capacidad_batería -> capacidad de la batería del vehículo en cuestión 
+// bateria_inicial  -> bateria inicial de la batería
+// bateria_objetivo  -> objetivo de carga de la batería (% carga deseado)
+// maxima_potencia   -> maxima potencia que puede aceptar la batería 
+// fecha_inicio      -> fecha de inicio de carga de la batería 
+// fecha_final       -> fecha de finalización de carga de la batería 
+// fecha_objetivo    -> fecha de objetivo de carga de la batería (posible
+// punto_inicio      -> punto de inciio de carga de la batería 
+// punto_final       -> punto de finalización de carga de la batería 
+// punto_objetivo    -> punto de objetivo de carga de la batería 
+
 
 typedef struct {
     bool   considerar_objetivo;
     int    numero_terminal;
+    int    punto_inicio;
+    int    punto_final;
+    int    punto_objetivo;
     int    capacidad_bateria;
     int    bateria_inicial;
     float  bateria_objetivo;
@@ -241,16 +261,28 @@ typedef struct {
     struct tm* fecha_objetivo;
 }bateria_t;
 
+// Numero_baterias-> Numero de baterías presente en el sistema
+// baterias-> array con la informacion de todas las baterías presentes en el sistema 
+
 typedef struct {
     int numero_baterias;
     bateria_t* baterias;
 }informacion_baterias_t;
 
+//Struct que sirve para almacenar cuantos puntos de cálculo tiene la optimización
+//cada punto tiene una fecha asociada.
 
+// fecha_punto -> fecha del punto asociado en cuestión 
+// delta -> deltat entre el punto de simulacion en cuestión y el anterior deltat puede cambiar) 
 typedef struct {
     struct tm* fecha_punto;
     int        delta;
 }punto_simulacion_t;
+
+//Struct que sirve para almacenar la informacion de los puntos de simulacion 
+//  numero_puntos_simulacion-> variable que sirve para almacenar el número de puntos que contiene la simulación.
+//  delta_minutos-> diferencia temporal entre los diferentes puntos de la simulación.
+//  puntos_simulacion-> array que contiene la informacion de todos los puntos de la simulacion
 
 typedef struct {
     int numero_puntos_simulacion;
@@ -258,21 +290,49 @@ typedef struct {
     punto_simulacion_t* puntos_simulacion;
 }informacion_puntos_simulacion_t;
 
+//Struct que sirve para almacenar las restricciones del sistema 
+//fácilmente  almacenan en este caso la maxima potencia que pueden intercambiar
+//la red con el sistema y la red en cada fase.
 typedef struct {
-    float potencia_maxima_red;
-    float potencia_minima_red;
-    float potencia_maxima_red_R;
-    float potencia_maxima_red_S;
-    float potencia_maxima_red_T;
-    float potencia_minima_red_R;
-    float potencia_minima_red_S;
-    float potencia_minima_red_T;
-    float potencia_maxima_estaciones_carga[12];
+    OSQPFloat  potencia_maxima_red;
+    OSQPFloat  potencia_minima_red;
+    OSQPFloat  potencia_maxima_red_R;
+    OSQPFloat  potencia_maxima_red_S;
+    OSQPFloat  potencia_maxima_red_T;
+    OSQPFloat  potencia_minima_red_R;
+    OSQPFloat  potencia_minima_red_S;
+    OSQPFloat  potencia_minima_red_T;
+    float      potencia_maxima_estaciones_carga[12];
+    float      potencia_minima_estaciones_carga[12];
 }informacion_restricciones_sistema_t;
+
+// Este struct contiene para cada precio el valor del precio, la fecha asociada ( hora) y el punto 
+// inicial y final de la simulacion a los cuales le corresponde ese precio.
+
+typedef struct {
+    struct tm* fecha_asociada;
+    float      precio;
+    int        punto_inicial;
+    int        punto_final;
+}precio_t;
+
+//Este struct contiene un array con los precios asociados a cada hora y el numero de horas.
+typedef struct {
+    int numero_horas;
+    precio_t* precios;
+}informacion_precio_t ;
+
+// Se definen structs para almacenar la informacion ya extraida de los CSVs de
+// entrada para poder rellenar las matrices con la informacion relevante fácilmente
+// informacion_vehiculos_t -> este struct se utiliza para almacenar toda la informacion relevante a los vehiculos
+// informacion_baterias_t  -> este struct se utiliza para almcanear toda la informacion relevante a las baterias
+// informacion_puntos_simulacion_t -> informacion de los puntos de simulacion
+// informacion_restricciones_sistema -> informacion de las restricciones del sistema
+// informacion_precio_t -> informacion de los precios de la electricidad
 typedef struct {
     informacion_vehiculos_t         informacion_vehiculos;
     informacion_baterias_t          informacion_baterias;
     informacion_puntos_simulacion_t informacion_puntos_simulacion;
     informacion_restricciones_sistema_t informacion_restricciones_sistema;
-   
+    informacion_precio_t                informacion_precio_t;
 }informacion_procesada_t;
