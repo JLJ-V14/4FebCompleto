@@ -44,7 +44,7 @@
     informacion_entrada_t informacion_sistema;
 
     //Se define la estructura donde van a ir contenidas las matrices del problema de optimizacion
-    problema_optimizacion_t problema_optimizacion = { 0 };
+    //problema_optimizacion_t problema_optimizacion = { 0 };
 
     // Se asume éxito inicialmente.
     int estado = EXITO;
@@ -97,7 +97,7 @@
   fin_programa:
     // Se libera la memoria reservada
     liberar_memoria_csvs(&informacion_sistema);
-    finalizar_problema_optimizacion(&problema_optimizacion);
+   // finalizar_problema_optimizacion(&problema_optimizacion);
 
 
     

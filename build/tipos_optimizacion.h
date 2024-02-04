@@ -3,6 +3,7 @@
   van a utilizar durante todo el codigo*/
 
 #include "osqp.h"
+#include <stdbool.h>
 #include <wctype.h>
 
 
@@ -154,7 +155,7 @@ typedef struct {
 // P_x->   Valores de los términos diferentes de 0.
 // P_i->   Indica los índices de las filas en las que se encuentran los 
 // terminos diferentes de 0.
-// 
+
 typedef struct {
     OSQPCscMatrix* P;
     OSQPInt        P_nnz;
@@ -164,7 +165,16 @@ typedef struct {
     OSQPFloat*     q;
 }matriz_objetivos_t;
 
-//
+//La matriz A sirve para indicar las restricciones a las que están sometidas las variables 
+//de decisión 
+//A_nnz-> Términos diferenes de 0
+//A_x-> Este Array contiene los valores diferentes de 0 en la matriz 
+//A_i-> Este vector contiene los índices de las filas en las que se encuentran los términos diferentes 
+//de 0 
+//A_p-> Indica cuando empiezan las columnas respecto al vector A_i 
+//l-> valor inferior de la restricción
+//u-> valor superior de la restricción
+
 typedef struct {
     OSQPCscMatrix* A;
     OSQPInt        A_nnz;
@@ -174,6 +184,10 @@ typedef struct {
     OSQPFloat*     l;
     OSQPFloat*     u;
 }matriz_restricciones_t;
+
+//Ajustes generales del problema de optimizacion en este estructura
+//se guardan las matrices, el solver los ajustes el numero de variables
+//y restricciones.
 
 typedef struct {
     OSQPSolver*                solver;
@@ -185,3 +199,80 @@ typedef struct {
     OSQPInt                    numero_restricciones;
 }problema_optimizacion_t;
 
+//Struct que se utiliza para guardar la informacion importante de un vehiculo
+//Se compone de los siguientes campos: 
+//numero_terminal -> numero de terminal a que esta conectado el vehiculo
+//punto_inicio    -> punto de inicio de la simulacion
+//punto_final     -> punto final de la simulacion 
+//fecha_inicio    -> fecha de inicio de la carga
+//fecha_final     -> fecha final de la carga 
+//bateria_inicial -> bateria inicial de la carga
+//bateria_final   -> bateria final de la carga
+//capacidad_bateria -> capacidad de la bateria del vehiculo 
+//modo_carga-> modo de carga del vehiculo rapida o normal.
+
+typedef struct {
+    int       numero_terminal;
+    int       punto_inicio;
+    int       punto_final;
+    struct tm fecha_inicio;
+    struct tm fecha_final;
+    float     bateria_inicial;
+    float     bateria_final;
+    float     capacidad_bateria;
+    char*     modo_carga;
+}vehiculos_t;
+
+typedef struct {
+    int     numero_vehiculos;
+    vehiculos_t vehiculos;
+}informacion_vehiculos_t;
+
+
+typedef struct {
+    bool   considerar_objetivo;
+    int    numero_terminal;
+    int    capacidad_bateria;
+    int    bateria_inicial;
+    float  bateria_objetivo;
+    float  maxima_potencia;
+    struct tm* fecha_inicio;
+    struct tm* fecha_final;
+    struct tm* fecha_objetivo;
+}bateria_t;
+
+typedef struct {
+    int numero_baterias;
+    bateria_t* baterias;
+}informacion_baterias_t;
+
+
+typedef struct {
+    struct tm* fecha_punto;
+    int        delta;
+}punto_simulacion_t;
+
+typedef struct {
+    int numero_puntos_simulacion;
+    int delta_minutos;
+    punto_simulacion_t* puntos_simulacion;
+}informacion_puntos_simulacion_t;
+
+typedef struct {
+    float potencia_maxima_red;
+    float potencia_minima_red;
+    float potencia_maxima_red_R;
+    float potencia_maxima_red_S;
+    float potencia_maxima_red_T;
+    float potencia_minima_red_R;
+    float potencia_minima_red_S;
+    float potencia_minima_red_T;
+    float potencia_maxima_estaciones_carga[12];
+}informacion_restricciones_sistema_t;
+typedef struct {
+    informacion_vehiculos_t         informacion_vehiculos;
+    informacion_baterias_t          informacion_baterias;
+    informacion_puntos_simulacion_t informacion_puntos_simulacion;
+    informacion_restricciones_sistema_t informacion_restricciones_sistema;
+   
+}informacion_procesada_t;
