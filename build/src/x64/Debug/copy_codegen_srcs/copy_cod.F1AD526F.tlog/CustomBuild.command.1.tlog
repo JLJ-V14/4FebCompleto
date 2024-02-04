@@ -1,0 +1,68 @@
+^F:\OSQP1FEB\OSQP-1.0.0.BETA1\BUILD\CMAKEFILES\D62045A030AF77D715AB800B621D74AF\AUXIL.C.RULE
+setlocal
+F:\Cmake\bin\cmake.exe -E copy F:/osqp1feb/osqp-1.0.0.beta1/src/auxil.c F:/osqp1feb/osqp-1.0.0.beta1/build/codegen_src/src/auxil.c
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^F:\OSQP1FEB\OSQP-1.0.0.BETA1\BUILD\CMAKEFILES\D62045A030AF77D715AB800B621D74AF\ERROR.C.RULE
+setlocal
+F:\Cmake\bin\cmake.exe -E copy F:/osqp1feb/osqp-1.0.0.beta1/src/error.c F:/osqp1feb/osqp-1.0.0.beta1/build/codegen_src/src/error.c
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^F:\OSQP1FEB\OSQP-1.0.0.BETA1\BUILD\CMAKEFILES\D62045A030AF77D715AB800B621D74AF\OSQP_API.C.RULE
+setlocal
+F:\Cmake\bin\cmake.exe -E copy F:/osqp1feb/osqp-1.0.0.beta1/src/osqp_api.c F:/osqp1feb/osqp-1.0.0.beta1/build/codegen_src/src/osqp_api.c
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^F:\OSQP1FEB\OSQP-1.0.0.BETA1\BUILD\CMAKEFILES\D62045A030AF77D715AB800B621D74AF\SCALING.C.RULE
+setlocal
+F:\Cmake\bin\cmake.exe -E copy F:/osqp1feb/osqp-1.0.0.beta1/src/scaling.c F:/osqp1feb/osqp-1.0.0.beta1/build/codegen_src/src/scaling.c
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^F:\OSQP1FEB\OSQP-1.0.0.BETA1\BUILD\CMAKEFILES\D62045A030AF77D715AB800B621D74AF\UTIL.C.RULE
+setlocal
+F:\Cmake\bin\cmake.exe -E copy F:/osqp1feb/osqp-1.0.0.beta1/src/util.c F:/osqp1feb/osqp-1.0.0.beta1/build/codegen_src/src/util.c
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^F:\OSQP1FEB\OSQP-1.0.0.BETA1\BUILD\CMAKEFILES\F5096D58B040580D88917FF2CF6325F2\COPY_CODEGEN_SRCS.RULE
+setlocal
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^F:\OSQP1FEB\OSQP-1.0.0.BETA1\SRC\CMAKELISTS.TXT
+setlocal
+F:\Cmake\bin\cmake.exe -SF:/osqp1feb/osqp-1.0.0.beta1 -BF:/osqp1feb/osqp-1.0.0.beta1/build --check-stamp-file F:/osqp1feb/osqp-1.0.0.beta1/build/src/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

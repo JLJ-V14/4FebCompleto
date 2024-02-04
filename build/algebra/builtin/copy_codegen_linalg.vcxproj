@@ -1,0 +1,1127 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <PreferredToolArchitecture>x64</PreferredToolArchitecture>
+  </PropertyGroup>
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="MinSizeRel|x64">
+      <Configuration>MinSizeRel</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="RelWithDebInfo|x64">
+      <Configuration>RelWithDebInfo</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{D6971208-CF45-366B-A352-58ED05F40963}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <WindowsTargetPlatformVersion>10.0.22621.0</WindowsTargetPlatformVersion>
+    <Platform>x64</Platform>
+    <ProjectName>copy_codegen_linalg</ProjectName>
+    <VCProjectUpgraderObjectName>NoUpgrade</VCProjectUpgraderObjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">
+    <Midl>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">
+    <Midl>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <CustomBuild Include="F:\osqp1feb\osqp-1.0.0.beta1\build\CMakeFiles\c1ce385e34aab7c13ee1443e89b19701\algebra_impl.h.rule">
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Copying algebra_impl.h</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
+F:\Cmake\bin\cmake.exe -E copy F:/osqp1feb/osqp-1.0.0.beta1/algebra/builtin/algebra_impl.h F:/osqp1feb/osqp-1.0.0.beta1/build/codegen_src/inc/private/algebra_impl.h
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">F:\osqp1feb\osqp-1.0.0.beta1\algebra\builtin\algebra_impl.h;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">F:\osqp1feb\osqp-1.0.0.beta1\build\codegen_src\inc\private\algebra_impl.h</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Copying algebra_impl.h</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
+F:\Cmake\bin\cmake.exe -E copy F:/osqp1feb/osqp-1.0.0.beta1/algebra/builtin/algebra_impl.h F:/osqp1feb/osqp-1.0.0.beta1/build/codegen_src/inc/private/algebra_impl.h
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">F:\osqp1feb\osqp-1.0.0.beta1\algebra\builtin\algebra_impl.h;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">F:\osqp1feb\osqp-1.0.0.beta1\build\codegen_src\inc\private\algebra_impl.h</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Copying algebra_impl.h</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">setlocal
+F:\Cmake\bin\cmake.exe -E copy F:/osqp1feb/osqp-1.0.0.beta1/algebra/builtin/algebra_impl.h F:/osqp1feb/osqp-1.0.0.beta1/build/codegen_src/inc/private/algebra_impl.h
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">F:\osqp1feb\osqp-1.0.0.beta1\algebra\builtin\algebra_impl.h;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">F:\osqp1feb\osqp-1.0.0.beta1\build\codegen_src\inc\private\algebra_impl.h</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Copying algebra_impl.h</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">setlocal
+F:\Cmake\bin\cmake.exe -E copy F:/osqp1feb/osqp-1.0.0.beta1/algebra/builtin/algebra_impl.h F:/osqp1feb/osqp-1.0.0.beta1/build/codegen_src/inc/private/algebra_impl.h
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">F:\osqp1feb\osqp-1.0.0.beta1\algebra\builtin\algebra_impl.h;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">F:\osqp1feb\osqp-1.0.0.beta1\build\codegen_src\inc\private\algebra_impl.h</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</LinkObjects>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="F:\osqp1feb\osqp-1.0.0.beta1\build\CMakeFiles\c1ce385e34aab7c13ee1443e89b19701\csc_math.h.rule">
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Copying csc_math.h</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
+F:\Cmake\bin\cmake.exe -E copy F:/osqp1feb/osqp-1.0.0.beta1/algebra/_common/csc_math.h F:/osqp1feb/osqp-1.0.0.beta1/build/codegen_src/inc/private/csc_math.h
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">F:\osqp1feb\osqp-1.0.0.beta1\algebra\_common\csc_math.h;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">F:\osqp1feb\osqp-1.0.0.beta1\build\codegen_src\inc\private\csc_math.h</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Copying csc_math.h</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
+F:\Cmake\bin\cmake.exe -E copy F:/osqp1feb/osqp-1.0.0.beta1/algebra/_common/csc_math.h F:/osqp1feb/osqp-1.0.0.beta1/build/codegen_src/inc/private/csc_math.h
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">F:\osqp1feb\osqp-1.0.0.beta1\algebra\_common\csc_math.h;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">F:\osqp1feb\osqp-1.0.0.beta1\build\codegen_src\inc\private\csc_math.h</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Copying csc_math.h</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">setlocal
+F:\Cmake\bin\cmake.exe -E copy F:/osqp1feb/osqp-1.0.0.beta1/algebra/_common/csc_math.h F:/osqp1feb/osqp-1.0.0.beta1/build/codegen_src/inc/private/csc_math.h
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">F:\osqp1feb\osqp-1.0.0.beta1\algebra\_common\csc_math.h;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">F:\osqp1feb\osqp-1.0.0.beta1\build\codegen_src\inc\private\csc_math.h</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Copying csc_math.h</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">setlocal
+F:\Cmake\bin\cmake.exe -E copy F:/osqp1feb/osqp-1.0.0.beta1/algebra/_common/csc_math.h F:/osqp1feb/osqp-1.0.0.beta1/build/codegen_src/inc/private/csc_math.h
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">F:\osqp1feb\osqp-1.0.0.beta1\algebra\_common\csc_math.h;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">F:\osqp1feb\osqp-1.0.0.beta1\build\codegen_src\inc\private\csc_math.h</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</LinkObjects>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="F:\osqp1feb\osqp-1.0.0.beta1\build\CMakeFiles\c1ce385e34aab7c13ee1443e89b19701\csc_utils.h.rule">
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Copying csc_utils.h</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
+F:\Cmake\bin\cmake.exe -E copy F:/osqp1feb/osqp-1.0.0.beta1/algebra/_common/csc_utils.h F:/osqp1feb/osqp-1.0.0.beta1/build/codegen_src/inc/private/csc_utils.h
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">F:\osqp1feb\osqp-1.0.0.beta1\algebra\_common\csc_utils.h;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">F:\osqp1feb\osqp-1.0.0.beta1\build\codegen_src\inc\private\csc_utils.h</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Copying csc_utils.h</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
+F:\Cmake\bin\cmake.exe -E copy F:/osqp1feb/osqp-1.0.0.beta1/algebra/_common/csc_utils.h F:/osqp1feb/osqp-1.0.0.beta1/build/codegen_src/inc/private/csc_utils.h
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">F:\osqp1feb\osqp-1.0.0.beta1\algebra\_common\csc_utils.h;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">F:\osqp1feb\osqp-1.0.0.beta1\build\codegen_src\inc\private\csc_utils.h</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Copying csc_utils.h</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">setlocal
+F:\Cmake\bin\cmake.exe -E copy F:/osqp1feb/osqp-1.0.0.beta1/algebra/_common/csc_utils.h F:/osqp1feb/osqp-1.0.0.beta1/build/codegen_src/inc/private/csc_utils.h
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">F:\osqp1feb\osqp-1.0.0.beta1\algebra\_common\csc_utils.h;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">F:\osqp1feb\osqp-1.0.0.beta1\build\codegen_src\inc\private\csc_utils.h</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Copying csc_utils.h</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">setlocal
+F:\Cmake\bin\cmake.exe -E copy F:/osqp1feb/osqp-1.0.0.beta1/algebra/_common/csc_utils.h F:/osqp1feb/osqp-1.0.0.beta1/build/codegen_src/inc/private/csc_utils.h
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">F:\osqp1feb\osqp-1.0.0.beta1\algebra\_common\csc_utils.h;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">F:\osqp1feb\osqp-1.0.0.beta1\build\codegen_src\inc\private\csc_utils.h</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</LinkObjects>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="F:\osqp1feb\osqp-1.0.0.beta1\build\CMakeFiles\c1ce385e34aab7c13ee1443e89b19701\kkt.h.rule">
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Copying kkt.h</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
+F:\Cmake\bin\cmake.exe -E copy F:/osqp1feb/osqp-1.0.0.beta1/algebra/_common/kkt.h F:/osqp1feb/osqp-1.0.0.beta1/build/codegen_src/inc/private/kkt.h
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">F:\osqp1feb\osqp-1.0.0.beta1\algebra\_common\kkt.h;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">F:\osqp1feb\osqp-1.0.0.beta1\build\codegen_src\inc\private\kkt.h</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Copying kkt.h</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
+F:\Cmake\bin\cmake.exe -E copy F:/osqp1feb/osqp-1.0.0.beta1/algebra/_common/kkt.h F:/osqp1feb/osqp-1.0.0.beta1/build/codegen_src/inc/private/kkt.h
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">F:\osqp1feb\osqp-1.0.0.beta1\algebra\_common\kkt.h;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">F:\osqp1feb\osqp-1.0.0.beta1\build\codegen_src\inc\private\kkt.h</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Copying kkt.h</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">setlocal
+F:\Cmake\bin\cmake.exe -E copy F:/osqp1feb/osqp-1.0.0.beta1/algebra/_common/kkt.h F:/osqp1feb/osqp-1.0.0.beta1/build/codegen_src/inc/private/kkt.h
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">F:\osqp1feb\osqp-1.0.0.beta1\algebra\_common\kkt.h;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">F:\osqp1feb\osqp-1.0.0.beta1\build\codegen_src\inc\private\kkt.h</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Copying kkt.h</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">setlocal
+F:\Cmake\bin\cmake.exe -E copy F:/osqp1feb/osqp-1.0.0.beta1/algebra/_common/kkt.h F:/osqp1feb/osqp-1.0.0.beta1/build/codegen_src/inc/private/kkt.h
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">F:\osqp1feb\osqp-1.0.0.beta1\algebra\_common\kkt.h;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">F:\osqp1feb\osqp-1.0.0.beta1\build\codegen_src\inc\private\kkt.h</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</LinkObjects>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="F:\osqp1feb\osqp-1.0.0.beta1\build\CMakeFiles\c1ce385e34aab7c13ee1443e89b19701\qdldl.h.rule">
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Copying qdldl.h</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
+F:\Cmake\bin\cmake.exe -E copy F:/osqp1feb/osqp-1.0.0.beta1/algebra/_common/lin_sys/qdldl/qdldl_sources/include/qdldl.h F:/osqp1feb/osqp-1.0.0.beta1/build/codegen_src/inc/private/qdldl.h
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">F:\osqp1feb\osqp-1.0.0.beta1\algebra\_common\lin_sys\qdldl\qdldl_sources\include\qdldl.h;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">F:\osqp1feb\osqp-1.0.0.beta1\build\codegen_src\inc\private\qdldl.h</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Copying qdldl.h</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
+F:\Cmake\bin\cmake.exe -E copy F:/osqp1feb/osqp-1.0.0.beta1/algebra/_common/lin_sys/qdldl/qdldl_sources/include/qdldl.h F:/osqp1feb/osqp-1.0.0.beta1/build/codegen_src/inc/private/qdldl.h
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">F:\osqp1feb\osqp-1.0.0.beta1\algebra\_common\lin_sys\qdldl\qdldl_sources\include\qdldl.h;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">F:\osqp1feb\osqp-1.0.0.beta1\build\codegen_src\inc\private\qdldl.h</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Copying qdldl.h</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">setlocal
+F:\Cmake\bin\cmake.exe -E copy F:/osqp1feb/osqp-1.0.0.beta1/algebra/_common/lin_sys/qdldl/qdldl_sources/include/qdldl.h F:/osqp1feb/osqp-1.0.0.beta1/build/codegen_src/inc/private/qdldl.h
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">F:\osqp1feb\osqp-1.0.0.beta1\algebra\_common\lin_sys\qdldl\qdldl_sources\include\qdldl.h;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">F:\osqp1feb\osqp-1.0.0.beta1\build\codegen_src\inc\private\qdldl.h</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Copying qdldl.h</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">setlocal
+F:\Cmake\bin\cmake.exe -E copy F:/osqp1feb/osqp-1.0.0.beta1/algebra/_common/lin_sys/qdldl/qdldl_sources/include/qdldl.h F:/osqp1feb/osqp-1.0.0.beta1/build/codegen_src/inc/private/qdldl.h
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">F:\osqp1feb\osqp-1.0.0.beta1\algebra\_common\lin_sys\qdldl\qdldl_sources\include\qdldl.h;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">F:\osqp1feb\osqp-1.0.0.beta1\build\codegen_src\inc\private\qdldl.h</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</LinkObjects>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="F:\osqp1feb\osqp-1.0.0.beta1\build\CMakeFiles\c1ce385e34aab7c13ee1443e89b19701\qdldl_interface.h.rule">
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Copying qdldl_interface.h</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
+F:\Cmake\bin\cmake.exe -E copy F:/osqp1feb/osqp-1.0.0.beta1/algebra/_common/lin_sys/qdldl/qdldl_interface.h F:/osqp1feb/osqp-1.0.0.beta1/build/codegen_src/inc/private/qdldl_interface.h
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">F:\osqp1feb\osqp-1.0.0.beta1\algebra\_common\lin_sys\qdldl\qdldl_interface.h;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">F:\osqp1feb\osqp-1.0.0.beta1\build\codegen_src\inc\private\qdldl_interface.h</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Copying qdldl_interface.h</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
+F:\Cmake\bin\cmake.exe -E copy F:/osqp1feb/osqp-1.0.0.beta1/algebra/_common/lin_sys/qdldl/qdldl_interface.h F:/osqp1feb/osqp-1.0.0.beta1/build/codegen_src/inc/private/qdldl_interface.h
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">F:\osqp1feb\osqp-1.0.0.beta1\algebra\_common\lin_sys\qdldl\qdldl_interface.h;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">F:\osqp1feb\osqp-1.0.0.beta1\build\codegen_src\inc\private\qdldl_interface.h</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Copying qdldl_interface.h</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">setlocal
+F:\Cmake\bin\cmake.exe -E copy F:/osqp1feb/osqp-1.0.0.beta1/algebra/_common/lin_sys/qdldl/qdldl_interface.h F:/osqp1feb/osqp-1.0.0.beta1/build/codegen_src/inc/private/qdldl_interface.h
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">F:\osqp1feb\osqp-1.0.0.beta1\algebra\_common\lin_sys\qdldl\qdldl_interface.h;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">F:\osqp1feb\osqp-1.0.0.beta1\build\codegen_src\inc\private\qdldl_interface.h</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Copying qdldl_interface.h</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">setlocal
+F:\Cmake\bin\cmake.exe -E copy F:/osqp1feb/osqp-1.0.0.beta1/algebra/_common/lin_sys/qdldl/qdldl_interface.h F:/osqp1feb/osqp-1.0.0.beta1/build/codegen_src/inc/private/qdldl_interface.h
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">F:\osqp1feb\osqp-1.0.0.beta1\algebra\_common\lin_sys\qdldl\qdldl_interface.h;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">F:\osqp1feb\osqp-1.0.0.beta1\build\codegen_src\inc\private\qdldl_interface.h</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</LinkObjects>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="F:\osqp1feb\osqp-1.0.0.beta1\build\CMakeFiles\c1ce385e34aab7c13ee1443e89b19701\qdldl_types.h.rule">
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Copying qdldl_types.h</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
+F:\Cmake\bin\cmake.exe -E copy F:/osqp1feb/osqp-1.0.0.beta1/algebra/_common/lin_sys/qdldl/qdldl_codegen_types.h.in F:/osqp1feb/osqp-1.0.0.beta1/build/codegen_src/inc/private/qdldl_types.h
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">F:\osqp1feb\osqp-1.0.0.beta1\algebra\_common\lin_sys\qdldl\qdldl_codegen_types.h.in;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">F:\osqp1feb\osqp-1.0.0.beta1\build\codegen_src\inc\private\qdldl_types.h</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Copying qdldl_types.h</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
+F:\Cmake\bin\cmake.exe -E copy F:/osqp1feb/osqp-1.0.0.beta1/algebra/_common/lin_sys/qdldl/qdldl_codegen_types.h.in F:/osqp1feb/osqp-1.0.0.beta1/build/codegen_src/inc/private/qdldl_types.h
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">F:\osqp1feb\osqp-1.0.0.beta1\algebra\_common\lin_sys\qdldl\qdldl_codegen_types.h.in;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">F:\osqp1feb\osqp-1.0.0.beta1\build\codegen_src\inc\private\qdldl_types.h</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Copying qdldl_types.h</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">setlocal
+F:\Cmake\bin\cmake.exe -E copy F:/osqp1feb/osqp-1.0.0.beta1/algebra/_common/lin_sys/qdldl/qdldl_codegen_types.h.in F:/osqp1feb/osqp-1.0.0.beta1/build/codegen_src/inc/private/qdldl_types.h
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">F:\osqp1feb\osqp-1.0.0.beta1\algebra\_common\lin_sys\qdldl\qdldl_codegen_types.h.in;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">F:\osqp1feb\osqp-1.0.0.beta1\build\codegen_src\inc\private\qdldl_types.h</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Copying qdldl_types.h</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">setlocal
+F:\Cmake\bin\cmake.exe -E copy F:/osqp1feb/osqp-1.0.0.beta1/algebra/_common/lin_sys/qdldl/qdldl_codegen_types.h.in F:/osqp1feb/osqp-1.0.0.beta1/build/codegen_src/inc/private/qdldl_types.h
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">F:\osqp1feb\osqp-1.0.0.beta1\algebra\_common\lin_sys\qdldl\qdldl_codegen_types.h.in;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">F:\osqp1feb\osqp-1.0.0.beta1\build\codegen_src\inc\private\qdldl_types.h</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</LinkObjects>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="F:\osqp1feb\osqp-1.0.0.beta1\build\CMakeFiles\c1ce385e34aab7c13ee1443e89b19701\qdldl_version.h.rule">
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Copying qdldl_version.h</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
+F:\Cmake\bin\cmake.exe -E copy F:/osqp1feb/osqp-1.0.0.beta1/algebra/_common/lin_sys/qdldl/qdldl_sources/include/qdldl_version.h F:/osqp1feb/osqp-1.0.0.beta1/build/codegen_src/inc/private/qdldl_version.h
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">F:\osqp1feb\osqp-1.0.0.beta1\algebra\_common\lin_sys\qdldl\qdldl_sources\include\qdldl_version.h;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">F:\osqp1feb\osqp-1.0.0.beta1\build\codegen_src\inc\private\qdldl_version.h</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Copying qdldl_version.h</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
+F:\Cmake\bin\cmake.exe -E copy F:/osqp1feb/osqp-1.0.0.beta1/algebra/_common/lin_sys/qdldl/qdldl_sources/include/qdldl_version.h F:/osqp1feb/osqp-1.0.0.beta1/build/codegen_src/inc/private/qdldl_version.h
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">F:\osqp1feb\osqp-1.0.0.beta1\algebra\_common\lin_sys\qdldl\qdldl_sources\include\qdldl_version.h;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">F:\osqp1feb\osqp-1.0.0.beta1\build\codegen_src\inc\private\qdldl_version.h</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Copying qdldl_version.h</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">setlocal
+F:\Cmake\bin\cmake.exe -E copy F:/osqp1feb/osqp-1.0.0.beta1/algebra/_common/lin_sys/qdldl/qdldl_sources/include/qdldl_version.h F:/osqp1feb/osqp-1.0.0.beta1/build/codegen_src/inc/private/qdldl_version.h
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">F:\osqp1feb\osqp-1.0.0.beta1\algebra\_common\lin_sys\qdldl\qdldl_sources\include\qdldl_version.h;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">F:\osqp1feb\osqp-1.0.0.beta1\build\codegen_src\inc\private\qdldl_version.h</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Copying qdldl_version.h</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">setlocal
+F:\Cmake\bin\cmake.exe -E copy F:/osqp1feb/osqp-1.0.0.beta1/algebra/_common/lin_sys/qdldl/qdldl_sources/include/qdldl_version.h F:/osqp1feb/osqp-1.0.0.beta1/build/codegen_src/inc/private/qdldl_version.h
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">F:\osqp1feb\osqp-1.0.0.beta1\algebra\_common\lin_sys\qdldl\qdldl_sources\include\qdldl_version.h;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">F:\osqp1feb\osqp-1.0.0.beta1\build\codegen_src\inc\private\qdldl_version.h</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</LinkObjects>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="F:\osqp1feb\osqp-1.0.0.beta1\build\CMakeFiles\d62045a030af77d715ab800b621d74af\algebra_libs.c.rule">
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Copying algebra_libs.c</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
+F:\Cmake\bin\cmake.exe -E copy F:/osqp1feb/osqp-1.0.0.beta1/algebra/builtin/algebra_libs.c F:/osqp1feb/osqp-1.0.0.beta1/build/codegen_src/src/algebra_libs.c
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">F:\osqp1feb\osqp-1.0.0.beta1\algebra\builtin\algebra_libs.c;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">F:\osqp1feb\osqp-1.0.0.beta1\build\codegen_src\src\algebra_libs.c</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Copying algebra_libs.c</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
+F:\Cmake\bin\cmake.exe -E copy F:/osqp1feb/osqp-1.0.0.beta1/algebra/builtin/algebra_libs.c F:/osqp1feb/osqp-1.0.0.beta1/build/codegen_src/src/algebra_libs.c
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">F:\osqp1feb\osqp-1.0.0.beta1\algebra\builtin\algebra_libs.c;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">F:\osqp1feb\osqp-1.0.0.beta1\build\codegen_src\src\algebra_libs.c</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Copying algebra_libs.c</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">setlocal
+F:\Cmake\bin\cmake.exe -E copy F:/osqp1feb/osqp-1.0.0.beta1/algebra/builtin/algebra_libs.c F:/osqp1feb/osqp-1.0.0.beta1/build/codegen_src/src/algebra_libs.c
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">F:\osqp1feb\osqp-1.0.0.beta1\algebra\builtin\algebra_libs.c;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">F:\osqp1feb\osqp-1.0.0.beta1\build\codegen_src\src\algebra_libs.c</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Copying algebra_libs.c</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">setlocal
+F:\Cmake\bin\cmake.exe -E copy F:/osqp1feb/osqp-1.0.0.beta1/algebra/builtin/algebra_libs.c F:/osqp1feb/osqp-1.0.0.beta1/build/codegen_src/src/algebra_libs.c
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">F:\osqp1feb\osqp-1.0.0.beta1\algebra\builtin\algebra_libs.c;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">F:\osqp1feb\osqp-1.0.0.beta1\build\codegen_src\src\algebra_libs.c</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</LinkObjects>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="F:\osqp1feb\osqp-1.0.0.beta1\build\CMakeFiles\d62045a030af77d715ab800b621d74af\csc_math.c.rule">
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Copying csc_math.c</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
+F:\Cmake\bin\cmake.exe -E copy F:/osqp1feb/osqp-1.0.0.beta1/algebra/_common/csc_math.c F:/osqp1feb/osqp-1.0.0.beta1/build/codegen_src/src/csc_math.c
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">F:\osqp1feb\osqp-1.0.0.beta1\algebra\_common\csc_math.c;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">F:\osqp1feb\osqp-1.0.0.beta1\build\codegen_src\src\csc_math.c</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Copying csc_math.c</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
+F:\Cmake\bin\cmake.exe -E copy F:/osqp1feb/osqp-1.0.0.beta1/algebra/_common/csc_math.c F:/osqp1feb/osqp-1.0.0.beta1/build/codegen_src/src/csc_math.c
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">F:\osqp1feb\osqp-1.0.0.beta1\algebra\_common\csc_math.c;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">F:\osqp1feb\osqp-1.0.0.beta1\build\codegen_src\src\csc_math.c</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Copying csc_math.c</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">setlocal
+F:\Cmake\bin\cmake.exe -E copy F:/osqp1feb/osqp-1.0.0.beta1/algebra/_common/csc_math.c F:/osqp1feb/osqp-1.0.0.beta1/build/codegen_src/src/csc_math.c
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">F:\osqp1feb\osqp-1.0.0.beta1\algebra\_common\csc_math.c;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">F:\osqp1feb\osqp-1.0.0.beta1\build\codegen_src\src\csc_math.c</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Copying csc_math.c</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">setlocal
+F:\Cmake\bin\cmake.exe -E copy F:/osqp1feb/osqp-1.0.0.beta1/algebra/_common/csc_math.c F:/osqp1feb/osqp-1.0.0.beta1/build/codegen_src/src/csc_math.c
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">F:\osqp1feb\osqp-1.0.0.beta1\algebra\_common\csc_math.c;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">F:\osqp1feb\osqp-1.0.0.beta1\build\codegen_src\src\csc_math.c</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</LinkObjects>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="F:\osqp1feb\osqp-1.0.0.beta1\build\CMakeFiles\d62045a030af77d715ab800b621d74af\csc_utils.c.rule">
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Copying csc_utils.c</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
+F:\Cmake\bin\cmake.exe -E copy F:/osqp1feb/osqp-1.0.0.beta1/algebra/_common/csc_utils.c F:/osqp1feb/osqp-1.0.0.beta1/build/codegen_src/src/csc_utils.c
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">F:\osqp1feb\osqp-1.0.0.beta1\algebra\_common\csc_utils.c;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">F:\osqp1feb\osqp-1.0.0.beta1\build\codegen_src\src\csc_utils.c</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Copying csc_utils.c</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
+F:\Cmake\bin\cmake.exe -E copy F:/osqp1feb/osqp-1.0.0.beta1/algebra/_common/csc_utils.c F:/osqp1feb/osqp-1.0.0.beta1/build/codegen_src/src/csc_utils.c
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">F:\osqp1feb\osqp-1.0.0.beta1\algebra\_common\csc_utils.c;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">F:\osqp1feb\osqp-1.0.0.beta1\build\codegen_src\src\csc_utils.c</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Copying csc_utils.c</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">setlocal
+F:\Cmake\bin\cmake.exe -E copy F:/osqp1feb/osqp-1.0.0.beta1/algebra/_common/csc_utils.c F:/osqp1feb/osqp-1.0.0.beta1/build/codegen_src/src/csc_utils.c
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">F:\osqp1feb\osqp-1.0.0.beta1\algebra\_common\csc_utils.c;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">F:\osqp1feb\osqp-1.0.0.beta1\build\codegen_src\src\csc_utils.c</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Copying csc_utils.c</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">setlocal
+F:\Cmake\bin\cmake.exe -E copy F:/osqp1feb/osqp-1.0.0.beta1/algebra/_common/csc_utils.c F:/osqp1feb/osqp-1.0.0.beta1/build/codegen_src/src/csc_utils.c
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">F:\osqp1feb\osqp-1.0.0.beta1\algebra\_common\csc_utils.c;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">F:\osqp1feb\osqp-1.0.0.beta1\build\codegen_src\src\csc_utils.c</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</LinkObjects>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="F:\osqp1feb\osqp-1.0.0.beta1\build\CMakeFiles\d62045a030af77d715ab800b621d74af\kkt.c.rule">
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Copying kkt.c</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
+F:\Cmake\bin\cmake.exe -E copy F:/osqp1feb/osqp-1.0.0.beta1/algebra/_common/kkt.c F:/osqp1feb/osqp-1.0.0.beta1/build/codegen_src/src/kkt.c
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">F:\osqp1feb\osqp-1.0.0.beta1\algebra\_common\kkt.c;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">F:\osqp1feb\osqp-1.0.0.beta1\build\codegen_src\src\kkt.c</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Copying kkt.c</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
+F:\Cmake\bin\cmake.exe -E copy F:/osqp1feb/osqp-1.0.0.beta1/algebra/_common/kkt.c F:/osqp1feb/osqp-1.0.0.beta1/build/codegen_src/src/kkt.c
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">F:\osqp1feb\osqp-1.0.0.beta1\algebra\_common\kkt.c;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">F:\osqp1feb\osqp-1.0.0.beta1\build\codegen_src\src\kkt.c</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Copying kkt.c</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">setlocal
+F:\Cmake\bin\cmake.exe -E copy F:/osqp1feb/osqp-1.0.0.beta1/algebra/_common/kkt.c F:/osqp1feb/osqp-1.0.0.beta1/build/codegen_src/src/kkt.c
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">F:\osqp1feb\osqp-1.0.0.beta1\algebra\_common\kkt.c;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">F:\osqp1feb\osqp-1.0.0.beta1\build\codegen_src\src\kkt.c</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Copying kkt.c</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">setlocal
+F:\Cmake\bin\cmake.exe -E copy F:/osqp1feb/osqp-1.0.0.beta1/algebra/_common/kkt.c F:/osqp1feb/osqp-1.0.0.beta1/build/codegen_src/src/kkt.c
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">F:\osqp1feb\osqp-1.0.0.beta1\algebra\_common\kkt.c;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">F:\osqp1feb\osqp-1.0.0.beta1\build\codegen_src\src\kkt.c</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</LinkObjects>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="F:\osqp1feb\osqp-1.0.0.beta1\build\CMakeFiles\d62045a030af77d715ab800b621d74af\matrix.c.rule">
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Copying matrix.c</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
+F:\Cmake\bin\cmake.exe -E copy F:/osqp1feb/osqp-1.0.0.beta1/algebra/builtin/matrix.c F:/osqp1feb/osqp-1.0.0.beta1/build/codegen_src/src/matrix.c
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">F:\osqp1feb\osqp-1.0.0.beta1\algebra\builtin\matrix.c;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">F:\osqp1feb\osqp-1.0.0.beta1\build\codegen_src\src\matrix.c</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Copying matrix.c</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
+F:\Cmake\bin\cmake.exe -E copy F:/osqp1feb/osqp-1.0.0.beta1/algebra/builtin/matrix.c F:/osqp1feb/osqp-1.0.0.beta1/build/codegen_src/src/matrix.c
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">F:\osqp1feb\osqp-1.0.0.beta1\algebra\builtin\matrix.c;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">F:\osqp1feb\osqp-1.0.0.beta1\build\codegen_src\src\matrix.c</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Copying matrix.c</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">setlocal
+F:\Cmake\bin\cmake.exe -E copy F:/osqp1feb/osqp-1.0.0.beta1/algebra/builtin/matrix.c F:/osqp1feb/osqp-1.0.0.beta1/build/codegen_src/src/matrix.c
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">F:\osqp1feb\osqp-1.0.0.beta1\algebra\builtin\matrix.c;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">F:\osqp1feb\osqp-1.0.0.beta1\build\codegen_src\src\matrix.c</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Copying matrix.c</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">setlocal
+F:\Cmake\bin\cmake.exe -E copy F:/osqp1feb/osqp-1.0.0.beta1/algebra/builtin/matrix.c F:/osqp1feb/osqp-1.0.0.beta1/build/codegen_src/src/matrix.c
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">F:\osqp1feb\osqp-1.0.0.beta1\algebra\builtin\matrix.c;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">F:\osqp1feb\osqp-1.0.0.beta1\build\codegen_src\src\matrix.c</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</LinkObjects>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="F:\osqp1feb\osqp-1.0.0.beta1\build\CMakeFiles\d62045a030af77d715ab800b621d74af\qdldl.c.rule">
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Copying qdldl.c</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
+F:\Cmake\bin\cmake.exe -E copy F:/osqp1feb/osqp-1.0.0.beta1/algebra/_common/lin_sys/qdldl/qdldl_sources/src/qdldl.c F:/osqp1feb/osqp-1.0.0.beta1/build/codegen_src/src/qdldl.c
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">F:\osqp1feb\osqp-1.0.0.beta1\algebra\_common\lin_sys\qdldl\qdldl_sources\src\qdldl.c;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">F:\osqp1feb\osqp-1.0.0.beta1\build\codegen_src\src\qdldl.c</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Copying qdldl.c</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
+F:\Cmake\bin\cmake.exe -E copy F:/osqp1feb/osqp-1.0.0.beta1/algebra/_common/lin_sys/qdldl/qdldl_sources/src/qdldl.c F:/osqp1feb/osqp-1.0.0.beta1/build/codegen_src/src/qdldl.c
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">F:\osqp1feb\osqp-1.0.0.beta1\algebra\_common\lin_sys\qdldl\qdldl_sources\src\qdldl.c;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">F:\osqp1feb\osqp-1.0.0.beta1\build\codegen_src\src\qdldl.c</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Copying qdldl.c</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">setlocal
+F:\Cmake\bin\cmake.exe -E copy F:/osqp1feb/osqp-1.0.0.beta1/algebra/_common/lin_sys/qdldl/qdldl_sources/src/qdldl.c F:/osqp1feb/osqp-1.0.0.beta1/build/codegen_src/src/qdldl.c
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">F:\osqp1feb\osqp-1.0.0.beta1\algebra\_common\lin_sys\qdldl\qdldl_sources\src\qdldl.c;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">F:\osqp1feb\osqp-1.0.0.beta1\build\codegen_src\src\qdldl.c</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Copying qdldl.c</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">setlocal
+F:\Cmake\bin\cmake.exe -E copy F:/osqp1feb/osqp-1.0.0.beta1/algebra/_common/lin_sys/qdldl/qdldl_sources/src/qdldl.c F:/osqp1feb/osqp-1.0.0.beta1/build/codegen_src/src/qdldl.c
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">F:\osqp1feb\osqp-1.0.0.beta1\algebra\_common\lin_sys\qdldl\qdldl_sources\src\qdldl.c;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">F:\osqp1feb\osqp-1.0.0.beta1\build\codegen_src\src\qdldl.c</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</LinkObjects>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="F:\osqp1feb\osqp-1.0.0.beta1\build\CMakeFiles\d62045a030af77d715ab800b621d74af\qdldl_interface.c.rule">
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Copying qdldl_interface.c</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
+F:\Cmake\bin\cmake.exe -E copy F:/osqp1feb/osqp-1.0.0.beta1/algebra/_common/lin_sys/qdldl/qdldl_interface.c F:/osqp1feb/osqp-1.0.0.beta1/build/codegen_src/src/qdldl_interface.c
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">F:\osqp1feb\osqp-1.0.0.beta1\algebra\_common\lin_sys\qdldl\qdldl_interface.c;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">F:\osqp1feb\osqp-1.0.0.beta1\build\codegen_src\src\qdldl_interface.c</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Copying qdldl_interface.c</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
+F:\Cmake\bin\cmake.exe -E copy F:/osqp1feb/osqp-1.0.0.beta1/algebra/_common/lin_sys/qdldl/qdldl_interface.c F:/osqp1feb/osqp-1.0.0.beta1/build/codegen_src/src/qdldl_interface.c
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">F:\osqp1feb\osqp-1.0.0.beta1\algebra\_common\lin_sys\qdldl\qdldl_interface.c;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">F:\osqp1feb\osqp-1.0.0.beta1\build\codegen_src\src\qdldl_interface.c</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Copying qdldl_interface.c</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">setlocal
+F:\Cmake\bin\cmake.exe -E copy F:/osqp1feb/osqp-1.0.0.beta1/algebra/_common/lin_sys/qdldl/qdldl_interface.c F:/osqp1feb/osqp-1.0.0.beta1/build/codegen_src/src/qdldl_interface.c
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">F:\osqp1feb\osqp-1.0.0.beta1\algebra\_common\lin_sys\qdldl\qdldl_interface.c;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">F:\osqp1feb\osqp-1.0.0.beta1\build\codegen_src\src\qdldl_interface.c</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Copying qdldl_interface.c</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">setlocal
+F:\Cmake\bin\cmake.exe -E copy F:/osqp1feb/osqp-1.0.0.beta1/algebra/_common/lin_sys/qdldl/qdldl_interface.c F:/osqp1feb/osqp-1.0.0.beta1/build/codegen_src/src/qdldl_interface.c
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">F:\osqp1feb\osqp-1.0.0.beta1\algebra\_common\lin_sys\qdldl\qdldl_interface.c;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">F:\osqp1feb\osqp-1.0.0.beta1\build\codegen_src\src\qdldl_interface.c</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</LinkObjects>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="F:\osqp1feb\osqp-1.0.0.beta1\build\CMakeFiles\d62045a030af77d715ab800b621d74af\vector.c.rule">
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Copying vector.c</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
+F:\Cmake\bin\cmake.exe -E copy F:/osqp1feb/osqp-1.0.0.beta1/algebra/builtin/vector.c F:/osqp1feb/osqp-1.0.0.beta1/build/codegen_src/src/vector.c
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">F:\osqp1feb\osqp-1.0.0.beta1\algebra\builtin\vector.c;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">F:\osqp1feb\osqp-1.0.0.beta1\build\codegen_src\src\vector.c</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Copying vector.c</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
+F:\Cmake\bin\cmake.exe -E copy F:/osqp1feb/osqp-1.0.0.beta1/algebra/builtin/vector.c F:/osqp1feb/osqp-1.0.0.beta1/build/codegen_src/src/vector.c
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">F:\osqp1feb\osqp-1.0.0.beta1\algebra\builtin\vector.c;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">F:\osqp1feb\osqp-1.0.0.beta1\build\codegen_src\src\vector.c</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Copying vector.c</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">setlocal
+F:\Cmake\bin\cmake.exe -E copy F:/osqp1feb/osqp-1.0.0.beta1/algebra/builtin/vector.c F:/osqp1feb/osqp-1.0.0.beta1/build/codegen_src/src/vector.c
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">F:\osqp1feb\osqp-1.0.0.beta1\algebra\builtin\vector.c;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">F:\osqp1feb\osqp-1.0.0.beta1\build\codegen_src\src\vector.c</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Copying vector.c</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">setlocal
+F:\Cmake\bin\cmake.exe -E copy F:/osqp1feb/osqp-1.0.0.beta1/algebra/builtin/vector.c F:/osqp1feb/osqp-1.0.0.beta1/build/codegen_src/src/vector.c
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">F:\osqp1feb\osqp-1.0.0.beta1\algebra\builtin\vector.c;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">F:\osqp1feb\osqp-1.0.0.beta1\build\codegen_src\src\vector.c</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</LinkObjects>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="F:\osqp1feb\osqp-1.0.0.beta1\build\CMakeFiles\d3c7fe04af0a80120b1d0ee354858a71\copy_codegen_linalg.rule">
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'"></Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">F:\osqp1feb\osqp-1.0.0.beta1\build\codegen_src\inc\private\algebra_impl.h;F:\osqp1feb\osqp-1.0.0.beta1\build\codegen_src\src\algebra_libs.c;F:\osqp1feb\osqp-1.0.0.beta1\build\codegen_src\src\vector.c;F:\osqp1feb\osqp-1.0.0.beta1\build\codegen_src\src\matrix.c;F:\osqp1feb\osqp-1.0.0.beta1\build\codegen_src\inc\private\csc_math.h;F:\osqp1feb\osqp-1.0.0.beta1\build\codegen_src\src\csc_math.c;F:\osqp1feb\osqp-1.0.0.beta1\build\codegen_src\inc\private\csc_utils.h;F:\osqp1feb\osqp-1.0.0.beta1\build\codegen_src\src\csc_utils.c;F:\osqp1feb\osqp-1.0.0.beta1\build\codegen_src\inc\private\kkt.h;F:\osqp1feb\osqp-1.0.0.beta1\build\codegen_src\src\kkt.c;F:\osqp1feb\osqp-1.0.0.beta1\build\codegen_src\inc\private\qdldl_interface.h;F:\osqp1feb\osqp-1.0.0.beta1\build\codegen_src\src\qdldl_interface.c;F:\osqp1feb\osqp-1.0.0.beta1\build\codegen_src\src\qdldl.c;F:\osqp1feb\osqp-1.0.0.beta1\build\codegen_src\inc\private\qdldl.h;F:\osqp1feb\osqp-1.0.0.beta1\build\codegen_src\inc\private\qdldl_version.h;F:\osqp1feb\osqp-1.0.0.beta1\build\codegen_src\inc\private\qdldl_types.h;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">F:\osqp1feb\osqp-1.0.0.beta1\build\algebra\builtin\CMakeFiles\copy_codegen_linalg</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
+      <VerifyInputsAndOutputsExist Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</VerifyInputsAndOutputsExist>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'"></Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">F:\osqp1feb\osqp-1.0.0.beta1\build\codegen_src\inc\private\algebra_impl.h;F:\osqp1feb\osqp-1.0.0.beta1\build\codegen_src\src\algebra_libs.c;F:\osqp1feb\osqp-1.0.0.beta1\build\codegen_src\src\vector.c;F:\osqp1feb\osqp-1.0.0.beta1\build\codegen_src\src\matrix.c;F:\osqp1feb\osqp-1.0.0.beta1\build\codegen_src\inc\private\csc_math.h;F:\osqp1feb\osqp-1.0.0.beta1\build\codegen_src\src\csc_math.c;F:\osqp1feb\osqp-1.0.0.beta1\build\codegen_src\inc\private\csc_utils.h;F:\osqp1feb\osqp-1.0.0.beta1\build\codegen_src\src\csc_utils.c;F:\osqp1feb\osqp-1.0.0.beta1\build\codegen_src\inc\private\kkt.h;F:\osqp1feb\osqp-1.0.0.beta1\build\codegen_src\src\kkt.c;F:\osqp1feb\osqp-1.0.0.beta1\build\codegen_src\inc\private\qdldl_interface.h;F:\osqp1feb\osqp-1.0.0.beta1\build\codegen_src\src\qdldl_interface.c;F:\osqp1feb\osqp-1.0.0.beta1\build\codegen_src\src\qdldl.c;F:\osqp1feb\osqp-1.0.0.beta1\build\codegen_src\inc\private\qdldl.h;F:\osqp1feb\osqp-1.0.0.beta1\build\codegen_src\inc\private\qdldl_version.h;F:\osqp1feb\osqp-1.0.0.beta1\build\codegen_src\inc\private\qdldl_types.h;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">F:\osqp1feb\osqp-1.0.0.beta1\build\algebra\builtin\CMakeFiles\copy_codegen_linalg</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
+      <VerifyInputsAndOutputsExist Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</VerifyInputsAndOutputsExist>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'"></Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">setlocal
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">F:\osqp1feb\osqp-1.0.0.beta1\build\codegen_src\inc\private\algebra_impl.h;F:\osqp1feb\osqp-1.0.0.beta1\build\codegen_src\src\algebra_libs.c;F:\osqp1feb\osqp-1.0.0.beta1\build\codegen_src\src\vector.c;F:\osqp1feb\osqp-1.0.0.beta1\build\codegen_src\src\matrix.c;F:\osqp1feb\osqp-1.0.0.beta1\build\codegen_src\inc\private\csc_math.h;F:\osqp1feb\osqp-1.0.0.beta1\build\codegen_src\src\csc_math.c;F:\osqp1feb\osqp-1.0.0.beta1\build\codegen_src\inc\private\csc_utils.h;F:\osqp1feb\osqp-1.0.0.beta1\build\codegen_src\src\csc_utils.c;F:\osqp1feb\osqp-1.0.0.beta1\build\codegen_src\inc\private\kkt.h;F:\osqp1feb\osqp-1.0.0.beta1\build\codegen_src\src\kkt.c;F:\osqp1feb\osqp-1.0.0.beta1\build\codegen_src\inc\private\qdldl_interface.h;F:\osqp1feb\osqp-1.0.0.beta1\build\codegen_src\src\qdldl_interface.c;F:\osqp1feb\osqp-1.0.0.beta1\build\codegen_src\src\qdldl.c;F:\osqp1feb\osqp-1.0.0.beta1\build\codegen_src\inc\private\qdldl.h;F:\osqp1feb\osqp-1.0.0.beta1\build\codegen_src\inc\private\qdldl_version.h;F:\osqp1feb\osqp-1.0.0.beta1\build\codegen_src\inc\private\qdldl_types.h;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">F:\osqp1feb\osqp-1.0.0.beta1\build\algebra\builtin\CMakeFiles\copy_codegen_linalg</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkObjects>
+      <VerifyInputsAndOutputsExist Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</VerifyInputsAndOutputsExist>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'"></Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">setlocal
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">F:\osqp1feb\osqp-1.0.0.beta1\build\codegen_src\inc\private\algebra_impl.h;F:\osqp1feb\osqp-1.0.0.beta1\build\codegen_src\src\algebra_libs.c;F:\osqp1feb\osqp-1.0.0.beta1\build\codegen_src\src\vector.c;F:\osqp1feb\osqp-1.0.0.beta1\build\codegen_src\src\matrix.c;F:\osqp1feb\osqp-1.0.0.beta1\build\codegen_src\inc\private\csc_math.h;F:\osqp1feb\osqp-1.0.0.beta1\build\codegen_src\src\csc_math.c;F:\osqp1feb\osqp-1.0.0.beta1\build\codegen_src\inc\private\csc_utils.h;F:\osqp1feb\osqp-1.0.0.beta1\build\codegen_src\src\csc_utils.c;F:\osqp1feb\osqp-1.0.0.beta1\build\codegen_src\inc\private\kkt.h;F:\osqp1feb\osqp-1.0.0.beta1\build\codegen_src\src\kkt.c;F:\osqp1feb\osqp-1.0.0.beta1\build\codegen_src\inc\private\qdldl_interface.h;F:\osqp1feb\osqp-1.0.0.beta1\build\codegen_src\src\qdldl_interface.c;F:\osqp1feb\osqp-1.0.0.beta1\build\codegen_src\src\qdldl.c;F:\osqp1feb\osqp-1.0.0.beta1\build\codegen_src\inc\private\qdldl.h;F:\osqp1feb\osqp-1.0.0.beta1\build\codegen_src\inc\private\qdldl_version.h;F:\osqp1feb\osqp-1.0.0.beta1\build\codegen_src\inc\private\qdldl_types.h;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">F:\osqp1feb\osqp-1.0.0.beta1\build\algebra\builtin\CMakeFiles\copy_codegen_linalg</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</LinkObjects>
+      <VerifyInputsAndOutputsExist Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</VerifyInputsAndOutputsExist>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="F:\osqp1feb\osqp-1.0.0.beta1\algebra\builtin\CMakeLists.txt">
+      <UseUtf8Encoding>Always</UseUtf8Encoding>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Building Custom Rule F:/osqp1feb/osqp-1.0.0.beta1/algebra/builtin/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
+F:\Cmake\bin\cmake.exe -SF:/osqp1feb/osqp-1.0.0.beta1 -BF:/osqp1feb/osqp-1.0.0.beta1/build --check-stamp-file F:/osqp1feb/osqp-1.0.0.beta1/build/algebra/builtin/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">F:\Cmake\share\cmake-3.27\Modules\ExternalProject\shared_internal_commands.cmake;F:\Cmake\share\cmake-3.27\Modules\FetchContent.cmake;F:\Cmake\share\cmake-3.27\Modules\FetchContent\CMakeLists.cmake.in;F:\Cmake\share\cmake-3.27\Modules\FindGit.cmake;F:\Cmake\share\cmake-3.27\Modules\FindPackageHandleStandardArgs.cmake;F:\Cmake\share\cmake-3.27\Modules\FindPackageMessage.cmake;F:\osqp1feb\osqp-1.0.0.beta1\algebra\_common\lin_sys\qdldl\qdldl.cmake;F:\osqp1feb\osqp-1.0.0.beta1\build\CMakeFiles\cmake.verify_globs;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">F:\osqp1feb\osqp-1.0.0.beta1\build\algebra\builtin\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Building Custom Rule F:/osqp1feb/osqp-1.0.0.beta1/algebra/builtin/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
+F:\Cmake\bin\cmake.exe -SF:/osqp1feb/osqp-1.0.0.beta1 -BF:/osqp1feb/osqp-1.0.0.beta1/build --check-stamp-file F:/osqp1feb/osqp-1.0.0.beta1/build/algebra/builtin/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">F:\Cmake\share\cmake-3.27\Modules\ExternalProject\shared_internal_commands.cmake;F:\Cmake\share\cmake-3.27\Modules\FetchContent.cmake;F:\Cmake\share\cmake-3.27\Modules\FetchContent\CMakeLists.cmake.in;F:\Cmake\share\cmake-3.27\Modules\FindGit.cmake;F:\Cmake\share\cmake-3.27\Modules\FindPackageHandleStandardArgs.cmake;F:\Cmake\share\cmake-3.27\Modules\FindPackageMessage.cmake;F:\osqp1feb\osqp-1.0.0.beta1\algebra\_common\lin_sys\qdldl\qdldl.cmake;F:\osqp1feb\osqp-1.0.0.beta1\build\CMakeFiles\cmake.verify_globs;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">F:\osqp1feb\osqp-1.0.0.beta1\build\algebra\builtin\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Building Custom Rule F:/osqp1feb/osqp-1.0.0.beta1/algebra/builtin/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">setlocal
+F:\Cmake\bin\cmake.exe -SF:/osqp1feb/osqp-1.0.0.beta1 -BF:/osqp1feb/osqp-1.0.0.beta1/build --check-stamp-file F:/osqp1feb/osqp-1.0.0.beta1/build/algebra/builtin/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">F:\Cmake\share\cmake-3.27\Modules\ExternalProject\shared_internal_commands.cmake;F:\Cmake\share\cmake-3.27\Modules\FetchContent.cmake;F:\Cmake\share\cmake-3.27\Modules\FetchContent\CMakeLists.cmake.in;F:\Cmake\share\cmake-3.27\Modules\FindGit.cmake;F:\Cmake\share\cmake-3.27\Modules\FindPackageHandleStandardArgs.cmake;F:\Cmake\share\cmake-3.27\Modules\FindPackageMessage.cmake;F:\osqp1feb\osqp-1.0.0.beta1\algebra\_common\lin_sys\qdldl\qdldl.cmake;F:\osqp1feb\osqp-1.0.0.beta1\build\CMakeFiles\cmake.verify_globs;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">F:\osqp1feb\osqp-1.0.0.beta1\build\algebra\builtin\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Building Custom Rule F:/osqp1feb/osqp-1.0.0.beta1/algebra/builtin/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">setlocal
+F:\Cmake\bin\cmake.exe -SF:/osqp1feb/osqp-1.0.0.beta1 -BF:/osqp1feb/osqp-1.0.0.beta1/build --check-stamp-file F:/osqp1feb/osqp-1.0.0.beta1/build/algebra/builtin/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">F:\Cmake\share\cmake-3.27\Modules\ExternalProject\shared_internal_commands.cmake;F:\Cmake\share\cmake-3.27\Modules\FetchContent.cmake;F:\Cmake\share\cmake-3.27\Modules\FetchContent\CMakeLists.cmake.in;F:\Cmake\share\cmake-3.27\Modules\FindGit.cmake;F:\Cmake\share\cmake-3.27\Modules\FindPackageHandleStandardArgs.cmake;F:\Cmake\share\cmake-3.27\Modules\FindPackageMessage.cmake;F:\osqp1feb\osqp-1.0.0.beta1\algebra\_common\lin_sys\qdldl\qdldl.cmake;F:\osqp1feb\osqp-1.0.0.beta1\build\CMakeFiles\cmake.verify_globs;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">F:\osqp1feb\osqp-1.0.0.beta1\build\algebra\builtin\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</LinkObjects>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="F:\osqp1feb\osqp-1.0.0.beta1\build\algebra\builtin\CMakeFiles\copy_codegen_linalg">
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="F:\osqp1feb\osqp-1.0.0.beta1\build\ZERO_CHECK.vcxproj">
+      <Project>{D2AF8DF1-CA74-32BB-B76E-F7130D4DE259}</Project>
+      <Name>ZERO_CHECK</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

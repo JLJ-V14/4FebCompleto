@@ -1,0 +1,177 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="..\examples\main.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\examples\calcular_matrices.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\examples\comprobar_lectura_datos.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\examples\conversion_numeros.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\examples\funciones_plataforma_dependiente.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\examples\inicializacion_algoritmo.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\examples\inicializar_csv.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\examples\inicializar_posiciones.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\examples\leer_entradas.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\examples\libcsv.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\examples\liberar_memoria.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\examples\operaciones_csv.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\examples\operaciones_fecha.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\examples\operaciones_string.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\examples\registrar_errores.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\examples\validaciones.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\examples\verificar_baterias.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\examples\verificar_conexiones_simultaneas.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\examples\verificar_datos_algoritmo.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\examples\verificar_datos_terminales.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\examples\verificar_entradas.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\examples\verificar_precios.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\examples\verificar_restricciones.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\examples\verificar_vehiculos.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="calcular_dimensiones_problema.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="preparar_problema_optimizacion.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="F:\osqp1feb\osqp-1.0.0.beta1\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{5E583162-ADBF-3655-8AB5-013313FBDE63}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Head Files">
+      <UniqueIdentifier>{fac573ad-ab67-40e6-b038-1fe4f21fa021}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="main.h">
+      <Filter>Head Files</Filter>
+    </ClInclude>
+    <ClInclude Include="calcular_matrices.h">
+      <Filter>Head Files</Filter>
+    </ClInclude>
+    <ClInclude Include="comprobar_lectura_datos.h">
+      <Filter>Head Files</Filter>
+    </ClInclude>
+    <ClInclude Include="conversion_numeros.h">
+      <Filter>Head Files</Filter>
+    </ClInclude>
+    <ClInclude Include="csv.h">
+      <Filter>Head Files</Filter>
+    </ClInclude>
+    <ClInclude Include="definiciones_globales.h">
+      <Filter>Head Files</Filter>
+    </ClInclude>
+    <ClInclude Include="funciones_plataforma_dependiente.h">
+      <Filter>Head Files</Filter>
+    </ClInclude>
+    <ClInclude Include="inicializacion_algoritmo.h">
+      <Filter>Head Files</Filter>
+    </ClInclude>
+    <ClInclude Include="inicializar_csv.h">
+      <Filter>Head Files</Filter>
+    </ClInclude>
+    <ClInclude Include="inicializar_posiciones.h">
+      <Filter>Head Files</Filter>
+    </ClInclude>
+    <ClInclude Include="leer_entradas.h">
+      <Filter>Head Files</Filter>
+    </ClInclude>
+    <ClInclude Include="liberar_memoria.h">
+      <Filter>Head Files</Filter>
+    </ClInclude>
+    <ClInclude Include="operaciones_csv.h">
+      <Filter>Head Files</Filter>
+    </ClInclude>
+    <ClInclude Include="operaciones_fecha.h">
+      <Filter>Head Files</Filter>
+    </ClInclude>
+    <ClInclude Include="operaciones_string.h">
+      <Filter>Head Files</Filter>
+    </ClInclude>
+    <ClInclude Include="validaciones.h">
+      <Filter>Head Files</Filter>
+    </ClInclude>
+    <ClInclude Include="verificar_baterias.h">
+      <Filter>Head Files</Filter>
+    </ClInclude>
+    <ClInclude Include="verificar_conexiones_simultaneas.h">
+      <Filter>Head Files</Filter>
+    </ClInclude>
+    <ClInclude Include="verificar_datos_algoritmo.h">
+      <Filter>Head Files</Filter>
+    </ClInclude>
+    <ClInclude Include="verificar_datos_terminales.h">
+      <Filter>Head Files</Filter>
+    </ClInclude>
+    <ClInclude Include="verificar_entradas.h">
+      <Filter>Head Files</Filter>
+    </ClInclude>
+    <ClInclude Include="verificar_precios.h">
+      <Filter>Head Files</Filter>
+    </ClInclude>
+    <ClInclude Include="verificar_restricciones.h">
+      <Filter>Head Files</Filter>
+    </ClInclude>
+    <ClInclude Include="verificar_vehiculos.h">
+      <Filter>Head Files</Filter>
+    </ClInclude>
+    <ClInclude Include="tipos_optimizacion.h">
+      <Filter>Head Files</Filter>
+    </ClInclude>
+    <ClInclude Include="calcular_dimensiones_problema.h">
+      <Filter>Head Files</Filter>
+    </ClInclude>
+    <ClInclude Include="preparar_problema_optimizacion.h">
+      <Filter>Head Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

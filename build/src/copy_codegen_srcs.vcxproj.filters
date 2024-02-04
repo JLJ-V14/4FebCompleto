@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="F:\osqp1feb\osqp-1.0.0.beta1\build\CMakeFiles\d62045a030af77d715ab800b621d74af\auxil.c.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="F:\osqp1feb\osqp-1.0.0.beta1\build\CMakeFiles\d62045a030af77d715ab800b621d74af\error.c.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="F:\osqp1feb\osqp-1.0.0.beta1\build\CMakeFiles\d62045a030af77d715ab800b621d74af\osqp_api.c.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="F:\osqp1feb\osqp-1.0.0.beta1\build\CMakeFiles\d62045a030af77d715ab800b621d74af\scaling.c.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="F:\osqp1feb\osqp-1.0.0.beta1\build\CMakeFiles\d62045a030af77d715ab800b621d74af\util.c.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="F:\osqp1feb\osqp-1.0.0.beta1\build\CMakeFiles\f5096d58b040580d88917ff2cf6325f2\copy_codegen_srcs.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="F:\osqp1feb\osqp-1.0.0.beta1\src\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="F:\osqp1feb\osqp-1.0.0.beta1\build\src\CMakeFiles\copy_codegen_srcs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{35CE2C97-179B-355A-9CE3-18825F983616}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

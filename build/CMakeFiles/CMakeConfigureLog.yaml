@@ -1,0 +1,227 @@
+
+---
+events:
+  -
+    kind: "message-v1"
+    backtrace:
+      - "F:/Cmake/share/cmake-3.27/Modules/CMakeDetermineSystem.cmake:211 (message)"
+      - "CMakeLists.txt:2 (project)"
+    message: |
+      The system is: Windows - 10.0.19044 - AMD64
+  -
+    kind: "message-v1"
+    backtrace:
+      - "F:/Cmake/share/cmake-3.27/Modules/CMakeDetermineCompilerId.cmake:17 (message)"
+      - "F:/Cmake/share/cmake-3.27/Modules/CMakeDetermineCompilerId.cmake:64 (__determine_compiler_id_test)"
+      - "F:/Cmake/share/cmake-3.27/Modules/CMakeDetermineCCompiler.cmake:123 (CMAKE_DETERMINE_COMPILER_ID)"
+      - "CMakeLists.txt:2 (project)"
+    message: |
+      Compiling the C compiler identification source file "CMakeCCompilerId.c" succeeded.
+      Compiler:  
+      Build flags: 
+      Id flags:  
+      
+      The output was:
+      0
+      MSBuild version 17.7.2+d6990bcfa for .NET Framework
+      Build started 01/02/2024 14:59:31.
+      
+      Project "F:\\osqp1feb\\osqp-1.0.0.beta1\\build\\CMakeFiles\\3.27.4\\CompilerIdC\\CompilerIdC.vcxproj" on node 1 (default targets).
+      PrepareForBuild:
+        Creating directory "Debug\\".
+        Creating directory "Debug\\CompilerIdC.tlog\\".
+      InitializeBuildStatus:
+        Creating "Debug\\CompilerIdC.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
+        Touching "Debug\\CompilerIdC.tlog\\unsuccessfulbuild".
+      ClCompile:
+        F:\\Visual_Studio\\VC\\Tools\\MSVC\\14.37.32822\\bin\\HostX64\\x64\\CL.exe /c /nologo /W0 /WX- /diagnostics:column /Od /D _MBCS /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"Debug\\\\" /Fd"Debug\\vc143.pdb" /external:W0 /Gd /TC /FC /errorReport:queue CMakeCCompilerId.c
+        CMakeCCompilerId.c
+      Link:
+        F:\\Visual_Studio\\VC\\Tools\\MSVC\\14.37.32822\\bin\\HostX64\\x64\\link.exe /ERRORREPORT:QUEUE /OUT:".\\CompilerIdC.exe" /INCREMENTAL:NO /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /PDB:".\\CompilerIdC.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:".\\CompilerIdC.lib" /MACHINE:X64 Debug\\CMakeCCompilerId.obj
+        CompilerIdC.vcxproj -> F:\\osqp1feb\\osqp-1.0.0.beta1\\build\\CMakeFiles\\3.27.4\\CompilerIdC\\CompilerIdC.exe
+      PostBuildEvent:
+        for %%i in (cl.exe) do @echo CMAKE_C_COMPILER=%%~$PATH:i
+        :VCEnd
+        CMAKE_C_COMPILER=F:\\Visual_Studio\\VC\\Tools\\MSVC\\14.37.32822\\bin\\Hostx64\\x64\\cl.exe
+      FinalizeBuildStatus:
+        Deleting file "Debug\\CompilerIdC.tlog\\unsuccessfulbuild".
+        Touching "Debug\\CompilerIdC.tlog\\CompilerIdC.lastbuildstate".
+      Done Building Project "F:\\osqp1feb\\osqp-1.0.0.beta1\\build\\CMakeFiles\\3.27.4\\CompilerIdC\\CompilerIdC.vcxproj" (default targets).
+      
+      Build succeeded.
+          0 Warning(s)
+          0 Error(s)
+      
+      Time Elapsed 00:00:01.64
+      
+      
+      Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "CompilerIdC.exe"
+      
+      Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "CompilerIdC.vcxproj"
+      
+      The C compiler identification is MSVC, found in:
+        F:/osqp1feb/osqp-1.0.0.beta1/build/CMakeFiles/3.27.4/CompilerIdC/CompilerIdC.exe
+      
+  -
+    kind: "message-v1"
+    backtrace:
+      - "F:/Cmake/share/cmake-3.27/Modules/CMakeDetermineCompilerId.cmake:17 (message)"
+      - "F:/Cmake/share/cmake-3.27/Modules/CMakeDetermineCompilerId.cmake:64 (__determine_compiler_id_test)"
+      - "F:/Cmake/share/cmake-3.27/Modules/CMakeDetermineCXXCompiler.cmake:126 (CMAKE_DETERMINE_COMPILER_ID)"
+      - "CMakeLists.txt:2 (project)"
+    message: |
+      Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" succeeded.
+      Compiler:  
+      Build flags: 
+      Id flags:  
+      
+      The output was:
+      0
+      MSBuild version 17.7.2+d6990bcfa for .NET Framework
+      Build started 01/02/2024 14:59:33.
+      
+      Project "F:\\osqp1feb\\osqp-1.0.0.beta1\\build\\CMakeFiles\\3.27.4\\CompilerIdCXX\\CompilerIdCXX.vcxproj" on node 1 (default targets).
+      PrepareForBuild:
+        Creating directory "Debug\\".
+        Creating directory "Debug\\CompilerIdCXX.tlog\\".
+      InitializeBuildStatus:
+        Creating "Debug\\CompilerIdCXX.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
+        Touching "Debug\\CompilerIdCXX.tlog\\unsuccessfulbuild".
+      ClCompile:
+        F:\\Visual_Studio\\VC\\Tools\\MSVC\\14.37.32822\\bin\\HostX64\\x64\\CL.exe /c /nologo /W0 /WX- /diagnostics:column /Od /D _MBCS /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"Debug\\\\" /Fd"Debug\\vc143.pdb" /external:W0 /Gd /TP /FC /errorReport:queue CMakeCXXCompilerId.cpp
+        CMakeCXXCompilerId.cpp
+      Link:
+        F:\\Visual_Studio\\VC\\Tools\\MSVC\\14.37.32822\\bin\\HostX64\\x64\\link.exe /ERRORREPORT:QUEUE /OUT:".\\CompilerIdCXX.exe" /INCREMENTAL:NO /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /PDB:".\\CompilerIdCXX.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:".\\CompilerIdCXX.lib" /MACHINE:X64 Debug\\CMakeCXXCompilerId.obj
+        CompilerIdCXX.vcxproj -> F:\\osqp1feb\\osqp-1.0.0.beta1\\build\\CMakeFiles\\3.27.4\\CompilerIdCXX\\CompilerIdCXX.exe
+      PostBuildEvent:
+        for %%i in (cl.exe) do @echo CMAKE_CXX_COMPILER=%%~$PATH:i
+        :VCEnd
+        CMAKE_CXX_COMPILER=F:\\Visual_Studio\\VC\\Tools\\MSVC\\14.37.32822\\bin\\Hostx64\\x64\\cl.exe
+      FinalizeBuildStatus:
+        Deleting file "Debug\\CompilerIdCXX.tlog\\unsuccessfulbuild".
+        Touching "Debug\\CompilerIdCXX.tlog\\CompilerIdCXX.lastbuildstate".
+      Done Building Project "F:\\osqp1feb\\osqp-1.0.0.beta1\\build\\CMakeFiles\\3.27.4\\CompilerIdCXX\\CompilerIdCXX.vcxproj" (default targets).
+      
+      Build succeeded.
+          0 Warning(s)
+          0 Error(s)
+      
+      Time Elapsed 00:00:01.23
+      
+      
+      Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "CompilerIdCXX.exe"
+      
+      Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "CompilerIdCXX.vcxproj"
+      
+      The CXX compiler identification is MSVC, found in:
+        F:/osqp1feb/osqp-1.0.0.beta1/build/CMakeFiles/3.27.4/CompilerIdCXX/CompilerIdCXX.exe
+      
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "F:/Cmake/share/cmake-3.27/Modules/CMakeDetermineCompilerABI.cmake:57 (try_compile)"
+      - "F:/Cmake/share/cmake-3.27/Modules/CMakeTestCCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:2 (project)"
+    checks:
+      - "Detecting C compiler ABI info"
+    directories:
+      source: "F:/osqp1feb/osqp-1.0.0.beta1/build/CMakeFiles/CMakeScratch/TryCompile-61dpr4"
+      binary: "F:/osqp1feb/osqp-1.0.0.beta1/build/CMakeFiles/CMakeScratch/TryCompile-61dpr4"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS"
+      CMAKE_C_FLAGS_DEBUG: "/Zi /Ob0 /Od /RTC1"
+      CMAKE_EXE_LINKER_FLAGS: "/machine:x64"
+    buildResult:
+      variable: "CMAKE_C_ABI_COMPILED"
+      cached: true
+      stdout: |
+        Change Dir: 'F:/osqp1feb/osqp-1.0.0.beta1/build/CMakeFiles/CMakeScratch/TryCompile-61dpr4'
+        
+        Run Build Command(s): F:/Visual_Studio/MSBuild/Current/Bin/amd64/MSBuild.exe cmTC_4bcac.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
+        MSBuild version 17.7.2+d6990bcfa for .NET Framework
+        Build started 01/02/2024 14:59:35.
+        
+        Project "F:\\osqp1feb\\osqp-1.0.0.beta1\\build\\CMakeFiles\\CMakeScratch\\TryCompile-61dpr4\\cmTC_4bcac.vcxproj" on node 1 (default targets).
+        PrepareForBuild:
+          Creating directory "cmTC_4bcac.dir\\Debug\\".
+          Creating directory "F:\\osqp1feb\\osqp-1.0.0.beta1\\build\\CMakeFiles\\CMakeScratch\\TryCompile-61dpr4\\Debug\\".
+          Creating directory "cmTC_4bcac.dir\\Debug\\cmTC_4bcac.tlog\\".
+        InitializeBuildStatus:
+          Creating "cmTC_4bcac.dir\\Debug\\cmTC_4bcac.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
+          Touching "cmTC_4bcac.dir\\Debug\\cmTC_4bcac.tlog\\unsuccessfulbuild".
+        ClCompile:
+          F:\\Visual_Studio\\VC\\Tools\\MSVC\\14.37.32822\\bin\\HostX64\\x64\\CL.exe /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_4bcac.dir\\Debug\\\\" /Fd"cmTC_4bcac.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TC /errorReport:queue "F:\\Cmake\\share\\cmake-3.27\\Modules\\CMakeCCompilerABI.c"
+          Microsoft (R) C/C++ Optimizing Compiler Version 19.37.32822 for x64
+          CMakeCCompilerABI.c
+          Copyright (C) Microsoft Corporation.  All rights reserved.
+          cl /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_4bcac.dir\\Debug\\\\" /Fd"cmTC_4bcac.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TC /errorReport:queue "F:\\Cmake\\share\\cmake-3.27\\Modules\\CMakeCCompilerABI.c"
+        Link:
+          F:\\Visual_Studio\\VC\\Tools\\MSVC\\14.37.32822\\bin\\HostX64\\x64\\link.exe /ERRORREPORT:QUEUE /OUT:"F:\\osqp1feb\\osqp-1.0.0.beta1\\build\\CMakeFiles\\CMakeScratch\\TryCompile-61dpr4\\Debug\\cmTC_4bcac.exe" /INCREMENTAL /ILK:"cmTC_4bcac.dir\\Debug\\cmTC_4bcac.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"F:/osqp1feb/osqp-1.0.0.beta1/build/CMakeFiles/CMakeScratch/TryCompile-61dpr4/Debug/cmTC_4bcac.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"F:/osqp1feb/osqp-1.0.0.beta1/build/CMakeFiles/CMakeScratch/TryCompile-61dpr4/Debug/cmTC_4bcac.lib" /MACHINE:X64  /machine:x64 cmTC_4bcac.dir\\Debug\\CMakeCCompilerABI.obj
+          cmTC_4bcac.vcxproj -> F:\\osqp1feb\\osqp-1.0.0.beta1\\build\\CMakeFiles\\CMakeScratch\\TryCompile-61dpr4\\Debug\\cmTC_4bcac.exe
+        FinalizeBuildStatus:
+          Deleting file "cmTC_4bcac.dir\\Debug\\cmTC_4bcac.tlog\\unsuccessfulbuild".
+          Touching "cmTC_4bcac.dir\\Debug\\cmTC_4bcac.tlog\\cmTC_4bcac.lastbuildstate".
+        Done Building Project "F:\\osqp1feb\\osqp-1.0.0.beta1\\build\\CMakeFiles\\CMakeScratch\\TryCompile-61dpr4\\cmTC_4bcac.vcxproj" (default targets).
+        
+        Build succeeded.
+            0 Warning(s)
+            0 Error(s)
+        
+        Time Elapsed 00:00:01.42
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "F:/Cmake/share/cmake-3.27/Modules/CMakeDetermineCompilerABI.cmake:57 (try_compile)"
+      - "F:/Cmake/share/cmake-3.27/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:2 (project)"
+    checks:
+      - "Detecting CXX compiler ABI info"
+    directories:
+      source: "F:/osqp1feb/osqp-1.0.0.beta1/build/CMakeFiles/CMakeScratch/TryCompile-zgwh5u"
+      binary: "F:/osqp1feb/osqp-1.0.0.beta1/build/CMakeFiles/CMakeScratch/TryCompile-zgwh5u"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: "/DWIN32 /D_WINDOWS /GR /EHsc"
+      CMAKE_CXX_FLAGS_DEBUG: "/Zi /Ob0 /Od /RTC1"
+      CMAKE_EXE_LINKER_FLAGS: "/machine:x64"
+    buildResult:
+      variable: "CMAKE_CXX_ABI_COMPILED"
+      cached: true
+      stdout: |
+        Change Dir: 'F:/osqp1feb/osqp-1.0.0.beta1/build/CMakeFiles/CMakeScratch/TryCompile-zgwh5u'
+        
+        Run Build Command(s): F:/Visual_Studio/MSBuild/Current/Bin/amd64/MSBuild.exe cmTC_fab6b.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
+        MSBuild version 17.7.2+d6990bcfa for .NET Framework
+        Build started 01/02/2024 14:59:37.
+        
+        Project "F:\\osqp1feb\\osqp-1.0.0.beta1\\build\\CMakeFiles\\CMakeScratch\\TryCompile-zgwh5u\\cmTC_fab6b.vcxproj" on node 1 (default targets).
+        PrepareForBuild:
+          Creating directory "cmTC_fab6b.dir\\Debug\\".
+          Creating directory "F:\\osqp1feb\\osqp-1.0.0.beta1\\build\\CMakeFiles\\CMakeScratch\\TryCompile-zgwh5u\\Debug\\".
+          Creating directory "cmTC_fab6b.dir\\Debug\\cmTC_fab6b.tlog\\".
+        InitializeBuildStatus:
+          Creating "cmTC_fab6b.dir\\Debug\\cmTC_fab6b.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
+          Touching "cmTC_fab6b.dir\\Debug\\cmTC_fab6b.tlog\\unsuccessfulbuild".
+        ClCompile:
+          F:\\Visual_Studio\\VC\\Tools\\MSVC\\14.37.32822\\bin\\HostX64\\x64\\CL.exe /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /GR /Fo"cmTC_fab6b.dir\\Debug\\\\" /Fd"cmTC_fab6b.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TP /errorReport:queue "F:\\Cmake\\share\\cmake-3.27\\Modules\\CMakeCXXCompilerABI.cpp"
+          Microsoft (R) C/C++ Optimizing Compiler Version 19.37.32822 for x64
+          CMakeCXXCompilerABI.cpp
+          Copyright (C) Microsoft Corporation.  All rights reserved.
+          cl /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /GR /Fo"cmTC_fab6b.dir\\Debug\\\\" /Fd"cmTC_fab6b.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TP /errorReport:queue "F:\\Cmake\\share\\cmake-3.27\\Modules\\CMakeCXXCompilerABI.cpp"
+        Link:
+          F:\\Visual_Studio\\VC\\Tools\\MSVC\\14.37.32822\\bin\\HostX64\\x64\\link.exe /ERRORREPORT:QUEUE /OUT:"F:\\osqp1feb\\osqp-1.0.0.beta1\\build\\CMakeFiles\\CMakeScratch\\TryCompile-zgwh5u\\Debug\\cmTC_fab6b.exe" /INCREMENTAL /ILK:"cmTC_fab6b.dir\\Debug\\cmTC_fab6b.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"F:/osqp1feb/osqp-1.0.0.beta1/build/CMakeFiles/CMakeScratch/TryCompile-zgwh5u/Debug/cmTC_fab6b.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"F:/osqp1feb/osqp-1.0.0.beta1/build/CMakeFiles/CMakeScratch/TryCompile-zgwh5u/Debug/cmTC_fab6b.lib" /MACHINE:X64  /machine:x64 cmTC_fab6b.dir\\Debug\\CMakeCXXCompilerABI.obj
+          cmTC_fab6b.vcxproj -> F:\\osqp1feb\\osqp-1.0.0.beta1\\build\\CMakeFiles\\CMakeScratch\\TryCompile-zgwh5u\\Debug\\cmTC_fab6b.exe
+        FinalizeBuildStatus:
+          Deleting file "cmTC_fab6b.dir\\Debug\\cmTC_fab6b.tlog\\unsuccessfulbuild".
+          Touching "cmTC_fab6b.dir\\Debug\\cmTC_fab6b.tlog\\cmTC_fab6b.lastbuildstate".
+        Done Building Project "F:\\osqp1feb\\osqp-1.0.0.beta1\\build\\CMakeFiles\\CMakeScratch\\TryCompile-zgwh5u\\cmTC_fab6b.vcxproj" (default targets).
+        
+        Build succeeded.
+            0 Warning(s)
+            0 Error(s)
+        
+        Time Elapsed 00:00:01.41
+        
+      exitCode: 0
+...

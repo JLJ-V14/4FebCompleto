@@ -1,0 +1,179 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="F:\osqp1feb\osqp-1.0.0.beta1\src\auxil.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\osqp1feb\osqp-1.0.0.beta1\src\error.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\osqp1feb\osqp-1.0.0.beta1\src\scaling.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\osqp1feb\osqp-1.0.0.beta1\src\util.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\osqp1feb\osqp-1.0.0.beta1\src\polish.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\osqp1feb\osqp-1.0.0.beta1\src\derivative.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\osqp1feb\osqp-1.0.0.beta1\src\interrupt_windows.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\osqp1feb\osqp-1.0.0.beta1\src\timing_windows.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\osqp1feb\osqp-1.0.0.beta1\src\codegen.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\osqp1feb\osqp-1.0.0.beta1\algebra\_common\csc_math.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\osqp1feb\osqp-1.0.0.beta1\algebra\_common\csc_utils.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\osqp1feb\osqp-1.0.0.beta1\algebra\builtin\algebra_libs.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\osqp1feb\osqp-1.0.0.beta1\algebra\builtin\vector.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\osqp1feb\osqp-1.0.0.beta1\algebra\builtin\matrix.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\osqp1feb\osqp-1.0.0.beta1\algebra\_common\lin_sys\qdldl\amd\src\SuiteSparse_config.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\osqp1feb\osqp-1.0.0.beta1\algebra\_common\lin_sys\qdldl\amd\src\amd_1.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\osqp1feb\osqp-1.0.0.beta1\algebra\_common\lin_sys\qdldl\amd\src\amd_2.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\osqp1feb\osqp-1.0.0.beta1\algebra\_common\lin_sys\qdldl\amd\src\amd_aat.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\osqp1feb\osqp-1.0.0.beta1\algebra\_common\lin_sys\qdldl\amd\src\amd_control.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\osqp1feb\osqp-1.0.0.beta1\algebra\_common\lin_sys\qdldl\amd\src\amd_defaults.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\osqp1feb\osqp-1.0.0.beta1\algebra\_common\lin_sys\qdldl\amd\src\amd_info.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\osqp1feb\osqp-1.0.0.beta1\algebra\_common\lin_sys\qdldl\amd\src\amd_order.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\osqp1feb\osqp-1.0.0.beta1\algebra\_common\lin_sys\qdldl\amd\src\amd_post_tree.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\osqp1feb\osqp-1.0.0.beta1\algebra\_common\lin_sys\qdldl\amd\src\amd_postorder.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\osqp1feb\osqp-1.0.0.beta1\algebra\_common\lin_sys\qdldl\amd\src\amd_preprocess.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\osqp1feb\osqp-1.0.0.beta1\algebra\_common\lin_sys\qdldl\amd\src\amd_valid.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\osqp1feb\osqp-1.0.0.beta1\algebra\_common\kkt.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\osqp1feb\osqp-1.0.0.beta1\algebra\_common\lin_sys\qdldl\qdldl_interface.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="F:\osqp1feb\osqp-1.0.0.beta1\include\private\version.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\osqp1feb\osqp-1.0.0.beta1\include\private\algebra_vector.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\osqp1feb\osqp-1.0.0.beta1\include\private\algebra_matrix.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\osqp1feb\osqp-1.0.0.beta1\include\private\auxil.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\osqp1feb\osqp-1.0.0.beta1\include\private\error.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\osqp1feb\osqp-1.0.0.beta1\include\private\glob_opts.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\osqp1feb\osqp-1.0.0.beta1\include\private\lin_alg.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\osqp1feb\osqp-1.0.0.beta1\include\private\printing.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\osqp1feb\osqp-1.0.0.beta1\include\private\scaling.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\osqp1feb\osqp-1.0.0.beta1\include\private\timing.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\osqp1feb\osqp-1.0.0.beta1\include\private\types.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\osqp1feb\osqp-1.0.0.beta1\include\private\util.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\osqp1feb\osqp-1.0.0.beta1\include\private\polish.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\osqp1feb\osqp-1.0.0.beta1\include\private\derivative.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\osqp1feb\osqp-1.0.0.beta1\include\private\interrupt.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\osqp1feb\osqp-1.0.0.beta1\algebra\_common\csc_math.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\osqp1feb\osqp-1.0.0.beta1\algebra\_common\csc_utils.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\osqp1feb\osqp-1.0.0.beta1\algebra\builtin\algebra_impl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\osqp1feb\osqp-1.0.0.beta1\algebra\_common\lin_sys\qdldl\amd\include\SuiteSparse_config.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\osqp1feb\osqp-1.0.0.beta1\algebra\_common\lin_sys\qdldl\amd\include\amd.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\osqp1feb\osqp-1.0.0.beta1\algebra\_common\lin_sys\qdldl\amd\include\amd_internal.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\osqp1feb\osqp-1.0.0.beta1\algebra\_common\kkt.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\osqp1feb\osqp-1.0.0.beta1\algebra\_common\lin_sys\qdldl\qdldl_interface.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="F:\osqp1feb\osqp-1.0.0.beta1\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Object Include="F:\osqp1feb\osqp-1.0.0.beta1\build\_deps\qdldl-build\qdldlobject.dir\$(Configuration)\qdldl.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{E3AC4172-9E5C-392E-ACCF-D4ECEE13A377}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object Libraries">
+      <UniqueIdentifier>{8E2C4844-CB45-3936-A10F-BFD51205FE35}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{5E583162-ADBF-3655-8AB5-013313FBDE63}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

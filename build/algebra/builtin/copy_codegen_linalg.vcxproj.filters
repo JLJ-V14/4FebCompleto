@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="F:\osqp1feb\osqp-1.0.0.beta1\build\CMakeFiles\c1ce385e34aab7c13ee1443e89b19701\algebra_impl.h.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="F:\osqp1feb\osqp-1.0.0.beta1\build\CMakeFiles\c1ce385e34aab7c13ee1443e89b19701\csc_math.h.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="F:\osqp1feb\osqp-1.0.0.beta1\build\CMakeFiles\c1ce385e34aab7c13ee1443e89b19701\csc_utils.h.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="F:\osqp1feb\osqp-1.0.0.beta1\build\CMakeFiles\c1ce385e34aab7c13ee1443e89b19701\kkt.h.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="F:\osqp1feb\osqp-1.0.0.beta1\build\CMakeFiles\c1ce385e34aab7c13ee1443e89b19701\qdldl.h.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="F:\osqp1feb\osqp-1.0.0.beta1\build\CMakeFiles\c1ce385e34aab7c13ee1443e89b19701\qdldl_interface.h.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="F:\osqp1feb\osqp-1.0.0.beta1\build\CMakeFiles\c1ce385e34aab7c13ee1443e89b19701\qdldl_types.h.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="F:\osqp1feb\osqp-1.0.0.beta1\build\CMakeFiles\c1ce385e34aab7c13ee1443e89b19701\qdldl_version.h.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="F:\osqp1feb\osqp-1.0.0.beta1\build\CMakeFiles\d62045a030af77d715ab800b621d74af\algebra_libs.c.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="F:\osqp1feb\osqp-1.0.0.beta1\build\CMakeFiles\d62045a030af77d715ab800b621d74af\csc_math.c.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="F:\osqp1feb\osqp-1.0.0.beta1\build\CMakeFiles\d62045a030af77d715ab800b621d74af\csc_utils.c.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="F:\osqp1feb\osqp-1.0.0.beta1\build\CMakeFiles\d62045a030af77d715ab800b621d74af\kkt.c.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="F:\osqp1feb\osqp-1.0.0.beta1\build\CMakeFiles\d62045a030af77d715ab800b621d74af\matrix.c.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="F:\osqp1feb\osqp-1.0.0.beta1\build\CMakeFiles\d62045a030af77d715ab800b621d74af\qdldl.c.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="F:\osqp1feb\osqp-1.0.0.beta1\build\CMakeFiles\d62045a030af77d715ab800b621d74af\qdldl_interface.c.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="F:\osqp1feb\osqp-1.0.0.beta1\build\CMakeFiles\d62045a030af77d715ab800b621d74af\vector.c.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="F:\osqp1feb\osqp-1.0.0.beta1\build\CMakeFiles\d3c7fe04af0a80120b1d0ee354858a71\copy_codegen_linalg.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="F:\osqp1feb\osqp-1.0.0.beta1\algebra\builtin\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="F:\osqp1feb\osqp-1.0.0.beta1\build\algebra\builtin\CMakeFiles\copy_codegen_linalg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{35CE2C97-179B-355A-9CE3-18825F983616}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

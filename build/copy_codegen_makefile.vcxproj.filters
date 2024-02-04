@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="F:\osqp1feb\osqp-1.0.0.beta1\build\CMakeFiles\3fb9908ed48c6d3b776c6a0d4765efa3\Makefile.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="F:\osqp1feb\osqp-1.0.0.beta1\build\CMakeFiles\9784540df6d809d152331c50fc53c95a\copy_codegen_makefile.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="F:\osqp1feb\osqp-1.0.0.beta1\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="F:\osqp1feb\osqp-1.0.0.beta1\build\CMakeFiles\copy_codegen_makefile" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{35CE2C97-179B-355A-9CE3-18825F983616}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

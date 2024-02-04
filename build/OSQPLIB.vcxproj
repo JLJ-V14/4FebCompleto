@@ -1,0 +1,334 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <PreferredToolArchitecture>x64</PreferredToolArchitecture>
+  </PropertyGroup>
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="MinSizeRel|x64">
+      <Configuration>MinSizeRel</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="RelWithDebInfo|x64">
+      <Configuration>RelWithDebInfo</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{1F5777B0-C67F-3C77-A2B2-91D13070807A}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <WindowsTargetPlatformVersion>10.0.22621.0</WindowsTargetPlatformVersion>
+    <Platform>x64</Platform>
+    <ProjectName>OSQPLIB</ProjectName>
+    <VCProjectUpgraderObjectName>NoUpgrade</VCProjectUpgraderObjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">OSQPLIB.dir\Debug\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">OSQPLIB.dir\Debug\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">OSQPLIB</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.lib</TargetExt>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">OSQPLIB.dir\Release\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">OSQPLIB.dir\Release\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">OSQPLIB</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.lib</TargetExt>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">OSQPLIB.dir\MinSizeRel\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">OSQPLIB.dir\MinSizeRel\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">OSQPLIB</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">.lib</TargetExt>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">OSQPLIB.dir\RelWithDebInfo\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">OSQPLIB.dir\RelWithDebInfo\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">OSQPLIB</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">.lib</TargetExt>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>F:\osqp1feb\osqp-1.0.0.beta1\include\public;F:\osqp1feb\osqp-1.0.0.beta1\build\include\public;F:\osqp1feb\osqp-1.0.0.beta1\include\private;F:\osqp1feb\osqp-1.0.0.beta1\build\include\private;F:\osqp1feb\osqp-1.0.0.beta1\algebra\builtin\..\_common;F:\osqp1feb\osqp-1.0.0.beta1\algebra\builtin;F:\osqp1feb\osqp-1.0.0.beta1\algebra\_common;F:\osqp1feb\osqp-1.0.0.beta1\algebra\_common\lin_sys\qdldl;F:\osqp1feb\osqp-1.0.0.beta1\algebra\_common\lin_sys\qdldl\amd\include;F:\osqp1feb\osqp-1.0.0.beta1\algebra\_common\lin_sys\qdldl\qdldl_sources\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <ExceptionHandling>
+      </ExceptionHandling>
+      <InlineFunctionExpansion>Disabled</InlineFunctionExpansion>
+      <Optimization>Disabled</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <UseFullPaths>false</UseFullPaths>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;CMAKE_INTDIR="Debug"</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_DEBUG;_WINDOWS;CMAKE_INTDIR=\"Debug\"</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>F:\osqp1feb\osqp-1.0.0.beta1\include\public;F:\osqp1feb\osqp-1.0.0.beta1\build\include\public;F:\osqp1feb\osqp-1.0.0.beta1\include\private;F:\osqp1feb\osqp-1.0.0.beta1\build\include\private;F:\osqp1feb\osqp-1.0.0.beta1\algebra\builtin\..\_common;F:\osqp1feb\osqp-1.0.0.beta1\algebra\builtin;F:\osqp1feb\osqp-1.0.0.beta1\algebra\_common;F:\osqp1feb\osqp-1.0.0.beta1\algebra\_common\lin_sys\qdldl;F:\osqp1feb\osqp-1.0.0.beta1\algebra\_common\lin_sys\qdldl\amd\include;F:\osqp1feb\osqp-1.0.0.beta1\algebra\_common\lin_sys\qdldl\qdldl_sources\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>F:\osqp1feb\osqp-1.0.0.beta1\include\public;F:\osqp1feb\osqp-1.0.0.beta1\build\include\public;F:\osqp1feb\osqp-1.0.0.beta1\include\private;F:\osqp1feb\osqp-1.0.0.beta1\build\include\private;F:\osqp1feb\osqp-1.0.0.beta1\algebra\builtin\..\_common;F:\osqp1feb\osqp-1.0.0.beta1\algebra\builtin;F:\osqp1feb\osqp-1.0.0.beta1\algebra\_common;F:\osqp1feb\osqp-1.0.0.beta1\algebra\_common\lin_sys\qdldl;F:\osqp1feb\osqp-1.0.0.beta1\algebra\_common\lin_sys\qdldl\amd\include;F:\osqp1feb\osqp-1.0.0.beta1\algebra\_common\lin_sys\qdldl\qdldl_sources\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Lib>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>F:\osqp1feb\osqp-1.0.0.beta1\include\public;F:\osqp1feb\osqp-1.0.0.beta1\build\include\public;F:\osqp1feb\osqp-1.0.0.beta1\include\private;F:\osqp1feb\osqp-1.0.0.beta1\build\include\private;F:\osqp1feb\osqp-1.0.0.beta1\algebra\builtin\..\_common;F:\osqp1feb\osqp-1.0.0.beta1\algebra\builtin;F:\osqp1feb\osqp-1.0.0.beta1\algebra\_common;F:\osqp1feb\osqp-1.0.0.beta1\algebra\_common\lin_sys\qdldl;F:\osqp1feb\osqp-1.0.0.beta1\algebra\_common\lin_sys\qdldl\amd\include;F:\osqp1feb\osqp-1.0.0.beta1\algebra\_common\lin_sys\qdldl\qdldl_sources\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ExceptionHandling>
+      </ExceptionHandling>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <Optimization>MaxSpeed</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <UseFullPaths>false</UseFullPaths>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;CMAKE_INTDIR="Release"</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <DebugInformationFormat>
+      </DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;CMAKE_INTDIR=\"Release\"</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>F:\osqp1feb\osqp-1.0.0.beta1\include\public;F:\osqp1feb\osqp-1.0.0.beta1\build\include\public;F:\osqp1feb\osqp-1.0.0.beta1\include\private;F:\osqp1feb\osqp-1.0.0.beta1\build\include\private;F:\osqp1feb\osqp-1.0.0.beta1\algebra\builtin\..\_common;F:\osqp1feb\osqp-1.0.0.beta1\algebra\builtin;F:\osqp1feb\osqp-1.0.0.beta1\algebra\_common;F:\osqp1feb\osqp-1.0.0.beta1\algebra\_common\lin_sys\qdldl;F:\osqp1feb\osqp-1.0.0.beta1\algebra\_common\lin_sys\qdldl\amd\include;F:\osqp1feb\osqp-1.0.0.beta1\algebra\_common\lin_sys\qdldl\qdldl_sources\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>F:\osqp1feb\osqp-1.0.0.beta1\include\public;F:\osqp1feb\osqp-1.0.0.beta1\build\include\public;F:\osqp1feb\osqp-1.0.0.beta1\include\private;F:\osqp1feb\osqp-1.0.0.beta1\build\include\private;F:\osqp1feb\osqp-1.0.0.beta1\algebra\builtin\..\_common;F:\osqp1feb\osqp-1.0.0.beta1\algebra\builtin;F:\osqp1feb\osqp-1.0.0.beta1\algebra\_common;F:\osqp1feb\osqp-1.0.0.beta1\algebra\_common\lin_sys\qdldl;F:\osqp1feb\osqp-1.0.0.beta1\algebra\_common\lin_sys\qdldl\amd\include;F:\osqp1feb\osqp-1.0.0.beta1\algebra\_common\lin_sys\qdldl\qdldl_sources\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Lib>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>F:\osqp1feb\osqp-1.0.0.beta1\include\public;F:\osqp1feb\osqp-1.0.0.beta1\build\include\public;F:\osqp1feb\osqp-1.0.0.beta1\include\private;F:\osqp1feb\osqp-1.0.0.beta1\build\include\private;F:\osqp1feb\osqp-1.0.0.beta1\algebra\builtin\..\_common;F:\osqp1feb\osqp-1.0.0.beta1\algebra\builtin;F:\osqp1feb\osqp-1.0.0.beta1\algebra\_common;F:\osqp1feb\osqp-1.0.0.beta1\algebra\_common\lin_sys\qdldl;F:\osqp1feb\osqp-1.0.0.beta1\algebra\_common\lin_sys\qdldl\amd\include;F:\osqp1feb\osqp-1.0.0.beta1\algebra\_common\lin_sys\qdldl\qdldl_sources\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ExceptionHandling>
+      </ExceptionHandling>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <Optimization>MinSpace</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <UseFullPaths>false</UseFullPaths>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;CMAKE_INTDIR="MinSizeRel"</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <DebugInformationFormat>
+      </DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;CMAKE_INTDIR=\"MinSizeRel\"</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>F:\osqp1feb\osqp-1.0.0.beta1\include\public;F:\osqp1feb\osqp-1.0.0.beta1\build\include\public;F:\osqp1feb\osqp-1.0.0.beta1\include\private;F:\osqp1feb\osqp-1.0.0.beta1\build\include\private;F:\osqp1feb\osqp-1.0.0.beta1\algebra\builtin\..\_common;F:\osqp1feb\osqp-1.0.0.beta1\algebra\builtin;F:\osqp1feb\osqp-1.0.0.beta1\algebra\_common;F:\osqp1feb\osqp-1.0.0.beta1\algebra\_common\lin_sys\qdldl;F:\osqp1feb\osqp-1.0.0.beta1\algebra\_common\lin_sys\qdldl\amd\include;F:\osqp1feb\osqp-1.0.0.beta1\algebra\_common\lin_sys\qdldl\qdldl_sources\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>F:\osqp1feb\osqp-1.0.0.beta1\include\public;F:\osqp1feb\osqp-1.0.0.beta1\build\include\public;F:\osqp1feb\osqp-1.0.0.beta1\include\private;F:\osqp1feb\osqp-1.0.0.beta1\build\include\private;F:\osqp1feb\osqp-1.0.0.beta1\algebra\builtin\..\_common;F:\osqp1feb\osqp-1.0.0.beta1\algebra\builtin;F:\osqp1feb\osqp-1.0.0.beta1\algebra\_common;F:\osqp1feb\osqp-1.0.0.beta1\algebra\_common\lin_sys\qdldl;F:\osqp1feb\osqp-1.0.0.beta1\algebra\_common\lin_sys\qdldl\amd\include;F:\osqp1feb\osqp-1.0.0.beta1\algebra\_common\lin_sys\qdldl\qdldl_sources\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Lib>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>F:\osqp1feb\osqp-1.0.0.beta1\include\public;F:\osqp1feb\osqp-1.0.0.beta1\build\include\public;F:\osqp1feb\osqp-1.0.0.beta1\include\private;F:\osqp1feb\osqp-1.0.0.beta1\build\include\private;F:\osqp1feb\osqp-1.0.0.beta1\algebra\builtin\..\_common;F:\osqp1feb\osqp-1.0.0.beta1\algebra\builtin;F:\osqp1feb\osqp-1.0.0.beta1\algebra\_common;F:\osqp1feb\osqp-1.0.0.beta1\algebra\_common\lin_sys\qdldl;F:\osqp1feb\osqp-1.0.0.beta1\algebra\_common\lin_sys\qdldl\amd\include;F:\osqp1feb\osqp-1.0.0.beta1\algebra\_common\lin_sys\qdldl\qdldl_sources\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <ExceptionHandling>
+      </ExceptionHandling>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <Optimization>MaxSpeed</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <UseFullPaths>false</UseFullPaths>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;CMAKE_INTDIR="RelWithDebInfo"</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;CMAKE_INTDIR=\"RelWithDebInfo\"</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>F:\osqp1feb\osqp-1.0.0.beta1\include\public;F:\osqp1feb\osqp-1.0.0.beta1\build\include\public;F:\osqp1feb\osqp-1.0.0.beta1\include\private;F:\osqp1feb\osqp-1.0.0.beta1\build\include\private;F:\osqp1feb\osqp-1.0.0.beta1\algebra\builtin\..\_common;F:\osqp1feb\osqp-1.0.0.beta1\algebra\builtin;F:\osqp1feb\osqp-1.0.0.beta1\algebra\_common;F:\osqp1feb\osqp-1.0.0.beta1\algebra\_common\lin_sys\qdldl;F:\osqp1feb\osqp-1.0.0.beta1\algebra\_common\lin_sys\qdldl\amd\include;F:\osqp1feb\osqp-1.0.0.beta1\algebra\_common\lin_sys\qdldl\qdldl_sources\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>F:\osqp1feb\osqp-1.0.0.beta1\include\public;F:\osqp1feb\osqp-1.0.0.beta1\build\include\public;F:\osqp1feb\osqp-1.0.0.beta1\include\private;F:\osqp1feb\osqp-1.0.0.beta1\build\include\private;F:\osqp1feb\osqp-1.0.0.beta1\algebra\builtin\..\_common;F:\osqp1feb\osqp-1.0.0.beta1\algebra\builtin;F:\osqp1feb\osqp-1.0.0.beta1\algebra\_common;F:\osqp1feb\osqp-1.0.0.beta1\algebra\_common\lin_sys\qdldl;F:\osqp1feb\osqp-1.0.0.beta1\algebra\_common\lin_sys\qdldl\amd\include;F:\osqp1feb\osqp-1.0.0.beta1\algebra\_common\lin_sys\qdldl\qdldl_sources\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Lib>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <CustomBuild Include="F:\osqp1feb\osqp-1.0.0.beta1\CMakeLists.txt">
+      <UseUtf8Encoding>Always</UseUtf8Encoding>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Building Custom Rule F:/osqp1feb/osqp-1.0.0.beta1/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
+F:\Cmake\bin\cmake.exe -SF:/osqp1feb/osqp-1.0.0.beta1 -BF:/osqp1feb/osqp-1.0.0.beta1/build --check-stamp-file F:/osqp1feb/osqp-1.0.0.beta1/build/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">F:\Cmake\share\cmake-3.27\Modules\BasicConfigVersion-SameMajorVersion.cmake.in;F:\Cmake\share\cmake-3.27\Modules\CMakeCCompiler.cmake.in;F:\Cmake\share\cmake-3.27\Modules\CMakeCCompilerABI.c;F:\Cmake\share\cmake-3.27\Modules\CMakeCInformation.cmake;F:\Cmake\share\cmake-3.27\Modules\CMakeCXXCompiler.cmake.in;F:\Cmake\share\cmake-3.27\Modules\CMakeCXXCompilerABI.cpp;F:\Cmake\share\cmake-3.27\Modules\CMakeCXXInformation.cmake;F:\Cmake\share\cmake-3.27\Modules\CMakeCommonLanguageInclude.cmake;F:\Cmake\share\cmake-3.27\Modules\CMakeCompilerIdDetection.cmake;F:\Cmake\share\cmake-3.27\Modules\CMakeDependentOption.cmake;F:\Cmake\share\cmake-3.27\Modules\CMakeDetermineCCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\CMakeDetermineCXXCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\CMakeDetermineCompileFeatures.cmake;F:\Cmake\share\cmake-3.27\Modules\CMakeDetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\CMakeDetermineCompilerABI.cmake;F:\Cmake\share\cmake-3.27\Modules\CMakeDetermineCompilerId.cmake;F:\Cmake\share\cmake-3.27\Modules\CMakeDetermineRCCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\CMakeDetermineSystem.cmake;F:\Cmake\share\cmake-3.27\Modules\CMakeFindBinUtils.cmake;F:\Cmake\share\cmake-3.27\Modules\CMakeGenericSystem.cmake;F:\Cmake\share\cmake-3.27\Modules\CMakeInitializeConfigs.cmake;F:\Cmake\share\cmake-3.27\Modules\CMakeLanguageInformation.cmake;F:\Cmake\share\cmake-3.27\Modules\CMakePackageConfigHelpers.cmake;F:\Cmake\share\cmake-3.27\Modules\CMakeParseImplicitIncludeInfo.cmake;F:\Cmake\share\cmake-3.27\Modules\CMakeParseImplicitLinkInfo.cmake;F:\Cmake\share\cmake-3.27\Modules\CMakeParseLibraryArchitecture.cmake;F:\Cmake\share\cmake-3.27\Modules\CMakeRCCompiler.cmake.in;F:\Cmake\share\cmake-3.27\Modules\CMakeRCInformation.cmake;F:\Cmake\share\cmake-3.27\Modules\CMakeSystem.cmake.in;F:\Cmake\share\cmake-3.27\Modules\CMakeSystemSpecificInformation.cmake;F:\Cmake\share\cmake-3.27\Modules\CMakeSystemSpecificInitialize.cmake;F:\Cmake\share\cmake-3.27\Modules\CMakeTestCCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\CMakeTestCXXCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\CMakeTestCompilerCommon.cmake;F:\Cmake\share\cmake-3.27\Modules\CMakeTestRCCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\ADSP-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\ARMCC-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\ARMClang-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\AppleClang-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\Borland-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\Bruce-C-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\CMakeCommonCompilerMacros.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\Clang-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\Clang-DetermineCompilerInternal.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\Comeau-CXX-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\Compaq-C-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\Compaq-CXX-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\Cray-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\Embarcadero-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\Fujitsu-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\FujitsuClang-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\GHS-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\GNU-C-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\GNU-CXX-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\HP-C-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\HP-CXX-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\IAR-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\IBMCPP-C-DetermineVersionInternal.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\IBMCPP-CXX-DetermineVersionInternal.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\IBMClang-C-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\IBMClang-CXX-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\Intel-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\IntelLLVM-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\LCC-C-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\LCC-CXX-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\MSVC-C.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\MSVC-CXX.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\MSVC-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\MSVC.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\NVHPC-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\NVIDIA-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\OpenWatcom-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\PGI-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\PathScale-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\SCO-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\SDCC-C-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\SunPro-C-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\SunPro-CXX-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\TI-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\Tasking-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\TinyCC-C-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\VisualAge-C-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\VisualAge-CXX-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\Watcom-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\XL-C-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\XL-CXX-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\XLClang-C-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\XLClang-CXX-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\zOS-C-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\zOS-CXX-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\CompilerId\VS-10.vcxproj.in;F:\Cmake\share\cmake-3.27\Modules\GNUInstallDirs.cmake;F:\Cmake\share\cmake-3.27\Modules\Internal\FeatureTesting.cmake;F:\Cmake\share\cmake-3.27\Modules\Platform\Windows-Determine-CXX.cmake;F:\Cmake\share\cmake-3.27\Modules\Platform\Windows-Initialize.cmake;F:\Cmake\share\cmake-3.27\Modules\Platform\Windows-MSVC-C.cmake;F:\Cmake\share\cmake-3.27\Modules\Platform\Windows-MSVC-CXX.cmake;F:\Cmake\share\cmake-3.27\Modules\Platform\Windows-MSVC.cmake;F:\Cmake\share\cmake-3.27\Modules\Platform\Windows.cmake;F:\Cmake\share\cmake-3.27\Modules\Platform\WindowsPaths.cmake;F:\Cmake\share\cmake-3.27\Modules\WriteBasicConfigVersionFile.cmake;F:\osqp1feb\osqp-1.0.0.beta1\build\CMakeFiles\3.27.4\CMakeCCompiler.cmake;F:\osqp1feb\osqp-1.0.0.beta1\build\CMakeFiles\3.27.4\CMakeCXXCompiler.cmake;F:\osqp1feb\osqp-1.0.0.beta1\build\CMakeFiles\3.27.4\CMakeRCCompiler.cmake;F:\osqp1feb\osqp-1.0.0.beta1\build\CMakeFiles\3.27.4\CMakeSystem.cmake;F:\osqp1feb\osqp-1.0.0.beta1\build\CMakeFiles\cmake.verify_globs;F:\osqp1feb\osqp-1.0.0.beta1\configure\cmake\Utils.cmake;F:\osqp1feb\osqp-1.0.0.beta1\configure\cmake\cmake_uninstall.cmake.in;F:\osqp1feb\osqp-1.0.0.beta1\configure\osqp-config.cmake.in;F:\osqp1feb\osqp-1.0.0.beta1\configure\osqp_configure.h.in;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">F:\osqp1feb\osqp-1.0.0.beta1\build\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Building Custom Rule F:/osqp1feb/osqp-1.0.0.beta1/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
+F:\Cmake\bin\cmake.exe -SF:/osqp1feb/osqp-1.0.0.beta1 -BF:/osqp1feb/osqp-1.0.0.beta1/build --check-stamp-file F:/osqp1feb/osqp-1.0.0.beta1/build/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">F:\Cmake\share\cmake-3.27\Modules\BasicConfigVersion-SameMajorVersion.cmake.in;F:\Cmake\share\cmake-3.27\Modules\CMakeCCompiler.cmake.in;F:\Cmake\share\cmake-3.27\Modules\CMakeCCompilerABI.c;F:\Cmake\share\cmake-3.27\Modules\CMakeCInformation.cmake;F:\Cmake\share\cmake-3.27\Modules\CMakeCXXCompiler.cmake.in;F:\Cmake\share\cmake-3.27\Modules\CMakeCXXCompilerABI.cpp;F:\Cmake\share\cmake-3.27\Modules\CMakeCXXInformation.cmake;F:\Cmake\share\cmake-3.27\Modules\CMakeCommonLanguageInclude.cmake;F:\Cmake\share\cmake-3.27\Modules\CMakeCompilerIdDetection.cmake;F:\Cmake\share\cmake-3.27\Modules\CMakeDependentOption.cmake;F:\Cmake\share\cmake-3.27\Modules\CMakeDetermineCCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\CMakeDetermineCXXCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\CMakeDetermineCompileFeatures.cmake;F:\Cmake\share\cmake-3.27\Modules\CMakeDetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\CMakeDetermineCompilerABI.cmake;F:\Cmake\share\cmake-3.27\Modules\CMakeDetermineCompilerId.cmake;F:\Cmake\share\cmake-3.27\Modules\CMakeDetermineRCCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\CMakeDetermineSystem.cmake;F:\Cmake\share\cmake-3.27\Modules\CMakeFindBinUtils.cmake;F:\Cmake\share\cmake-3.27\Modules\CMakeGenericSystem.cmake;F:\Cmake\share\cmake-3.27\Modules\CMakeInitializeConfigs.cmake;F:\Cmake\share\cmake-3.27\Modules\CMakeLanguageInformation.cmake;F:\Cmake\share\cmake-3.27\Modules\CMakePackageConfigHelpers.cmake;F:\Cmake\share\cmake-3.27\Modules\CMakeParseImplicitIncludeInfo.cmake;F:\Cmake\share\cmake-3.27\Modules\CMakeParseImplicitLinkInfo.cmake;F:\Cmake\share\cmake-3.27\Modules\CMakeParseLibraryArchitecture.cmake;F:\Cmake\share\cmake-3.27\Modules\CMakeRCCompiler.cmake.in;F:\Cmake\share\cmake-3.27\Modules\CMakeRCInformation.cmake;F:\Cmake\share\cmake-3.27\Modules\CMakeSystem.cmake.in;F:\Cmake\share\cmake-3.27\Modules\CMakeSystemSpecificInformation.cmake;F:\Cmake\share\cmake-3.27\Modules\CMakeSystemSpecificInitialize.cmake;F:\Cmake\share\cmake-3.27\Modules\CMakeTestCCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\CMakeTestCXXCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\CMakeTestCompilerCommon.cmake;F:\Cmake\share\cmake-3.27\Modules\CMakeTestRCCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\ADSP-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\ARMCC-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\ARMClang-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\AppleClang-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\Borland-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\Bruce-C-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\CMakeCommonCompilerMacros.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\Clang-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\Clang-DetermineCompilerInternal.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\Comeau-CXX-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\Compaq-C-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\Compaq-CXX-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\Cray-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\Embarcadero-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\Fujitsu-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\FujitsuClang-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\GHS-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\GNU-C-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\GNU-CXX-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\HP-C-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\HP-CXX-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\IAR-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\IBMCPP-C-DetermineVersionInternal.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\IBMCPP-CXX-DetermineVersionInternal.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\IBMClang-C-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\IBMClang-CXX-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\Intel-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\IntelLLVM-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\LCC-C-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\LCC-CXX-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\MSVC-C.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\MSVC-CXX.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\MSVC-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\MSVC.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\NVHPC-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\NVIDIA-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\OpenWatcom-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\PGI-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\PathScale-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\SCO-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\SDCC-C-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\SunPro-C-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\SunPro-CXX-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\TI-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\Tasking-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\TinyCC-C-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\VisualAge-C-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\VisualAge-CXX-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\Watcom-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\XL-C-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\XL-CXX-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\XLClang-C-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\XLClang-CXX-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\zOS-C-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\zOS-CXX-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\CompilerId\VS-10.vcxproj.in;F:\Cmake\share\cmake-3.27\Modules\GNUInstallDirs.cmake;F:\Cmake\share\cmake-3.27\Modules\Internal\FeatureTesting.cmake;F:\Cmake\share\cmake-3.27\Modules\Platform\Windows-Determine-CXX.cmake;F:\Cmake\share\cmake-3.27\Modules\Platform\Windows-Initialize.cmake;F:\Cmake\share\cmake-3.27\Modules\Platform\Windows-MSVC-C.cmake;F:\Cmake\share\cmake-3.27\Modules\Platform\Windows-MSVC-CXX.cmake;F:\Cmake\share\cmake-3.27\Modules\Platform\Windows-MSVC.cmake;F:\Cmake\share\cmake-3.27\Modules\Platform\Windows.cmake;F:\Cmake\share\cmake-3.27\Modules\Platform\WindowsPaths.cmake;F:\Cmake\share\cmake-3.27\Modules\WriteBasicConfigVersionFile.cmake;F:\osqp1feb\osqp-1.0.0.beta1\build\CMakeFiles\3.27.4\CMakeCCompiler.cmake;F:\osqp1feb\osqp-1.0.0.beta1\build\CMakeFiles\3.27.4\CMakeCXXCompiler.cmake;F:\osqp1feb\osqp-1.0.0.beta1\build\CMakeFiles\3.27.4\CMakeRCCompiler.cmake;F:\osqp1feb\osqp-1.0.0.beta1\build\CMakeFiles\3.27.4\CMakeSystem.cmake;F:\osqp1feb\osqp-1.0.0.beta1\build\CMakeFiles\cmake.verify_globs;F:\osqp1feb\osqp-1.0.0.beta1\configure\cmake\Utils.cmake;F:\osqp1feb\osqp-1.0.0.beta1\configure\cmake\cmake_uninstall.cmake.in;F:\osqp1feb\osqp-1.0.0.beta1\configure\osqp-config.cmake.in;F:\osqp1feb\osqp-1.0.0.beta1\configure\osqp_configure.h.in;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">F:\osqp1feb\osqp-1.0.0.beta1\build\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Building Custom Rule F:/osqp1feb/osqp-1.0.0.beta1/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">setlocal
+F:\Cmake\bin\cmake.exe -SF:/osqp1feb/osqp-1.0.0.beta1 -BF:/osqp1feb/osqp-1.0.0.beta1/build --check-stamp-file F:/osqp1feb/osqp-1.0.0.beta1/build/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">F:\Cmake\share\cmake-3.27\Modules\BasicConfigVersion-SameMajorVersion.cmake.in;F:\Cmake\share\cmake-3.27\Modules\CMakeCCompiler.cmake.in;F:\Cmake\share\cmake-3.27\Modules\CMakeCCompilerABI.c;F:\Cmake\share\cmake-3.27\Modules\CMakeCInformation.cmake;F:\Cmake\share\cmake-3.27\Modules\CMakeCXXCompiler.cmake.in;F:\Cmake\share\cmake-3.27\Modules\CMakeCXXCompilerABI.cpp;F:\Cmake\share\cmake-3.27\Modules\CMakeCXXInformation.cmake;F:\Cmake\share\cmake-3.27\Modules\CMakeCommonLanguageInclude.cmake;F:\Cmake\share\cmake-3.27\Modules\CMakeCompilerIdDetection.cmake;F:\Cmake\share\cmake-3.27\Modules\CMakeDependentOption.cmake;F:\Cmake\share\cmake-3.27\Modules\CMakeDetermineCCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\CMakeDetermineCXXCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\CMakeDetermineCompileFeatures.cmake;F:\Cmake\share\cmake-3.27\Modules\CMakeDetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\CMakeDetermineCompilerABI.cmake;F:\Cmake\share\cmake-3.27\Modules\CMakeDetermineCompilerId.cmake;F:\Cmake\share\cmake-3.27\Modules\CMakeDetermineRCCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\CMakeDetermineSystem.cmake;F:\Cmake\share\cmake-3.27\Modules\CMakeFindBinUtils.cmake;F:\Cmake\share\cmake-3.27\Modules\CMakeGenericSystem.cmake;F:\Cmake\share\cmake-3.27\Modules\CMakeInitializeConfigs.cmake;F:\Cmake\share\cmake-3.27\Modules\CMakeLanguageInformation.cmake;F:\Cmake\share\cmake-3.27\Modules\CMakePackageConfigHelpers.cmake;F:\Cmake\share\cmake-3.27\Modules\CMakeParseImplicitIncludeInfo.cmake;F:\Cmake\share\cmake-3.27\Modules\CMakeParseImplicitLinkInfo.cmake;F:\Cmake\share\cmake-3.27\Modules\CMakeParseLibraryArchitecture.cmake;F:\Cmake\share\cmake-3.27\Modules\CMakeRCCompiler.cmake.in;F:\Cmake\share\cmake-3.27\Modules\CMakeRCInformation.cmake;F:\Cmake\share\cmake-3.27\Modules\CMakeSystem.cmake.in;F:\Cmake\share\cmake-3.27\Modules\CMakeSystemSpecificInformation.cmake;F:\Cmake\share\cmake-3.27\Modules\CMakeSystemSpecificInitialize.cmake;F:\Cmake\share\cmake-3.27\Modules\CMakeTestCCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\CMakeTestCXXCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\CMakeTestCompilerCommon.cmake;F:\Cmake\share\cmake-3.27\Modules\CMakeTestRCCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\ADSP-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\ARMCC-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\ARMClang-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\AppleClang-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\Borland-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\Bruce-C-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\CMakeCommonCompilerMacros.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\Clang-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\Clang-DetermineCompilerInternal.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\Comeau-CXX-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\Compaq-C-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\Compaq-CXX-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\Cray-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\Embarcadero-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\Fujitsu-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\FujitsuClang-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\GHS-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\GNU-C-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\GNU-CXX-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\HP-C-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\HP-CXX-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\IAR-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\IBMCPP-C-DetermineVersionInternal.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\IBMCPP-CXX-DetermineVersionInternal.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\IBMClang-C-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\IBMClang-CXX-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\Intel-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\IntelLLVM-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\LCC-C-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\LCC-CXX-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\MSVC-C.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\MSVC-CXX.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\MSVC-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\MSVC.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\NVHPC-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\NVIDIA-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\OpenWatcom-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\PGI-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\PathScale-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\SCO-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\SDCC-C-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\SunPro-C-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\SunPro-CXX-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\TI-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\Tasking-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\TinyCC-C-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\VisualAge-C-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\VisualAge-CXX-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\Watcom-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\XL-C-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\XL-CXX-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\XLClang-C-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\XLClang-CXX-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\zOS-C-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\zOS-CXX-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\CompilerId\VS-10.vcxproj.in;F:\Cmake\share\cmake-3.27\Modules\GNUInstallDirs.cmake;F:\Cmake\share\cmake-3.27\Modules\Internal\FeatureTesting.cmake;F:\Cmake\share\cmake-3.27\Modules\Platform\Windows-Determine-CXX.cmake;F:\Cmake\share\cmake-3.27\Modules\Platform\Windows-Initialize.cmake;F:\Cmake\share\cmake-3.27\Modules\Platform\Windows-MSVC-C.cmake;F:\Cmake\share\cmake-3.27\Modules\Platform\Windows-MSVC-CXX.cmake;F:\Cmake\share\cmake-3.27\Modules\Platform\Windows-MSVC.cmake;F:\Cmake\share\cmake-3.27\Modules\Platform\Windows.cmake;F:\Cmake\share\cmake-3.27\Modules\Platform\WindowsPaths.cmake;F:\Cmake\share\cmake-3.27\Modules\WriteBasicConfigVersionFile.cmake;F:\osqp1feb\osqp-1.0.0.beta1\build\CMakeFiles\3.27.4\CMakeCCompiler.cmake;F:\osqp1feb\osqp-1.0.0.beta1\build\CMakeFiles\3.27.4\CMakeCXXCompiler.cmake;F:\osqp1feb\osqp-1.0.0.beta1\build\CMakeFiles\3.27.4\CMakeRCCompiler.cmake;F:\osqp1feb\osqp-1.0.0.beta1\build\CMakeFiles\3.27.4\CMakeSystem.cmake;F:\osqp1feb\osqp-1.0.0.beta1\build\CMakeFiles\cmake.verify_globs;F:\osqp1feb\osqp-1.0.0.beta1\configure\cmake\Utils.cmake;F:\osqp1feb\osqp-1.0.0.beta1\configure\cmake\cmake_uninstall.cmake.in;F:\osqp1feb\osqp-1.0.0.beta1\configure\osqp-config.cmake.in;F:\osqp1feb\osqp-1.0.0.beta1\configure\osqp_configure.h.in;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">F:\osqp1feb\osqp-1.0.0.beta1\build\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Building Custom Rule F:/osqp1feb/osqp-1.0.0.beta1/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">setlocal
+F:\Cmake\bin\cmake.exe -SF:/osqp1feb/osqp-1.0.0.beta1 -BF:/osqp1feb/osqp-1.0.0.beta1/build --check-stamp-file F:/osqp1feb/osqp-1.0.0.beta1/build/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">F:\Cmake\share\cmake-3.27\Modules\BasicConfigVersion-SameMajorVersion.cmake.in;F:\Cmake\share\cmake-3.27\Modules\CMakeCCompiler.cmake.in;F:\Cmake\share\cmake-3.27\Modules\CMakeCCompilerABI.c;F:\Cmake\share\cmake-3.27\Modules\CMakeCInformation.cmake;F:\Cmake\share\cmake-3.27\Modules\CMakeCXXCompiler.cmake.in;F:\Cmake\share\cmake-3.27\Modules\CMakeCXXCompilerABI.cpp;F:\Cmake\share\cmake-3.27\Modules\CMakeCXXInformation.cmake;F:\Cmake\share\cmake-3.27\Modules\CMakeCommonLanguageInclude.cmake;F:\Cmake\share\cmake-3.27\Modules\CMakeCompilerIdDetection.cmake;F:\Cmake\share\cmake-3.27\Modules\CMakeDependentOption.cmake;F:\Cmake\share\cmake-3.27\Modules\CMakeDetermineCCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\CMakeDetermineCXXCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\CMakeDetermineCompileFeatures.cmake;F:\Cmake\share\cmake-3.27\Modules\CMakeDetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\CMakeDetermineCompilerABI.cmake;F:\Cmake\share\cmake-3.27\Modules\CMakeDetermineCompilerId.cmake;F:\Cmake\share\cmake-3.27\Modules\CMakeDetermineRCCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\CMakeDetermineSystem.cmake;F:\Cmake\share\cmake-3.27\Modules\CMakeFindBinUtils.cmake;F:\Cmake\share\cmake-3.27\Modules\CMakeGenericSystem.cmake;F:\Cmake\share\cmake-3.27\Modules\CMakeInitializeConfigs.cmake;F:\Cmake\share\cmake-3.27\Modules\CMakeLanguageInformation.cmake;F:\Cmake\share\cmake-3.27\Modules\CMakePackageConfigHelpers.cmake;F:\Cmake\share\cmake-3.27\Modules\CMakeParseImplicitIncludeInfo.cmake;F:\Cmake\share\cmake-3.27\Modules\CMakeParseImplicitLinkInfo.cmake;F:\Cmake\share\cmake-3.27\Modules\CMakeParseLibraryArchitecture.cmake;F:\Cmake\share\cmake-3.27\Modules\CMakeRCCompiler.cmake.in;F:\Cmake\share\cmake-3.27\Modules\CMakeRCInformation.cmake;F:\Cmake\share\cmake-3.27\Modules\CMakeSystem.cmake.in;F:\Cmake\share\cmake-3.27\Modules\CMakeSystemSpecificInformation.cmake;F:\Cmake\share\cmake-3.27\Modules\CMakeSystemSpecificInitialize.cmake;F:\Cmake\share\cmake-3.27\Modules\CMakeTestCCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\CMakeTestCXXCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\CMakeTestCompilerCommon.cmake;F:\Cmake\share\cmake-3.27\Modules\CMakeTestRCCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\ADSP-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\ARMCC-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\ARMClang-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\AppleClang-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\Borland-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\Bruce-C-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\CMakeCommonCompilerMacros.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\Clang-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\Clang-DetermineCompilerInternal.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\Comeau-CXX-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\Compaq-C-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\Compaq-CXX-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\Cray-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\Embarcadero-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\Fujitsu-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\FujitsuClang-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\GHS-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\GNU-C-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\GNU-CXX-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\HP-C-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\HP-CXX-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\IAR-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\IBMCPP-C-DetermineVersionInternal.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\IBMCPP-CXX-DetermineVersionInternal.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\IBMClang-C-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\IBMClang-CXX-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\Intel-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\IntelLLVM-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\LCC-C-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\LCC-CXX-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\MSVC-C.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\MSVC-CXX.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\MSVC-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\MSVC.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\NVHPC-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\NVIDIA-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\OpenWatcom-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\PGI-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\PathScale-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\SCO-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\SDCC-C-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\SunPro-C-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\SunPro-CXX-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\TI-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\Tasking-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\TinyCC-C-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\VisualAge-C-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\VisualAge-CXX-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\Watcom-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\XL-C-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\XL-CXX-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\XLClang-C-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\XLClang-CXX-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\zOS-C-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\Compiler\zOS-CXX-DetermineCompiler.cmake;F:\Cmake\share\cmake-3.27\Modules\CompilerId\VS-10.vcxproj.in;F:\Cmake\share\cmake-3.27\Modules\GNUInstallDirs.cmake;F:\Cmake\share\cmake-3.27\Modules\Internal\FeatureTesting.cmake;F:\Cmake\share\cmake-3.27\Modules\Platform\Windows-Determine-CXX.cmake;F:\Cmake\share\cmake-3.27\Modules\Platform\Windows-Initialize.cmake;F:\Cmake\share\cmake-3.27\Modules\Platform\Windows-MSVC-C.cmake;F:\Cmake\share\cmake-3.27\Modules\Platform\Windows-MSVC-CXX.cmake;F:\Cmake\share\cmake-3.27\Modules\Platform\Windows-MSVC.cmake;F:\Cmake\share\cmake-3.27\Modules\Platform\Windows.cmake;F:\Cmake\share\cmake-3.27\Modules\Platform\WindowsPaths.cmake;F:\Cmake\share\cmake-3.27\Modules\WriteBasicConfigVersionFile.cmake;F:\osqp1feb\osqp-1.0.0.beta1\build\CMakeFiles\3.27.4\CMakeCCompiler.cmake;F:\osqp1feb\osqp-1.0.0.beta1\build\CMakeFiles\3.27.4\CMakeCXXCompiler.cmake;F:\osqp1feb\osqp-1.0.0.beta1\build\CMakeFiles\3.27.4\CMakeRCCompiler.cmake;F:\osqp1feb\osqp-1.0.0.beta1\build\CMakeFiles\3.27.4\CMakeSystem.cmake;F:\osqp1feb\osqp-1.0.0.beta1\build\CMakeFiles\cmake.verify_globs;F:\osqp1feb\osqp-1.0.0.beta1\configure\cmake\Utils.cmake;F:\osqp1feb\osqp-1.0.0.beta1\configure\cmake\cmake_uninstall.cmake.in;F:\osqp1feb\osqp-1.0.0.beta1\configure\osqp-config.cmake.in;F:\osqp1feb\osqp-1.0.0.beta1\configure\osqp_configure.h.in;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">F:\osqp1feb\osqp-1.0.0.beta1\build\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</LinkObjects>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="F:\osqp1feb\osqp-1.0.0.beta1\include\private\version.h" />
+    <ClInclude Include="F:\osqp1feb\osqp-1.0.0.beta1\include\private\algebra_vector.h" />
+    <ClInclude Include="F:\osqp1feb\osqp-1.0.0.beta1\include\private\algebra_matrix.h" />
+    <ClInclude Include="F:\osqp1feb\osqp-1.0.0.beta1\include\private\auxil.h" />
+    <ClInclude Include="F:\osqp1feb\osqp-1.0.0.beta1\include\private\error.h" />
+    <ClInclude Include="F:\osqp1feb\osqp-1.0.0.beta1\include\private\glob_opts.h" />
+    <ClInclude Include="F:\osqp1feb\osqp-1.0.0.beta1\include\private\lin_alg.h" />
+    <ClInclude Include="F:\osqp1feb\osqp-1.0.0.beta1\include\private\printing.h" />
+    <ClInclude Include="F:\osqp1feb\osqp-1.0.0.beta1\include\private\scaling.h" />
+    <ClInclude Include="F:\osqp1feb\osqp-1.0.0.beta1\include\private\timing.h" />
+    <ClInclude Include="F:\osqp1feb\osqp-1.0.0.beta1\include\private\types.h" />
+    <ClInclude Include="F:\osqp1feb\osqp-1.0.0.beta1\include\private\util.h" />
+    <ClInclude Include="F:\osqp1feb\osqp-1.0.0.beta1\include\private\polish.h" />
+    <ClInclude Include="F:\osqp1feb\osqp-1.0.0.beta1\include\private\derivative.h" />
+    <ClInclude Include="F:\osqp1feb\osqp-1.0.0.beta1\include\private\interrupt.h" />
+    <ClCompile Include="F:\osqp1feb\osqp-1.0.0.beta1\src\auxil.c" />
+    <ClCompile Include="F:\osqp1feb\osqp-1.0.0.beta1\src\error.c" />
+    <ClCompile Include="F:\osqp1feb\osqp-1.0.0.beta1\src\scaling.c" />
+    <ClCompile Include="F:\osqp1feb\osqp-1.0.0.beta1\src\util.c" />
+    <ClCompile Include="F:\osqp1feb\osqp-1.0.0.beta1\src\polish.c" />
+    <ClCompile Include="F:\osqp1feb\osqp-1.0.0.beta1\src\derivative.c" />
+    <ClCompile Include="F:\osqp1feb\osqp-1.0.0.beta1\src\interrupt_windows.c" />
+    <ClCompile Include="F:\osqp1feb\osqp-1.0.0.beta1\src\timing_windows.c" />
+    <ClCompile Include="F:\osqp1feb\osqp-1.0.0.beta1\src\codegen.c" />
+    <ClInclude Include="F:\osqp1feb\osqp-1.0.0.beta1\algebra\_common\csc_math.h" />
+    <ClCompile Include="F:\osqp1feb\osqp-1.0.0.beta1\algebra\_common\csc_math.c" />
+    <ClInclude Include="F:\osqp1feb\osqp-1.0.0.beta1\algebra\_common\csc_utils.h" />
+    <ClCompile Include="F:\osqp1feb\osqp-1.0.0.beta1\algebra\_common\csc_utils.c" />
+    <ClInclude Include="F:\osqp1feb\osqp-1.0.0.beta1\algebra\builtin\algebra_impl.h" />
+    <ClCompile Include="F:\osqp1feb\osqp-1.0.0.beta1\algebra\builtin\algebra_libs.c" />
+    <ClCompile Include="F:\osqp1feb\osqp-1.0.0.beta1\algebra\builtin\vector.c" />
+    <ClCompile Include="F:\osqp1feb\osqp-1.0.0.beta1\algebra\builtin\matrix.c" />
+    <ClInclude Include="F:\osqp1feb\osqp-1.0.0.beta1\algebra\_common\lin_sys\qdldl\amd\include\SuiteSparse_config.h" />
+    <ClInclude Include="F:\osqp1feb\osqp-1.0.0.beta1\algebra\_common\lin_sys\qdldl\amd\include\amd.h" />
+    <ClInclude Include="F:\osqp1feb\osqp-1.0.0.beta1\algebra\_common\lin_sys\qdldl\amd\include\amd_internal.h" />
+    <ClCompile Include="F:\osqp1feb\osqp-1.0.0.beta1\algebra\_common\lin_sys\qdldl\amd\src\SuiteSparse_config.c" />
+    <ClCompile Include="F:\osqp1feb\osqp-1.0.0.beta1\algebra\_common\lin_sys\qdldl\amd\src\amd_1.c" />
+    <ClCompile Include="F:\osqp1feb\osqp-1.0.0.beta1\algebra\_common\lin_sys\qdldl\amd\src\amd_2.c" />
+    <ClCompile Include="F:\osqp1feb\osqp-1.0.0.beta1\algebra\_common\lin_sys\qdldl\amd\src\amd_aat.c" />
+    <ClCompile Include="F:\osqp1feb\osqp-1.0.0.beta1\algebra\_common\lin_sys\qdldl\amd\src\amd_control.c" />
+    <ClCompile Include="F:\osqp1feb\osqp-1.0.0.beta1\algebra\_common\lin_sys\qdldl\amd\src\amd_defaults.c" />
+    <ClCompile Include="F:\osqp1feb\osqp-1.0.0.beta1\algebra\_common\lin_sys\qdldl\amd\src\amd_info.c" />
+    <ClCompile Include="F:\osqp1feb\osqp-1.0.0.beta1\algebra\_common\lin_sys\qdldl\amd\src\amd_order.c" />
+    <ClCompile Include="F:\osqp1feb\osqp-1.0.0.beta1\algebra\_common\lin_sys\qdldl\amd\src\amd_post_tree.c" />
+    <ClCompile Include="F:\osqp1feb\osqp-1.0.0.beta1\algebra\_common\lin_sys\qdldl\amd\src\amd_postorder.c" />
+    <ClCompile Include="F:\osqp1feb\osqp-1.0.0.beta1\algebra\_common\lin_sys\qdldl\amd\src\amd_preprocess.c" />
+    <ClCompile Include="F:\osqp1feb\osqp-1.0.0.beta1\algebra\_common\lin_sys\qdldl\amd\src\amd_valid.c" />
+    <ClInclude Include="F:\osqp1feb\osqp-1.0.0.beta1\algebra\_common\kkt.h" />
+    <ClCompile Include="F:\osqp1feb\osqp-1.0.0.beta1\algebra\_common\kkt.c" />
+    <ClInclude Include="F:\osqp1feb\osqp-1.0.0.beta1\algebra\_common\lin_sys\qdldl\qdldl_interface.h" />
+    <ClCompile Include="F:\osqp1feb\osqp-1.0.0.beta1\algebra\_common\lin_sys\qdldl\qdldl_interface.c" />
+    <Object Include="F:\osqp1feb\osqp-1.0.0.beta1\build\_deps\qdldl-build\qdldlobject.dir\$(Configuration)\qdldl.obj" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="F:\osqp1feb\osqp-1.0.0.beta1\build\ZERO_CHECK.vcxproj">
+      <Project>{D2AF8DF1-CA74-32BB-B76E-F7130D4DE259}</Project>
+      <Name>ZERO_CHECK</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="F:\osqp1feb\osqp-1.0.0.beta1\build\_deps\qdldl-build\qdldlobject.vcxproj">
+      <Project>{3E769C98-FCDD-30EC-B994-8A392F886199}</Project>
+      <Name>qdldlobject</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

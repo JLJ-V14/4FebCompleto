@@ -1,0 +1,28 @@
+^F:\OSQP1FEB\OSQP-1.0.0.BETA1\BUILD\CMAKEFILES\3FB9908ED48C6D3B776C6A0D4765EFA3\MAKEFILE.RULE
+setlocal
+F:\Cmake\bin\cmake.exe -E copy F:/osqp1feb/osqp-1.0.0.beta1/configure/Makefile.emosqp F:/osqp1feb/osqp-1.0.0.beta1/build/codegen_src/Makefile
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^F:\OSQP1FEB\OSQP-1.0.0.BETA1\BUILD\CMAKEFILES\9784540DF6D809D152331C50FC53C95A\COPY_CODEGEN_MAKEFILE.RULE
+setlocal
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^F:\OSQP1FEB\OSQP-1.0.0.BETA1\CMAKELISTS.TXT
+setlocal
+F:\Cmake\bin\cmake.exe -SF:/osqp1feb/osqp-1.0.0.beta1 -BF:/osqp1feb/osqp-1.0.0.beta1/build --check-stamp-file F:/osqp1feb/osqp-1.0.0.beta1/build/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

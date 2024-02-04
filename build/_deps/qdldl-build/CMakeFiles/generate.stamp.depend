@@ -1,0 +1,7 @@
+# CMake generation dependency list for this directory.
+F:/Cmake/share/cmake-3.27/Modules/CMakeDependentOption.cmake
+F:/Cmake/share/cmake-3.27/Modules/GNUInstallDirs.cmake
+F:/osqp1feb/osqp-1.0.0.beta1/algebra/_common/lin_sys/qdldl/qdldl_sources/CMakeLists.txt
+F:/osqp1feb/osqp-1.0.0.beta1/algebra/_common/lin_sys/qdldl/qdldl_sources/configure/qdldl_types.h.in
+F:/osqp1feb/osqp-1.0.0.beta1/algebra/_common/lin_sys/qdldl/qdldl_sources/configure/qdldl_version.h.in
+F:/osqp1feb/osqp-1.0.0.beta1/build/CMakeFiles/cmake.verify_globs

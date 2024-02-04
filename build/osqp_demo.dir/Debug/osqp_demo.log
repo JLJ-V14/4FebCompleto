@@ -1,0 +1,3 @@
+﻿F:\Visual_Studio\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(531,5): warning MSB8028: The intermediate directory (osqp_demo.dir\Debug\) contains files shared from another project (osqp_demo.vcxproj, osqp_optimizacion.vcxproj).  This can lead to incorrect clean and rebuild behavior.
+  verificar_datos_algoritmo.c
+  osqp_demo.vcxproj -> F:\osqp1feb\osqp-1.0.0.beta1\build\out\osqp_demo.exe

@@ -1,0 +1,178 @@
+^F:\OSQP1FEB\OSQP-1.0.0.BETA1\BUILD\CMAKEFILES\C1CE385E34AAB7C13EE1443E89B19701\ALGEBRA_IMPL.H.RULE
+setlocal
+F:\Cmake\bin\cmake.exe -E copy F:/osqp1feb/osqp-1.0.0.beta1/algebra/builtin/algebra_impl.h F:/osqp1feb/osqp-1.0.0.beta1/build/codegen_src/inc/private/algebra_impl.h
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^F:\OSQP1FEB\OSQP-1.0.0.BETA1\BUILD\CMAKEFILES\C1CE385E34AAB7C13EE1443E89B19701\CSC_MATH.H.RULE
+setlocal
+F:\Cmake\bin\cmake.exe -E copy F:/osqp1feb/osqp-1.0.0.beta1/algebra/_common/csc_math.h F:/osqp1feb/osqp-1.0.0.beta1/build/codegen_src/inc/private/csc_math.h
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^F:\OSQP1FEB\OSQP-1.0.0.BETA1\BUILD\CMAKEFILES\C1CE385E34AAB7C13EE1443E89B19701\CSC_UTILS.H.RULE
+setlocal
+F:\Cmake\bin\cmake.exe -E copy F:/osqp1feb/osqp-1.0.0.beta1/algebra/_common/csc_utils.h F:/osqp1feb/osqp-1.0.0.beta1/build/codegen_src/inc/private/csc_utils.h
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^F:\OSQP1FEB\OSQP-1.0.0.BETA1\BUILD\CMAKEFILES\C1CE385E34AAB7C13EE1443E89B19701\KKT.H.RULE
+setlocal
+F:\Cmake\bin\cmake.exe -E copy F:/osqp1feb/osqp-1.0.0.beta1/algebra/_common/kkt.h F:/osqp1feb/osqp-1.0.0.beta1/build/codegen_src/inc/private/kkt.h
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^F:\OSQP1FEB\OSQP-1.0.0.BETA1\BUILD\CMAKEFILES\C1CE385E34AAB7C13EE1443E89B19701\QDLDL.H.RULE
+setlocal
+F:\Cmake\bin\cmake.exe -E copy F:/osqp1feb/osqp-1.0.0.beta1/algebra/_common/lin_sys/qdldl/qdldl_sources/include/qdldl.h F:/osqp1feb/osqp-1.0.0.beta1/build/codegen_src/inc/private/qdldl.h
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^F:\OSQP1FEB\OSQP-1.0.0.BETA1\BUILD\CMAKEFILES\C1CE385E34AAB7C13EE1443E89B19701\QDLDL_INTERFACE.H.RULE
+setlocal
+F:\Cmake\bin\cmake.exe -E copy F:/osqp1feb/osqp-1.0.0.beta1/algebra/_common/lin_sys/qdldl/qdldl_interface.h F:/osqp1feb/osqp-1.0.0.beta1/build/codegen_src/inc/private/qdldl_interface.h
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^F:\OSQP1FEB\OSQP-1.0.0.BETA1\BUILD\CMAKEFILES\C1CE385E34AAB7C13EE1443E89B19701\QDLDL_TYPES.H.RULE
+setlocal
+F:\Cmake\bin\cmake.exe -E copy F:/osqp1feb/osqp-1.0.0.beta1/algebra/_common/lin_sys/qdldl/qdldl_codegen_types.h.in F:/osqp1feb/osqp-1.0.0.beta1/build/codegen_src/inc/private/qdldl_types.h
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^F:\OSQP1FEB\OSQP-1.0.0.BETA1\BUILD\CMAKEFILES\C1CE385E34AAB7C13EE1443E89B19701\QDLDL_VERSION.H.RULE
+setlocal
+F:\Cmake\bin\cmake.exe -E copy F:/osqp1feb/osqp-1.0.0.beta1/algebra/_common/lin_sys/qdldl/qdldl_sources/include/qdldl_version.h F:/osqp1feb/osqp-1.0.0.beta1/build/codegen_src/inc/private/qdldl_version.h
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^F:\OSQP1FEB\OSQP-1.0.0.BETA1\BUILD\CMAKEFILES\D62045A030AF77D715AB800B621D74AF\ALGEBRA_LIBS.C.RULE
+setlocal
+F:\Cmake\bin\cmake.exe -E copy F:/osqp1feb/osqp-1.0.0.beta1/algebra/builtin/algebra_libs.c F:/osqp1feb/osqp-1.0.0.beta1/build/codegen_src/src/algebra_libs.c
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^F:\OSQP1FEB\OSQP-1.0.0.BETA1\BUILD\CMAKEFILES\D62045A030AF77D715AB800B621D74AF\CSC_MATH.C.RULE
+setlocal
+F:\Cmake\bin\cmake.exe -E copy F:/osqp1feb/osqp-1.0.0.beta1/algebra/_common/csc_math.c F:/osqp1feb/osqp-1.0.0.beta1/build/codegen_src/src/csc_math.c
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^F:\OSQP1FEB\OSQP-1.0.0.BETA1\BUILD\CMAKEFILES\D62045A030AF77D715AB800B621D74AF\CSC_UTILS.C.RULE
+setlocal
+F:\Cmake\bin\cmake.exe -E copy F:/osqp1feb/osqp-1.0.0.beta1/algebra/_common/csc_utils.c F:/osqp1feb/osqp-1.0.0.beta1/build/codegen_src/src/csc_utils.c
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^F:\OSQP1FEB\OSQP-1.0.0.BETA1\BUILD\CMAKEFILES\D62045A030AF77D715AB800B621D74AF\KKT.C.RULE
+setlocal
+F:\Cmake\bin\cmake.exe -E copy F:/osqp1feb/osqp-1.0.0.beta1/algebra/_common/kkt.c F:/osqp1feb/osqp-1.0.0.beta1/build/codegen_src/src/kkt.c
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^F:\OSQP1FEB\OSQP-1.0.0.BETA1\BUILD\CMAKEFILES\D62045A030AF77D715AB800B621D74AF\MATRIX.C.RULE
+setlocal
+F:\Cmake\bin\cmake.exe -E copy F:/osqp1feb/osqp-1.0.0.beta1/algebra/builtin/matrix.c F:/osqp1feb/osqp-1.0.0.beta1/build/codegen_src/src/matrix.c
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^F:\OSQP1FEB\OSQP-1.0.0.BETA1\BUILD\CMAKEFILES\D62045A030AF77D715AB800B621D74AF\QDLDL.C.RULE
+setlocal
+F:\Cmake\bin\cmake.exe -E copy F:/osqp1feb/osqp-1.0.0.beta1/algebra/_common/lin_sys/qdldl/qdldl_sources/src/qdldl.c F:/osqp1feb/osqp-1.0.0.beta1/build/codegen_src/src/qdldl.c
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^F:\OSQP1FEB\OSQP-1.0.0.BETA1\BUILD\CMAKEFILES\D62045A030AF77D715AB800B621D74AF\QDLDL_INTERFACE.C.RULE
+setlocal
+F:\Cmake\bin\cmake.exe -E copy F:/osqp1feb/osqp-1.0.0.beta1/algebra/_common/lin_sys/qdldl/qdldl_interface.c F:/osqp1feb/osqp-1.0.0.beta1/build/codegen_src/src/qdldl_interface.c
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^F:\OSQP1FEB\OSQP-1.0.0.BETA1\BUILD\CMAKEFILES\D62045A030AF77D715AB800B621D74AF\VECTOR.C.RULE
+setlocal
+F:\Cmake\bin\cmake.exe -E copy F:/osqp1feb/osqp-1.0.0.beta1/algebra/builtin/vector.c F:/osqp1feb/osqp-1.0.0.beta1/build/codegen_src/src/vector.c
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^F:\OSQP1FEB\OSQP-1.0.0.BETA1\BUILD\CMAKEFILES\D3C7FE04AF0A80120B1D0EE354858A71\COPY_CODEGEN_LINALG.RULE
+setlocal
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^F:\OSQP1FEB\OSQP-1.0.0.BETA1\ALGEBRA\BUILTIN\CMAKELISTS.TXT
+setlocal
+F:\Cmake\bin\cmake.exe -SF:/osqp1feb/osqp-1.0.0.beta1 -BF:/osqp1feb/osqp-1.0.0.beta1/build --check-stamp-file F:/osqp1feb/osqp-1.0.0.beta1/build/algebra/builtin/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
