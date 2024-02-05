@@ -4,7 +4,7 @@
 #define OPERACIONES_STRING_H
 
 #include <stdbool.h>
-#include <wchar.h>
+
 /* Include files */
 
 

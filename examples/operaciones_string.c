@@ -24,7 +24,7 @@ bool strings_iguales(const char* String_1, const char* String_2) {
 	//Linux como en windows.
 #ifdef _WIN32
 #define strcasecmp _stricmp
-#define wcsdup _wcsdup
+#define strdup _strdup
 #endif
 
 
