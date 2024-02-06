@@ -1,17 +1,19 @@
-﻿  procesar_informacion_entrada.c
-procesar_informacion_entrada.c(16,28): warning C4033: 'eliminar_fechas_repetidas' must return a value
-procesar_informacion_entrada.c(31,25): warning C4047: '=': 'tm *' differs in levels of indirection from 'tm **'
-procesar_informacion_entrada.c(93,22): warning C4047: 'function': 'const datos_csv_t *' differs in levels of indirection from 'char ****'
-procesar_informacion_entrada.c(93,22): warning C4024: 'cargar_fecha': different types for formal and actual parameter 1
-procesar_informacion_entrada.c(97,22): warning C4047: 'function': 'const datos_csv_t *' differs in levels of indirection from 'char ****'
-procesar_informacion_entrada.c(97,22): warning C4024: 'cargar_fecha': different types for formal and actual parameter 1
-procesar_informacion_entrada.c(101,22): warning C4047: 'function': 'const datos_csv_t *' differs in levels of indirection from 'char ****'
-procesar_informacion_entrada.c(101,22): warning C4024: 'cargar_fecha': different types for formal and actual parameter 1
-procesar_informacion_entrada.c(119,22): warning C4047: 'function': 'const datos_csv_t *' differs in levels of indirection from 'char ****'
-procesar_informacion_entrada.c(119,22): warning C4024: 'cargar_fecha': different types for formal and actual parameter 1
-procesar_informacion_entrada.c(124,22): warning C4047: 'function': 'const datos_csv_t *' differs in levels of indirection from 'char ****'
-procesar_informacion_entrada.c(124,22): warning C4024: 'cargar_fecha': different types for formal and actual parameter 1
-procesar_informacion_entrada.c(277,16): warning C4133: 'function': incompatible types - from 'datos_csv_algoritmo_t *' to 'const datos_csv_t *'
-procesar_informacion_entrada.c(281,16): warning C4133: 'function': incompatible types - from 'datos_csv_algoritmo_t *' to 'const datos_csv_t *'
-procesar_informacion_entrada.c(274,7): warning C4047: 'initializing': 'int' differs in levels of indirection from 'char *'
-F:\osqp1feb\osqp-1.0.0.beta1\build\procesar_informacion_entrada.c(40): warning C4715: 'eliminar_fechas_repetidas': not all control paths return a value
+﻿  calcular_puntos_simulacion.c
+calcular_puntos_simulacion.c(55,20): warning C4047: 'function': 'const datos_csv_t *' differs in levels of indirection from 'char ****'
+calcular_puntos_simulacion.c(55,20): warning C4024: 'cargar_fecha': different types for formal and actual parameter 1
+calcular_puntos_simulacion.c(59,20): warning C4047: 'function': 'const datos_csv_t *' differs in levels of indirection from 'char ****'
+calcular_puntos_simulacion.c(59,20): warning C4024: 'cargar_fecha': different types for formal and actual parameter 1
+calcular_puntos_simulacion.c(63,20): warning C4047: 'function': 'const datos_csv_t *' differs in levels of indirection from 'char ****'
+calcular_puntos_simulacion.c(63,20): warning C4024: 'cargar_fecha': different types for formal and actual parameter 1
+calcular_puntos_simulacion.c(81,20): warning C4047: 'function': 'const datos_csv_t *' differs in levels of indirection from 'char ****'
+calcular_puntos_simulacion.c(81,20): warning C4024: 'cargar_fecha': different types for formal and actual parameter 1
+calcular_puntos_simulacion.c(86,20): warning C4047: 'function': 'const datos_csv_t *' differs in levels of indirection from 'char ****'
+calcular_puntos_simulacion.c(86,20): warning C4024: 'cargar_fecha': different types for formal and actual parameter 1
+calcular_puntos_simulacion.c(187,16): warning C4133: 'function': incompatible types - from 'datos_csv_algoritmo_t *' to 'const datos_csv_t *'
+calcular_puntos_simulacion.c(191,16): warning C4133: 'function': incompatible types - from 'datos_csv_algoritmo_t *' to 'const datos_csv_t *'
+calcular_puntos_simulacion.c(184,7): warning C4047: 'initializing': 'int' differs in levels of indirection from 'char *'
+calcular_puntos_simulacion.c(260,72): warning C4047: 'function': 'time_t *' differs in levels of indirection from 'time_t'
+calcular_puntos_simulacion.c(260,72): warning C4024: 'calcular_numero_puntos_provisional': different types for formal and actual parameter 1
+calcular_puntos_simulacion.c(260,86): warning C4047: 'function': 'time_t *' differs in levels of indirection from 'time_t'
+calcular_puntos_simulacion.c(260,86): warning C4024: 'calcular_numero_puntos_provisional': different types for formal and actual parameter 2
+F:\osqp1feb\osqp-1.0.0.beta1\build\calcular_puntos_simulacion.c(277): warning C4715: 'cacular_puntos_simulacion': not all control paths return a value
