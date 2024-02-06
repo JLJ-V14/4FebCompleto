@@ -24,6 +24,8 @@ extern "C" {
 
 	int  verificar_orden_fechas(const struct tm fecha_anterior, const struct tm fecha_posterior,
 		const int incluir_igual);
+
+	int comparar_fechas(const void* a, const void* b);
 #ifdef __cplusplus
 }
 #endif

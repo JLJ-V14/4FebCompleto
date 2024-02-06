@@ -1,20 +1,52 @@
 #include "definiciones_globales.h"
 #include "registrar_errores.h"
-#include "tipos_optimizacion.h"
+
 #include "osqp.h"
+#include "operaciones_fecha.h"
 #include "operaciones_string.h"
+#include "tipos_optimizacion.h"
 #include <stdlib.h>
 #include <stdbool.h>
 #include <stdio.h>
 #include <time.h>
+
+/*El subprograma siguiente se utiliza para eliminar las fechas repetidas del array
+  de fechas adicionales */
+int eliminar_fechas_repetidas(struct tm** fechas_adicionales,int* tamanyo_array) {
+  if (*tamanyo_array <= 1) return;
+  //Se ordena el array en orden ascendentes de fechas
+  qsort(fechas_adicionales, *tamanyo_array, sizeof(struct tm*), comparar_fechas);
+  //Se pasa a eliminar las fechas duplicadas
+  int indice_escritura = 0;
+  for (int indice_lectura = 1; indice_lectura < *tamanyo_array; ++indice_lectura) {
+    if (comparar_fechas(&fechas_adicionales[indice_lectura], &fechas_adicionales[indice_escritura]) != 0) {
+      indice_escritura++;
+      fechas_adicionales[indice_escritura] = fechas_adicionales[indice_lectura];
+    }
+  }
+  *tamanyo_array = indice_escritura;
+
+  struct tm** tempPtr = realloc(*fechas_adicionales, sizeof(struct tm*) * (*tamanyo_array));
+  if (tempPtr != NULL) {
+    *fechas_adicionales = tempPtr;
+    return EXITO;
+  }
+  else {
+    // Realloc failed, handle error or continue with original size
+    fprintf(stderr, "Error: No se ha podido redimensionar el array de fechas adicionales.\n");
+    registrar_error("Error: No se ha podido redimensionar el array de fechas adicionales.\n", REGISTRO_ERRORES);
+    return ERROR;
+  }
+}
+
 
 //Se utiliza este subprograma para obtener las fechas adicionales de las baterias que hay que añadir
 //Por cada bateria hay que añadir la fecha inicial a partir la cual la bateria esta conectada, la fecha
 //final en la que la bateria se desconecta, y si se considera algun objetivo de carga de la bateria la fecha
 //a la que se desea un determinado estado de carga para la bateria
 
-int cargar_fechas_adicionales_baterias(datos_csv_baterias_t* datos_baterias, struct tm** fechas_adicionales_baterias,
-  const int numero_vehiculos) {
+int cargar_fechas_adicionales_baterias(datos_csv_baterias_t* datos_baterias, struct tm** fechas_adicionales,
+  const int numero_vehiculos, int* numero_fechas_adicionales) {
 
   //Se carga un puntero que apunta a donde se encuentra la informacion leida de los csv de las baterias
   datos_csv_t* informacion_baterias = &(datos_baterias->informacion_baterias);
@@ -42,60 +74,58 @@ int cargar_fechas_adicionales_baterias(datos_csv_baterias_t* datos_baterias, str
   int columna_hora_objetivo_bateria = datos_baterias->posiciones_informacion_baterias.ubicacion_fecha_objetivo_baterias.columna_hora;
   int columna_minuto_objetivo_bateria = datos_baterias->posiciones_informacion_baterias.ubicacion_fecha_objetivo_baterias.columna_minuto;
 
+  //Se carga la ubicacion donde se encuentra si se considera el posible objetivo de carga de la bateria o no.
+  int columna_objetivo_carga_bateria = datos_baterias->posiciones_informacion_baterias.columna_consideracion_objetivo;
   for (int bateria = 0; bateria < numero_filas_baterias; bateria++) {
 
-    if (strings_iguales(datos_baterias->informacion_baterias.datos, "si") == EXITO) {
+    if (strings_iguales(informacion_baterias->datos[bateria+1][columna_objetivo_carga_bateria], "si") == EXITO) {
       tamanyo_actual += 3;
-      struct tm* tempPtr = (struct tm*)realloc(*fechas_adicionales_baterias, sizeof(struct tm) * tamanyo_actual);
+      *numero_fechas_adicionales += 3;
+      struct tm* tempPtr = (struct tm*)realloc(*fechas_adicionales, sizeof(struct tm) * tamanyo_actual);
       if (tempPtr == NULL) {
         printf("Fallo en la adición de las fechas adicionales en los puntos de simulación, fallo al reservar memoria\n");
         registrar_error("Fallo en la adición de las fechas adicionales en los puntos de simulación, fallo al reservar memoria\n", REGISTRO_ERRORES);
         return ERROR;
       }
-        //Se pasa a situar en el array de fechas iniciales la fecha inicial de la bateria
-        *fechas_adicionales_baterias = tempPtr;
+        //Se pasa a situar en el array de fechas adicionales las fechas iniciales finales y objetivo de las baterias
+        *fechas_adicionales = tempPtr;
 
-        
-        fechas_adicionales_baterias[tamanyo_actual - 3]->tm_year = informacion_baterias->datos[bateria + 1][columna_anyo_inicial_bateria];
-        fechas_adicionales_baterias[tamanyo_actual - 3]->tm_mon = informacion_baterias->datos[bateria + 1][columna_mes_inicial_bateria];
-        fechas_adicionales_baterias[tamanyo_actual - 3]->tm_mday = informacion_baterias->datos[bateria + 1][columna_dia_inicial_bateria];
-        fechas_adicionales_baterias[tamanyo_actual - 3]->tm_hour = informacion_baterias->datos[bateria + 1][columna_hora_inicial_bateria];
-        fechas_adicionales_baterias[tamanyo_actual - 3]->tm_min = informacion_baterias->datos[bateria + 1][columna_minuto_inicial_bateria];
+        cargar_fecha(&(informacion_baterias->datos), fechas_adicionales[tamanyo_actual - 3], columna_anyo_inicial_bateria,
+          columna_mes_inicial_bateria, columna_dia_inicial_bateria, columna_hora_inicial_bateria, columna_minuto_inicial_bateria,
+          bateria+1,SI_INCLUIR_MINUTO);
 
-        fechas_adicionales_baterias[tamanyo_actual - 2]->tm_year = informacion_baterias->datos[bateria + 1][columna_anyo_objetivo_bateria];
-        fechas_adicionales_baterias[tamanyo_actual - 2]->tm_mon = informacion_baterias->datos[bateria + 1][columna_mes_objetivo_bateria];
-        fechas_adicionales_baterias[tamanyo_actual - 2]->tm_mday = informacion_baterias->datos[bateria + 1][columna_dia_objetivo_bateria];
-        fechas_adicionales_baterias[tamanyo_actual - 2]->tm_hour = informacion_baterias->datos[bateria + 1][columna_hora_objetivo_bateria];
-        fechas_adicionales_baterias[tamanyo_actual - 2]->tm_min = informacion_baterias->datos[bateria + 1][columna_minuto_objetivo_bateria];
+        cargar_fecha(&(informacion_baterias->datos), fechas_adicionales[tamanyo_actual - 2], columna_anyo_objetivo_bateria,
+          columna_mes_objetivo_bateria, columna_dia_objetivo_bateria, columna_hora_objetivo_bateria, columna_minuto_objetivo_bateria,
+          bateria + 1, SI_INCLUIR_MINUTO);
 
-        fechas_adicionales_baterias[tamanyo_actual - 1]->tm_year = informacion_baterias->datos[bateria + 1][columna_anyo_final_bateria];
-        fechas_adicionales_baterias[tamanyo_actual - 1]->tm_mon = informacion_baterias->datos[bateria + 1][columna_mes_final_bateria];
-        fechas_adicionales_baterias[tamanyo_actual - 1]->tm_mday = informacion_baterias->datos[bateria + 1][columna_dia_final_bateria];
-        fechas_adicionales_baterias[tamanyo_actual - 1]->tm_hour = informacion_baterias->datos[bateria + 1][columna_hora_final_bateria];
-        fechas_adicionales_baterias[tamanyo_actual - 1]->tm_min = informacion_baterias->datos[bateria + 1][columna_minuto_final_bateria];
+        cargar_fecha(&(informacion_baterias->datos), fechas_adicionales[tamanyo_actual - 1], columna_anyo_final_bateria,
+          columna_mes_final_bateria, columna_dia_final_bateria, columna_hora_final_bateria, columna_minuto_final_bateria,
+          bateria + 1, SI_INCLUIR_MINUTO);
 
       }
       else {
         tamanyo_actual += 2;
-        struct tm* tempPtr = (struct tm*)realloc(*fechas_adicionales_baterias, sizeof(struct tm) * tamanyo_actual);
+        *numero_fechas_adicionales += 2;
+        struct tm* tempPtr = (struct tm*)realloc(*fechas_adicionales, sizeof(struct tm) * tamanyo_actual);
         if (tempPtr == NULL) {
           printf("Fallo en la adición de las fechas adicionales en los puntos de simulación, fallo al reservar memoria\n");
           registrar_error("Fallo en la adición de las fechas adicionales en los puntos de simulación, fallo al reservar memoria\n", REGISTRO_ERRORES);
           return ERROR;
         }
-        *fechas_adicionales_baterias = tempPtr;
+        *fechas_adicionales = tempPtr;
         //Se cargan la fecha inicial y final de la bateria en el array de fechas adicionales a considerar en la simulacion 
-        fechas_adicionales_baterias[tamanyo_actual - 2]->tm_year = informacion_baterias->datos[bateria + 1][columna_anyo_inicial_bateria];
-        fechas_adicionales_baterias[tamanyo_actual - 2]->tm_mon = informacion_baterias->datos[bateria + 1][columna_mes_inicial_bateria];
-        fechas_adicionales_baterias[tamanyo_actual - 2]->tm_mday = informacion_baterias->datos[bateria + 1][columna_dia_inicial_bateria];
-        fechas_adicionales_baterias[tamanyo_actual - 2]->tm_hour = informacion_baterias->datos[bateria + 1][columna_hora_inicial_bateria];
-        fechas_adicionales_baterias[tamanyo_actual - 2]->tm_min = informacion_baterias->datos[bateria + 1][columna_minuto_inicial_bateria];
 
-        fechas_adicionales_baterias[tamanyo_actual - 1]->tm_year = informacion_baterias->datos[bateria + 1][columna_anyo_final_bateria];
-        fechas_adicionales_baterias[tamanyo_actual - 1]->tm_mon = informacion_baterias->datos[bateria + 1][columna_mes_final_bateria];
-        fechas_adicionales_baterias[tamanyo_actual - 1]->tm_mday = informacion_baterias->datos[bateria + 1][columna_dia_final_bateria];
-        fechas_adicionales_baterias[tamanyo_actual - 1]->tm_hour = informacion_baterias->datos[bateria + 1][columna_hora_final_bateria];
-        fechas_adicionales_baterias[tamanyo_actual - 1]->tm_min = informacion_baterias->datos[bateria + 1][columna_minuto_final_bateria];
+
+        cargar_fecha(&(informacion_baterias->datos), fechas_adicionales[tamanyo_actual - 2], columna_anyo_inicial_bateria,
+          columna_mes_inicial_bateria, columna_dia_inicial_bateria, columna_hora_inicial_bateria, columna_minuto_inicial_bateria,
+          bateria + 1, SI_INCLUIR_MINUTO);
+
+
+        cargar_fecha(&(informacion_baterias->datos), fechas_adicionales[tamanyo_actual - 1], columna_anyo_final_bateria,
+          columna_mes_final_bateria, columna_dia_final_bateria, columna_hora_final_bateria, columna_minuto_final_bateria,
+          bateria + 1, SI_INCLUIR_MINUTO);
+
+
 
 
       }
@@ -156,7 +186,7 @@ void procesar_informacion_restricciones(datos_csv_restricciones_t* datos_csv_res
 //como la llegada o partida de vehiculos.
 
 int leer_fechas_adicionales(datos_csv_vehiculos_t* datos_vehiculos, struct tm** fechas_adicionales,
-                             datos_csv_baterias_t* datos_baterias) {
+                             datos_csv_baterias_t* datos_baterias, int* numero_fechas_adicionales) {
 
   //Cargo las ubicaciones de donde se encuentra la informacion relevante en el csv de los vehiculos.
   
@@ -202,14 +232,65 @@ int leer_fechas_adicionales(datos_csv_vehiculos_t* datos_vehiculos, struct tm** 
     (*fechas_adicionales)[2 * i + 1].tm_hour = atoi(datos_vehiculos->informacion_vehiculos.datos[i + 1][hora_final_vehiculo]);
     (*fechas_adicionales)[2 * i + 1].tm_min = atoi(datos_vehiculos->informacion_vehiculos.datos[i + 1][minuto_final_vehiculo]);
   }
+  *numero_fechas_adicionales = 2 * numero_vehiculos;
+  cargar_fechas_adicionales_baterias(datos_baterias, fechas_adicionales, numero_vehiculos,numero_fechas_adicionales);
+  return EXITO;
+}
+
+void configurar_puntos_simulacion(informacion_entrada_t* informacion_entrada, informacion_procesada_t* informacion_procesada,
+                                  struct tm** fechas_adicionales, const int numero_fechas_adicionales) {
+  //Se cargan elementos temporales claves de la simulacion, como la resolucion de la simulacion, la fecha inicial
+  //y la fecha final.
+  //Cargo la ubicacion de las fechas iniciales y finales del algoritmo
+  //Se definen variables para almacenar las fechas iniciales y finales del cálculo de optimizacion
+  struct tm* fecha_inicial_algoritmo;
+  struct tm* fecha_final_algoritmo;
+
+  //Se carga la fecha inicial del algoritmo.
+  int fila_valores = informacion_entrada->datos_algoritmo.posiciones_informacion_algoritmo.fila_informacion;
+  int columna_anyo_inicial = informacion_entrada->datos_algoritmo.posiciones_informacion_algoritmo.ubicacion_fecha_inicial_algoritmo.columna_anyo;
+  int columna_mes_inicial = informacion_entrada->datos_algoritmo.posiciones_informacion_algoritmo.ubicacion_fecha_inicial_algoritmo.columna_mes;
+  int columna_dia_inicial = informacion_entrada->datos_algoritmo.posiciones_informacion_algoritmo.ubicacion_fecha_inicial_algoritmo.columna_dia;
+  int columna_hora_inicial = informacion_entrada->datos_algoritmo.posiciones_informacion_algoritmo.ubicacion_fecha_inicial_algoritmo.columna_hora;
+  int columna_minuto_inicial = informacion_entrada->datos_algoritmo.posiciones_informacion_algoritmo.ubicacion_fecha_inicial_algoritmo.columna_minuto;
+  //Se carga la fecha final del algoritmo
+  int columna_anyo_final   = informacion_entrada->datos_algoritmo.posiciones_informacion_algoritmo.ubicacion_fecha_final_algoritmo.columna_anyo;
+  int columna_mes_final    = informacion_entrada->datos_algoritmo.posiciones_informacion_algoritmo.ubicacion_fecha_final_algoritmo.columna_mes;
+  int columna_dia_final    = informacion_entrada->datos_algoritmo.posiciones_informacion_algoritmo.ubicacion_fecha_final_algoritmo.columna_dia;
+  int columna_hora_final   = informacion_entrada->datos_algoritmo.posiciones_informacion_algoritmo.ubicacion_fecha_final_algoritmo.columna_hora;
+  int columna_minuto_final = informacion_entrada->datos_algoritmo.posiciones_informacion_algoritmo.ubicacion_fecha_final_algoritmo.columna_minuto;
+  //Se carga la ubicacion de la resolucion temporal de la simulacion
+  int columna_resolucion_minutos = informacion_entrada->datos_algoritmo.posiciones_informacion_algoritmo.resolucion_minutos;
+
+  //Se carga la resolution temporal de la simulacion
+  int delta_resolucion = informacion_entrada->datos_algoritmo.informacion_algoritmo.datos[fila_valores][columna_resolucion_minutos];
+
+  //Se cargan las fechas iniciales y finales del algoritmo
+  cargar_fecha(&(informacion_entrada->datos_algoritmo), fecha_inicial_algoritmo, columna_anyo_inicial,
+               columna_mes_inicial, columna_dia_inicial, columna_hora_inicial, columna_minuto_inicial,
+               fila_valores, SI_INCLUIR_MINUTO);
+
+  cargar_fecha(&(informacion_entrada->datos_algoritmo), fecha_final_algoritmo, columna_anyo_final,
+    columna_mes_final, columna_dia_final, columna_hora_final, columna_minuto_final,
+    fila_valores, SI_INCLUIR_MINUTO);
 
 
 
 }
 
-void procesar_informacion_puntos_simulacion(informacion_entrada_t* informacion_entrada,informacion_procesada_t* informacion_procesada) {
+int procesar_informacion_puntos_simulacion(informacion_entrada_t* informacion_entrada,informacion_procesada_t* informacion_procesada) {
   //Se procesa la informacion de cuantos puntos de simulacion hacen falta.
-
+  datos_csv_vehiculos_t* datos_vehiculos = &(informacion_entrada->datos_vehiculos);
+  datos_csv_baterias_t* datos_baterias   = &(informacion_entrada->datos_baterias);
+  struct tm** fechas_adicionales = NULL;
+  int numero_fechas_adicionales;
+  if (leer_fechas_adicionales(datos_vehiculos, fechas_adicionales, datos_baterias,&numero_fechas_adicionales) == ERROR) {
+    return ERROR;
+  }
+  
+  eliminar_fechas_repetidas(fechas_adicionales,&numero_fechas_adicionales);
+  configurar_puntos_simulacion()
+  return EXITO;
 }
 
 void procesar_informacion_vehiculos() {

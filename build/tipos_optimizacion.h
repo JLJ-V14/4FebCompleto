@@ -330,9 +330,9 @@ typedef struct {
 // informacion_restricciones_sistema -> informacion de las restricciones del sistema
 // informacion_precio_t -> informacion de los precios de la electricidad
 typedef struct {
-    informacion_vehiculos_t         informacion_vehiculos;
-    informacion_baterias_t          informacion_baterias;
-    informacion_puntos_simulacion_t informacion_puntos_simulacion;
+    informacion_vehiculos_t             informacion_vehiculos;
+    informacion_baterias_t              informacion_baterias;
+    informacion_puntos_simulacion_t     informacion_puntos_simulacion;
     informacion_restricciones_sistema_t informacion_restricciones_sistema;
     informacion_precio_t                informacion_precio_t;
 }informacion_procesada_t;

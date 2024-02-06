@@ -302,4 +302,17 @@ int verificar_fecha_carga(datos_csv_t* datos_carga, datos_csv_algoritmo_t* datos
 	return EXITO;
 }
 
+//Se utiliza este subprograma para comprobar si dos fechas son iguales
+int comparar_fechas(const void* a, const void* b) {
+  struct tm* fecha_1 = *(struct tm**)a;
+  struct tm* fecha_2 = *(struct tm**)b;
+  //Se pasa a formato time_t para comparar->
+  time_t t1 = mktime(fecha_1);
+  time_t t2 = mktime(fecha_2);
+
+  if (t1 < t2) return -1;
+  if (t1 > t2) return 1;
+  return 0;
+}
+
 
