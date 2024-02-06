@@ -277,6 +277,7 @@ typedef struct {
 typedef struct {
     struct tm* fecha_punto;
     int        delta;
+    int        punto_simulacion;
 }punto_simulacion_t;
 
 //Struct que sirve para almacenar la informacion de los puntos de simulacion 

@@ -237,7 +237,7 @@ int leer_fechas_adicionales(datos_csv_vehiculos_t* datos_vehiculos, struct tm** 
   return EXITO;
 }
 
-void configurar_puntos_simulacion(informacion_entrada_t* informacion_entrada, informacion_procesada_t* informacion_procesada,
+int configurar_puntos_simulacion(informacion_entrada_t* informacion_entrada, informacion_procesada_t* informacion_procesada,
                                   struct tm** fechas_adicionales, const int numero_fechas_adicionales) {
   //Se cargan elementos temporales claves de la simulacion, como la resolucion de la simulacion, la fecha inicial
   //y la fecha final.
@@ -245,6 +245,14 @@ void configurar_puntos_simulacion(informacion_entrada_t* informacion_entrada, in
   //Se definen variables para almacenar las fechas iniciales y finales del cálculo de optimizacion
   struct tm* fecha_inicial_algoritmo;
   struct tm* fecha_final_algoritmo;
+
+  fecha_inicial_algoritmo = malloc(sizeof(struct tm));
+  fecha_final_algoritmo = malloc(sizeof(struct tm));
+  if ((fecha_inicial_algoritmo == NULL) || (fecha_final_algoritmo == NULL)) {
+    free(fecha_inicial_algoritmo);
+    free(fecha_final_algoritmo);
+    return ERROR;
+  }
 
   //Se carga la fecha inicial del algoritmo.
   int fila_valores = informacion_entrada->datos_algoritmo.posiciones_informacion_algoritmo.fila_informacion;
@@ -274,8 +282,10 @@ void configurar_puntos_simulacion(informacion_entrada_t* informacion_entrada, in
     columna_mes_final, columna_dia_final, columna_hora_final, columna_minuto_final,
     fila_valores, SI_INCLUIR_MINUTO);
 
+  
+  
 
-
+  return EXITO;
 }
 
 int procesar_informacion_puntos_simulacion(informacion_entrada_t* informacion_entrada,informacion_procesada_t* informacion_procesada) {
@@ -284,12 +294,14 @@ int procesar_informacion_puntos_simulacion(informacion_entrada_t* informacion_en
   datos_csv_baterias_t* datos_baterias   = &(informacion_entrada->datos_baterias);
   struct tm** fechas_adicionales = NULL;
   int numero_fechas_adicionales;
+  //Se leen que fechas han de estar consideradas sí o sí en el calculo
   if (leer_fechas_adicionales(datos_vehiculos, fechas_adicionales, datos_baterias,&numero_fechas_adicionales) == ERROR) {
     return ERROR;
   }
-  
+  //Se eliminan las fechas adicionales repetidas.
   eliminar_fechas_repetidas(fechas_adicionales,&numero_fechas_adicionales);
-  configurar_puntos_simulacion()
+  //Se configuran los puntos de simulacion 
+  configurar_puntos_simulacion(informacion_entrada, informacion_procesada, fechas_adicionales, numero_fechas_adicionales);
   return EXITO;
 }
 

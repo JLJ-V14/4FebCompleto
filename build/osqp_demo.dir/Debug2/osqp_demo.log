@@ -1,12 +1,17 @@
 ﻿  procesar_informacion_entrada.c
-procesar_informacion_entrada.c(61,22): warning C4047: 'function': 'const datos_csv_t *' differs in levels of indirection from 'char ****'
-procesar_informacion_entrada.c(61,22): warning C4024: 'cargar_fecha': different types for formal and actual parameter 1
-procesar_informacion_entrada.c(65,22): warning C4047: 'function': 'const datos_csv_t *' differs in levels of indirection from 'char ****'
-procesar_informacion_entrada.c(65,22): warning C4024: 'cargar_fecha': different types for formal and actual parameter 1
-procesar_informacion_entrada.c(69,22): warning C4047: 'function': 'const datos_csv_t *' differs in levels of indirection from 'char ****'
-procesar_informacion_entrada.c(69,22): warning C4024: 'cargar_fecha': different types for formal and actual parameter 1
-procesar_informacion_entrada.c(86,22): warning C4047: 'function': 'const datos_csv_t *' differs in levels of indirection from 'char ****'
-procesar_informacion_entrada.c(86,22): warning C4024: 'cargar_fecha': different types for formal and actual parameter 1
-procesar_informacion_entrada.c(91,22): warning C4047: 'function': 'const datos_csv_t *' differs in levels of indirection from 'char ****'
-procesar_informacion_entrada.c(91,22): warning C4024: 'cargar_fecha': different types for formal and actual parameter 1
-F:\osqp1feb\osqp-1.0.0.beta1\build\procesar_informacion_entrada.c(205): warning C4715: 'leer_fechas_adicionales': not all control paths return a value
+procesar_informacion_entrada.c(16,28): warning C4033: 'eliminar_fechas_repetidas' must return a value
+procesar_informacion_entrada.c(31,25): warning C4047: '=': 'tm *' differs in levels of indirection from 'tm **'
+procesar_informacion_entrada.c(93,22): warning C4047: 'function': 'const datos_csv_t *' differs in levels of indirection from 'char ****'
+procesar_informacion_entrada.c(93,22): warning C4024: 'cargar_fecha': different types for formal and actual parameter 1
+procesar_informacion_entrada.c(97,22): warning C4047: 'function': 'const datos_csv_t *' differs in levels of indirection from 'char ****'
+procesar_informacion_entrada.c(97,22): warning C4024: 'cargar_fecha': different types for formal and actual parameter 1
+procesar_informacion_entrada.c(101,22): warning C4047: 'function': 'const datos_csv_t *' differs in levels of indirection from 'char ****'
+procesar_informacion_entrada.c(101,22): warning C4024: 'cargar_fecha': different types for formal and actual parameter 1
+procesar_informacion_entrada.c(119,22): warning C4047: 'function': 'const datos_csv_t *' differs in levels of indirection from 'char ****'
+procesar_informacion_entrada.c(119,22): warning C4024: 'cargar_fecha': different types for formal and actual parameter 1
+procesar_informacion_entrada.c(124,22): warning C4047: 'function': 'const datos_csv_t *' differs in levels of indirection from 'char ****'
+procesar_informacion_entrada.c(124,22): warning C4024: 'cargar_fecha': different types for formal and actual parameter 1
+procesar_informacion_entrada.c(277,16): warning C4133: 'function': incompatible types - from 'datos_csv_algoritmo_t *' to 'const datos_csv_t *'
+procesar_informacion_entrada.c(281,16): warning C4133: 'function': incompatible types - from 'datos_csv_algoritmo_t *' to 'const datos_csv_t *'
+procesar_informacion_entrada.c(274,7): warning C4047: 'initializing': 'int' differs in levels of indirection from 'char *'
+F:\osqp1feb\osqp-1.0.0.beta1\build\procesar_informacion_entrada.c(40): warning C4715: 'eliminar_fechas_repetidas': not all control paths return a value
