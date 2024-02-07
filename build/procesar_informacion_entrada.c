@@ -1,6 +1,6 @@
+#include "calcular_puntos_simulacion.h"
 #include "definiciones_globales.h"
 #include "registrar_errores.h"
-
 #include "osqp.h"
 #include "operaciones_fecha.h"
 #include "operaciones_string.h"
@@ -72,24 +72,10 @@ void procesar_informacion_restricciones(datos_csv_restricciones_t* datos_csv_res
 //como la llegada o partida de vehiculos.
 
 
-int procesar_informacion_puntos_simulacion(informacion_entrada_t* informacion_entrada,informacion_procesada_t* informacion_procesada) {
-  //Se procesa la informacion de cuantos puntos de simulacion hacen falta.
-  datos_csv_vehiculos_t* datos_vehiculos = &(informacion_entrada->datos_vehiculos);
-  datos_csv_baterias_t* datos_baterias   = &(informacion_entrada->datos_baterias);
-  struct tm** fechas_adicionales = NULL;
-  int numero_fechas_adicionales;
-  //Se leen que fechas han de estar consideradas sí o sí en el calculo
-  if (leer_fechas_adicionales(datos_vehiculos, fechas_adicionales, datos_baterias,&numero_fechas_adicionales) == ERROR) {
-    return ERROR;
-  }
-  //Se eliminan las fechas adicionales repetidas.
-  eliminar_fechas_repetidas(fechas_adicionales,&numero_fechas_adicionales);
-  //Se configuran los puntos de simulacion 
-  configurar_puntos_simulacion(informacion_entrada, informacion_procesada, fechas_adicionales, numero_fechas_adicionales);
-  return EXITO;
-}
-
-void procesar_informacion_vehiculos() {
+/*Este subprograma se encarga de guardar la informacion de los diferentes del vehiculos del sistema en la
+  variable correspondiente*/
+void procesar_informacion_vehiculos(informacion_entrada_t* informacion_entrada, informacion_procesada_t* informacion_procesada,
+                                    puntos_adicionales_t* puntos_adicionales) {
 
 }
 
@@ -101,7 +87,73 @@ void procesar_informacion_precio() {
 
 }
 
+int configurar_puntos_simulacion(informacion_entrada_t* informacion_entrada, informacion_procesada_t* informacion_procesada,
+                                 puntos_adicionales_t**  puntos_adicionales) {
+  //Se cargan elementos temporales claves de la simulacion, como la resolucion de la simulacion, la fecha inicial
+  //y la fecha final.
+  //
+   struct tm** fechas_adicionales = NULL;
+  //Cargo la ubicacion de las fechas iniciales y finales del algoritmo
+  //Se definen variables para almacenar las fechas iniciales y finales del cálculo de optimizacion
+  struct tm* fecha_inicial_algoritmo;
+  struct tm* fecha_final_algoritmo;
+  /*Se crea un array para almacenar las fechas adicionales que deben ser añadidas (ida y partida de vehiculos por
+    ejemplo*/
+  
+  int numero_fechas_adicionales = 0;
 
+  fecha_inicial_algoritmo = malloc(sizeof(struct tm));
+  fecha_final_algoritmo = malloc(sizeof(struct tm));
+  if ((fecha_inicial_algoritmo == NULL) || (fecha_final_algoritmo == NULL)) {
+    free(fecha_inicial_algoritmo);
+    free(fecha_final_algoritmo);
+    return ERROR;
+  }
+
+  //Se carga la fecha inicial del algoritmo.
+  int fila_valores = informacion_entrada->datos_algoritmo.posiciones_informacion_algoritmo.fila_informacion;
+  int columna_anyo_inicial = informacion_entrada->datos_algoritmo.posiciones_informacion_algoritmo.ubicacion_fecha_inicial_algoritmo.columna_anyo;
+  int columna_mes_inicial = informacion_entrada->datos_algoritmo.posiciones_informacion_algoritmo.ubicacion_fecha_inicial_algoritmo.columna_mes;
+  int columna_dia_inicial = informacion_entrada->datos_algoritmo.posiciones_informacion_algoritmo.ubicacion_fecha_inicial_algoritmo.columna_dia;
+  int columna_hora_inicial = informacion_entrada->datos_algoritmo.posiciones_informacion_algoritmo.ubicacion_fecha_inicial_algoritmo.columna_hora;
+  int columna_minuto_inicial = informacion_entrada->datos_algoritmo.posiciones_informacion_algoritmo.ubicacion_fecha_inicial_algoritmo.columna_minuto;
+  //Se carga la fecha final del algoritmo
+  int columna_anyo_final = informacion_entrada->datos_algoritmo.posiciones_informacion_algoritmo.ubicacion_fecha_final_algoritmo.columna_anyo;
+  int columna_mes_final = informacion_entrada->datos_algoritmo.posiciones_informacion_algoritmo.ubicacion_fecha_final_algoritmo.columna_mes;
+  int columna_dia_final = informacion_entrada->datos_algoritmo.posiciones_informacion_algoritmo.ubicacion_fecha_final_algoritmo.columna_dia;
+  int columna_hora_final = informacion_entrada->datos_algoritmo.posiciones_informacion_algoritmo.ubicacion_fecha_final_algoritmo.columna_hora;
+  int columna_minuto_final = informacion_entrada->datos_algoritmo.posiciones_informacion_algoritmo.ubicacion_fecha_final_algoritmo.columna_minuto;
+  //Se carga la ubicacion de la resolucion temporal de la simulacion
+  int columna_resolucion_minutos = informacion_entrada->datos_algoritmo.posiciones_informacion_algoritmo.resolucion_minutos;
+
+  //Se carga la resolution temporal de la simulacion
+  int delta_resolucion = informacion_entrada->datos_algoritmo.informacion_algoritmo.datos[fila_valores][columna_resolucion_minutos];
+
+  //Se cargan las fechas iniciales y finales del algoritmo
+  cargar_fecha(&(informacion_entrada->datos_algoritmo), fecha_inicial_algoritmo, columna_anyo_inicial,
+    columna_mes_inicial, columna_dia_inicial, columna_hora_inicial, columna_minuto_inicial,
+    fila_valores, SI_INCLUIR_MINUTO);
+
+  cargar_fecha(&(informacion_entrada->datos_algoritmo), fecha_final_algoritmo, columna_anyo_final,
+    columna_mes_final, columna_dia_final, columna_hora_final, columna_minuto_final,
+    fila_valores, SI_INCLUIR_MINUTO);
+
+  if (leer_fechas_adicionales(&(informacion_entrada->datos_vehiculos), fechas_adicionales, &(informacion_entrada->datos_baterias),
+    &numero_fechas_adicionales, fecha_inicial_algoritmo, fecha_final_algoritmo) == ERROR) {
+    printf("No se ha podido añadir las fechas adicionales a la simulacion\n");
+    registrar_error("No se ha podido añadir las fechas adicionales a la simulacion", REGISTRO_ERRORES);
+    return ERROR;
+  }
+
+  if (cacular_puntos_simulacion(informacion_entrada, fechas_adicionales, informacion_procesada,
+    fecha_inicial_algoritmo, fecha_final_algoritmo, delta_resolucion,
+    numero_fechas_adicionales,puntos_adicionales) == ERROR) {
+    printf("No se ha podido calcular el numero de puntos de simulacion\n");
+    registrar_error("No se ha podido calcular el numero de puntos de simulacion\n", REGISTRO_ERRORES);
+  }
+
+  return EXITO;
+}
 
 
 
@@ -110,8 +162,13 @@ void procesar_informacion_precio() {
 
 void procesar_informacion_entrada(informacion_entrada_t* informacion_entrada,
                                   informacion_procesada_t* informacion_procesada) {
+
+  //Se crea una variable para almacenar las fechas adicionales a añadir, esta variable va a ser utilizada para
+  //reconocer más rápidamente a que punto de simulación corresponde la ida o partida de los vehículos o baterías
+  puntos_adicionales_t** puntos_adicionales = NULL;
+ 
   //Se almacena la informacion de restriccion leída del csv de las restricciones
   procesar_informacion_restricciones(&(informacion_entrada->datos_restricciones), &(informacion_procesada->informacion_restricciones_sistema));
- 
+  configurar_puntos_simulacion(informacion_entrada, informacion_procesada,puntos_adicionales);
 
 }

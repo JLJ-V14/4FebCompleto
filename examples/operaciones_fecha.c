@@ -314,5 +314,17 @@ int comparar_fechas(const void* a, const void* b) {
   if (t1 > t2) return 1;
   return 0;
 }
+/*Se crea un subprograma para obtener la diferencia en minutos entre dos fechas */
+int obtener_diferencia_minutos(const struct tm* fecha_1, const struct tm* fecha_2) {
+  time_t t1 = mktime((struct tm*)fecha_1);
+  time_t t2 = mktime((struct tm*)fecha_2);
 
+  //Se calcula la diferencia en segundos
+  double diff_segundos = difftime(t2, t1);
+
+  //Se convierte lo segundos a minutos
+  int diff_minutos = (int)(diff_segundos / 60);
+
+  return diff_minutos;
+}
 

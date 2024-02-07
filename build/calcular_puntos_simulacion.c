@@ -276,13 +276,6 @@ int leer_fechas_adicionales(datos_csv_vehiculos_t* datos_vehiculos, struct tm** 
 }
 
 
-
-
-
-
-
-
-
 /*Se calcula la cantidad máxima de puntos de simulacion que se va a tener */
 
 int calcular_numero_puntos_provisional(time_t* tiempo_actual, time_t *tiempo_final, int delta_simulacion_segundos,
@@ -324,10 +317,21 @@ int calcular_numero_puntos_provisional(time_t* tiempo_actual, time_t *tiempo_fin
 /*Este subprograma se encarga de calcular los puntos de simulacion y la fecha asociada a cada uno de ellos*/
 int cacular_puntos_simulacion(informacion_entrada_t* informacion_entrada, struct tm** fechas_adicionales,
   informacion_procesada_t* informacion_procesada, struct tm* fecha_inicial_algoritmo,
-  struct tm* fecha_final_algoritmo, int delta_simulacion) {
+  struct tm* fecha_final_algoritmo, int delta_simulacion, const int numero_fechas_adicionales,
+  puntos_adicionales_t** puntos_adicionales) {
+
+  /*Se crea un array para almacenar los puntos adicionales*/
+  *puntos_adicionales = (puntos_adicionales_t*)calloc(numero_fechas_adicionales, sizeof(puntos_adicionales_t));
+  if (*puntos_adicionales == NULL) {
+    printf("Error al reservar memoria para el array de los nuevos puntos adicionales\n");
+    registrar_error("Error al reservar memoria para el array de los nuevos puntosa adicionales\n", REGISTRO_ERRORES);
+    return ERROR;
+  }
+
 
   struct tm* fecha_actual = fecha_inicial_algoritmo;
-  
+
+  time_t tiempo_inicial = mktime(fecha_inicial_algoritmo);
   time_t tiempo_actual = mktime(fecha_inicial_algoritmo);
   time_t tiempo_final = mktime(fecha_final_algoritmo);
 
@@ -338,79 +342,83 @@ int cacular_puntos_simulacion(informacion_entrada_t* informacion_entrada, struct
   int numero_puntos_provisionales = calcular_numero_puntos_provisional(tiempo_actual,tiempo_final,delta_simulacion_segundos,
                                                          fechas_adicionales);
 
-  //Se declara un puntero a las posiciones en memoria donde se encuentra la informacion de los puntos de simulacion
-  punto_simulacion_t* informacion_puntos_simulacion = informacion_procesada->informacion_puntos_simulacion.puntos_simulacion;
-  informacion_puntos_simulacion = (punto_simulacion_t*)malloc(numero_puntos_provisionales * sizeof(punto_simulacion_t));
 
 
-  while (fecha_actual != fecha_final_algoritmo) {
+  /*Se maneja el caso de que no se reserve memoria correctamente*/
+  /*Si el delta de simulacion en segundos se retorna al programa principal ya que no se puede tener un delta
+    de 0 minutos*/
 
-    if (delta_simulacion_segundos == 0) {
-      printf("No se puede tener un delta de 0 minutos\n");
-      registrar_error("Fallo no se puede tener un delta de 0 minutos", REGISTRO_ERRORES);
-      return ERROR;
+  if (delta_simulacion_segundos == 0) {
+    printf("No se puede tener un delta de 0 minutos\n");
+    registrar_error("Fallo no se puede tener un delta de 0 minutos", REGISTRO_ERRORES);
+    return ERROR;
+  }
+
+  /*Cargo una variable que sirva como index del array de fechas adicionales a añadir*/
+  int index_fecha_adicional = 0;
+  /*Se crea una variable de tipo int para almacenar el resultado de la comparacion de dos fechas*/
+  int resultado_comparacion = 0;
+  /*Se crea una variable para llevar la cuenta de por cual punto de simulacion se va*/
+  int punto_actual = 0;
+
+
+  while (tiempo_actual < tiempo_final) {
+
+    fecha_actual = localtime(&tiempo_actual);
+    if (index_fecha_adicional < numero_fechas_adicionales) {
+      /*Se compara la fecha que se va a añadir en la simulacion con la fecha siguiente a añadir de fechas
+        adicionales en concreto si es igual a una fecha adicional que se va a añadir o si esta por encima
+        teniendo en cuenta que la forma de proceder es distinta*/
+
+      /*Si la fecha a añadir es superior a la fecha adicional significa que se ha pasado por encima de la
+        fecha adicional y que hay que añadir la fecha adicional manualmente*/
+
+      if (comparar_fechas(fecha_actual, fechas_adicionales[index_fecha_adicional]) == 1) {
+        informacion_procesada->informacion_puntos_simulacion.puntos_simulacion[punto_actual].fecha_punto = fechas_adicionales[index_fecha_adicional];
+        informacion_procesada->informacion_puntos_simulacion.puntos_simulacion[punto_actual].punto_simulacion = punto_actual;
+        informacion_procesada->informacion_puntos_simulacion.puntos_simulacion[punto_actual].delta = obtener_diferencia_minutos(informacion_procesada->informacion_puntos_simulacion.puntos_simulacion[punto_actual - 1].fecha_punto, fechas_adicionales[index_fecha_adicional]);
+        puntos_adicionales[index_fecha_adicional]->numero_punto = punto_actual;
+        puntos_adicionales[index_fecha_adicional]->fecha_adicional = fechas_adicionales[index_fecha_adicional];
+        punto_actual++;
+        index_fecha_adicional++;
+
+      }
+      else if (comparar_fechas(fecha_actual, fechas_adicionales[index_fecha_adicional]) == 0) {
+        informacion_procesada->informacion_puntos_simulacion.puntos_simulacion[punto_actual].fecha_punto = fecha_actual;
+        informacion_procesada->informacion_puntos_simulacion.puntos_simulacion[punto_actual].punto_simulacion = punto_actual;
+        informacion_procesada->informacion_puntos_simulacion.puntos_simulacion[punto_actual].delta = delta_simulacion;
+        puntos_adicionales[index_fecha_adicional]->numero_punto = punto_actual;
+        puntos_adicionales[index_fecha_adicional]->fecha_adicional = fechas_adicionales[index_fecha_adicional];
+        punto_actual++;
+        index_fecha_adicional++;
+      }
     }
 
+    else {
+      informacion_procesada->informacion_puntos_simulacion.puntos_simulacion[punto_actual].fecha_punto = fecha_actual;
+      informacion_procesada->informacion_puntos_simulacion.puntos_simulacion[punto_actual].punto_simulacion = punto_actual;
+      informacion_procesada->informacion_puntos_simulacion.puntos_simulacion[punto_actual].delta = delta_simulacion;
+      punto_actual++;
+    }
+    tiempo_actual = mktime(fechas_adicionales[index_fecha_adicional]);
+    tiempo_actual += delta_simulacion_segundos;
   }
+
+  /*Se procede a añadir la fecha final del algoritmo en los puntos de la simulacion*/
+  informacion_procesada->informacion_puntos_simulacion.puntos_simulacion[punto_actual].fecha_punto = fecha_final_algoritmo;
+  informacion_procesada->informacion_puntos_simulacion.puntos_simulacion[punto_actual].punto_simulacion = punto_actual;
+
+  if (fecha_inicial_algoritmo == fecha_final_algoritmo) {
+    informacion_procesada->informacion_puntos_simulacion.puntos_simulacion[punto_actual].delta = 0;
+  }
+  informacion_procesada->informacion_puntos_simulacion.puntos_simulacion[punto_actual].delta = obtener_diferencia_minutos(informacion_procesada->informacion_puntos_simulacion.puntos_simulacion[punto_actual - 1].fecha_punto, fechas_adicionales[index_fecha_adicional]);
 }
 
 
-int configurar_puntos_simulacion(informacion_entrada_t* informacion_entrada, informacion_procesada_t* informacion_procesada) {
-  //Se cargan elementos temporales claves de la simulacion, como la resolucion de la simulacion, la fecha inicial
-  //y la fecha final.
-  //Cargo la ubicacion de las fechas iniciales y finales del algoritmo
-  //Se definen variables para almacenar las fechas iniciales y finales del cálculo de optimizacion
-  struct tm* fecha_inicial_algoritmo;
-  struct tm* fecha_final_algoritmo;
-  /*Se crea un array para almacenar las fechas adicionales que deben ser añadidas (ida y partida de vehiculos por
-    ejemplo*/
-  struct tm** fechas_adicionales = NULL;
-  int numero_fechas_adicionales = 0;
-
-  fecha_inicial_algoritmo = malloc(sizeof(struct tm));
-  fecha_final_algoritmo = malloc(sizeof(struct tm));
-  if ((fecha_inicial_algoritmo == NULL) || (fecha_final_algoritmo == NULL)) {
-    free(fecha_inicial_algoritmo);
-    free(fecha_final_algoritmo);
-    return ERROR;
-  }
-
-  //Se carga la fecha inicial del algoritmo.
-  int fila_valores = informacion_entrada->datos_algoritmo.posiciones_informacion_algoritmo.fila_informacion;
-  int columna_anyo_inicial = informacion_entrada->datos_algoritmo.posiciones_informacion_algoritmo.ubicacion_fecha_inicial_algoritmo.columna_anyo;
-  int columna_mes_inicial = informacion_entrada->datos_algoritmo.posiciones_informacion_algoritmo.ubicacion_fecha_inicial_algoritmo.columna_mes;
-  int columna_dia_inicial = informacion_entrada->datos_algoritmo.posiciones_informacion_algoritmo.ubicacion_fecha_inicial_algoritmo.columna_dia;
-  int columna_hora_inicial = informacion_entrada->datos_algoritmo.posiciones_informacion_algoritmo.ubicacion_fecha_inicial_algoritmo.columna_hora;
-  int columna_minuto_inicial = informacion_entrada->datos_algoritmo.posiciones_informacion_algoritmo.ubicacion_fecha_inicial_algoritmo.columna_minuto;
-  //Se carga la fecha final del algoritmo
-  int columna_anyo_final = informacion_entrada->datos_algoritmo.posiciones_informacion_algoritmo.ubicacion_fecha_final_algoritmo.columna_anyo;
-  int columna_mes_final = informacion_entrada->datos_algoritmo.posiciones_informacion_algoritmo.ubicacion_fecha_final_algoritmo.columna_mes;
-  int columna_dia_final = informacion_entrada->datos_algoritmo.posiciones_informacion_algoritmo.ubicacion_fecha_final_algoritmo.columna_dia;
-  int columna_hora_final = informacion_entrada->datos_algoritmo.posiciones_informacion_algoritmo.ubicacion_fecha_final_algoritmo.columna_hora;
-  int columna_minuto_final = informacion_entrada->datos_algoritmo.posiciones_informacion_algoritmo.ubicacion_fecha_final_algoritmo.columna_minuto;
-  //Se carga la ubicacion de la resolucion temporal de la simulacion
-  int columna_resolucion_minutos = informacion_entrada->datos_algoritmo.posiciones_informacion_algoritmo.resolucion_minutos;
-
-  //Se carga la resolution temporal de la simulacion
-  int delta_resolucion = informacion_entrada->datos_algoritmo.informacion_algoritmo.datos[fila_valores][columna_resolucion_minutos];
-
-  //Se cargan las fechas iniciales y finales del algoritmo
-  cargar_fecha(&(informacion_entrada->datos_algoritmo), fecha_inicial_algoritmo, columna_anyo_inicial,
-    columna_mes_inicial, columna_dia_inicial, columna_hora_inicial, columna_minuto_inicial,
-    fila_valores, SI_INCLUIR_MINUTO);
-
-  cargar_fecha(&(informacion_entrada->datos_algoritmo), fecha_final_algoritmo, columna_anyo_final,
-    columna_mes_final, columna_dia_final, columna_hora_final, columna_minuto_final,
-    fila_valores, SI_INCLUIR_MINUTO);
-
-  if (leer_fechas_adicionales(&(informacion_entrada->datos_vehiculos), fechas_adicionales, &(informacion_entrada->datos_baterias),
-    &numero_fechas_adicionales, fecha_inicial_algoritmo, fecha_final_algoritmo) == ERROR) {
-    printf("No se ha podido añadir las fechas adicionales a la simulacion\n");
-    registrar_error("No se ha podido añadir las fechas adicionales a la simulacion", REGISTRO_ERRORES);
-    return ERROR;
-  }
 
 
-  return EXITO;
-}
+
+
+
+
 

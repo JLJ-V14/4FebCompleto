@@ -26,6 +26,8 @@ extern "C" {
 		const int incluir_igual);
 
 	int comparar_fechas(const void* a, const void* b);
+	int obtener_diferencia_minutos(const struct tm* fecha_1, const struct tm* fecha_2);
+
 #ifdef __cplusplus
 }
 #endif

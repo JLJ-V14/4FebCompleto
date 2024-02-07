@@ -323,6 +323,15 @@ typedef struct {
     precio_t* precios;
 }informacion_precio_t ;
 
+/*Se define un tipo para almacenar las fechas que deben estar presenten en la simulacion
+  y a que punto corresponde, cada fecha.*/
+
+typedef struct {
+    int numero_punto;
+    struct tm* fecha_adicional;
+}puntos_adicionales_t;
+
+
 // Se definen structs para almacenar la informacion ya extraida de los CSVs de
 // entrada para poder rellenar las matrices con la informacion relevante fácilmente
 // informacion_vehiculos_t -> este struct se utiliza para almacenar toda la informacion relevante a los vehiculos
@@ -336,4 +345,6 @@ typedef struct {
     informacion_puntos_simulacion_t     informacion_puntos_simulacion;
     informacion_restricciones_sistema_t informacion_restricciones_sistema;
     informacion_precio_t                informacion_precio_t;
+    puntos_adicionales_t                informacion_puntos_adicionales;
 }informacion_procesada_t;
+
