@@ -414,6 +414,20 @@ int cacular_puntos_simulacion(informacion_entrada_t* informacion_entrada, struct
   informacion_procesada->informacion_puntos_simulacion.puntos_simulacion[punto_actual].delta = obtener_diferencia_minutos(informacion_procesada->informacion_puntos_simulacion.puntos_simulacion[punto_actual - 1].fecha_punto, fechas_adicionales[index_fecha_adicional]);
 }
 
+/*Este subprograma se utiliza para obtener a que punto de simulacion corresponde la llegada o partida de
+  un vehiculo, bateria o fecha de carga de una bateria.*/
+
+void obtener_punto_simulacion(OSQPInt* punto_simulacion, struct tm* fecha, puntos_adicionales_t* puntos_adicionales) {
+  bool fecha_obtenida = false;
+  int punto_adicional_actual = 0;
+  while (fecha_obtenida == false) {
+    if (comparar_fechas(puntos_adicionales[punto_adicional_actual].fecha_adicional, fecha) == 0) {
+      punto_simulacion = (OSQPInt)puntos_adicionales->numero_punto;
+      fecha_obtenida = true;
+    }
+    punto_adicional_actual++;
+  }
+}
 
 
 

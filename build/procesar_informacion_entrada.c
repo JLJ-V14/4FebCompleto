@@ -12,7 +12,6 @@
 
 
 
-
 //Se utiliza este subprograma para obtener las fechas adicionales de las baterias que hay que añadir
 //Por cada bateria hay que añadir la fecha inicial a partir la cual la bateria esta conectada, la fecha
 //final en la que la bateria se desconecta, y si se considera algun objetivo de carga de la bateria la fecha
@@ -74,13 +73,188 @@ void procesar_informacion_restricciones(datos_csv_restricciones_t* datos_csv_res
 
 /*Este subprograma se encarga de guardar la informacion de los diferentes del vehiculos del sistema en la
   variable correspondiente*/
-void procesar_informacion_vehiculos(informacion_entrada_t* informacion_entrada, informacion_procesada_t* informacion_procesada,
+int procesar_informacion_vehiculos(informacion_entrada_t* informacion_entrada, informacion_procesada_t* informacion_procesada,
                                     puntos_adicionales_t* puntos_adicionales) {
+  informacion_procesada->informacion_vehiculos.numero_vehiculos = informacion_entrada->datos_vehiculos.informacion_vehiculos.filas -1 ;
+  informacion_procesada->informacion_vehiculos.vehiculos = (vehiculos_t*)malloc(informacion_procesada->informacion_vehiculos.numero_vehiculos * sizeof(vehiculos_t));
 
+  if (informacion_procesada->informacion_vehiculos.vehiculos == NULL) {
+    printf("Error no se ha podido procesar la informacion de los vehiculos\n");
+    registrar_error("No se ha podido procesar la informacion de los vehiculos\n", REGISTRO_ERRORES);
+    return ERROR;
+  }
+
+
+  int vehiculos_totales = informacion_procesada->informacion_vehiculos.numero_vehiculos;
+  // informacion_procesada->informacion_vehiculos.vehiculos = malloc(informacion_procesada->informacion_vehiculos.numero_vehiculos * sizeof(vehiculos_t));
+
+  //Se procede a cargar las ubicaciones donde se encuentra la informacion en el csv de los vehiculos.
+  int columna_capacidad = informacion_entrada->datos_vehiculos.posiciones_informacion_vehiculos.columna_capacidad_bateria;
+  int columna_maxima = informacion_entrada->datos_vehiculos.posiciones_informacion_vehiculos.columna_maxima_potencia;
+  int columna_modo_carga = informacion_entrada->datos_vehiculos.posiciones_informacion_vehiculos.columna_modo_carga;
+  int columna_bat_deseada = informacion_entrada->datos_vehiculos.posiciones_informacion_vehiculos.columna_porcentaje_bateria_deseada;
+  int columna_bat_inicial = informacion_entrada->datos_vehiculos.posiciones_informacion_vehiculos.columna_porcentaje_bateria_inicial;
+  int columna_terminal = informacion_entrada->datos_vehiculos.posiciones_informacion_vehiculos.columna_terminales;
+  //Se carga las ubicaciones donde se encuentra la informacion de las fechas iniciales y finales de los vehiculos
+  int columna_anyo_inicial = informacion_entrada->datos_vehiculos.posiciones_informacion_vehiculos.ubicacion_fecha_inicial_vehiculo.columna_anyo;
+  int columna_mes_inicial = informacion_entrada->datos_vehiculos.posiciones_informacion_vehiculos.ubicacion_fecha_inicial_vehiculo.columna_mes;
+  int columna_dia_inicial = informacion_entrada->datos_vehiculos.posiciones_informacion_vehiculos.ubicacion_fecha_inicial_vehiculo.columna_dia;
+  int columna_hora_inicial = informacion_entrada->datos_vehiculos.posiciones_informacion_vehiculos.ubicacion_fecha_inicial_vehiculo.columna_hora;
+  int columna_minuto_inicial = informacion_entrada->datos_vehiculos.posiciones_informacion_vehiculos.ubicacion_fecha_inicial_vehiculo.columna_minuto;
+
+  //Se carga las ubicaciones donde se encuentra la informacion de la fecha final
+  int columna_anyo_final = informacion_entrada->datos_vehiculos.posiciones_informacion_vehiculos.ubicacion_fecha_final_vehiculo.columna_anyo;
+  int columna_mes_final = informacion_entrada->datos_vehiculos.posiciones_informacion_vehiculos.ubicacion_fecha_final_vehiculo.columna_mes;
+  int columna_dia_final = informacion_entrada->datos_vehiculos.posiciones_informacion_vehiculos.ubicacion_fecha_final_vehiculo.columna_dia;
+  int columna_hora_final = informacion_entrada->datos_vehiculos.posiciones_informacion_vehiculos.ubicacion_fecha_final_vehiculo.columna_hora;
+  int columna_minuto_final = informacion_entrada->datos_vehiculos.posiciones_informacion_vehiculos.ubicacion_fecha_final_vehiculo.columna_minuto;
+
+  for (int numero_vehiculo = 0; numero_vehiculo < vehiculos_totales; numero_vehiculo++) {
+    //Se cargan los datos del vehiculos.
+    informacion_procesada->informacion_vehiculos.vehiculos[numero_vehiculo].bateria_final = (OSQPFloat)atof(informacion_entrada->datos_vehiculos.informacion_vehiculos.datos[numero_vehiculo + 1][columna_bat_deseada]);
+    informacion_procesada->informacion_vehiculos.vehiculos[numero_vehiculo].bateria_inicial = (OSQPFloat)atof(informacion_entrada->datos_vehiculos.informacion_vehiculos.datos[numero_vehiculo + 1][columna_bat_inicial]);
+    informacion_procesada->informacion_vehiculos.vehiculos[numero_vehiculo].capacidad_bateria = (OSQPFloat)atof(informacion_entrada->datos_vehiculos.informacion_vehiculos.datos[numero_vehiculo + 1][columna_capacidad]);
+    informacion_procesada->informacion_vehiculos.vehiculos[numero_vehiculo].numero_terminal = (OSQPInt)atof(informacion_entrada->datos_vehiculos.informacion_vehiculos.datos[numero_vehiculo + 1][columna_terminal]);
+    informacion_procesada->informacion_vehiculos.vehiculos[numero_vehiculo].modo_carga = informacion_entrada->datos_vehiculos.informacion_vehiculos.datos[numero_vehiculo + 1][columna_terminal];
+    //Se carga la fechas inicial del vehiculo
+    informacion_procesada->informacion_vehiculos.vehiculos[numero_vehiculo].fecha_inicio->tm_year = atoi(informacion_entrada->datos_vehiculos.informacion_vehiculos.datos[numero_vehiculo + 1][columna_anyo_inicial]);
+    informacion_procesada->informacion_vehiculos.vehiculos[numero_vehiculo].fecha_inicio->tm_mon = atoi(informacion_entrada->datos_vehiculos.informacion_vehiculos.datos[numero_vehiculo + 1][columna_mes_inicial]);
+    informacion_procesada->informacion_vehiculos.vehiculos[numero_vehiculo].fecha_inicio->tm_mday = atoi(informacion_entrada->datos_vehiculos.informacion_vehiculos.datos[numero_vehiculo + 1][columna_dia_inicial]);
+    informacion_procesada->informacion_vehiculos.vehiculos[numero_vehiculo].fecha_inicio->tm_hour = atoi(informacion_entrada->datos_vehiculos.informacion_vehiculos.datos[numero_vehiculo + 1][columna_hora_inicial]);
+    informacion_procesada->informacion_vehiculos.vehiculos[numero_vehiculo].fecha_inicio->tm_hour = atoi(informacion_entrada->datos_vehiculos.informacion_vehiculos.datos[numero_vehiculo + 1][columna_minuto_inicial]);
+
+    //Se carga la fecha inicial del vehiculo
+    cargar_fecha(informacion_entrada->datos_vehiculos.informacion_vehiculos.datos, informacion_procesada->informacion_vehiculos.vehiculos->fecha_inicio,
+      columna_anyo_inicial, columna_mes_inicial, columna_dia_inicial, columna_hora_inicial, columna_minuto_inicial,
+      numero_vehiculo + 1, SI_INCLUIR_MINUTO);
+
+    //Se carga la fecha final del vehiculo
+    cargar_fecha(informacion_entrada->datos_vehiculos.informacion_vehiculos.datos, informacion_procesada->informacion_vehiculos.vehiculos->fecha_final,
+      columna_anyo_final, columna_mes_final, columna_dia_final, columna_hora_final, columna_minuto_final,
+      numero_vehiculo + 1, SI_INCLUIR_MINUTO);
+
+    //Se obtiene de simulacion inicial del vehiculo
+    obtener_punto_simulacion(informacion_procesada->informacion_vehiculos.vehiculos[numero_vehiculo].punto_inicio,
+                             informacion_procesada->informacion_vehiculos.vehiculos[numero_vehiculo].fecha_inicio, puntos_adicionales);
+    //Se obtiene el punto de simulacion final   del vehiculo
+    obtener_punto_simulacion(informacion_procesada->informacion_vehiculos.vehiculos[numero_vehiculo].punto_final,
+      informacion_procesada->informacion_vehiculos.vehiculos[numero_vehiculo].fecha_final, puntos_adicionales);
+
+  }
+  return EXITO;
 }
 
-void procesar_informacion_baterias() {
+/*Este subprograma se utiliza para proceder la informacion de las baterías*/
+int procesar_informacion_baterias(informacion_entrada_t * informacion_entrada,informacion_procesada_t* informacion_procesada,
+                                   puntos_adicionales_t* puntos_adicionales) {
+  informacion_procesada->informacion_baterias.numero_baterias = informacion_entrada->datos_baterias.informacion_baterias.filas - 1;
+  informacion_procesada->informacion_baterias.baterias = (bateria_t*)malloc(informacion_procesada->informacion_baterias.numero_baterias * sizeof(bateria_t));
 
+  if (informacion_procesada->informacion_baterias.baterias == NULL) {
+    printf("Error no se ha podido procesar la informacion de las baterias\n");
+    registrar_error("No se ha podido procesar la informacion de las baterias\n", REGISTRO_ERRORES);
+    return ERROR;
+  }
+  //Se carga el numero de baterias totales
+  int baterias_totales = informacion_procesada->informacion_baterias.numero_baterias;
+  //Se  procede a cargar las ubicaciones sobre donde se encuentra la informacion
+  int columna_capacidad_bateria = informacion_entrada->datos_baterias.posiciones_informacion_baterias.columna_capacidad_bateria;
+  int columna_consideracion_objetivo_carga = informacion_entrada->datos_baterias.posiciones_informacion_baterias.columna_consideracion_objetivo;
+  int columna_bateria_objetivo = informacion_entrada->datos_baterias.posiciones_informacion_baterias.columna_porcentaje_bateria_deseada;
+  int columna_bateria_inicial = informacion_entrada->datos_baterias.posiciones_informacion_baterias.columna_porcentaje_bateria_inicial;
+  int columna_terminal = informacion_entrada->datos_baterias.posiciones_informacion_baterias.columna_terminal;
+  int columna_potencia_maxima = informacion_entrada->datos_baterias.posiciones_informacion_baterias.columna_potencia_maxima_bateria;
+  //Se procede a cargar la ubicacion de las diferentes fechas importantes de las baterías
+  // Fecha inicial de la bateria
+  int columna_anyo_inicial = informacion_entrada->datos_baterias.posiciones_informacion_baterias.ubicacion_fecha_inicial_baterias.columna_anyo;
+  int columna_mes_inicial = informacion_entrada->datos_baterias.posiciones_informacion_baterias.ubicacion_fecha_inicial_baterias.columna_mes;
+  int columna_dia_inicial = informacion_entrada->datos_baterias.posiciones_informacion_baterias.ubicacion_fecha_inicial_baterias.columna_dia;
+  int columna_hora_inicial = informacion_entrada->datos_baterias.posiciones_informacion_baterias.ubicacion_fecha_inicial_baterias.columna_hora;
+  int columna_minuto_inicial = informacion_entrada->datos_baterias.posiciones_informacion_baterias.ubicacion_fecha_inicial_baterias.columna_minuto;
+  //Se procede a cargar la ubicacion de la fecha final
+  int columna_anyo_final = informacion_entrada->datos_baterias.posiciones_informacion_baterias.ubicacion_fecha_final_baterias.columna_anyo;
+  int columna_mes_final = informacion_entrada->datos_baterias.posiciones_informacion_baterias.ubicacion_fecha_final_baterias.columna_mes;
+  int columna_dia_final = informacion_entrada->datos_baterias.posiciones_informacion_baterias.ubicacion_fecha_final_baterias.columna_dia;
+  int columna_hora_final = informacion_entrada->datos_baterias.posiciones_informacion_baterias.ubicacion_fecha_final_baterias.columna_hora;
+  int columna_minuto_final = informacion_entrada->datos_baterias.posiciones_informacion_baterias.ubicacion_fecha_final_baterias.columna_minuto;
+  //Se procede a cargar la ubicacion de la fecha del objetivo
+  int columna_anyo_objetivo = informacion_entrada->datos_baterias.posiciones_informacion_baterias.ubicacion_fecha_objetivo_baterias.columna_anyo;
+  int columna_mes_objetivo = informacion_entrada->datos_baterias.posiciones_informacion_baterias.ubicacion_fecha_objetivo_baterias.columna_mes;
+  int columna_dia_objetivo = informacion_entrada->datos_baterias.posiciones_informacion_baterias.ubicacion_fecha_objetivo_baterias.columna_dia;
+  int columna_hora_objetivo = informacion_entrada->datos_baterias.posiciones_informacion_baterias.ubicacion_fecha_objetivo_baterias.columna_hora;
+  int columna_minuto_objetivo = informacion_entrada->datos_baterias.posiciones_informacion_baterias.ubicacion_fecha_objetivo_baterias.columna_minuto;
+
+  /*Se procede a cargar la informacion de las baterias*/
+  for (int numero_bateria = 0; numero_bateria < baterias_totales; numero_bateria++) {
+
+    char* maxima_potencia = informacion_entrada->datos_baterias.informacion_baterias.datos[numero_bateria + 1][columna_bateria_inicial];
+
+    //Se carga los datos de la bateria
+    if (maxima_potencia != NULL && *maxima_potencia != '\0') { // Verificar que el dato no sea NULL y no esté vacío
+      informacion_procesada->informacion_baterias.baterias[numero_bateria].maxima_potencia = (OSQPFloat)atof(maxima_potencia);
+    }
+    else {
+      printf("Error: el dato de potencia máxima es NULL o está vacío.\n");
+      // Manejar el error como sea apropiado
+    }
+
+    char * considerar_objetivo = informacion_entrada->datos_baterias.informacion_baterias.datos[numero_bateria + 1][columna_bateria_objetivo];
+
+     if (considerar_objetivo != NULL && *considerar_objetivo != '\0') { // Verificar que el dato no sea NULL y no esté vacío
+      informacion_procesada->informacion_baterias.baterias[numero_bateria].considerar_objetivo = (OSQPFloat)atof(considerar_objetivo);
+    }
+    else {
+      printf("Error: el dato de potencia máxima es NULL o está vacío.\n");
+      // Manejar el error como sea apropiado
+    }
+
+
+     char* capacidad_bateria = informacion_entrada->datos_baterias.informacion_baterias.datos[numero_bateria + 1][columna_capacidad_bateria];
+
+     if (capacidad_bateria != NULL && *capacidad_bateria != '\0') { // Verificar que el dato no sea NULL y no esté vacío
+       informacion_procesada->informacion_baterias.baterias[numero_bateria].capacidad_bateria = (OSQPFloat)atof(capacidad_bateria);
+     }
+     else {
+       printf("Error: el dato de potencia máxima es NULL o está vacío.\n");
+       // Manejar el error como sea apropiado
+     }
+
+     char* numero_terminal = informacion_entrada->datos_baterias.informacion_baterias.datos[numero_bateria + 1][columna_terminal];
+
+     if (numero_terminal != NULL && *numero_terminal != '\0') { // Verificar que el dato no sea NULL y no esté vacío
+       informacion_procesada->informacion_baterias.baterias[numero_bateria].numero_terminal = (OSQPFloat)atof(numero_terminal);
+     }
+     else {
+       printf("Error: el dato de potencia máxima es NULL o está vacío.\n");
+       // Manejar el error como sea apropiado
+     }
+
+     //Se carga la fecha inicial de la bateria 
+     cargar_fecha(informacion_entrada->datos_baterias.informacion_baterias.datos, informacion_procesada->informacion_baterias.baterias[numero_bateria].fecha_inicio,
+       columna_anyo_inicial, columna_mes_inicial, columna_dia_inicial, columna_hora_inicial, columna_minuto_inicial,
+       numero_bateria + 1, SI_INCLUIR_MINUTO);
+
+     //Se carga la fecha final de la bateria
+     cargar_fecha(informacion_entrada->datos_baterias.informacion_baterias.datos, informacion_procesada->informacion_baterias.baterias[numero_bateria].fecha_inicio,
+       columna_anyo_final, columna_mes_final, columna_dia_final, columna_hora_final, columna_minuto_final, numero_bateria + 1, SI_INCLUIR_MINUTO);
+
+
+     char* considerar_objetivo_cadena = informacion_entrada->datos_baterias.informacion_baterias.datos[numero_bateria][columna_consideracion_objetivo_carga];
+     //Se comprueba si hay que cargar fecha objetivo
+     if(considerar_objetivo_cadena != NULL && strings_iguales(considerar_objetivo_cadena, "si") == true) {
+
+       //Se carga la fecha objetivo
+       cargar_fecha(informacion_entrada->datos_baterias.informacion_baterias.datos, informacion_procesada->informacion_baterias.baterias[numero_bateria].fecha_objetivo,
+         columna_anyo_objetivo, columna_mes_objetivo, columna_dia_objetivo, columna_hora_objetivo, columna_minuto_objetivo,
+         numero_bateria, SI_INCLUIR_MINUTO);
+
+       informacion_procesada->informacion_baterias.baterias[numero_bateria + 1].considerar_objetivo = true;
+     }
+     else {
+       informacion_procesada->informacion_baterias.baterias[numero_bateria + 1].considerar_objetivo = false;
+     }
+  }
+  return EXITO;
 }
 
 void procesar_informacion_precio() {
@@ -160,7 +334,7 @@ int configurar_puntos_simulacion(informacion_entrada_t* informacion_entrada, inf
 //Este subprograma se utiliza para procesar la informacion de entrada para guardarlo
 //facilmente en las matrices->
 
-void procesar_informacion_entrada(informacion_entrada_t* informacion_entrada,
+int procesar_informacion_entrada(informacion_entrada_t* informacion_entrada,
                                   informacion_procesada_t* informacion_procesada) {
 
   //Se crea una variable para almacenar las fechas adicionales a añadir, esta variable va a ser utilizada para
@@ -169,6 +343,21 @@ void procesar_informacion_entrada(informacion_entrada_t* informacion_entrada,
  
   //Se almacena la informacion de restriccion leída del csv de las restricciones
   procesar_informacion_restricciones(&(informacion_entrada->datos_restricciones), &(informacion_procesada->informacion_restricciones_sistema));
-  configurar_puntos_simulacion(informacion_entrada, informacion_procesada,puntos_adicionales);
+  if (configurar_puntos_simulacion(informacion_entrada, informacion_procesada, puntos_adicionales) == ERROR) {
+    printf("No se ha podido configurar los puntos de simulacion correctamente\n");
+    registrar_error("No se ha podido configurar los puntos de simulacion correctamente\n", REGISTRO_ERRORES);
+    return ERROR;
+  }
+  if (procesar_informacion_vehiculos(informacion_entrada, informacion_procesada, puntos_adicionales) == ERROR) {
+    printf("No se ha podido configurar la informacion de los vehiculos correctamente\n");
+    registrar_error("No se ha podido configurar la informacion de los vehiculos correctamente\n",REGISTRO_ERRORES);
+    return ERROR;
+  }
 
+  if (procesar_informacion_baterias(informacion_entrada, informacion_procesada, puntos_adicionales) == ERROR) {
+    printf("No se ha podido configurar la informacion de las baterias\n");
+    registrar_error("No se ha podido configurar la informacion de las baterias\n", REGISTRO_ERRORES);
+    return ERROR;
+  }
+  return EXITO;
 }

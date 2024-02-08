@@ -212,22 +212,22 @@ typedef struct {
 //modo_carga-> modo de carga del vehiculo rapida o normal.
 
 typedef struct {
-    int       numero_terminal;
-    int       punto_inicio;
-    int       punto_final;
-    struct tm *fecha_inicio;
-    struct tm* fecha_final;
-    float     bateria_inicial;
-    float     bateria_final;
-    float     capacidad_bateria;
-    char*     modo_carga;
+    OSQPInt       numero_terminal;
+    OSQPInt       punto_inicio;
+    OSQPInt       punto_final;
+    struct tm*    fecha_inicio;
+    struct tm*    fecha_final;
+    OSQPFloat     bateria_inicial;
+    OSQPFloat     bateria_final;
+    OSQPFloat     capacidad_bateria;
+    char*         modo_carga;
 }vehiculos_t;
 
 //numero_vehiculos -> numero de vehiculos en el sistema 
 //vehiculos-> variable que sirve para almacenar la informacion de un vehiculo
 typedef struct {
     int     numero_vehiculos;
-    vehiculos_t vehiculos;
+    vehiculos_t *vehiculos;
 }informacion_vehiculos_t;
 
 //Struct que sirve para almacenar la informacion relevante de las 
@@ -247,18 +247,18 @@ typedef struct {
 
 
 typedef struct {
-    bool   considerar_objetivo;
-    int    numero_terminal;
-    int    punto_inicio;
-    int    punto_final;
-    int    punto_objetivo;
-    int    capacidad_bateria;
-    int    bateria_inicial;
-    float  bateria_objetivo;
-    float  maxima_potencia;
-    struct tm* fecha_inicio;
-    struct tm* fecha_final;
-    struct tm* fecha_objetivo;
+    bool         considerar_objetivo;
+    OSQPInt      numero_terminal;
+    OSQPInt      punto_inicio;
+    OSQPInt      punto_final;
+    OSQPInt      punto_objetivo;
+    OSQPFloat    capacidad_bateria;
+    OSQPFloat    bateria_inicial;
+    OSQPFloat    bateria_objetivo;
+    OSQPFloat    maxima_potencia;
+    struct tm*   fecha_inicio;
+    struct tm*   fecha_final;
+    struct tm*   fecha_objetivo;
 }bateria_t;
 
 // Numero_baterias-> Numero de baterías presente en el sistema
@@ -330,6 +330,8 @@ typedef struct {
     int numero_punto;
     struct tm* fecha_adicional;
 }puntos_adicionales_t;
+
+
 
 
 // Se definen structs para almacenar la informacion ya extraida de los CSVs de

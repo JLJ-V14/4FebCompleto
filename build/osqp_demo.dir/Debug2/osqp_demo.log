@@ -1,21 +1,20 @@
-﻿  calcular_puntos_simulacion.c
-calcular_puntos_simulacion.c(16,28): warning C4033: 'ajustar_array_fechas_adicionales' must return a value
-calcular_puntos_simulacion.c(31,25): warning C4047: '=': 'tm *' differs in levels of indirection from 'tm **'
-calcular_puntos_simulacion.c(91,20): warning C4047: 'function': 'const datos_csv_t *' differs in levels of indirection from 'char ****'
-calcular_puntos_simulacion.c(91,20): warning C4024: 'cargar_fecha': different types for formal and actual parameter 1
-calcular_puntos_simulacion.c(95,20): warning C4047: 'function': 'const datos_csv_t *' differs in levels of indirection from 'char ****'
-calcular_puntos_simulacion.c(95,20): warning C4024: 'cargar_fecha': different types for formal and actual parameter 1
-calcular_puntos_simulacion.c(99,20): warning C4047: 'function': 'const datos_csv_t *' differs in levels of indirection from 'char ****'
-calcular_puntos_simulacion.c(99,20): warning C4024: 'cargar_fecha': different types for formal and actual parameter 1
-calcular_puntos_simulacion.c(117,20): warning C4047: 'function': 'const datos_csv_t *' differs in levels of indirection from 'char ****'
-calcular_puntos_simulacion.c(117,20): warning C4024: 'cargar_fecha': different types for formal and actual parameter 1
-calcular_puntos_simulacion.c(122,20): warning C4047: 'function': 'const datos_csv_t *' differs in levels of indirection from 'char ****'
-calcular_puntos_simulacion.c(122,20): warning C4024: 'cargar_fecha': different types for formal and actual parameter 1
-calcular_puntos_simulacion.c(173,23): warning C4047: '=': 'tm *' differs in levels of indirection from 'tm **'
-calcular_puntos_simulacion.c(332,72): warning C4047: 'function': 'time_t *' differs in levels of indirection from 'time_t'
-calcular_puntos_simulacion.c(332,72): warning C4024: 'calcular_numero_puntos_provisional': different types for formal and actual parameter 1
-calcular_puntos_simulacion.c(332,86): warning C4047: 'function': 'time_t *' differs in levels of indirection from 'time_t'
-calcular_puntos_simulacion.c(332,86): warning C4024: 'calcular_numero_puntos_provisional': different types for formal and actual parameter 2
-F:\osqp1feb\osqp-1.0.0.beta1\build\calcular_puntos_simulacion.c(391): warning C4715: 'cacular_puntos_simulacion': not all control paths return a value
-F:\osqp1feb\osqp-1.0.0.beta1\build\calcular_puntos_simulacion.c(240): warning C4715: 'cargar_fechas_adicionales_vehiculos': not all control paths return a value
-F:\osqp1feb\osqp-1.0.0.beta1\build\calcular_puntos_simulacion.c(40): warning C4715: 'ajustar_array_fechas_adicionales': not all control paths return a value
+﻿  procesar_informacion_entrada.c
+procesar_informacion_entrada.c(127,76): warning C4047: 'function': 'const datos_csv_t *' differs in levels of indirection from 'char ***'
+procesar_informacion_entrada.c(127,76): warning C4024: 'cargar_fecha': different types for formal and actual parameter 1
+procesar_informacion_entrada.c(132,76): warning C4047: 'function': 'const datos_csv_t *' differs in levels of indirection from 'char ***'
+procesar_informacion_entrada.c(132,76): warning C4024: 'cargar_fecha': different types for formal and actual parameter 1
+procesar_informacion_entrada.c(137,101): warning C4047: 'function': 'OSQPInt *' differs in levels of indirection from 'OSQPInt'
+procesar_informacion_entrada.c(137,101): warning C4024: 'obtener_punto_simulacion': different types for formal and actual parameter 1
+procesar_informacion_entrada.c(140,101): warning C4047: 'function': 'OSQPInt *' differs in levels of indirection from 'OSQPInt'
+procesar_informacion_entrada.c(140,101): warning C4024: 'obtener_punto_simulacion': different types for formal and actual parameter 1
+procesar_informacion_entrada.c(156,17): warning C4098: 'procesar_informacion_baterias': 'void' function returning a value
+procesar_informacion_entrada.c(233,75): warning C4047: 'function': 'const datos_csv_t *' differs in levels of indirection from 'char ***'
+procesar_informacion_entrada.c(233,75): warning C4024: 'cargar_fecha': different types for formal and actual parameter 1
+procesar_informacion_entrada.c(238,75): warning C4047: 'function': 'const datos_csv_t *' differs in levels of indirection from 'char ***'
+procesar_informacion_entrada.c(238,75): warning C4024: 'cargar_fecha': different types for formal and actual parameter 1
+procesar_informacion_entrada.c(247,77): warning C4047: 'function': 'const datos_csv_t *' differs in levels of indirection from 'char ***'
+procesar_informacion_entrada.c(247,77): warning C4024: 'cargar_fecha': different types for formal and actual parameter 1
+procesar_informacion_entrada.c(306,16): warning C4133: 'function': incompatible types - from 'datos_csv_algoritmo_t *' to 'const datos_csv_t *'
+procesar_informacion_entrada.c(310,16): warning C4133: 'function': incompatible types - from 'datos_csv_algoritmo_t *' to 'const datos_csv_t *'
+procesar_informacion_entrada.c(303,7): warning C4047: 'initializing': 'int' differs in levels of indirection from 'char *'
+F:\osqp1feb\osqp-1.0.0.beta1\build\procesar_informacion_entrada.c(251): warning C6386: Buffer overrun while writing to 'informacion_procesada->informacion_baterias.baterias'.
