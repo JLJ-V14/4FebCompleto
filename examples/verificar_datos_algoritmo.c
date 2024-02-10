@@ -93,7 +93,7 @@ static int verificar_tipo_datos_csv_algoritmo(datos_csv_algoritmo_t* datos_algor
 		if (!es_un_numero(informacion_algoritmo->datos[fila_datos_algoritmo][columna], DECIMAL_NO_INCLUIDO)) {
 
 			char mensaje_error[512];
-			snprintf(mensaje_error, sizeof(mensaje_error), "Error en la columna %d del CSV de datos del algoritmo %ls no es un dato numerico\n",
+			snprintf(mensaje_error, sizeof(mensaje_error), "Error en la columna %d del CSV de datos del algoritmo %s no es un dato numerico\n",
 				columna, informacion_algoritmo->datos[fila_datos_algoritmo][columna]);
 
 			printf(mensaje_error);

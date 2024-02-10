@@ -41,7 +41,7 @@ static int comprobar_datos_bateria(const datos_csv_baterias_t* datos_bateria, co
 	/*Cargo el puntero que apunta a la posicon en memoria donde se encuentra la informacion de las
 	  baterias*/
 
-	datos_csv_t* informacion_baterias = &(datos_bateria->informacion_baterias);
+	datos_csv_t informacion_baterias = datos_bateria->informacion_baterias;
 
 
 	//Cargo las columnas y filas en las que se encuentra la informacion en el csv de las baterias->
@@ -52,11 +52,11 @@ static int comprobar_datos_bateria(const datos_csv_baterias_t* datos_bateria, co
 	int  columna_csv_baterias_final = datos_bateria->posiciones_informacion_baterias.columna_porcentaje_bateria_deseada;
 	
 	//Cargo los datos del csv de las baterias
-	char*    numero_terminal_char = informacion_baterias->datos[numero_bateria][columna_csv_baterias_num_terminal];
-	char*    capacidad_bateria_char = informacion_baterias->datos[numero_bateria][columna_csv_baterias_capacidad];
-	char*    maxima_potencia_char = informacion_baterias->datos[numero_bateria][columna_csv_baterias_max_potencia];
-	char*    bateria_inicial_char = informacion_baterias->datos[numero_bateria][columna_csv_baterias_inicial];
-	char*    bateria_deseada_char = informacion_baterias->datos[numero_bateria][columna_csv_baterias_final];
+	char*    numero_terminal_char = informacion_baterias.datos[numero_bateria][columna_csv_baterias_num_terminal];
+	char*    capacidad_bateria_char = informacion_baterias.datos[numero_bateria][columna_csv_baterias_capacidad];
+	char*    maxima_potencia_char = informacion_baterias.datos[numero_bateria][columna_csv_baterias_max_potencia];
+	char*    bateria_inicial_char = informacion_baterias.datos[numero_bateria][columna_csv_baterias_inicial];
+	char*    bateria_deseada_char = informacion_baterias.datos[numero_bateria][columna_csv_baterias_final];
 
 
 
@@ -152,8 +152,8 @@ static int comprobar_fecha_inicial_bateria(struct tm* fecha_inicial_bateria, con
 
 	//Cargo los punteros a las posiciones de las memoria en la que se encuentra la informacion
 	//del algoritmo y la bateria.
-	datos_csv_t* informacion_algoritmo = &(datos_algoritmo->informacion_algoritmo);
-	datos_csv_t* informacion_bateria   = &(datos_baterias->informacion_baterias);
+	datos_csv_t informacion_algoritmo = (datos_algoritmo->informacion_algoritmo);
+	datos_csv_t informacion_bateria   = (datos_baterias->informacion_baterias);
 
 	//Cargo las columnas y filas donde se encuentra la informacion
 	//Fecha inicial del algoritmo
@@ -174,7 +174,7 @@ static int comprobar_fecha_inicial_bateria(struct tm* fecha_inicial_bateria, con
 	int columna_csv_baterias_minuto_inicial = datos_baterias->posiciones_informacion_baterias.ubicacion_fecha_inicial_baterias.columna_minuto;
 
 	//Se carga la fecha inicial del algoritmo 
-	cargar_fecha(informacion_algoritmo, &fecha_inicial_algoritmo, columna_anyo_inicial_algoritmo,
+	cargar_fecha(&informacion_algoritmo, &fecha_inicial_algoritmo, columna_anyo_inicial_algoritmo,
 	columna_mes_inicial_algoritmo, columna_dia_inicial_algoritmo, columna_hora_inicial_algoritmo,
 	columna_minuto_inicial_algoritmo, fila_informacion_algoritmo,SI_INCLUIR_MINUTO);
 
@@ -244,7 +244,7 @@ static int comprobar_fecha_final_bateria(struct tm* fecha_final_bateria, const d
 	
     
 	if (verificar_orden_fechas(*fecha_final_bateria,fecha_final_algoritmo,INCLUIR_FECHA_IGUAL) == ERROR) {
-		char* mensaje_error[512];
+		char mensaje_error[512];
 		snprintf(mensaje_error, sizeof(mensaje_error),
 			"La fecha final de la bateria es Año %d  Mes %d Dia %d Hora %d Minuto %d "
 			"La fecha final del algoritmo es Año %d  Mes %d Dia %d Hora %d Minuto %d "
@@ -262,7 +262,7 @@ static int comprobar_fecha_final_bateria(struct tm* fecha_final_bateria, const d
 	return EXITO;
 }
 
-bool considerar_objetivo_bateria(const wchar_t*objetivo) {
+bool considerar_objetivo_bateria(const char *objetivo) {
 	if (strcmp("si", objetivo) == 0) {
 		return true;
 	}

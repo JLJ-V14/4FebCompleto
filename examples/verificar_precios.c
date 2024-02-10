@@ -55,16 +55,16 @@ static int comprobar_encabezados_csv_precios(datos_csv_precio_t* datos_precio) {
 	la electricidad.
 	*/
 
-	datos_csv_t* informacion_precio = &(datos_precio->informacion_precio.datos);
-	const wchar_t* encabezados[] = { L"Año",L"Mes",L"Dia",L"Hora",L"Precio kWh" };
+	datos_csv_t* informacion_precio = &(datos_precio->informacion_precio);
+	const char* encabezados[] = { "Año","Mes","Dia","Hora","Precio kWh" };
 
-	for (int numero_columna = 0; numero_columna < numero_columna; numero_columnas++) {
+	for (int numero_columna = 0; numero_columna < numero_columnas; numero_columna++) {
 
 		if (!strings_iguales(informacion_precio->datos[fila_encabezados][numero_columna],
 			encabezados[numero_columna])) {
 
 			char mensaje_error[512];
-			snprintf(mensaje_error, sizeof(mensaje_error), "Error el encabezado en la columna %d deberia ser %ls y es %ls",
+			snprintf(mensaje_error, sizeof(mensaje_error), "Error el encabezado en la columna %d deberia ser %s y es %s",
 				numero_columna, encabezados[numero_columna], informacion_precio->datos[fila_encabezados][numero_columna]);
 			printf("%s\n", mensaje_error);
 			registrar_error(mensaje_error, REGISTRO_ERRORES);
@@ -80,7 +80,7 @@ los datos temporales relacionados con los
 precios son numeros enteros, sin decimales.
 */
 
-static int comprobar_formato_dato_tiempo_precio(datos_csv_t* datos_precio, const int numero_columna) {
+static int comprobar_formato_dato_tiempo_precio( const datos_csv_t* datos_precio, const int numero_columna) {
 
 
 	int numero_filas = datos_precio->filas;
@@ -504,7 +504,7 @@ static int comprobar_consecutividad_precios(datos_csv_precio_t* datos_precio) {
 			columna_hora_precio, NO_PROCEDE, numero_fila,
 			NO_INCLUIR_MINUTO);
 
-		cargar_fecha(datos_precio, &fecha_2, columna_anyo_precio,
+		cargar_fecha(informacion_precio, &fecha_2, columna_anyo_precio,
 			columna_mes_precio, columna_dia_precio,
 			columna_hora_precio, NO_PROCEDE, numero_fila + 1,
 			NO_INCLUIR_MINUTO);
@@ -522,7 +522,7 @@ static int comprobar_consecutividad_precios(datos_csv_precio_t* datos_precio) {
  precios tienen sentido.*/
 
 static int comprobar_fecha_precios(datos_csv_precio_t* datos_precio_compra, datos_csv_precio_t* datos_precio_venta,
-	datos_csv_precio_t* datos_algoritmo) {
+	datos_csv_algoritmo_t* datos_algoritmo) {
 
 	/*
 	Se comprueba que:
@@ -627,7 +627,9 @@ precios tiene sentido.
 int verificar_precios(datos_csv_precio_t* datos_precio_compra, datos_csv_precio_t* datos_precio_venta,
 	datos_csv_algoritmo_t* datos_algoritmo) {
 
-
+  /*Cargo un puntero que apunta a las posiciones de memoria donde se encuentra la informacion de los precios*/
+  datos_csv_t informacion_precios_compra = datos_precio_compra->informacion_precio;
+  datos_csv_t informacion_precios_venta = datos_precio_venta->informacion_precio;
 
 	if (comprobar_dimensiones_csv_precios(datos_precio_compra, datos_precio_venta) == ERROR) {
 		return ERROR;
@@ -638,7 +640,7 @@ int verificar_precios(datos_csv_precio_t* datos_precio_compra, datos_csv_precio_
 	}
 
   
-	if (comprobar_formato_precios(datos_precio_compra, datos_precio_venta) == ERROR) {
+	if (comprobar_formato_precios(&informacion_precios_compra,&informacion_precios_venta) == ERROR) {
 		return ERROR;
 	}
   

@@ -124,20 +124,20 @@ int procesar_informacion_vehiculos(informacion_entrada_t* informacion_entrada, i
     informacion_procesada->informacion_vehiculos.vehiculos[numero_vehiculo].fecha_inicio->tm_hour = atoi(informacion_entrada->datos_vehiculos.informacion_vehiculos.datos[numero_vehiculo + 1][columna_minuto_inicial]);
 
     //Se carga la fecha inicial del vehiculo
-    cargar_fecha(informacion_entrada->datos_vehiculos.informacion_vehiculos.datos, informacion_procesada->informacion_vehiculos.vehiculos->fecha_inicio,
+    cargar_fecha(&(informacion_entrada->datos_vehiculos.informacion_vehiculos), informacion_procesada->informacion_vehiculos.vehiculos->fecha_inicio,
       columna_anyo_inicial, columna_mes_inicial, columna_dia_inicial, columna_hora_inicial, columna_minuto_inicial,
       numero_vehiculo + 1, SI_INCLUIR_MINUTO);
 
     //Se carga la fecha final del vehiculo
-    cargar_fecha(informacion_entrada->datos_vehiculos.informacion_vehiculos.datos, informacion_procesada->informacion_vehiculos.vehiculos->fecha_final,
+    cargar_fecha(&(informacion_entrada->datos_vehiculos.informacion_vehiculos), informacion_procesada->informacion_vehiculos.vehiculos->fecha_final,
       columna_anyo_final, columna_mes_final, columna_dia_final, columna_hora_final, columna_minuto_final,
       numero_vehiculo + 1, SI_INCLUIR_MINUTO);
 
     //Se obtiene de simulacion inicial del vehiculo
-    obtener_punto_simulacion(informacion_procesada->informacion_vehiculos.vehiculos[numero_vehiculo].punto_inicio,
+    obtener_punto_simulacion(&(informacion_procesada->informacion_vehiculos.vehiculos[numero_vehiculo].punto_inicio),
                              informacion_procesada->informacion_vehiculos.vehiculos[numero_vehiculo].fecha_inicio, puntos_adicionales);
     //Se obtiene el punto de simulacion final   del vehiculo
-    obtener_punto_simulacion(informacion_procesada->informacion_vehiculos.vehiculos[numero_vehiculo].punto_final,
+    obtener_punto_simulacion(&(informacion_procesada->informacion_vehiculos.vehiculos[numero_vehiculo].punto_final),
       informacion_procesada->informacion_vehiculos.vehiculos[numero_vehiculo].fecha_final, puntos_adicionales);
 
   }
@@ -230,12 +230,12 @@ int procesar_informacion_baterias(informacion_entrada_t * informacion_entrada,in
      }
 
      //Se carga la fecha inicial de la bateria 
-     cargar_fecha(informacion_entrada->datos_baterias.informacion_baterias.datos, informacion_procesada->informacion_baterias.baterias[numero_bateria].fecha_inicio,
+     cargar_fecha(&(informacion_entrada->datos_baterias.informacion_baterias), informacion_procesada->informacion_baterias.baterias[numero_bateria].fecha_inicio,
        columna_anyo_inicial, columna_mes_inicial, columna_dia_inicial, columna_hora_inicial, columna_minuto_inicial,
        numero_bateria + 1, SI_INCLUIR_MINUTO);
 
      //Se carga la fecha final de la bateria
-     cargar_fecha(informacion_entrada->datos_baterias.informacion_baterias.datos, informacion_procesada->informacion_baterias.baterias[numero_bateria].fecha_inicio,
+     cargar_fecha(&(informacion_entrada->datos_baterias.informacion_baterias), informacion_procesada->informacion_baterias.baterias[numero_bateria].fecha_inicio,
        columna_anyo_final, columna_mes_final, columna_dia_final, columna_hora_final, columna_minuto_final, numero_bateria + 1, SI_INCLUIR_MINUTO);
 
 
@@ -244,23 +244,117 @@ int procesar_informacion_baterias(informacion_entrada_t * informacion_entrada,in
      if(considerar_objetivo_cadena != NULL && strings_iguales(considerar_objetivo_cadena, "si") == true) {
 
        //Se carga la fecha objetivo
-       cargar_fecha(informacion_entrada->datos_baterias.informacion_baterias.datos, informacion_procesada->informacion_baterias.baterias[numero_bateria].fecha_objetivo,
+       cargar_fecha(&(informacion_entrada->datos_baterias.informacion_baterias), informacion_procesada->informacion_baterias.baterias[numero_bateria].fecha_objetivo,
          columna_anyo_objetivo, columna_mes_objetivo, columna_dia_objetivo, columna_hora_objetivo, columna_minuto_objetivo,
          numero_bateria, SI_INCLUIR_MINUTO);
 
-       informacion_procesada->informacion_baterias.baterias[numero_bateria + 1].considerar_objetivo = true;
+       informacion_procesada->informacion_baterias.baterias[numero_bateria].considerar_objetivo = true;
      }
      else {
-       informacion_procesada->informacion_baterias.baterias[numero_bateria + 1].considerar_objetivo = false;
+       informacion_procesada->informacion_baterias.baterias[numero_bateria].considerar_objetivo = false;
      }
   }
   return EXITO;
 }
 
-void procesar_informacion_precio() {
+/*Este subprograma se utiliza para procesar la informacion de los precios*/
+int procesar_informacion_precio(informacion_entrada_t* informacion_entrada, informacion_procesada_t* informacion_procesada) {
+  // Se carga el numero de precios que hay = numero de horas
+  informacion_procesada->informacion_precio_compra.numero_horas= informacion_entrada->datos_precio_compra.informacion_precio.filas - 1;
+  informacion_procesada->informacion_precio_venta.numero_horas = informacion_entrada->datos_precio_venta.informacion_precio.filas - 1;
+  //Se crea una variable booleana para identificar a cuantos puntos de simulacion hay que asignarles un precio de la
+  //electricidad
+  bool fin_bucle = false;
+  //Se carga una variable para acceder a un precio de la electricidad u otro
+  int  index_precio_actual = 1;
+  //Cargo las posiciones donde se encuentra la informacion en el csv de los precios de compra y venta
+  int columna_precio_compra = informacion_entrada->datos_precio_compra.posiciones_informacion_precio.columna_precio;
+  int columna_precio_venta = informacion_entrada->datos_precio_venta.posiciones_informacion_precio.columna_precio;
+  int columna_anyo_precio_compra = informacion_entrada->datos_precio_compra.posiciones_informacion_precio.ubicacion_fecha_precios.columna_anyo;
+  int columna_mes_precio_compra = informacion_entrada->datos_precio_compra.posiciones_informacion_precio.ubicacion_fecha_precios.columna_mes;
+  int columna_dia_precio_compra = informacion_entrada->datos_precio_compra.posiciones_informacion_precio.ubicacion_fecha_precios.columna_dia;
+  int columna_hora_precio_compra = informacion_entrada->datos_precio_compra.posiciones_informacion_precio.ubicacion_fecha_precios.columna_hora;
+  int columna_anyo_precio_venta = informacion_entrada->datos_precio_venta.posiciones_informacion_precio.ubicacion_fecha_precios.columna_anyo;
+  int columna_mes_precio_venta = informacion_entrada->datos_precio_venta.posiciones_informacion_precio.ubicacion_fecha_precios.columna_mes;
+  int columna_dia_precio_venta = informacion_entrada->datos_precio_venta.posiciones_informacion_precio.ubicacion_fecha_precios.columna_dia;
+  int columna_hora_precio_venta = informacion_entrada->datos_precio_venta.posiciones_informacion_precio.ubicacion_fecha_precios.columna_hora;
+  int fila_inicial_precio_compra = 1;
+  int fila_inicial_precio_venta = 1;
+  /*Se carga el primer precio de compra y venta asi como el primer punto de simulacion, asi como la primera fecha*/
 
+  OSQPFloat precio_actual_compra = atof(informacion_entrada->datos_precio_compra.informacion_precio.datos[index_precio_actual][columna_precio_compra]);
+  OSQPFloat precio_actual_venta = atof(informacion_entrada->datos_precio_venta.informacion_precio.datos[index_precio_actual][columna_precio_venta]);
+
+  informacion_procesada->informacion_precio_compra.precios[0].precio = precio_actual_compra;
+  informacion_procesada->informacion_precio_venta.precios[0].precio = precio_actual_venta;
+
+  /*Se carga el numero de puntos de simulacion que hay en total*/
+  int numero_puntos_simulacion = informacion_procesada->informacion_puntos_simulacion.numero_puntos_simulacion;
+
+  if (cargar_fecha(&(informacion_entrada->datos_precio_compra.informacion_precio), informacion_procesada->informacion_precio_compra.precios[0].fecha_asociada,
+    columna_anyo_precio_compra, columna_mes_precio_compra, columna_dia_precio_compra, columna_hora_precio_compra,
+    0, fila_inicial_precio_compra, NO_INCLUIR_MINUTO) == ERROR) {
+    printf("No se ha podido cargar la fecha inicial del precio de compra\n");
+    registrar_error("No se ha podido cargar la fecha inicial del precio de compra\n", REGISTRO_ERRORES);
+    return ERROR;
+  }
+
+  if (cargar_fecha(&(informacion_entrada->datos_precio_venta.informacion_precio), informacion_procesada->informacion_precio_venta.precios[0].fecha_asociada,
+    columna_anyo_precio_venta, columna_mes_precio_venta, columna_dia_precio_venta, columna_hora_precio_venta, 0,
+    fila_inicial_precio_venta, NO_INCLUIR_MINUTO) == ERROR) {
+    printf("No se ha podido cargar la fecha inicial del precio de venta\n");
+    registrar_error("No se ha podido cargar la fecha inicial del precio de venta\n", REGISTRO_ERRORES);
+    return ERROR;
+  }
+
+  /*Se introduce el punto inicial de los precios*/
+  informacion_procesada->informacion_precio_compra.precios[0].punto_inicial = 0;
+  informacion_procesada->informacion_precio_venta.precios[0].punto_inicial = 0;
+
+  /*Se carga el valor del punto actual que se está examinando*/
+  int punto_actual = 0;
+  int precio_actual = 0;
+
+
+  while (!fin_bucle) {
+    //Cargo el precio de la hora actual
+    if (comprobar_hora(*informacion_procesada->informacion_precio_compra.precios[precio_actual].fecha_asociada,
+      *informacion_procesada->informacion_puntos_simulacion.puntos_simulacion[punto_actual].fecha_punto) == false) {
+
+      informacion_procesada->informacion_precio_compra.precios[precio_actual].punto_final = punto_actual - 1;
+      informacion_procesada->informacion_precio_compra.precios[precio_actual].punto_final = punto_actual - 1;
+
+      precio_actual++;
+      index_precio_actual++;
+
+      if (cargar_fecha(&(informacion_entrada->datos_precio_compra.informacion_precio), informacion_procesada->informacion_precio_compra.precios[precio_actual].fecha_asociada,
+        columna_anyo_precio_compra, columna_mes_precio_compra, columna_dia_precio_compra, columna_hora_precio_compra, 0, precio_actual + 1,
+        SI_INCLUIR_MINUTO) == ERROR) {
+        printf("Error procesando la informacion de los precios, en la carga de las fechas de los precios de compra\n");
+        registrar_error("Error procesando la informacion de los precios, en la carga de las fechas de los precios de compra\n", REGISTRO_ERRORES);
+        return ERROR;
+      }
+
+      if (cargar_fecha(&(informacion_entrada->datos_precio_venta.informacion_precio), informacion_procesada->informacion_precio_venta.precios[precio_actual].fecha_asociada,
+        columna_anyo_precio_venta, columna_mes_precio_venta, columna_dia_precio_venta, columna_hora_precio_venta, 0, precio_actual + 1,
+        SI_INCLUIR_MINUTO) == ERROR) {
+        printf("Error procesando la informacion de los precios, en la carga de las fechas de los precios de venta\n");
+        registrar_error("Error procesando la informacion de los precios en la carga de las fechas de los precios de venta\n", REGISTRO_ERRORES);
+        return ERROR;
+      }
+      OSQPFloat precio_actual_compra = atof(informacion_entrada->datos_precio_compra.informacion_precio.datos[index_precio_actual][columna_precio_compra]);
+      OSQPFloat precio_actual_venta  = atof(informacion_entrada->datos_precio_venta.informacion_precio.datos[index_precio_actual][columna_precio_venta]);
+      informacion_procesada->informacion_precio_compra.precios[precio_actual].punto_inicial = punto_actual;
+      informacion_procesada->informacion_precio_venta.precios[precio_actual].punto_inicial  = punto_actual;
+    }
+    punto_actual++;
+
+    if (numero_puntos_simulacion < punto_actual) {
+      fin_bucle = true;
+    }
+  }
+  return EXITO;
 }
-
 int configurar_puntos_simulacion(informacion_entrada_t* informacion_entrada, informacion_procesada_t* informacion_procesada,
                                  puntos_adicionales_t**  puntos_adicionales) {
   //Se cargan elementos temporales claves de la simulacion, como la resolucion de la simulacion, la fecha inicial
@@ -301,14 +395,14 @@ int configurar_puntos_simulacion(informacion_entrada_t* informacion_entrada, inf
   int columna_resolucion_minutos = informacion_entrada->datos_algoritmo.posiciones_informacion_algoritmo.resolucion_minutos;
 
   //Se carga la resolution temporal de la simulacion
-  int delta_resolucion = informacion_entrada->datos_algoritmo.informacion_algoritmo.datos[fila_valores][columna_resolucion_minutos];
+  int delta_resolucion = atoi(informacion_entrada->datos_algoritmo.informacion_algoritmo.datos[fila_valores][columna_resolucion_minutos]);
 
   //Se cargan las fechas iniciales y finales del algoritmo
-  cargar_fecha(&(informacion_entrada->datos_algoritmo), fecha_inicial_algoritmo, columna_anyo_inicial,
+  cargar_fecha(&(informacion_entrada->datos_algoritmo.informacion_algoritmo), fecha_inicial_algoritmo, columna_anyo_inicial,
     columna_mes_inicial, columna_dia_inicial, columna_hora_inicial, columna_minuto_inicial,
     fila_valores, SI_INCLUIR_MINUTO);
 
-  cargar_fecha(&(informacion_entrada->datos_algoritmo), fecha_final_algoritmo, columna_anyo_final,
+  cargar_fecha(&(informacion_entrada->datos_algoritmo.informacion_algoritmo), fecha_final_algoritmo, columna_anyo_final,
     columna_mes_final, columna_dia_final, columna_hora_final, columna_minuto_final,
     fila_valores, SI_INCLUIR_MINUTO);
 
@@ -348,15 +442,29 @@ int procesar_informacion_entrada(informacion_entrada_t* informacion_entrada,
     registrar_error("No se ha podido configurar los puntos de simulacion correctamente\n", REGISTRO_ERRORES);
     return ERROR;
   }
-  if (procesar_informacion_vehiculos(informacion_entrada, informacion_procesada, puntos_adicionales) == ERROR) {
+
+  if (puntos_adicionales == NULL) {
+    // Handle memory allocation failure
+    printf("Error al asignar memoria para puntos adicionales\n");
+    registrar_error("Error al asignar memoria para puntos adicionales\n", REGISTRO_ERRORES);
+    return ERROR;
+  }
+
+  if (procesar_informacion_vehiculos(informacion_entrada, informacion_procesada, *puntos_adicionales) == ERROR) {
     printf("No se ha podido configurar la informacion de los vehiculos correctamente\n");
     registrar_error("No se ha podido configurar la informacion de los vehiculos correctamente\n",REGISTRO_ERRORES);
     return ERROR;
   }
 
-  if (procesar_informacion_baterias(informacion_entrada, informacion_procesada, puntos_adicionales) == ERROR) {
+  if (procesar_informacion_baterias(informacion_entrada, informacion_procesada,*puntos_adicionales) == ERROR) {
     printf("No se ha podido configurar la informacion de las baterias\n");
     registrar_error("No se ha podido configurar la informacion de las baterias\n", REGISTRO_ERRORES);
+    return ERROR;
+  }
+
+  if (procesar_informacion_precio(informacion_entrada, informacion_procesada) == ERROR) {
+    printf("No se ha podido configurar la informacion de los precios\n");
+    registrar_error("No se ha podido configurar la informacion de los precios\n", REGISTRO_ERRORES);
     return ERROR;
   }
   return EXITO;

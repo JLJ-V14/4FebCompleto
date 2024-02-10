@@ -346,7 +346,8 @@ typedef struct {
     informacion_baterias_t              informacion_baterias;
     informacion_puntos_simulacion_t     informacion_puntos_simulacion;
     informacion_restricciones_sistema_t informacion_restricciones_sistema;
-    informacion_precio_t                informacion_precio_t;
+    informacion_precio_t                informacion_precio_compra;
+    informacion_precio_t                informacion_precio_venta;
     puntos_adicionales_t                informacion_puntos_adicionales;
 }informacion_procesada_t;
 

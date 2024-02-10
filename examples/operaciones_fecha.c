@@ -10,6 +10,7 @@ con operar las fechas.
 #include <stdio.h>
 #include <time.h>
 #include <stdlib.h>
+#include <stdbool.h>
 /*
 Defino las columnas en donde se encuentran
 los diferentes tipos de datos del algoritmo
@@ -328,3 +329,22 @@ int obtener_diferencia_minutos(const struct tm* fecha_1, const struct tm* fecha_
   return diff_minutos;
 }
 
+/*Este subprograma se utiliza para comprobar que una fecha está dentro del rango :00 -:59 durante
+  otra esto sirve para identificar cuando hay que avanzar al siguiente precio.*/
+bool comprobar_hora(struct tm fecha_comprobar, struct tm fecha_referencia) {
+
+  /*Se comprubeba si el año, mes y día es la misma*/
+  if (fecha_comprobar.tm_year == fecha_referencia.tm_year &&
+    fecha_comprobar.tm_mon == fecha_referencia.tm_mon &&
+    fecha_comprobar.tm_mday == fecha_referencia.tm_mday) {
+
+
+  //Se comrpbueba si la hora es la misma
+
+    if (fecha_comprobar.tm_hour == fecha_referencia.tm_hour) {
+      return  true;
+    }
+
+  }
+  return false;
+}

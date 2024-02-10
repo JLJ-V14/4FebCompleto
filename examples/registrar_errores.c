@@ -14,7 +14,7 @@ void registrar_error(const char* mensaje, const char* nombre_archivo) {
 
 
     time_t tiempo_actual;
-    char* tiempo_actual_string;
+    const char* tiempo_actual_string;
 
     tiempo_actual = time(NULL);
     tiempo_actual_string = obtener_tiempo_string(&tiempo_actual);

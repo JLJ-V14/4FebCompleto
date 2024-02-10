@@ -85,7 +85,7 @@ int comprobar_simultaneidad_vehiculo (datos_csv_vehiculos_t* datos_vehiculos,
 				                        *fecha_inicial_elemento,*fecha_final_elemento)) {
 				
 				char mensaje_error[512];
-				snprintf(mensaje_error, 512, "Error en el terminal %ls "
+				snprintf(mensaje_error, 512, "Error en el terminal %s "
 				"Hay un problema de simultaneidad con el vehiculo en la fila %d"
 				"la fecha inicial del vehiculo es Año %d Mes %d Dia %d Hora %d Minuto %d"
 				"la fecha final del vehiculo es Año %d Mes %d Dia %d Hora %d Minuto %d",
@@ -96,7 +96,7 @@ int comprobar_simultaneidad_vehiculo (datos_csv_vehiculos_t* datos_vehiculos,
 				fecha_final_vehiculo.tm_mon + DESPLAZAMIENTO_MES,
 				fecha_final_vehiculo.tm_mday, fecha_final_vehiculo.tm_hour, fecha_final_vehiculo.tm_min);
 				 
-				wprintf(mensaje_error);
+				printf(mensaje_error);
 				registrar_error(mensaje_error, REGISTRO_ERRORES);
 				return ERROR;
 			}
@@ -225,7 +225,7 @@ int comprobar_simultaneidad_baterias (datos_csv_baterias_t* datos_baterias,
 				*fecha_inicial_elemento, *fecha_final_elemento)) {
 
 				char mensaje_error[512];
-				snprintf(mensaje_error, 512, "Error en el terminal %ls \n "
+				snprintf(mensaje_error, 512, "Error en el terminal %s \n "
 					"Hay un problema de simultaneidad con la bateria en la fila %d \n"
 					"la fecha inicial de la bateria es Año %d Mes %d Dia %d Hora %d Minuto %d \n"
 					"la fecha final de la bateria es Año %d Mes %d Dia %d Hora %d Minuto %d \n",

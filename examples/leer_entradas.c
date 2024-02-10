@@ -112,7 +112,7 @@ static int leer_csv(const char* nombre_archivo, char*delimitador, datos_csv_t* d
             numero_columnas = current_columns;
         }
 
-        datos_csv->datos[i] = malloc(numero_columnas * sizeof(wchar_t*));
+        datos_csv->datos[i] = malloc(numero_columnas * sizeof(char*));
         if (datos_csv->datos[i] == NULL) {
             perror("Error reservando memoria");
             liberar_memoria_csv_individual(datos_csv);

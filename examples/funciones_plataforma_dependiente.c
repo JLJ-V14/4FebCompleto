@@ -20,7 +20,15 @@
 char* strok_seguro(char* str, const char* delimitador, char** token) {
 
 #ifdef _WIN32
-  strtok_s(str, delimitador, token);
+  errno_t err = strtok_s(str, delimitador, token);
+  if (err != 0) {
+    // Handle error. For example, you can print an error message or return NULL.
+    printf("strtok_s fallo código error: %d\n", err);
+    *token = NULL; // Ensure that *token is NULL to prevent dereferencing in case of error
+    return NULL;
+  }
+
+
   if (*token != NULL) {
    // printf("Token: %s\n", *token); // Ensure this is safe to print
   }

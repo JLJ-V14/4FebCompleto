@@ -1,20 +1,2 @@
-﻿  procesar_informacion_entrada.c
-procesar_informacion_entrada.c(127,76): warning C4047: 'function': 'const datos_csv_t *' differs in levels of indirection from 'char ***'
-procesar_informacion_entrada.c(127,76): warning C4024: 'cargar_fecha': different types for formal and actual parameter 1
-procesar_informacion_entrada.c(132,76): warning C4047: 'function': 'const datos_csv_t *' differs in levels of indirection from 'char ***'
-procesar_informacion_entrada.c(132,76): warning C4024: 'cargar_fecha': different types for formal and actual parameter 1
-procesar_informacion_entrada.c(137,101): warning C4047: 'function': 'OSQPInt *' differs in levels of indirection from 'OSQPInt'
-procesar_informacion_entrada.c(137,101): warning C4024: 'obtener_punto_simulacion': different types for formal and actual parameter 1
-procesar_informacion_entrada.c(140,101): warning C4047: 'function': 'OSQPInt *' differs in levels of indirection from 'OSQPInt'
-procesar_informacion_entrada.c(140,101): warning C4024: 'obtener_punto_simulacion': different types for formal and actual parameter 1
-procesar_informacion_entrada.c(156,17): warning C4098: 'procesar_informacion_baterias': 'void' function returning a value
-procesar_informacion_entrada.c(233,75): warning C4047: 'function': 'const datos_csv_t *' differs in levels of indirection from 'char ***'
-procesar_informacion_entrada.c(233,75): warning C4024: 'cargar_fecha': different types for formal and actual parameter 1
-procesar_informacion_entrada.c(238,75): warning C4047: 'function': 'const datos_csv_t *' differs in levels of indirection from 'char ***'
-procesar_informacion_entrada.c(238,75): warning C4024: 'cargar_fecha': different types for formal and actual parameter 1
-procesar_informacion_entrada.c(247,77): warning C4047: 'function': 'const datos_csv_t *' differs in levels of indirection from 'char ***'
-procesar_informacion_entrada.c(247,77): warning C4024: 'cargar_fecha': different types for formal and actual parameter 1
-procesar_informacion_entrada.c(306,16): warning C4133: 'function': incompatible types - from 'datos_csv_algoritmo_t *' to 'const datos_csv_t *'
-procesar_informacion_entrada.c(310,16): warning C4133: 'function': incompatible types - from 'datos_csv_algoritmo_t *' to 'const datos_csv_t *'
-procesar_informacion_entrada.c(303,7): warning C4047: 'initializing': 'int' differs in levels of indirection from 'char *'
-F:\osqp1feb\osqp-1.0.0.beta1\build\procesar_informacion_entrada.c(251): warning C6386: Buffer overrun while writing to 'informacion_procesada->informacion_baterias.baterias'.
+﻿  liberar_memoria.c
+  osqp_demo.vcxproj -> F:\osqp1feb\osqp-1.0.0.beta1\build\out\osqp_demo.exe

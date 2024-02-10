@@ -13,7 +13,7 @@
 /*El subprograma siguiente se utiliza para eliminar las fechas repetidas del array
   de fechas adicionales */
 int ajustar_array_fechas_adicionales(struct tm** fechas_adicionales, int* tamanyo_array) {
-  if (*tamanyo_array <= 1) return;
+  if (*tamanyo_array <= 1) return ERROR;
   //Se ordena el array en orden ascendentes de fechas
   qsort(fechas_adicionales, *tamanyo_array, sizeof(struct tm*), comparar_fechas);
   //Se pasa a eliminar las fechas duplicadas
@@ -28,7 +28,7 @@ int ajustar_array_fechas_adicionales(struct tm** fechas_adicionales, int* tamany
 
   struct tm** tempPtr = realloc(*fechas_adicionales, sizeof(struct tm*) * (*tamanyo_array));
   if (tempPtr != NULL) {
-    *fechas_adicionales = tempPtr;
+    fechas_adicionales = tempPtr;
     return EXITO;
   }
   else {
@@ -37,6 +37,7 @@ int ajustar_array_fechas_adicionales(struct tm** fechas_adicionales, int* tamany
     registrar_error("Error: No se ha podido redimensionar el array de fechas adicionales.\n", REGISTRO_ERRORES);
     return ERROR;
   }
+  return EXITO;
 }
 
 
@@ -88,15 +89,15 @@ int cargar_fechas_adicionales_baterias(datos_csv_baterias_t* datos_baterias, str
       //Se pasa a situar en el array de fechas adicionales las fechas iniciales finales y objetivo de las baterias
       *fechas_adicionales = tempPtr;
 
-      cargar_fecha(&(informacion_baterias->datos), fechas_adicionales[tamanyo_actual - 3], columna_anyo_inicial_bateria,
+      cargar_fecha(informacion_baterias, fechas_adicionales[tamanyo_actual - 3], columna_anyo_inicial_bateria,
         columna_mes_inicial_bateria, columna_dia_inicial_bateria, columna_hora_inicial_bateria, columna_minuto_inicial_bateria,
         bateria + 1, SI_INCLUIR_MINUTO);
 
-      cargar_fecha(&(informacion_baterias->datos), fechas_adicionales[tamanyo_actual - 2], columna_anyo_objetivo_bateria,
+      cargar_fecha(informacion_baterias, fechas_adicionales[tamanyo_actual - 2], columna_anyo_objetivo_bateria,
         columna_mes_objetivo_bateria, columna_dia_objetivo_bateria, columna_hora_objetivo_bateria, columna_minuto_objetivo_bateria,
         bateria + 1, SI_INCLUIR_MINUTO);
 
-      cargar_fecha(&(informacion_baterias->datos), fechas_adicionales[tamanyo_actual - 1], columna_anyo_final_bateria,
+      cargar_fecha(informacion_baterias, fechas_adicionales[tamanyo_actual - 1], columna_anyo_final_bateria,
         columna_mes_final_bateria, columna_dia_final_bateria, columna_hora_final_bateria, columna_minuto_final_bateria,
         bateria + 1, SI_INCLUIR_MINUTO);
 
@@ -114,12 +115,12 @@ int cargar_fechas_adicionales_baterias(datos_csv_baterias_t* datos_baterias, str
       //Se cargan la fecha inicial y final de la bateria en el array de fechas adicionales a considerar en la simulacion 
 
 
-      cargar_fecha(&(informacion_baterias->datos), fechas_adicionales[tamanyo_actual - 2], columna_anyo_inicial_bateria,
+      cargar_fecha(informacion_baterias, fechas_adicionales[tamanyo_actual - 2], columna_anyo_inicial_bateria,
         columna_mes_inicial_bateria, columna_dia_inicial_bateria, columna_hora_inicial_bateria, columna_minuto_inicial_bateria,
         bateria + 1, SI_INCLUIR_MINUTO);
 
 
-      cargar_fecha(&(informacion_baterias->datos), fechas_adicionales[tamanyo_actual - 1], columna_anyo_final_bateria,
+      cargar_fecha(informacion_baterias, fechas_adicionales[tamanyo_actual - 1], columna_anyo_final_bateria,
         columna_mes_final_bateria, columna_dia_final_bateria, columna_hora_final_bateria, columna_minuto_final_bateria,
         bateria + 1, SI_INCLUIR_MINUTO);
 
@@ -170,7 +171,7 @@ int cargar_fechas_adicionales_en_punto(struct tm** fechas_adicionales, struct tm
     registrar_error("Error al añadir las fechas en punto al array de fechas adicionales\n", REGISTRO_ERRORES);
     return ERROR;
   }
-  *fechas_adicionales = nuevas_fechas;
+  fechas_adicionales = nuevas_fechas;
   /*Se rellena el array con las nuevas fechas en punto */
   int i = numero_fechas_adicionales;
   for (time_t t = inicio; t <= fin; t += 3600) { // Iteracion en cada hora
@@ -237,6 +238,8 @@ int cargar_fechas_adicionales_vehiculos(datos_csv_vehiculos_t* datos_vehiculos,s
     (*fechas_adicionales)[2 * i + 1].tm_min  = atoi(datos_vehiculos->informacion_vehiculos.datos[i + 1][minuto_final_vehiculo]);
   }
   *numero_fechas_adicionales = 2 * numero_vehiculos;
+
+  return EXITO;
 }
 
 /*Este subprograma se utiliza para cargar un array las fechas adicionales que deeben ser añadidas en el array
@@ -339,7 +342,7 @@ int cacular_puntos_simulacion(informacion_entrada_t* informacion_entrada, struct
   int delta_simulacion_segundos = delta_simulacion * 60;
 
   //Se obtiene el tamaño provisional del numero de puntos de simulacion
-  int numero_puntos_provisionales = calcular_numero_puntos_provisional(tiempo_actual,tiempo_final,delta_simulacion_segundos,
+  int numero_puntos_provisionales = calcular_numero_puntos_provisional(&tiempo_actual,&tiempo_final,delta_simulacion_segundos,
                                                          fechas_adicionales);
 
 
@@ -412,6 +415,7 @@ int cacular_puntos_simulacion(informacion_entrada_t* informacion_entrada, struct
     informacion_procesada->informacion_puntos_simulacion.puntos_simulacion[punto_actual].delta = 0;
   }
   informacion_procesada->informacion_puntos_simulacion.puntos_simulacion[punto_actual].delta = obtener_diferencia_minutos(informacion_procesada->informacion_puntos_simulacion.puntos_simulacion[punto_actual - 1].fecha_punto, fechas_adicionales[index_fecha_adicional]);
+  return EXITO;
 }
 
 /*Este subprograma se utiliza para obtener a que punto de simulacion corresponde la llegada o partida de
@@ -422,7 +426,7 @@ void obtener_punto_simulacion(OSQPInt* punto_simulacion, struct tm* fecha, punto
   int punto_adicional_actual = 0;
   while (fecha_obtenida == false) {
     if (comparar_fechas(puntos_adicionales[punto_adicional_actual].fecha_adicional, fecha) == 0) {
-      punto_simulacion = (OSQPInt)puntos_adicionales->numero_punto;
+      *punto_simulacion = (OSQPInt)puntos_adicionales->numero_punto;
       fecha_obtenida = true;
     }
     punto_adicional_actual++;

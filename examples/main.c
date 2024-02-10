@@ -80,17 +80,20 @@
         goto fin_programa;
     }
 
-    
-
     //Se verifica que la informacion de entrada es correcta
-    
     if (verificar_entradas(&informacion_sistema) == ERROR) {
         printf("Las entradas son incorrectas\n");
-        registrar_error("Fallo las entradas son incorrectas", REGISTRO_ERRORES);
+        registrar_error("Fallo las entradas son incorrectas\n", REGISTRO_ERRORES);
         goto fin_programa;
     }
     
     printf("Se han verificado las entradas\n");
+
+    if (procesar_informacion_entrada(&informacion_sistema, &informacion_procesada) == ERROR) {
+      printf("La informacion no ha podido ser procesada correctamente\n");
+      registrar_error("La informacion no ha podido ser procesada correctamente\n", REGISTRO_ERRORES);
+      goto fin_programa;
+    }
     
     
 
@@ -99,6 +102,7 @@
   fin_programa:
     // Se libera la memoria reservada
     liberar_memoria_csvs(&informacion_sistema);
+    liberar_memoria_informacion_procesada(&informacion_procesada);
    // finalizar_problema_optimizacion(&problema_optimizacion);
 
 

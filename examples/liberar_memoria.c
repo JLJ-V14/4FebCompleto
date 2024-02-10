@@ -13,24 +13,28 @@
   */
 void liberar_memoria_csv_individual(datos_csv_t* datos_csv) {
 
-    if (datos_csv == NULL) {
+    if (datos_csv == NULL || datos_csv->datos == NULL) {
         return; //Si el dato de entrada que es un puntero es NULL se sale de la funcion.
     }
     int numero_filas = (datos_csv)->filas;
     int numero_columnas = (datos_csv)->columnas;
 
     for (int i = 0; i < numero_filas; i++) {
-
+      if (datos_csv->datos[i] != NULL) {
         for (int j = 0; j < numero_columnas; j++) {
-
-            free((datos_csv)->datos[i][j]);
+          if (datos_csv->datos[i][j] != NULL) {
+            free(datos_csv->datos[i][j]);
+            datos_csv->datos[i][j] = NULL;
+          }
+          
         }
         free((datos_csv)->datos[i]);
+        datos_csv->datos[i] = NULL;
+      }
     }
-
-    if (datos_csv->datos != NULL) {
+   
         free(datos_csv->datos);
-    }
+        datos_csv->datos = NULL;
 
 }
 
@@ -67,7 +71,34 @@ void liberar_memoria_csvs(informacion_entrada_t* informacion_sistema) {
 
 }
 
+void liberar_memoria_vehiculo(vehiculos_t* vehiculo) {
+  free(vehiculo->fecha_inicio);
+  free(vehiculo->fecha_final);
+}
 
+void liberar_memoria_bateria(bateria_t* bateria) {
+  free(bateria->fecha_inicio);
+  free(bateria->fecha_final);
+  free(bateria->fecha_objetivo);
+}
+
+/*Este subprograma se utiliza para liberar la memoria reservada para almacenar la informacion procesada*/
+void liberar_memoria_informacion_procesada(informacion_procesada_t* informacion_procesada) {
+  for (int i = 0; i < informacion_procesada->informacion_vehiculos.numero_vehiculos; i++) {
+    liberar_memoria_vehiculo(&informacion_procesada->informacion_vehiculos.vehiculos[i]);
+  }
+  free(informacion_procesada->informacion_vehiculos.vehiculos);
+
+  //Se libera las baterias
+  for (int i = 0; i < informacion_procesada->informacion_baterias.numero_baterias; i++) {
+    liberar_memoria_bateria(&informacion_procesada->informacion_baterias.baterias[i]);
+  }
+  free(informacion_procesada->informacion_baterias.baterias);
+
+  // Se libera la informacion de los precios
+  free(informacion_procesada->informacion_precio_compra.precios);
+  free(informacion_procesada->informacion_precio_venta.precios);
+}
 
 void finalizar_problema_optimizacion(problema_optimizacion_t* problema_optimizacion) {
   /*En este subprograma se liberan las posiciones en memoria reservadas a las matrices para la resolucion del

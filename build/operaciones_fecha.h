@@ -18,7 +18,7 @@ extern "C" {
 	int verificar_fecha_carga(datos_csv_t* datos_carga, datos_csv_algoritmo_t* datos_algoritmo,
 		const int numero_fila);
 
-	void cargar_fecha(const datos_csv_t* datos_entrada, struct tm* fecha, const int columna_csv_anyo,
+	int cargar_fecha(const datos_csv_t* datos_entrada, struct tm* fecha, const int columna_csv_anyo,
 		const int columna_csv_mes, const int columna_csv_dia, const int columna_csv_hora,
 		const int columna_csv_minuto, const int numero_fila, const int incluir_minuto);
 
@@ -27,7 +27,7 @@ extern "C" {
 
 	int comparar_fechas(const void* a, const void* b);
 	int obtener_diferencia_minutos(const struct tm* fecha_1, const struct tm* fecha_2);
-
+	bool comprobar_hora(struct tm fecha_comprobar, struct tm fecha_referencia);
 #ifdef __cplusplus
 }
 #endif
