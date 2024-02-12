@@ -3,7 +3,7 @@
 #include "registrar_errores.h"
 #include "tipos_optimizacion.h"
 #include <stdio.h>
-#include <wchar.h>
+
 
 /* En este archivo se incluyen las funciones
 *  para comprobar que informacion de entrada
