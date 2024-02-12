@@ -79,20 +79,21 @@ static int leer_csv(const char* nombre_archivo, char*delimitador, datos_csv_t* d
         }
 
 
-        int current_columns = 1;
+       // int current_columns = 1;
 
        // printf("%s\n", linea);
         //Se guarda la primera columna
-        tokens[0] = linea;
+        //tokens[0] = linea;
         char* token = strok_seguro(linea, delimitador_str, &next_token);
+        int current_columns = 0;
         //char* token = linea;
        // printf("%s\n", token);
         
         while (token != NULL && token[0] != '\0') {
             
-            tokens[current_columns] = token; // Store in temporary array
+            tokens[current_columns++] = token; // Store in temporary array
             //printf("Almacenado en array\n");
-            current_columns++;
+           // current_columns++;
             token = strok_seguro(NULL, delimitador_str, &next_token);
             //printf("%s\n", token);
         }
@@ -167,7 +168,7 @@ int leer_entradas(informacion_entrada_t* informacion_sistema) {
     {INFORMACION_PRECIO_VENTA, &(informacion_sistema->datos_precio_venta.informacion_precio)}
 
     };
-
+    
     for (int i = 0; i < NUM_CSVS; i++) {
 
         if (leer_csv(csvs[i].nombre_archivo, DELIMITADOR, csvs[i].datos) == ERROR) {
@@ -175,7 +176,7 @@ int leer_entradas(informacion_entrada_t* informacion_sistema) {
             return ERROR;
         }
     }
-
+    
 
     return EXITO;
 

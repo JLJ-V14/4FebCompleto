@@ -84,20 +84,31 @@ void liberar_memoria_bateria(bateria_t* bateria) {
 
 /*Este subprograma se utiliza para liberar la memoria reservada para almacenar la informacion procesada*/
 void liberar_memoria_informacion_procesada(informacion_procesada_t* informacion_procesada) {
-  for (int i = 0; i < informacion_procesada->informacion_vehiculos.numero_vehiculos; i++) {
-    liberar_memoria_vehiculo(&informacion_procesada->informacion_vehiculos.vehiculos[i]);
-  }
-  free(informacion_procesada->informacion_vehiculos.vehiculos);
 
+  if (informacion_procesada->informacion_vehiculos.vehiculos != NULL) {
+    for (int i = 0; i < informacion_procesada->informacion_vehiculos.numero_vehiculos; i++) {
+      liberar_memoria_vehiculo(&informacion_procesada->informacion_vehiculos.vehiculos[i]);
+    }
+    free(informacion_procesada->informacion_vehiculos.vehiculos);
+   // informacion_procesada->informacion_vehiculos.vehiculos = NULL;
+  }
   //Se libera las baterias
-  for (int i = 0; i < informacion_procesada->informacion_baterias.numero_baterias; i++) {
-    liberar_memoria_bateria(&informacion_procesada->informacion_baterias.baterias[i]);
+  if (informacion_procesada->informacion_baterias.baterias != NULL) {
+    for (int i = 0; i < informacion_procesada->informacion_baterias.numero_baterias; i++) {
+      liberar_memoria_bateria(&informacion_procesada->informacion_baterias.baterias[i]);
+    }
+    free(informacion_procesada->informacion_baterias.baterias);
+    //informacion_procesada->informacion_baterias.baterias = NULL;
   }
-  free(informacion_procesada->informacion_baterias.baterias);
-
   // Se libera la informacion de los precios
-  free(informacion_procesada->informacion_precio_compra.precios);
-  free(informacion_procesada->informacion_precio_venta.precios);
+  if (informacion_procesada->informacion_precio_compra.precios != NULL) {
+    free(informacion_procesada->informacion_precio_compra.precios);
+    informacion_procesada->informacion_precio_compra.precios = NULL;
+  }
+  if (informacion_procesada->informacion_precio_venta.precios != NULL) {
+    free(informacion_procesada->informacion_precio_venta.precios);
+    informacion_procesada->informacion_precio_venta.precios = NULL;
+  }
 }
 
 void finalizar_problema_optimizacion(problema_optimizacion_t* problema_optimizacion) {

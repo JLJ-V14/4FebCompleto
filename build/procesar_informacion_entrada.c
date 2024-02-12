@@ -356,11 +356,15 @@ int procesar_informacion_precio(informacion_entrada_t* informacion_entrada, info
   return EXITO;
 }
 int configurar_puntos_simulacion(informacion_entrada_t* informacion_entrada, informacion_procesada_t* informacion_procesada,
-                                 puntos_adicionales_t**  puntos_adicionales) {
+                                 informacion_puntos_adicionales_t*  informacion_puntos_adicionales) {
   //Se cargan elementos temporales claves de la simulacion, como la resolucion de la simulacion, la fecha inicial
   //y la fecha final.
   //
-   struct tm** fechas_adicionales = NULL;
+
+
+  //struct tm** fechas_adicionales = NULL;
+  struct tm* actual_fechas = NULL;
+  struct tm** fechas_adicionales = &actual_fechas;
   //Cargo la ubicacion de las fechas iniciales y finales del algoritmo
   //Se definen variables para almacenar las fechas iniciales y finales del cálculo de optimizacion
   struct tm* fecha_inicial_algoritmo;
@@ -371,7 +375,8 @@ int configurar_puntos_simulacion(informacion_entrada_t* informacion_entrada, inf
   int numero_fechas_adicionales = 0;
 
   fecha_inicial_algoritmo = malloc(sizeof(struct tm));
-  fecha_final_algoritmo = malloc(sizeof(struct tm));
+  fecha_final_algoritmo   = malloc(sizeof(struct tm));
+
   if ((fecha_inicial_algoritmo == NULL) || (fecha_final_algoritmo == NULL)) {
     free(fecha_inicial_algoritmo);
     free(fecha_final_algoritmo);
@@ -397,6 +402,10 @@ int configurar_puntos_simulacion(informacion_entrada_t* informacion_entrada, inf
   //Se carga la resolution temporal de la simulacion
   int delta_resolucion = atoi(informacion_entrada->datos_algoritmo.informacion_algoritmo.datos[fila_valores][columna_resolucion_minutos]);
 
+
+  
+
+
   //Se cargan las fechas iniciales y finales del algoritmo
   cargar_fecha(&(informacion_entrada->datos_algoritmo.informacion_algoritmo), fecha_inicial_algoritmo, columna_anyo_inicial,
     columna_mes_inicial, columna_dia_inicial, columna_hora_inicial, columna_minuto_inicial,
@@ -406,16 +415,22 @@ int configurar_puntos_simulacion(informacion_entrada_t* informacion_entrada, inf
     columna_mes_final, columna_dia_final, columna_hora_final, columna_minuto_final,
     fila_valores, SI_INCLUIR_MINUTO);
 
-  if (leer_fechas_adicionales(&(informacion_entrada->datos_vehiculos), fechas_adicionales, &(informacion_entrada->datos_baterias),
-    &numero_fechas_adicionales, fecha_inicial_algoritmo, fecha_final_algoritmo) == ERROR) {
+
+ 
+  if (leer_fechas_adicionales(&(informacion_entrada->datos_vehiculos),fechas_adicionales, &(informacion_entrada->datos_baterias),
+    &(informacion_puntos_adicionales->numero_puntos), fecha_inicial_algoritmo, fecha_final_algoritmo) == ERROR) {
     printf("No se ha podido añadir las fechas adicionales a la simulacion\n");
     registrar_error("No se ha podido añadir las fechas adicionales a la simulacion", REGISTRO_ERRORES);
     return ERROR;
   }
+  
+  //Se guarda la informacion de las fechas adicionales a añadir en las variables correspondiente
+  
+
 
   if (cacular_puntos_simulacion(informacion_entrada, fechas_adicionales, informacion_procesada,
     fecha_inicial_algoritmo, fecha_final_algoritmo, delta_resolucion,
-    numero_fechas_adicionales,puntos_adicionales) == ERROR) {
+    numero_fechas_adicionales,&(informacion_puntos_adicionales->puntos) == ERROR)) {
     printf("No se ha podido calcular el numero de puntos de simulacion\n");
     registrar_error("No se ha podido calcular el numero de puntos de simulacion\n", REGISTRO_ERRORES);
   }
@@ -428,35 +443,40 @@ int configurar_puntos_simulacion(informacion_entrada_t* informacion_entrada, inf
 //Este subprograma se utiliza para procesar la informacion de entrada para guardarlo
 //facilmente en las matrices->
 
-int procesar_informacion_entrada(informacion_entrada_t* informacion_entrada,
+int procesar_informacion_entrada(informacion_entrada_t*    informacion_entrada,
                                   informacion_procesada_t* informacion_procesada) {
 
   //Se crea una variable para almacenar las fechas adicionales a añadir, esta variable va a ser utilizada para
   //reconocer más rápidamente a que punto de simulación corresponde la ida o partida de los vehículos o baterías
-  puntos_adicionales_t** puntos_adicionales = NULL;
+  informacion_puntos_adicionales_t* informacion_puntos_adicionales = &(informacion_procesada->informacion_puntos_adicionales);
  
   //Se almacena la informacion de restriccion leída del csv de las restricciones
   procesar_informacion_restricciones(&(informacion_entrada->datos_restricciones), &(informacion_procesada->informacion_restricciones_sistema));
-  if (configurar_puntos_simulacion(informacion_entrada, informacion_procesada, puntos_adicionales) == ERROR) {
+
+ 
+
+  if (configurar_puntos_simulacion(informacion_entrada, informacion_procesada, informacion_puntos_adicionales) == ERROR) {
     printf("No se ha podido configurar los puntos de simulacion correctamente\n");
     registrar_error("No se ha podido configurar los puntos de simulacion correctamente\n", REGISTRO_ERRORES);
     return ERROR;
   }
 
-  if (puntos_adicionales == NULL) {
+  
+
+  if (informacion_puntos_adicionales == NULL) {
     // Handle memory allocation failure
     printf("Error al asignar memoria para puntos adicionales\n");
     registrar_error("Error al asignar memoria para puntos adicionales\n", REGISTRO_ERRORES);
     return ERROR;
   }
-
-  if (procesar_informacion_vehiculos(informacion_entrada, informacion_procesada, *puntos_adicionales) == ERROR) {
+  
+  if (procesar_informacion_vehiculos(informacion_entrada, informacion_procesada,informacion_puntos_adicionales->puntos) == ERROR) {
     printf("No se ha podido configurar la informacion de los vehiculos correctamente\n");
     registrar_error("No se ha podido configurar la informacion de los vehiculos correctamente\n",REGISTRO_ERRORES);
     return ERROR;
   }
 
-  if (procesar_informacion_baterias(informacion_entrada, informacion_procesada,*puntos_adicionales) == ERROR) {
+  if (procesar_informacion_baterias(informacion_entrada, informacion_procesada, informacion_puntos_adicionales->puntos) == ERROR) {
     printf("No se ha podido configurar la informacion de las baterias\n");
     registrar_error("No se ha podido configurar la informacion de las baterias\n", REGISTRO_ERRORES);
     return ERROR;

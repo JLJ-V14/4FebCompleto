@@ -9,6 +9,7 @@
 #include <stdio.h>
 #include <locale.h>
 #include "comprobar_lectura_datos.h"
+#include "comprobar_informacion_procesada.h"
 #include "definiciones_globales.h"
 #include "inicializar_csv.h"
 #include "leer_entradas.h"
@@ -65,6 +66,8 @@
         registrar_error("Fallo en la inicializacion de los datos de entrada", REGISTRO_ERRORES);
         goto fin_programa;
     }
+
+    
   
     //Se pasa a leer los datos de entrada->
     if (leer_entradas(&informacion_sistema) == ERROR) {
@@ -73,6 +76,7 @@
         goto fin_programa;
     }
     
+    
     //Se inspecciona si la lectura se esta haciendo adecuadamente
     if (comprobar_informacion_entrada(&informacion_sistema) == ERROR) {
         printf("Fallo en la comprobacion de la informacion de entrada\n");
@@ -80,6 +84,8 @@
         goto fin_programa;
     }
 
+
+    
     //Se verifica que la informacion de entrada es correcta
     if (verificar_entradas(&informacion_sistema) == ERROR) {
         printf("Las entradas son incorrectas\n");
@@ -87,19 +93,25 @@
         goto fin_programa;
     }
     
-    printf("Se han verificado las entradas\n");
+   
 
+    //Se procesa la informacion de entrada
+    
     if (procesar_informacion_entrada(&informacion_sistema, &informacion_procesada) == ERROR) {
       printf("La informacion no ha podido ser procesada correctamente\n");
       registrar_error("La informacion no ha podido ser procesada correctamente\n", REGISTRO_ERRORES);
       goto fin_programa;
     }
-    
-    
 
-
-
-  fin_programa:
+    /*
+    //Se procesa la informacion 
+    if (comprobar_informacion_procesada(&informacion_procesada) == ERROR) {
+      printf("La informacion procesada no ha sido correctamente\n");
+      registrar_error("La informacion procesada no ha sido correctamente\n", REGISTRO_ERRORES);
+      goto fin_programa;
+    }
+    */
+    fin_programa:
     // Se libera la memoria reservada
     liberar_memoria_csvs(&informacion_sistema);
     liberar_memoria_informacion_procesada(&informacion_procesada);

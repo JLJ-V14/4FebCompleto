@@ -581,7 +581,7 @@ int comprobar_encabezados_precios(datos_csv_precio_t* datos_precio_compra, datos
   
 
 	const char* valores_aceptables[] = {"Año","Mes","Dia","Hora","Precio kWh" };
-  printf("%s", valores_aceptables[0]);
+  //printf("%s", valores_aceptables[0]);
 	const int numero_encabezados = sizeof(valores_aceptables) / sizeof(valores_aceptables[0]);
 	datos_csv_t* informacion_precio_compra = &(datos_precio_compra->informacion_precio);
   datos_csv_t* informacion_precio_venta  = &(datos_precio_venta->informacion_precio);

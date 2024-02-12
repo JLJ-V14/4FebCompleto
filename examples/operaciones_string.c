@@ -1,6 +1,7 @@
 #include <ctype.h>
 #include <locale.h>
 #include <stdbool.h>
+#include <time.h>
 #include <stdlib.h>
 #include <string.h>
 
@@ -52,4 +53,10 @@ bool strings_iguales(const char* String_1, const char* String_2) {
 	free(u2);
 
 	return Resultado == 0;
+}
+/*Se define un subprograma para pasar de un dato tipo tm a tipo string*/
+char* tm_to_string(const struct tm* tm) {
+  static char buffer[20];
+  strftime(buffer, sizeof(buffer), "%Y-%m-%d %H:%M", tm);
+  return buffer;
 }

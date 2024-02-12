@@ -332,7 +332,10 @@ typedef struct {
 }puntos_adicionales_t;
 
 
-
+typedef struct {
+    int numero_puntos;
+    puntos_adicionales_t* puntos;
+}informacion_puntos_adicionales_t;
 
 // Se definen structs para almacenar la informacion ya extraida de los CSVs de
 // entrada para poder rellenar las matrices con la informacion relevante fácilmente
@@ -348,6 +351,6 @@ typedef struct {
     informacion_restricciones_sistema_t informacion_restricciones_sistema;
     informacion_precio_t                informacion_precio_compra;
     informacion_precio_t                informacion_precio_venta;
-    puntos_adicionales_t                informacion_puntos_adicionales;
+    informacion_puntos_adicionales_t    informacion_puntos_adicionales;
 }informacion_procesada_t;
 

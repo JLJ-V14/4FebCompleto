@@ -13,6 +13,7 @@ extern "C" {
 #endif
 
 	bool strings_iguales(const char* String_1, const char* String_2);
+	char* tm_to_string(const struct tm* tm);
 
 #ifdef __cplusplus
 }

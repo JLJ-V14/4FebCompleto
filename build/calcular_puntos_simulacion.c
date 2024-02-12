@@ -213,17 +213,21 @@ int cargar_fechas_adicionales_vehiculos(datos_csv_vehiculos_t* datos_vehiculos,s
   int minuto_final_vehiculo = datos_vehiculos->posiciones_informacion_vehiculos.ubicacion_fecha_final_vehiculo.columna_minuto;
   //Tantas vehiculos como filas-1 tenga el csv de los vehículos
   int numero_vehiculos = datos_vehiculos->informacion_vehiculos.filas - 1;
-  *fechas_adicionales = (struct tm*)malloc(sizeof(struct tm) * numero_vehiculos * 2);
+  printf("%d\n", numero_vehiculos);
+  //fechas_adicionales = calloc(numero_vehiculos *2 , sizeof(struct tm*));
+  *fechas_adicionales = calloc(numero_vehiculos * 2, sizeof(struct tm));
   //Se pasa a rellenar el array de fechas de tipo tm* con todas las fechas adicionales de los vehiculos que
   //hay que añadir
-
-  if (*fechas_adicionales == NULL) {
+  return ERROR;
+  if (fechas_adicionales == NULL) {
+    printf("Error Aquí\n");
     fprintf(stderr, "No se ha podido reservar memoria para la informacion procesada.\n");
     registrar_error("No se ha podido reservar memoria para la informacion procesada", REGISTRO_ERRORES);
     return ERROR;
   }
 
   for (int i = 0; i < 2 * numero_vehiculos; i++) {
+   
     //Se carga la fecha inicial del vehiculo
     (*fechas_adicionales)[2 * i].tm_year = atoi(datos_vehiculos->informacion_vehiculos.datos[i + 1][anyo_inicial_vehiculo]) - 1900;
     (*fechas_adicionales)[2 * i].tm_mon = atoi(datos_vehiculos->informacion_vehiculos.datos[i + 1][mes_inicial_vehiculo]) - 1;
@@ -249,13 +253,15 @@ int leer_fechas_adicionales(datos_csv_vehiculos_t* datos_vehiculos, struct tm** 
   datos_csv_baterias_t* datos_baterias, int* numero_fechas_adicionales,struct tm* fecha_inicial_algoritmo,
   struct tm*fecha_final_algoritmo) {
 
+
+  printf("No problem\n");
   /*Se carga las fechas adicionales de los vehiculos que es necesario añadir*/
   if (cargar_fechas_adicionales_vehiculos(datos_vehiculos, fechas_adicionales, numero_fechas_adicionales) == ERROR) {
     printf("Error no se han podido cargar en la simulacion las fechas de los vehiculos\n");
     registrar_error("Error no se han podido cargar en la simulacion las fechas de los vehiculos\n", REGISTRO_ERRORES);
     return ERROR;
   }
-
+  
   /*Se carga las fechas adicionales de las baterias*/
   if (cargar_fechas_adicionales_baterias(datos_baterias, fechas_adicionales, numero_fechas_adicionales) == ERROR) {
     printf("Error no se han podido cargar en la simulacion las fechas de las baterias\n");

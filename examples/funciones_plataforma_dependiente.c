@@ -18,35 +18,12 @@
   // Adjusted typedef for clarity and uniform behavior across platforms
 
 char* strok_seguro(char* str, const char* delimitador, char** token) {
-
 #ifdef _WIN32
-  errno_t err = strtok_s(str, delimitador, token);
-  if (err != 0) {
-    // Handle error. For example, you can print an error message or return NULL.
-    printf("strtok_s fallo código error: %d\n", err);
-    *token = NULL; // Ensure that *token is NULL to prevent dereferencing in case of error
-    return NULL;
-  }
-
-
-  if (*token != NULL) {
-   // printf("Token: %s\n", *token); // Ensure this is safe to print
-  }
-  else {
-    //printf("H\n"); // Indicate no more tokens
-    return NULL;
-  }
+  return strtok_s(str, delimitador, token);
 #else
-  char* result = strtok_r(str, delimitador, token);
-  if (result != NULL) {
-    printf("Token: %s\n", result);
-}
-  else {
-    printf("H\n"); // POSIX path no more tokens
-    return NULL;
-  }
+  return strtok(str, delimitador, token);
 #endif
-  return *token;
+
 }
 
 /*
