@@ -88,6 +88,9 @@
     <ClCompile Include="comprobar_informacion_procesada.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="inicializar_informacion_procesada.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="F:\osqp1feb\osqp-1.0.0.beta1\CMakeLists.txt" />
@@ -192,6 +195,9 @@
       <Filter>Head Files</Filter>
     </ClInclude>
     <ClInclude Include="comprobar_informacion_procesada.h">
+      <Filter>Head Files</Filter>
+    </ClInclude>
+    <ClInclude Include="inicializar_informacion_procesada.h">
       <Filter>Head Files</Filter>
     </ClInclude>
   </ItemGroup>

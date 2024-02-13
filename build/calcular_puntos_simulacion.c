@@ -10,6 +10,30 @@
 #include <stdlib.h>
 #include <time.h>
 
+
+void printTm(const struct tm* date) {
+  if (date == NULL) {
+    printf("The date is NULL\n");
+    return;
+  }
+
+  // Note: tm_year is years since 1900, tm_mon is 0-11, and tm_mday is 1-31
+  printf("Year: %d, Month: %02d, Day: %02d\n",
+    date->tm_year + 1900, date->tm_mon + 1, date->tm_mday);
+  printf("Hour: %02d, Minute: %02d, Second: %02d\n",
+    date->tm_hour, date->tm_min, date->tm_sec);
+
+  // Optionally, you can print the day of the week and day of the year
+  printf("Weekday (Sunday=0): %d, Day of the year: %d\n",
+    date->tm_wday, date->tm_yday);
+}
+
+
+
+
+
+
+
 /*El subprograma siguiente se utiliza para eliminar las fechas repetidas del array
   de fechas adicionales */
 int ajustar_array_fechas_adicionales(struct tm** fechas_adicionales, int* tamanyo_array) {
@@ -46,7 +70,7 @@ int ajustar_array_fechas_adicionales(struct tm** fechas_adicionales, int* tamany
 
 int cargar_fechas_adicionales_baterias(datos_csv_baterias_t* datos_baterias, struct tm** fechas_adicionales,
   int* numero_fechas_adicionales) {
-
+  
   //Se carga un puntero que apunta a donde se encuentra la informacion leida de los csv de las baterias
   datos_csv_t* informacion_baterias = &(datos_baterias->informacion_baterias);
   //Se carga el tamaño actual del array de fechas
@@ -77,9 +101,14 @@ int cargar_fechas_adicionales_baterias(datos_csv_baterias_t* datos_baterias, str
   int columna_objetivo_carga_bateria = datos_baterias->posiciones_informacion_baterias.columna_consideracion_objetivo;
   for (int bateria = 0; bateria < numero_filas_baterias; bateria++) {
 
-    if (strings_iguales(informacion_baterias->datos[bateria + 1][columna_objetivo_carga_bateria], "si") == EXITO) {
+
+    printf("La consideracion del objetivo es %s\n", informacion_baterias->datos[bateria + 1][columna_objetivo_carga_bateria]);
+
+    if (strings_iguales(informacion_baterias->datos[bateria + 1][columna_objetivo_carga_bateria],"si") == EXITO) {
       tamanyo_actual += 3;
+      printf("El numero de fechas adicionales es HUUUU %d\n", *numero_fechas_adicionales);
       *numero_fechas_adicionales += 3;
+      printf("El numero de fechas adicionales es HUUU %d\n", *numero_fechas_adicionales);
       struct tm* tempPtr = (struct tm*)realloc(*fechas_adicionales, sizeof(struct tm) * tamanyo_actual);
       if (tempPtr == NULL) {
         printf("Fallo en la adición de las fechas adicionales en los puntos de simulación, fallo al reservar memoria\n");
@@ -89,22 +118,36 @@ int cargar_fechas_adicionales_baterias(datos_csv_baterias_t* datos_baterias, str
       //Se pasa a situar en el array de fechas adicionales las fechas iniciales finales y objetivo de las baterias
       *fechas_adicionales = tempPtr;
 
-      cargar_fecha(informacion_baterias, fechas_adicionales[tamanyo_actual - 3], columna_anyo_inicial_bateria,
+      if (cargar_fecha(informacion_baterias, fechas_adicionales[tamanyo_actual - 3], columna_anyo_inicial_bateria,
         columna_mes_inicial_bateria, columna_dia_inicial_bateria, columna_hora_inicial_bateria, columna_minuto_inicial_bateria,
-        bateria + 1, SI_INCLUIR_MINUTO);
+        bateria + 1, SI_INCLUIR_MINUTO) == ERROR) {
+        printf("Ha habido un error cargando la fecha inicial de la bateria numero %d", bateria);
+        registrar_error("Ha habido un error cargando la fecha inicial de la bateria numero %d", REGISTRO_ERRORES);
+        return ERROR;
+      }
 
-      cargar_fecha(informacion_baterias, fechas_adicionales[tamanyo_actual - 2], columna_anyo_objetivo_bateria,
+      if (cargar_fecha(informacion_baterias, fechas_adicionales[tamanyo_actual - 2], columna_anyo_objetivo_bateria,
         columna_mes_objetivo_bateria, columna_dia_objetivo_bateria, columna_hora_objetivo_bateria, columna_minuto_objetivo_bateria,
-        bateria + 1, SI_INCLUIR_MINUTO);
+        bateria + 1, SI_INCLUIR_MINUTO) == ERROR) {
+        printf("No se ha podido cargar la fechas objetivos de las baterias en la informacion procesada\n");
+        registrar_error("No se ha podido cargar las fechas objetivos de las baterias en la informacion procesada", REGISTRO_ERRORES);
+        return ERROR;
+      }
 
-      cargar_fecha(informacion_baterias, fechas_adicionales[tamanyo_actual - 1], columna_anyo_final_bateria,
+      if (cargar_fecha(informacion_baterias, fechas_adicionales[tamanyo_actual - 1], columna_anyo_final_bateria,
         columna_mes_final_bateria, columna_dia_final_bateria, columna_hora_final_bateria, columna_minuto_final_bateria,
-        bateria + 1, SI_INCLUIR_MINUTO);
+        bateria + 1, SI_INCLUIR_MINUTO) == ERROR) {
+        printf("No se ha podido cargar las fechas finales de las baterias en la informacion procesada\n");
+        registrar_error("No se ha podido cargar las fechas finales de las baterias en la informacion procesada", REGISTRO_ERRORES);
+        return ERROR;
+      }
 
     }
     else {
       tamanyo_actual += 2;
+      printf("El numero de fechas adicionales es HEYYYY %d\n", *numero_fechas_adicionales);
       *numero_fechas_adicionales += 2;
+      printf("El numero de fechas adicionales es HEYYYY %d\n", *numero_fechas_adicionales);
       struct tm* tempPtr = (struct tm*)realloc(*fechas_adicionales, sizeof(struct tm) * tamanyo_actual);
       if (tempPtr == NULL) {
         printf("Fallo en la adición de las fechas adicionales en los puntos de simulación, fallo al reservar memoria\n");
@@ -115,36 +158,59 @@ int cargar_fechas_adicionales_baterias(datos_csv_baterias_t* datos_baterias, str
       //Se cargan la fecha inicial y final de la bateria en el array de fechas adicionales a considerar en la simulacion 
 
 
-      cargar_fecha(informacion_baterias, fechas_adicionales[tamanyo_actual - 2], columna_anyo_inicial_bateria,
+      if (cargar_fecha(informacion_baterias, fechas_adicionales[tamanyo_actual - 2], columna_anyo_inicial_bateria,
         columna_mes_inicial_bateria, columna_dia_inicial_bateria, columna_hora_inicial_bateria, columna_minuto_inicial_bateria,
-        bateria + 1, SI_INCLUIR_MINUTO);
+        bateria + 1, SI_INCLUIR_MINUTO) == ERROR) {
+        printf("Problema al cargar las fechas iniciales de las baterias en la informacion procesada\n");
+        registrar_error("Problema al cargar la fecha inicial de la baterias en la informacion procesada\n", REGISTRO_ERRORES);
+        return ERROR;
+      }
+
+      printf("El numero de fechas adicionales es HULUT %d\n", *numero_fechas_adicionales);
 
 
-      cargar_fecha(informacion_baterias, fechas_adicionales[tamanyo_actual - 1], columna_anyo_final_bateria,
+      
+      if (cargar_fecha(informacion_baterias, fechas_adicionales[tamanyo_actual - 1], columna_anyo_final_bateria,
         columna_mes_final_bateria, columna_dia_final_bateria, columna_hora_final_bateria, columna_minuto_final_bateria,
-        bateria + 1, SI_INCLUIR_MINUTO);
-
+        bateria + 1, SI_INCLUIR_MINUTO) == ERROR) {
+        printf("Problema al cargar las fechas finales de las baterias en la informacion procesada\n");
+        registrar_error("Problema al cargar la fecha finales de las baterias en la informacion procesada\n", REGISTRO_ERRORES);
+        return ERROR;
+      }
+      
+      
+      printf("El numero de fechas adicionales es HATTT %d\n", *numero_fechas_adicionales);
 
 
 
     }
+    printf("El numero de fechas adicionales es HILIT %d\n", *numero_fechas_adicionales);
   }
+  printf("El numero de fechas adicionales es HEYYYY %d\n", *numero_fechas_adicionales);
   return EXITO;
 }
+
+
+
 
  /*Este subprograma se utiliza para cargar las fechas adicionales que corresponden a las horas en punto
    estas deben ser añadidas, esto es porque el precio cambia de hora a hora así que los momentos en los
    que se tiene una hora en punto debe ser considerado en la simulacion*/
 
 int cargar_fechas_adicionales_en_punto(struct tm** fechas_adicionales, struct tm* fecha_inicial_algoritmo,
-                                       struct tm* fecha_final_algoritmo,  int numero_fechas_adicionales) {
- 
+                                       struct tm* fecha_final_algoritmo,  int* numero_fechas_adicionales) {
+
+  
+
   time_t inicio = mktime(fecha_inicial_algoritmo);
   time_t fin = mktime(fecha_final_algoritmo);
+
+
 
   //Se ajusta la fecha de inicio a una hora en punto si no lo está para contar correctamente el numero de
   //horas en punto
   struct tm* inicio_tm = localtime(&inicio);
+  //printTm(inicio_tm);
   if (inicio_tm->tm_min != 0 || inicio_tm->tm_sec != 0) {
     inicio_tm->tm_min = 0;
     inicio_tm->tm_sec = 0;
@@ -163,17 +229,21 @@ int cargar_fechas_adicionales_en_punto(struct tm** fechas_adicionales, struct tm
   }
 
   /*Se reajusta el tamaño del array de las fechas adicionales*/
-  int total_fechas = numero_fechas_adicionales + numero_fechas_en_punto;
-  struct tm** nuevas_fechas = realloc(fechas_adicionales, total_fechas * sizeof(struct tm*));
+  int total_fechas = *numero_fechas_adicionales + numero_fechas_en_punto;
+  printf("%d\n", total_fechas);
+  struct tm* nuevas_fechas = realloc(*fechas_adicionales, total_fechas * sizeof(struct tm));
+
+
   /*Se maneja la posibilidad que el reajuste de memoria no tenga éxito*/
   if (nuevas_fechas == NULL) {
     printf("Error al añadir las fechas en punto al array de fechas adicionales\n");
     registrar_error("Error al añadir las fechas en punto al array de fechas adicionales\n", REGISTRO_ERRORES);
     return ERROR;
   }
-  fechas_adicionales = nuevas_fechas;
+
+  *fechas_adicionales = nuevas_fechas;
   /*Se rellena el array con las nuevas fechas en punto */
-  int i = numero_fechas_adicionales;
+  int i = *numero_fechas_adicionales;
   for (time_t t = inicio; t <= fin; t += 3600) { // Iteracion en cada hora
     temp = *localtime(&t);
     struct tm* nueva_fecha = malloc(sizeof(struct tm));
@@ -190,10 +260,11 @@ int cargar_fechas_adicionales_en_punto(struct tm** fechas_adicionales, struct tm
   if (i < total_fechas) {
     fechas_adicionales[i] = NULL;
   }
-  numero_fechas_adicionales = total_fechas;
+  *numero_fechas_adicionales = total_fechas;
   return EXITO;
 
 }
+
  /*Este subprograma se utiliza para */
 
 int cargar_fechas_adicionales_vehiculos(datos_csv_vehiculos_t* datos_vehiculos,struct tm ** fechas_adicionales,
@@ -213,12 +284,12 @@ int cargar_fechas_adicionales_vehiculos(datos_csv_vehiculos_t* datos_vehiculos,s
   int minuto_final_vehiculo = datos_vehiculos->posiciones_informacion_vehiculos.ubicacion_fecha_final_vehiculo.columna_minuto;
   //Tantas vehiculos como filas-1 tenga el csv de los vehículos
   int numero_vehiculos = datos_vehiculos->informacion_vehiculos.filas - 1;
-  printf("%d\n", numero_vehiculos);
+  
   //fechas_adicionales = calloc(numero_vehiculos *2 , sizeof(struct tm*));
   *fechas_adicionales = calloc(numero_vehiculos * 2, sizeof(struct tm));
   //Se pasa a rellenar el array de fechas de tipo tm* con todas las fechas adicionales de los vehiculos que
   //hay que añadir
-  return ERROR;
+ 
   if (fechas_adicionales == NULL) {
     printf("Error Aquí\n");
     fprintf(stderr, "No se ha podido reservar memoria para la informacion procesada.\n");
@@ -226,7 +297,10 @@ int cargar_fechas_adicionales_vehiculos(datos_csv_vehiculos_t* datos_vehiculos,s
     return ERROR;
   }
 
-  for (int i = 0; i < 2 * numero_vehiculos; i++) {
+  
+ 
+  for (int i = 0; i <numero_vehiculos; i++) {
+    
    
     //Se carga la fecha inicial del vehiculo
     (*fechas_adicionales)[2 * i].tm_year = atoi(datos_vehiculos->informacion_vehiculos.datos[i + 1][anyo_inicial_vehiculo]) - 1900;
@@ -254,33 +328,40 @@ int leer_fechas_adicionales(datos_csv_vehiculos_t* datos_vehiculos, struct tm** 
   struct tm*fecha_final_algoritmo) {
 
 
-  printf("No problem\n");
+
+  printf("El numero de fechas adicionales es %d\n", *numero_fechas_adicionales);
   /*Se carga las fechas adicionales de los vehiculos que es necesario añadir*/
   if (cargar_fechas_adicionales_vehiculos(datos_vehiculos, fechas_adicionales, numero_fechas_adicionales) == ERROR) {
     printf("Error no se han podido cargar en la simulacion las fechas de los vehiculos\n");
     registrar_error("Error no se han podido cargar en la simulacion las fechas de los vehiculos\n", REGISTRO_ERRORES);
     return ERROR;
   }
-  
+  printf("El numero de fechas adicionales es %d\n", *numero_fechas_adicionales);
   /*Se carga las fechas adicionales de las baterias*/
   if (cargar_fechas_adicionales_baterias(datos_baterias, fechas_adicionales, numero_fechas_adicionales) == ERROR) {
     printf("Error no se han podido cargar en la simulacion las fechas de las baterias\n");
     registrar_error("Error no se han podido cargar en la simulacion las fechas de las baterias\n", REGISTRO_ERRORES);
     return ERROR;
   }
+  
   /*Se carga las fechas adicionales de las fechas en punto */
-  if (cargar_fechas_adicionales_en_punto(fechas_adicionales, fecha_inicial_algoritmo, fecha_final_algoritmo, *numero_fechas_adicionales) == ERROR) {
+
+  printf("El numero de fechas adicionales es %d\n", *numero_fechas_adicionales);
+  if (cargar_fechas_adicionales_en_punto(fechas_adicionales, fecha_inicial_algoritmo, fecha_final_algoritmo, numero_fechas_adicionales) == ERROR) {
     printf("Error no se han podido cargar las fechas adicionales (horas en punto) a la simulacion\n");
     registrar_error("Error no se han podido cargar en la simulacion las fechas adicionales (horas en punto) a la simulacion\n",REGISTRO_ERRORES);
     return ERROR;
   }
-
+  
+  printf("El numero de fechas adicionales es %d\n", *numero_fechas_adicionales);
   /*Se eliminan las fechas repetidas y se ordenan en orden cronológico*/
   if (ajustar_array_fechas_adicionales(fechas_adicionales, numero_fechas_adicionales) == ERROR) {
     printf("Error no se han podido eliminar las fechas adicionales repetidas del array correspondiente\n");
     registrar_error("Error no se han podido eliminar las fechas adicionales repetidas correctamente\n", REGISTRO_ERRORES);
     return ERROR;
   }
+
+  printf("El numero de fechas adicionales es %d\n", *numero_fechas_adicionales);
   return EXITO;
 }
 
@@ -326,11 +407,14 @@ int calcular_numero_puntos_provisional(time_t* tiempo_actual, time_t *tiempo_fin
 /*Este subprograma se encarga de calcular los puntos de simulacion y la fecha asociada a cada uno de ellos*/
 int cacular_puntos_simulacion(informacion_entrada_t* informacion_entrada, struct tm** fechas_adicionales,
   informacion_procesada_t* informacion_procesada, struct tm* fecha_inicial_algoritmo,
-  struct tm* fecha_final_algoritmo, int delta_simulacion, const int numero_fechas_adicionales,
+  struct tm* fecha_final_algoritmo, int delta_simulacion, const int *numero_fechas_adicionales,
   puntos_adicionales_t** puntos_adicionales) {
-
+  
   /*Se crea un array para almacenar los puntos adicionales*/
-  *puntos_adicionales = (puntos_adicionales_t*)calloc(numero_fechas_adicionales, sizeof(puntos_adicionales_t));
+  printf("HEY JUDE\n");
+  printf("%d", *numero_fechas_adicionales);
+  *puntos_adicionales = (puntos_adicionales_t*)calloc(*numero_fechas_adicionales, sizeof(puntos_adicionales_t));
+
   if (*puntos_adicionales == NULL) {
     printf("Error al reservar memoria para el array de los nuevos puntos adicionales\n");
     registrar_error("Error al reservar memoria para el array de los nuevos puntosa adicionales\n", REGISTRO_ERRORES);

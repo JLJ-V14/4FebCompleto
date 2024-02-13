@@ -5,6 +5,7 @@ con operar las fechas.
 */
 
 #include "definiciones_globales.h"
+#include "registrar_errores.h"
 #include "tipos_optimizacion.h"
 #include <errno.h>
 #include <stdio.h>
@@ -155,12 +156,14 @@ int cargar_fecha_generico(datos_csv_t* datos, struct tm* fecha_inicio, struct tm
 	if (cargar_fecha(datos, fecha_inicio, columna_anyo_inicio, columna_mes_inicio, columna_dia_inicio,
 		columna_hora_inicio, columna_minuto_inicio, numero_fila, incluir_minuto) == ERROR) {
 		printf("Error al cargar la fecha de inicio\n");
+    registrar_error("Error al cargar la fecha de inicio\n", REGISTRO_ERRORES);
 		return ERROR;
 	}
 
 	if (cargar_fecha(datos, fecha_final, columna_anyo_final, columna_mes_final, columna_dia_final,
 		columna_hora_final, columna_minuto_final, numero_fila, incluir_minuto) == ERROR) {
 		printf("Error al cargar la fecha final\n");
+    registrar_error("Error al cargar la fecha final\n", REGISTRO_ERRORES);
 		return ERROR;
 	}
 
@@ -237,20 +240,20 @@ int comprobar_fecha_carga(struct tm fecha_inicial_algoritmo, struct tm fecha_fin
 
 	if (verificar_orden_fechas(fecha_inicial_algoritmo, fecha_inicial_carga,
 		INCLUIR_FECHA_IGUAL) == ERROR) {
-		printf("Error la carga del vehiculo no puede empezar "
-			"antes que el inicio del algoritmo\n");
+		printf("Error la carga del vehiculo no puede empezar antes que el inicio del algoritmo\n");
+    registrar_error("Error la carga del vehiculo no puede empezar antes que el inicio del algoritmo\n",REGISTRO_ERRORES);
 		return ERROR;
 	}
 	if (verificar_orden_fechas(fecha_final_carga, fecha_final_algoritmo,
 		INCLUIR_FECHA_IGUAL) == ERROR) {
-		printf("Error la carga del vehiculo no puede terminar más tarde"
-			"que el fin del algoritmo\n");
+		printf("Error la carga del vehiculo no puede terminar más tarde que el fin del algoritmo\n");
+    registrar_error("Error la carga del vehiculo no puede terminar más tarde que el fin del algoritmo\n",REGISTRO_ERRORES);
 		return ERROR;
 	}
 	if (verificar_orden_fechas(fecha_inicial_carga, fecha_final_carga,
 		INCLUIR_FECHA_IGUAL) == ERROR) {
-		printf("Error la fecha de inicio de la carga debe ser"
-			"anterior a la fecha del posterior\n");
+		printf("Error la fecha de inicio de la carga debe ser anterior a la fecha del posterior\n");
+    registrar_error("Error la fecha de inicio de la carga debe ser anterior a la fecha del posterior\n", REGISTRO_ERRORES);
 		return ERROR;
 	}
 	return EXITO;
@@ -286,11 +289,15 @@ int verificar_fecha_carga(datos_csv_t* datos_carga, datos_csv_algoritmo_t* datos
 
 	if (cargar_fecha_algoritmo(datos_algoritmo, &fecha_inicial_algoritmo,
 		&fecha_final_algoritmo) == ERROR) {
+    printf("Error no se ha podido cargar la fecha inicial y la fecha final del algoritmo\n");
+    registrar_error("Error no se ha podido cargar la fecha inicial y la fecha final del algoritmo\n", REGISTRO_ERRORES);
 		return ERROR;
 	};
 
 	if (cargar_fecha_carga(datos_carga, &fecha_inicial_carga,
 		&fecha_final_carga, numero_fila) == ERROR) {
+    printf("Error no se ha podido cargar la fecha inicial y la fecha final de carga\n");
+    registrar_error("Error no se ha podido cargar la fecha inicial y la fecha final de carga\n", REGISTRO_ERRORES);
 		return ERROR;
 	};
 
@@ -298,6 +305,8 @@ int verificar_fecha_carga(datos_csv_t* datos_carga, datos_csv_algoritmo_t* datos
 	if (comprobar_fecha_carga(fecha_inicial_algoritmo,
 		fecha_final_algoritmo, fecha_inicial_carga,
 		fecha_final_carga) == ERROR) {
+    printf("No se ha podido comprobar el orden temporal de las fechas del algoritmo y de carga\n");
+    registrar_error("Erro no se ha podido comprobar el orden temporal de las fechas del algoritmo y de carga\n",REGISTRO_ERRORES);
 		return ERROR;
 	}
 	return EXITO;

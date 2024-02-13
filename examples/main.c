@@ -12,6 +12,7 @@
 #include "comprobar_informacion_procesada.h"
 #include "definiciones_globales.h"
 #include "inicializar_csv.h"
+#include "inicializar_informacion_procesada.h"
 #include "leer_entradas.h"
 #include "liberar_memoria.h"
 #include "main.h"
@@ -84,7 +85,7 @@
         goto fin_programa;
     }
 
-
+    
     
     //Se verifica que la informacion de entrada es correcta
     if (verificar_entradas(&informacion_sistema) == ERROR) {
@@ -92,17 +93,19 @@
         registrar_error("Fallo las entradas son incorrectas\n", REGISTRO_ERRORES);
         goto fin_programa;
     }
-    
+  
    
 
     //Se procesa la informacion de entrada
+    inicializar_informacion_procesada(&informacion_procesada);
+
     
     if (procesar_informacion_entrada(&informacion_sistema, &informacion_procesada) == ERROR) {
       printf("La informacion no ha podido ser procesada correctamente\n");
       registrar_error("La informacion no ha podido ser procesada correctamente\n", REGISTRO_ERRORES);
       goto fin_programa;
     }
-
+    
     /*
     //Se procesa la informacion 
     if (comprobar_informacion_procesada(&informacion_procesada) == ERROR) {

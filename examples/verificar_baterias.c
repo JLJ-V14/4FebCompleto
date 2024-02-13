@@ -379,9 +379,9 @@ static int comprobar_fecha_baterias(const int numero_bateria, const datos_csv_ba
 		return ERROR;
 	}
 
+  
 	//Se revisa si para la bateria en cuestion se desea si se desea que tenga un cierto nivel de carga para alguna
 	//fecha en particular.
-
 	if (considerar_objetivo_bateria(informacion_baterias->datos[numero_bateria][columna_objetivo])==ERROR) {
 
 	//Se comprueba que la fecha objetivo de carga de la bateria sea correcta.

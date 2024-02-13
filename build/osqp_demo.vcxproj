@@ -336,6 +336,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClCompile Include="calcular_dimensiones_problema.c" />
     <ClCompile Include="calcular_puntos_simulacion.c" />
     <ClCompile Include="comprobar_informacion_procesada.c" />
+    <ClCompile Include="inicializar_informacion_procesada.c" />
     <ClCompile Include="preparar_problema_optimizacion.c" />
     <ClCompile Include="procesar_informacion_entrada.c" />
   </ItemGroup>
@@ -363,6 +364,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClInclude Include="funciones_plataforma_dependiente.h" />
     <ClInclude Include="inicializacion_algoritmo.h" />
     <ClInclude Include="inicializar_csv.h" />
+    <ClInclude Include="inicializar_informacion_procesada.h" />
     <ClInclude Include="inicializar_posiciones.h" />
     <ClInclude Include="leer_entradas.h" />
     <ClInclude Include="liberar_memoria.h" />

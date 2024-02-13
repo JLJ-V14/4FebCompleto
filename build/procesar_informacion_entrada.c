@@ -376,8 +376,9 @@ int configurar_puntos_simulacion(informacion_entrada_t* informacion_entrada, inf
 
   fecha_inicial_algoritmo = malloc(sizeof(struct tm));
   fecha_final_algoritmo   = malloc(sizeof(struct tm));
-
   if ((fecha_inicial_algoritmo == NULL) || (fecha_final_algoritmo == NULL)) {
+    printf("Problema con las fechas iniciales y finales del algoritmo\n");
+    registrar_error("Problema con las fechas iniciales y finales del algoritmo\n",REGISTRO_ERRORES);
     free(fecha_inicial_algoritmo);
     free(fecha_final_algoritmo);
     return ERROR;
@@ -405,18 +406,19 @@ int configurar_puntos_simulacion(informacion_entrada_t* informacion_entrada, inf
 
   
 
+  
 
   //Se cargan las fechas iniciales y finales del algoritmo
   cargar_fecha(&(informacion_entrada->datos_algoritmo.informacion_algoritmo), fecha_inicial_algoritmo, columna_anyo_inicial,
     columna_mes_inicial, columna_dia_inicial, columna_hora_inicial, columna_minuto_inicial,
     fila_valores, SI_INCLUIR_MINUTO);
-
+  
   cargar_fecha(&(informacion_entrada->datos_algoritmo.informacion_algoritmo), fecha_final_algoritmo, columna_anyo_final,
     columna_mes_final, columna_dia_final, columna_hora_final, columna_minuto_final,
     fila_valores, SI_INCLUIR_MINUTO);
 
-
- 
+  
+  
   if (leer_fechas_adicionales(&(informacion_entrada->datos_vehiculos),fechas_adicionales, &(informacion_entrada->datos_baterias),
     &(informacion_puntos_adicionales->numero_puntos), fecha_inicial_algoritmo, fecha_final_algoritmo) == ERROR) {
     printf("No se ha podido añadir las fechas adicionales a la simulacion\n");
@@ -426,15 +428,16 @@ int configurar_puntos_simulacion(informacion_entrada_t* informacion_entrada, inf
   
   //Se guarda la informacion de las fechas adicionales a añadir en las variables correspondiente
   
-
+ 
 
   if (cacular_puntos_simulacion(informacion_entrada, fechas_adicionales, informacion_procesada,
     fecha_inicial_algoritmo, fecha_final_algoritmo, delta_resolucion,
     numero_fechas_adicionales,&(informacion_puntos_adicionales->puntos) == ERROR)) {
     printf("No se ha podido calcular el numero de puntos de simulacion\n");
     registrar_error("No se ha podido calcular el numero de puntos de simulacion\n", REGISTRO_ERRORES);
+    return ERROR;
   }
-
+  
   return EXITO;
 }
 
@@ -453,7 +456,7 @@ int procesar_informacion_entrada(informacion_entrada_t*    informacion_entrada,
   //Se almacena la informacion de restriccion leída del csv de las restricciones
   procesar_informacion_restricciones(&(informacion_entrada->datos_restricciones), &(informacion_procesada->informacion_restricciones_sistema));
 
- 
+  
 
   if (configurar_puntos_simulacion(informacion_entrada, informacion_procesada, informacion_puntos_adicionales) == ERROR) {
     printf("No se ha podido configurar los puntos de simulacion correctamente\n");
