@@ -11,7 +11,7 @@
 extern "C" {
 #endif
 	void registrar_error(const char* mensaje, const char* nombre_achivo);
-
+	void borrar_contenido_log(const char* nombre_archivo);
 
 #ifdef __cplusplus
 }

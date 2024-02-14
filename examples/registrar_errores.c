@@ -31,3 +31,12 @@ void registrar_error(const char* mensaje, const char* nombre_archivo) {
     fclose(archivo);
 }
 
+/*Se utiliza este subprograma para borrar el contenido del registro de errores*/
+void borrar_contenido_log(const char* nombre_archivo) {
+  FILE* archivo = fopen(nombre_archivo, "w");
+  if (archivo == NULL) {
+    perror("Error abriendo el  para borrar contenido");
+    return;
+  }
+  fclose(nombre_archivo);
+}

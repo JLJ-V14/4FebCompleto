@@ -1,3 +1,4 @@
 ﻿  calcular_puntos_simulacion.c
-calcular_puntos_simulacion.c(461,31): warning C4047: '<': 'int' differs in levels of indirection from 'const int *'
+calcular_puntos_simulacion.c(506,31): warning C4047: '<': 'int' differs in levels of indirection from 'const int *'
+F:\osqp1feb\osqp-1.0.0.beta1\build\calcular_puntos_simulacion.c(292): warning C4715: 'cargar_fechas_adicionales_en_punto': not all control paths return a value
   osqp_demo.vcxproj -> F:\osqp1feb\osqp-1.0.0.beta1\build\out\osqp_demo.exe

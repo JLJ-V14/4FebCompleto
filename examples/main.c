@@ -60,7 +60,10 @@
     ajustes_punto_decimal();
    
     
-    
+
+    //Se borran los errores de ejecuciones anteriores del programa
+    borrar_contenido_log(REGISTRO_ERRORES);
+
     // Se inicializan las variables que almacenan los datos de entrada.
     if (inicializar_informacion_entrada(&informacion_sistema) == ERROR) {
         printf("Fallo en la inicialización del algoritmo\n");
@@ -97,8 +100,10 @@
    
 
     //Se procesa la informacion de entrada
+    
     inicializar_informacion_procesada(&informacion_procesada);
-
+    
+    
     
     if (procesar_informacion_entrada(&informacion_sistema, &informacion_procesada) == ERROR) {
       printf("La informacion no ha podido ser procesada correctamente\n");
@@ -106,6 +111,7 @@
       goto fin_programa;
     }
     
+    /*
     /*
     //Se procesa la informacion 
     if (comprobar_informacion_procesada(&informacion_procesada) == ERROR) {
@@ -116,8 +122,9 @@
     */
     fin_programa:
     // Se libera la memoria reservada
-    liberar_memoria_csvs(&informacion_sistema);
     liberar_memoria_informacion_procesada(&informacion_procesada);
+    printf("Memoria de informacion procesada liberada\n");
+    liberar_memoria_csvs(&informacion_sistema);
    // finalizar_problema_optimizacion(&problema_optimizacion);
 
 

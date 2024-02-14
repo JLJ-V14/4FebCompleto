@@ -10,7 +10,22 @@
 #include <stdio.h>
 #include <time.h>
 
+void printTm_2(const struct tm* date) {
+  if (date == NULL) {
+    printf("The date is NULL\n");
+    return;
+  }
 
+  // Note: tm_year is years since 1900, tm_mon is 0-11, and tm_mday is 1-31
+  printf("Year: %d, Month: %02d, Day: %02d\n",
+    date->tm_year + 1900, date->tm_mon + 1, date->tm_mday);
+  printf("Hour: %02d, Minute: %02d, Second: %02d\n",
+    date->tm_hour, date->tm_min, date->tm_sec);
+
+  // Optionally, you can print the day of the week and day of the year
+  printf("Weekday (Sunday=0): %d, Day of the year: %d\n",
+    date->tm_wday, date->tm_yday);
+}
 
 //Se utiliza este subprograma para obtener las fechas adicionales de las baterias que hay que añadir
 //Por cada bateria hay que añadir la fecha inicial a partir la cual la bateria esta conectada, la fecha
@@ -361,10 +376,11 @@ int configurar_puntos_simulacion(informacion_entrada_t* informacion_entrada, inf
   //y la fecha final.
   //
 
-
-  //struct tm** fechas_adicionales = NULL;
-  struct tm* actual_fechas = NULL;
-  struct tm** fechas_adicionales = &actual_fechas;
+  
+  struct tm* puntero_auxiliar = NULL;
+  struct tm** fechas_adicionales = &puntero_auxiliar;
+ 
+ 
   //Cargo la ubicacion de las fechas iniciales y finales del algoritmo
   //Se definen variables para almacenar las fechas iniciales y finales del cálculo de optimizacion
   struct tm* fecha_inicial_algoritmo;
@@ -406,16 +422,17 @@ int configurar_puntos_simulacion(informacion_entrada_t* informacion_entrada, inf
 
   
 
-  
-
   //Se cargan las fechas iniciales y finales del algoritmo
   cargar_fecha(&(informacion_entrada->datos_algoritmo.informacion_algoritmo), fecha_inicial_algoritmo, columna_anyo_inicial,
     columna_mes_inicial, columna_dia_inicial, columna_hora_inicial, columna_minuto_inicial,
     fila_valores, SI_INCLUIR_MINUTO);
+ 
   
   cargar_fecha(&(informacion_entrada->datos_algoritmo.informacion_algoritmo), fecha_final_algoritmo, columna_anyo_final,
     columna_mes_final, columna_dia_final, columna_hora_final, columna_minuto_final,
     fila_valores, SI_INCLUIR_MINUTO);
+
+  
 
   
   
@@ -425,7 +442,7 @@ int configurar_puntos_simulacion(informacion_entrada_t* informacion_entrada, inf
     registrar_error("No se ha podido añadir las fechas adicionales a la simulacion", REGISTRO_ERRORES);
     return ERROR;
   }
-  
+  /*
   //Se guarda la informacion de las fechas adicionales a añadir en las variables correspondiente
   
  
@@ -437,7 +454,7 @@ int configurar_puntos_simulacion(informacion_entrada_t* informacion_entrada, inf
     registrar_error("No se ha podido calcular el numero de puntos de simulacion\n", REGISTRO_ERRORES);
     return ERROR;
   }
-  
+  */
   return EXITO;
 }
 
@@ -457,14 +474,14 @@ int procesar_informacion_entrada(informacion_entrada_t*    informacion_entrada,
   procesar_informacion_restricciones(&(informacion_entrada->datos_restricciones), &(informacion_procesada->informacion_restricciones_sistema));
 
   
-
+  
   if (configurar_puntos_simulacion(informacion_entrada, informacion_procesada, informacion_puntos_adicionales) == ERROR) {
     printf("No se ha podido configurar los puntos de simulacion correctamente\n");
     registrar_error("No se ha podido configurar los puntos de simulacion correctamente\n", REGISTRO_ERRORES);
     return ERROR;
   }
 
-  
+  /*
 
   if (informacion_puntos_adicionales == NULL) {
     // Handle memory allocation failure
@@ -490,5 +507,6 @@ int procesar_informacion_entrada(informacion_entrada_t*    informacion_entrada,
     registrar_error("No se ha podido configurar la informacion de los precios\n", REGISTRO_ERRORES);
     return ERROR;
   }
+  */
   return EXITO;
 }

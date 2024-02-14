@@ -26,6 +26,26 @@
 
 //----revisado-----------------------------------------//
 
+
+static int comprobar_objetivo_bateria(const char* objetivo) {
+
+  if (strcmp("si", objetivo) == 0) {
+    return EXITO;
+  }
+  else if (strcmp("no", objetivo) == 0) {
+    return EXITO;
+  }
+  else {
+    printf("en el campo de considerar la carga debe introducirse un si o un no \n");
+    registrar_error("En el campo de considerar la carga debe introducirse un si o un no", REGISTRO_ERRORES);
+    return ERROR;
+  }
+}
+
+
+
+
+
 static int comprobar_datos_bateria(const datos_csv_baterias_t* datos_bateria, const int numero_bateria) {
 
 	/*
@@ -50,14 +70,16 @@ static int comprobar_datos_bateria(const datos_csv_baterias_t* datos_bateria, co
 	int  columna_csv_baterias_max_potencia = datos_bateria->posiciones_informacion_baterias.columna_capacidad_bateria;
 	int  columna_csv_baterias_inicial = datos_bateria->posiciones_informacion_baterias.columna_porcentaje_bateria_inicial;
 	int  columna_csv_baterias_final = datos_bateria->posiciones_informacion_baterias.columna_porcentaje_bateria_deseada;
-	
+  int  columna_objetivo_baterias = datos_bateria->posiciones_informacion_baterias.columna_consideracion_objetivo;
+
+
 	//Cargo los datos del csv de las baterias
 	char*    numero_terminal_char = informacion_baterias.datos[numero_bateria][columna_csv_baterias_num_terminal];
 	char*    capacidad_bateria_char = informacion_baterias.datos[numero_bateria][columna_csv_baterias_capacidad];
 	char*    maxima_potencia_char = informacion_baterias.datos[numero_bateria][columna_csv_baterias_max_potencia];
 	char*    bateria_inicial_char = informacion_baterias.datos[numero_bateria][columna_csv_baterias_inicial];
 	char*    bateria_deseada_char = informacion_baterias.datos[numero_bateria][columna_csv_baterias_final];
-
+  char* objetivo_bateria_char = informacion_baterias.datos[numero_bateria][columna_objetivo_baterias];
 
 
 	//Creo las variables que sirven para almacenar la informacion de tipo numerico
@@ -111,36 +133,40 @@ static int comprobar_datos_bateria(const datos_csv_baterias_t* datos_bateria, co
 		return ERROR;
 	}
 	else if (maxima_potencia_num < 0) {
-		printf("la potencia maxima de la bateria %d no puede ser inferior a 0 \n", numero_bateria);
+    char mensaje_error[512];
+    snprintf(mensaje_error, sizeof(mensaje_error), "La potencia máxima de la batería %d no puede ser 0 o inferior a 0\n", numero_bateria);
+		printf(mensaje_error);
+    registrar_error(mensaje_error, REGISTRO_ERRORES);
 		return ERROR;
 	}
 	else if ((bateria_inicial_num < 0) || (bateria_inicial_num > 1)) {
-		printf("el porcentaje inicial de la bateria %d ha de estar entre 0 o 1 (0 % y 100 % \n", numero_bateria);
-		return ERROR;
+    char mensaje_error[512];
+    snprintf(mensaje_error, sizeof(mensaje_error), "el porcentaje inicial de la bateria %d ha de estar entre 0 o 1 (0% y 100%)", numero_bateria);
+    printf(mensaje_error);
+    registrar_error(mensaje_error, REGISTRO_ERRORES);
+    return ERROR;
 	}
 	else if ((bateria_deseada_num < 0) || (bateria_deseada_num > 1)) {
-		printf("el porcentaje de bateria deseada %d ha de estar entre 0 o 1 (0% y 100% \n", numero_bateria);
+    char mensaje_error[512];
+    snprintf(mensaje_error, sizeof(mensaje_error), "El porcentaje de bateria deseada %d ha de estar entre 0 o 1 (0% y 100%\n", numero_bateria);
+    printf(mensaje_error);
+    registrar_error(mensaje_error, REGISTRO_ERRORES);
 		return ERROR;
 	}
+  else if (comprobar_objetivo_bateria(objetivo_bateria_char) == ERROR) {
+    printf("No se reconoció´\n");
+    char mensaje_error[512];
+    snprintf(mensaje_error, sizeof(mensaje_error), "El campo que sirve para determinar que si la bateria tiene un objetivo de carga tiene que ser si o no\n");
+    printf(mensaje_error);
+    registrar_error(mensaje_error, REGISTRO_ERRORES);
+    return ERROR;
+  }
 	return EXITO;
 }
 
 //Este subprograma se utiliza para comprobar si el termino de considerar la carga de la bateria es correcto
 
-static int comprobar_objetivo_bateria(const char* objetivo) {
-	
-	if (strcmp("si", objetivo) == 0) {
-		return EXITO;
-	}
-	else if (strcmp("no", objetivo) == 0) {
-		return EXITO;
-	}
-	else {
-		printf("en el campo de considerar la carga debe introducirse un si o un no \n");
-		registrar_error("En el campo de considerar la carga debe introducirse un si o un no", REGISTRO_ERRORES);
-		return ERROR;
-	}
-}
+
 
 
 
@@ -383,7 +409,7 @@ static int comprobar_fecha_baterias(const int numero_bateria, const datos_csv_ba
 	//Se revisa si para la bateria en cuestion se desea si se desea que tenga un cierto nivel de carga para alguna
 	//fecha en particular.
 	if (considerar_objetivo_bateria(informacion_baterias->datos[numero_bateria][columna_objetivo])==ERROR) {
-
+    printf("Objetivo reconocido\n");
 	//Se comprueba que la fecha objetivo de carga de la bateria sea correcta.
 		if (comprobar_fecha_objetivo_baterias(datos_baterias, numero_bateria, fecha_inicial_bateria, fecha_final_bateria) == ERROR) {
 			printf("La fecha objetivo de carga de la bateria no es correcta\n");

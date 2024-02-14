@@ -28,13 +28,13 @@ void liberar_memoria_csv_individual(datos_csv_t* datos_csv) {
           }
           
         }
-        free((datos_csv)->datos[i]);
+       free((datos_csv)->datos[i]);
         datos_csv->datos[i] = NULL;
       }
     }
    
         free(datos_csv->datos);
-        datos_csv->datos = NULL;
+       datos_csv->datos = NULL;
 
 }
 
