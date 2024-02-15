@@ -89,8 +89,11 @@ void procesar_informacion_restricciones(datos_csv_restricciones_t* datos_csv_res
 /*Este subprograma se encarga de guardar la informacion de los diferentes del vehiculos del sistema en la
   variable correspondiente*/
 int procesar_informacion_vehiculos(informacion_entrada_t* informacion_entrada, informacion_procesada_t* informacion_procesada,
-                                    puntos_adicionales_t* puntos_adicionales) {
+                                   puntos_adicionales_t* puntos_adicionales) {
+
   informacion_procesada->informacion_vehiculos.numero_vehiculos = informacion_entrada->datos_vehiculos.informacion_vehiculos.filas -1 ;
+  printf("EL numero de vehiculos es%d", informacion_procesada->informacion_vehiculos.numero_vehiculos);
+
   informacion_procesada->informacion_vehiculos.vehiculos = (vehiculos_t*)malloc(informacion_procesada->informacion_vehiculos.numero_vehiculos * sizeof(vehiculos_t));
 
   if (informacion_procesada->informacion_vehiculos.vehiculos == NULL) {
@@ -99,10 +102,10 @@ int procesar_informacion_vehiculos(informacion_entrada_t* informacion_entrada, i
     return ERROR;
   }
 
-
+  
   int vehiculos_totales = informacion_procesada->informacion_vehiculos.numero_vehiculos;
   // informacion_procesada->informacion_vehiculos.vehiculos = malloc(informacion_procesada->informacion_vehiculos.numero_vehiculos * sizeof(vehiculos_t));
-
+  
   //Se procede a cargar las ubicaciones donde se encuentra la informacion en el csv de los vehiculos.
   int columna_capacidad = informacion_entrada->datos_vehiculos.posiciones_informacion_vehiculos.columna_capacidad_bateria;
   int columna_maxima = informacion_entrada->datos_vehiculos.posiciones_informacion_vehiculos.columna_maxima_potencia;
@@ -123,39 +126,42 @@ int procesar_informacion_vehiculos(informacion_entrada_t* informacion_entrada, i
   int columna_dia_final = informacion_entrada->datos_vehiculos.posiciones_informacion_vehiculos.ubicacion_fecha_final_vehiculo.columna_dia;
   int columna_hora_final = informacion_entrada->datos_vehiculos.posiciones_informacion_vehiculos.ubicacion_fecha_final_vehiculo.columna_hora;
   int columna_minuto_final = informacion_entrada->datos_vehiculos.posiciones_informacion_vehiculos.ubicacion_fecha_final_vehiculo.columna_minuto;
-
+  
   for (int numero_vehiculo = 0; numero_vehiculo < vehiculos_totales; numero_vehiculo++) {
     //Se cargan los datos del vehiculos.
-    informacion_procesada->informacion_vehiculos.vehiculos[numero_vehiculo].bateria_final = (OSQPFloat)atof(informacion_entrada->datos_vehiculos.informacion_vehiculos.datos[numero_vehiculo + 1][columna_bat_deseada]);
-    informacion_procesada->informacion_vehiculos.vehiculos[numero_vehiculo].bateria_inicial = (OSQPFloat)atof(informacion_entrada->datos_vehiculos.informacion_vehiculos.datos[numero_vehiculo + 1][columna_bat_inicial]);
+    informacion_procesada->informacion_vehiculos.vehiculos[numero_vehiculo].bateria_final     = (OSQPFloat)atof(informacion_entrada->datos_vehiculos.informacion_vehiculos.datos[numero_vehiculo + 1][columna_bat_deseada]);
+    informacion_procesada->informacion_vehiculos.vehiculos[numero_vehiculo].bateria_inicial   = (OSQPFloat)atof(informacion_entrada->datos_vehiculos.informacion_vehiculos.datos[numero_vehiculo + 1][columna_bat_inicial]);
     informacion_procesada->informacion_vehiculos.vehiculos[numero_vehiculo].capacidad_bateria = (OSQPFloat)atof(informacion_entrada->datos_vehiculos.informacion_vehiculos.datos[numero_vehiculo + 1][columna_capacidad]);
-    informacion_procesada->informacion_vehiculos.vehiculos[numero_vehiculo].numero_terminal = (OSQPInt)atof(informacion_entrada->datos_vehiculos.informacion_vehiculos.datos[numero_vehiculo + 1][columna_terminal]);
-    informacion_procesada->informacion_vehiculos.vehiculos[numero_vehiculo].modo_carga = informacion_entrada->datos_vehiculos.informacion_vehiculos.datos[numero_vehiculo + 1][columna_terminal];
+    informacion_procesada->informacion_vehiculos.vehiculos[numero_vehiculo].numero_terminal   = (OSQPInt)atof(informacion_entrada->datos_vehiculos.informacion_vehiculos.datos[numero_vehiculo + 1][columna_terminal]);
+    informacion_procesada->informacion_vehiculos.vehiculos[numero_vehiculo].modo_carga        = informacion_entrada->datos_vehiculos.informacion_vehiculos.datos[numero_vehiculo + 1][columna_terminal];
+    
     //Se carga la fechas inicial del vehiculo
-    informacion_procesada->informacion_vehiculos.vehiculos[numero_vehiculo].fecha_inicio->tm_year = atoi(informacion_entrada->datos_vehiculos.informacion_vehiculos.datos[numero_vehiculo + 1][columna_anyo_inicial]);
-    informacion_procesada->informacion_vehiculos.vehiculos[numero_vehiculo].fecha_inicio->tm_mon = atoi(informacion_entrada->datos_vehiculos.informacion_vehiculos.datos[numero_vehiculo + 1][columna_mes_inicial]);
-    informacion_procesada->informacion_vehiculos.vehiculos[numero_vehiculo].fecha_inicio->tm_mday = atoi(informacion_entrada->datos_vehiculos.informacion_vehiculos.datos[numero_vehiculo + 1][columna_dia_inicial]);
-    informacion_procesada->informacion_vehiculos.vehiculos[numero_vehiculo].fecha_inicio->tm_hour = atoi(informacion_entrada->datos_vehiculos.informacion_vehiculos.datos[numero_vehiculo + 1][columna_hora_inicial]);
-    informacion_procesada->informacion_vehiculos.vehiculos[numero_vehiculo].fecha_inicio->tm_hour = atoi(informacion_entrada->datos_vehiculos.informacion_vehiculos.datos[numero_vehiculo + 1][columna_minuto_inicial]);
+    printf("Iteracion\n");
 
     //Se carga la fecha inicial del vehiculo
-    cargar_fecha(&(informacion_entrada->datos_vehiculos.informacion_vehiculos), informacion_procesada->informacion_vehiculos.vehiculos->fecha_inicio,
+    cargar_fecha(&(informacion_entrada->datos_vehiculos.informacion_vehiculos), &(informacion_procesada->informacion_vehiculos.vehiculos->fecha_inicio),
       columna_anyo_inicial, columna_mes_inicial, columna_dia_inicial, columna_hora_inicial, columna_minuto_inicial,
       numero_vehiculo + 1, SI_INCLUIR_MINUTO);
 
     //Se carga la fecha final del vehiculo
-    cargar_fecha(&(informacion_entrada->datos_vehiculos.informacion_vehiculos), informacion_procesada->informacion_vehiculos.vehiculos->fecha_final,
+    cargar_fecha(&(informacion_entrada->datos_vehiculos.informacion_vehiculos), &(informacion_procesada->informacion_vehiculos.vehiculos->fecha_final),
       columna_anyo_final, columna_mes_final, columna_dia_final, columna_hora_final, columna_minuto_final,
       numero_vehiculo + 1, SI_INCLUIR_MINUTO);
-
+    
     //Se obtiene de simulacion inicial del vehiculo
+    printf("uisi\n");
     obtener_punto_simulacion(&(informacion_procesada->informacion_vehiculos.vehiculos[numero_vehiculo].punto_inicio),
-                             informacion_procesada->informacion_vehiculos.vehiculos[numero_vehiculo].fecha_inicio, puntos_adicionales);
-    //Se obtiene el punto de simulacion final   del vehiculo
+                             &(informacion_procesada->informacion_vehiculos.vehiculos[numero_vehiculo].fecha_inicio), puntos_adicionales);
+    
+    //Se obtiene el punto de simulacion final del vehiculo
+    printf("uisa\n");
     obtener_punto_simulacion(&(informacion_procesada->informacion_vehiculos.vehiculos[numero_vehiculo].punto_final),
-      informacion_procesada->informacion_vehiculos.vehiculos[numero_vehiculo].fecha_final, puntos_adicionales);
-
+      &(informacion_procesada->informacion_vehiculos.vehiculos[numero_vehiculo].fecha_final), puntos_adicionales);
+    /*  */
+    printf("uisu\n");
   }
+
+  
   return EXITO;
 }
 
@@ -442,19 +448,23 @@ int configurar_puntos_simulacion(informacion_entrada_t* informacion_entrada, inf
     registrar_error("No se ha podido añadir las fechas adicionales a la simulacion", REGISTRO_ERRORES);
     return ERROR;
   }
-  /*
+  
   //Se guarda la informacion de las fechas adicionales a añadir en las variables correspondiente
   
  
+  informacion_puntos_adicionales->puntos = NULL;
+  puntos_adicionales_t ** puntos_adicionales = &(informacion_puntos_adicionales->puntos);
+  printf("EL numero de puntos adicionales es %d", informacion_puntos_adicionales->numero_puntos);
+  printf("LE NUMBER %d", informacion_puntos_adicionales->numero_puntos);
 
   if (cacular_puntos_simulacion(informacion_entrada, fechas_adicionales, informacion_procesada,
     fecha_inicial_algoritmo, fecha_final_algoritmo, delta_resolucion,
-    numero_fechas_adicionales,&(informacion_puntos_adicionales->puntos) == ERROR)) {
+    &(informacion_puntos_adicionales->numero_puntos),&(informacion_puntos_adicionales->puntos) == ERROR)) {
     printf("No se ha podido calcular el numero de puntos de simulacion\n");
     registrar_error("No se ha podido calcular el numero de puntos de simulacion\n", REGISTRO_ERRORES);
     return ERROR;
   }
-  */
+  /* */
   return EXITO;
 }
 
@@ -468,34 +478,34 @@ int procesar_informacion_entrada(informacion_entrada_t*    informacion_entrada,
 
   //Se crea una variable para almacenar las fechas adicionales a añadir, esta variable va a ser utilizada para
   //reconocer más rápidamente a que punto de simulación corresponde la ida o partida de los vehículos o baterías
-  informacion_puntos_adicionales_t* informacion_puntos_adicionales = &(informacion_procesada->informacion_puntos_adicionales);
  
+
   //Se almacena la informacion de restriccion leída del csv de las restricciones
   procesar_informacion_restricciones(&(informacion_entrada->datos_restricciones), &(informacion_procesada->informacion_restricciones_sistema));
 
   
   
-  if (configurar_puntos_simulacion(informacion_entrada, informacion_procesada, informacion_puntos_adicionales) == ERROR) {
+  if (configurar_puntos_simulacion(informacion_entrada, informacion_procesada, &(informacion_procesada->informacion_puntos_adicionales)) == ERROR) {
     printf("No se ha podido configurar los puntos de simulacion correctamente\n");
     registrar_error("No se ha podido configurar los puntos de simulacion correctamente\n", REGISTRO_ERRORES);
     return ERROR;
   }
 
-  /*
+  
 
-  if (informacion_puntos_adicionales == NULL) {
+  if (&(informacion_procesada->informacion_puntos_adicionales )== NULL) {
     // Handle memory allocation failure
     printf("Error al asignar memoria para puntos adicionales\n");
     registrar_error("Error al asignar memoria para puntos adicionales\n", REGISTRO_ERRORES);
     return ERROR;
   }
-  
-  if (procesar_informacion_vehiculos(informacion_entrada, informacion_procesada,informacion_puntos_adicionales->puntos) == ERROR) {
+
+  if (procesar_informacion_vehiculos(informacion_entrada, informacion_procesada,informacion_procesada->informacion_puntos_adicionales.puntos) == ERROR) {
     printf("No se ha podido configurar la informacion de los vehiculos correctamente\n");
     registrar_error("No se ha podido configurar la informacion de los vehiculos correctamente\n",REGISTRO_ERRORES);
     return ERROR;
   }
-
+  /*
   if (procesar_informacion_baterias(informacion_entrada, informacion_procesada, informacion_puntos_adicionales->puntos) == ERROR) {
     printf("No se ha podido configurar la informacion de las baterias\n");
     registrar_error("No se ha podido configurar la informacion de las baterias\n", REGISTRO_ERRORES);

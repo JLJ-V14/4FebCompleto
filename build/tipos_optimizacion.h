@@ -3,8 +3,9 @@
   van a utilizar durante todo el codigo*/
 
 #include "osqp.h"
+#include <time.h>
 #include <stdbool.h>
-#include <wctype.h>
+
 
 
 #define NUMERO_TERMINALES 12
@@ -215,8 +216,8 @@ typedef struct {
     OSQPInt       numero_terminal;
     OSQPInt       punto_inicio;
     OSQPInt       punto_final;
-    struct tm*    fecha_inicio;
-    struct tm*    fecha_final;
+    struct tm     fecha_inicio;
+    struct tm     fecha_final;
     OSQPFloat     bateria_inicial;
     OSQPFloat     bateria_final;
     OSQPFloat     capacidad_bateria;
@@ -328,7 +329,7 @@ typedef struct {
 
 typedef struct {
     int numero_punto;
-    struct tm* fecha_adicional;
+    struct tm fecha_adicional;
 }puntos_adicionales_t;
 
 

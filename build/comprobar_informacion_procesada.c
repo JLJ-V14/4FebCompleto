@@ -25,8 +25,8 @@ int imprimir_informacion_procesada_vehiculos(const informacion_vehiculos_t* info
       v->numero_terminal,
       v->punto_inicio,
       v->punto_final,
-      tm_to_string(v->fecha_inicio),
-      tm_to_string(v->fecha_final),
+      tm_to_string(&(v->fecha_inicio)),
+      tm_to_string(&(v->fecha_final)),
       v->bateria_inicial,
       v->bateria_final,
       v->capacidad_bateria,
@@ -173,7 +173,7 @@ int imprimir_informacion_puntos_adicionales(informacion_puntos_adicionales_t* in
   for (int i = 0; i < informacion_fechas_adicionales->numero_puntos; i++) {
     fprintf(archivo, "%d,%s\n",
       informacion_fechas_adicionales->puntos[i].numero_punto,
-      tm_to_string(informacion_fechas_adicionales->puntos[i].fecha_adicional));
+      tm_to_string(&(informacion_fechas_adicionales->puntos[i].fecha_adicional)));
       
   }
   
