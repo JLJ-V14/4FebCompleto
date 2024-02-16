@@ -22,6 +22,7 @@
 #define COLUMNA_MES_PRECIO    1
 #define COLUMNA_DIA_PRECIO    2
 #define COLUMNA_HORA_PRECIO   3
+#define COLUMNA_PRECIO        4
 
 //Columnas del Csv que contiene la informacion de los terminales
 #define COLUMNA_CSV_NUMERO_TERMINAL 0
@@ -134,6 +135,7 @@ static void inicializar_ubicacion_informacion_precios(ubicacion_csv_precios_t* p
 
 
     posicion_info_precio->fila_encabezados = FILA_ENCABEZADOS;
+    posicion_info_precio->columna_precio = COLUMNA_PRECIO;
     posicion_info_precio->ubicacion_fecha_precios.columna_anyo = COLUMNA_ANYO_PRECIO;
     posicion_info_precio->ubicacion_fecha_precios.columna_mes = COLUMNA_MES_PRECIO;
     posicion_info_precio->ubicacion_fecha_precios.columna_dia = COLUMNA_DIA_PRECIO;

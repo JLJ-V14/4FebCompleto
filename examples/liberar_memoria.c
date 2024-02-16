@@ -77,14 +77,15 @@ void liberar_memoria_vehiculo(vehiculos_t* vehiculo) {
 }
 
 void liberar_memoria_bateria(bateria_t* bateria) {
-  free(bateria->fecha_inicio);
-  free(bateria->fecha_final);
-  free(bateria->fecha_objetivo);
+  //free(bateria->fecha_inicio);
+  //free(bateria->fecha_final);
+  //free(bateria->fecha_objetivo);
 }
 
 /*Este subprograma se utiliza para liberar la memoria reservada para almacenar la informacion procesada*/
 void liberar_memoria_informacion_procesada(informacion_procesada_t* informacion_procesada) {
 
+  if(informacion_procesada!=NULL){
   if (informacion_procesada->informacion_vehiculos.vehiculos != NULL) {
     /*
     for (int i = 0; i < informacion_procesada->informacion_vehiculos.numero_vehiculos; i++) {
@@ -122,6 +123,7 @@ void liberar_memoria_informacion_procesada(informacion_procesada_t* informacion_
       informacion_procesada->informacion_precio_venta.precios = NULL;
     }
   }
+}
 
 
 void finalizar_problema_optimizacion(problema_optimizacion_t* problema_optimizacion) {

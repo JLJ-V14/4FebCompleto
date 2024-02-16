@@ -257,9 +257,9 @@ typedef struct {
     OSQPFloat    bateria_inicial;
     OSQPFloat    bateria_objetivo;
     OSQPFloat    maxima_potencia;
-    struct tm*   fecha_inicio;
-    struct tm*   fecha_final;
-    struct tm*   fecha_objetivo;
+    struct tm   fecha_inicio;
+    struct tm   fecha_final;
+    struct tm   fecha_objetivo;
 }bateria_t;
 
 // Numero_baterias-> Numero de baterías presente en el sistema
@@ -276,7 +276,7 @@ typedef struct {
 // fecha_punto -> fecha del punto asociado en cuestión 
 // delta -> deltat entre el punto de simulacion en cuestión y el anterior deltat puede cambiar) 
 typedef struct {
-    struct tm* fecha_punto;
+    struct tm  fecha_punto;
     int        delta;
     int        punto_simulacion;
 }punto_simulacion_t;
@@ -312,10 +312,10 @@ typedef struct {
 // inicial y final de la simulacion a los cuales le corresponde ese precio.
 
 typedef struct {
-    struct tm* fecha_asociada;
-    float      precio;
-    int        punto_inicial;
-    int        punto_final;
+    struct tm      fecha_asociada;
+    OSQPFloat      precio;
+    OSQPInt        punto_inicial;
+    OSQPInt        punto_final;
 }precio_t;
 
 //Este struct contiene un array con los precios asociados a cada hora y el numero de horas.

@@ -1,4 +1,7 @@
 ﻿  procesar_informacion_entrada.c
-procesar_informacion_entrada.c(462,96): warning C4047: '==': 'puntos_adicionales_t **' differs in levels of indirection from 'int'
-procesar_informacion_entrada.c(462,96): warning C4020: 'cacular_puntos_simulacion': too many actual parameters
+procesar_informacion_entrada.c(143,12): warning C4477: 'printf' : format string '%d' requires an argument of type 'int', but variadic argument 1 has type 'OSQPInt'
+procesar_informacion_entrada.c(143,12): message : consider using '%lld' in the format string
+procesar_informacion_entrada.c(143,12): message : consider using '%Id' in the format string
+procesar_informacion_entrada.c(143,12): message : consider using '%I64d' in the format string
+procesar_informacion_entrada.c(547,134): warning C4020: 'procesar_informacion_vehiculos': too many actual parameters
   osqp_demo.vcxproj -> F:\osqp1feb\osqp-1.0.0.beta1\build\out\osqp_demo.exe

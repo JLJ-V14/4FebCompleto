@@ -110,16 +110,16 @@
       registrar_error("La informacion no ha podido ser procesada correctamente\n", REGISTRO_ERRORES);
       goto fin_programa;
     }
+    printf("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n");
+    printf("%d\n", informacion_procesada.informacion_vehiculos.vehiculos[0].numero_terminal);
     
-    /*
-    /*
     //Se procesa la informacion 
-    if (comprobar_informacion_procesada(&informacion_procesada) == ERROR) {
+    if (comprobar_informacion_procesada(informacion_procesada) == ERROR) {
       printf("La informacion procesada no ha sido correctamente\n");
       registrar_error("La informacion procesada no ha sido correctamente\n", REGISTRO_ERRORES);
       goto fin_programa;
     }
-    */
+    /* */
     fin_programa:
     // Se libera la memoria reservada
     liberar_memoria_informacion_procesada(&informacion_procesada);

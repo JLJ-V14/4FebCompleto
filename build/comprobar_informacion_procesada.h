@@ -9,7 +9,7 @@
 extern "C" {
 #endif
 
-	int comprobar_informacion_procesada(informacion_procesada_t* informacion_procesada);
+	int comprobar_informacion_procesada(informacion_procesada_t informacion_procesada);
 
 #ifdef __cplusplus
 }
