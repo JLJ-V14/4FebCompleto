@@ -30,7 +30,8 @@ int imprimir_informacion_procesada_vehiculos(const informacion_vehiculos_t infor
                                               const char* nombre_archivo) {
   //Se abre el archivo 
   FILE* file = fopen(nombre_archivo, "w");
-  
+  printf("Dentro de la informacion procesada es\n");
+  printTm_3(&(informacion_vehiculos.vehiculos[1].fecha_final));
   if (!file) {
     perror("Error al abrir el archivo para comprobar la informacion procesada de los vehiculos");
     registrar_error("Fallo en la comprobacion de la informacion de entrada", REGISTRO_ERRORES);
@@ -42,15 +43,25 @@ int imprimir_informacion_procesada_vehiculos(const informacion_vehiculos_t infor
  
   for (int i = 0; i < informacion_vehiculos.numero_vehiculos; i++) {
     const vehiculos_t v = informacion_vehiculos.vehiculos[i];
-    printf("El numero terminal es \n");
-    printf("%d\n",v.numero_terminal);
-    
+
+    // Convertir las fechas a strings antes de escribir en el archivo
+    char fechaInicioStr[20]; // Asegúrate de que el buffer sea lo suficientemente grande
+    strftime(fechaInicioStr, sizeof(fechaInicioStr), "%Y-%m-%d %H:%M", &(v.fecha_inicio));
+
+    char fechaFinalStr[20];
+    strftime(fechaFinalStr, sizeof(fechaFinalStr), "%Y-%m-%d %H:%M", &(v.fecha_final));
+
+
+
+
+    printf("La fecha final de la iteracion es \n");
+    printTm_3(&(v.fecha_final));
     fprintf(file, "%d,%d,%d,%s,%s,%.2f,%.2f,%.2f,%s\n",
       v.numero_terminal,
       v.punto_inicio,
       v.punto_final,
-      tm_to_string(&(v.fecha_inicio)),
-      tm_to_string(&(v.fecha_final)),
+      fechaInicioStr,
+      fechaFinalStr,
       v.bateria_inicial,
       v.bateria_final,
       v.capacidad_bateria,
@@ -73,8 +84,10 @@ int imprimir_informacion_procesada_bateria(const informacion_baterias_t * inform
   printf("El punto de inicio de la bateria es %d", informacion_baterias->baterias[0].punto_final);
   printf("El punto de inicio de la bateria es %d", informacion_baterias->baterias[0].punto_objetivo);
 
+
+
   FILE* file = fopen(nombre_archivo, "w");
-  /*
+ 
   if (!file) {
     perror("Error al abrir la informacion para comprobar la informacion procesada de las baterias");
     registrar_error("Error al abrir la informacion para comprobar la informacion procesada de las baterias", REGISTRO_ERRORES);
@@ -85,6 +98,16 @@ int imprimir_informacion_procesada_bateria(const informacion_baterias_t * inform
   //Se itera por cada bateria y se imprime la infomracion procesada de cada bateria
   for (int i = 0; i < informacion_baterias->numero_baterias; i++) {
     const bateria_t* b = &(informacion_baterias->baterias[i]);
+
+    char fechaInicioStr[20]; // Ensure the buffer is large enough for the formatted date-time string
+    strftime(fechaInicioStr, sizeof(fechaInicioStr), "%Y-%m-%d %H:%M", &(b->fecha_inicio));
+
+    char fechaFinalStr[20];
+    strftime(fechaFinalStr, sizeof(fechaFinalStr), "%Y-%m-%d %H:%M", &(b->fecha_final));
+
+    char fechaObjetivoStr[20];
+    strftime(fechaObjetivoStr, sizeof(fechaObjetivoStr), "%Y-%m-%d %H:%M", &(b->fecha_objetivo));
+
     fprintf(file, "%d,%d,%d,%d,%.2f,%.2f,%.2f,%.2f,%s,%s,%s\n",
       b->numero_terminal,
       b->punto_inicio,
@@ -94,11 +117,11 @@ int imprimir_informacion_procesada_bateria(const informacion_baterias_t * inform
       b->bateria_inicial,
       b->bateria_objetivo,
       b->maxima_potencia,
-      tm_to_string(&(b->fecha_inicio)),
-      tm_to_string(&(b->fecha_final)),
-      tm_to_string(&(b->fecha_objetivo)));
+      fechaInicioStr,
+      fechaFinalStr,
+      fechaObjetivoStr);
   }
-  */
+  /* */
   fclose(file);
   
   return EXITO;
@@ -221,7 +244,8 @@ int imprimir_informacion_puntos_adicionales(informacion_puntos_adicionales_t* in
 
 /*Este subprograma se utiliza para comprobar que la informacion procesada sea correcta*/
 int comprobar_informacion_procesada(informacion_procesada_t informacion_procesada) {
-
+  printf("La fecha dentro de la informacion");
+  printTm_3(&(informacion_procesada.informacion_vehiculos.vehiculos[1].fecha_final));
   //Se imprime la informacion procesada de los vehiculos
   if (imprimir_informacion_procesada_vehiculos((informacion_procesada.informacion_vehiculos),
     "Comprobar_informacion_procesada_vehiculos.csv") == ERROR) {
@@ -234,13 +258,14 @@ int comprobar_informacion_procesada(informacion_procesada_t informacion_procesad
   printf("%d\n", informacion_procesada.informacion_baterias.baterias[0].numero_terminal);
  
   //Se imprime la informacion procesada de las baterias
+  
   if (imprimir_informacion_procesada_bateria(&(informacion_procesada.informacion_baterias),
     "Comprobar_informacion_procesada_bateria.csv") == ERROR) {
     printf("No se ha podido comprobar la informacion procesada de las baterias\n");
     registrar_error("No se ha podido comprobar la informacion procesada de las baterias\n",REGISTRO_ERRORES);
     return ERROR;
   }
-  
+ 
   //Se imprime la informacion procesada de las restricciones
   if (imprimir_informacion_procesada_restricciones(&(informacion_procesada.informacion_restricciones_sistema),
     "Comprobar_informacion_procesada_restricciones.csv") == ERROR) {
@@ -248,43 +273,48 @@ int comprobar_informacion_procesada(informacion_procesada_t informacion_procesad
     registrar_error("No se ha comprobado la informacion procesada de las restricciones\n",REGISTRO_ERRORES);
     return ERROR;
   }
-
-
+  
+  
   printf("%f\n", informacion_procesada.informacion_precio_compra.precios[0].precio);
   printTm_3(&(informacion_procesada.informacion_precio_compra.precios[0].fecha_asociada));
 
 
   // Se imprime la informacion procesada de los precios de compra
-  if (imprimir_informacion_precios(&(informacion_procesada.informacion_precio_compra),
-    "Comprobar_informacion_procesada_precios_compra.csv") == ERROR) {
-    printf("No se ha podido comprobar la informacion procesada de los precios de compra\n");
-    registrar_error("No se ha podido comprobar la informacion procesada de los precios de compra\n",REGISTRO_ERRORES);
-    return ERROR;
-  }
-  /*
-  // Se imprime la informacion procesada de los precios de venta
-  if (imprimir_informacion_precios(&informacion_procesada->informacion_precio_venta,
-    "Comprobar_informacion_procesada_precios_venta") == ERROR) {
-    printf("No se ha podido comprobar la informacion procesada de los precios de venta\n");
-    registrar_error("No se ha podido comprobar la informacion de los precios de venta\n",REGISTRO_ERRORES);
-    return ERROR;
-  }
 
+ 
+
+  
   // Se imprime la informacion procesada de los puntos de simulacion 
-  if (imprimir_puntos_simulacion(&informacion_procesada->informacion_puntos_simulacion,
-    "Comprobar_informacion_procesada_puntos_simulacion") == ERROR) {
+  if (imprimir_puntos_simulacion(&(informacion_procesada.informacion_puntos_simulacion),
+    "Comprobar_informacion_procesada_puntos_simulacion.csv") == ERROR) {
     printf("No se ha podido comprobar la informacion procesada de los puntos de simulacion\n");
     registrar_error("No se ha podido comprobar la informacion procesada de los puntos de simulacion\n", REGISTRO_ERRORES);
     return ERROR;
   }
   // Se imprime la informacion procesada de los puntos adicionales 
 
-  if (imprimir_informacion_puntos_adicionales(&informacion_procesada->informacion_puntos_adicionales,
-    "Comprobar_informacion_procesada_puntos_adicionales") == ERROR) {
+  if (imprimir_informacion_puntos_adicionales(&(informacion_procesada.informacion_puntos_adicionales),
+    "Comprobar_informacion_procesada_puntos_adicionales.csv") == ERROR) {
     printf("No se ha podido comprobar la informacion procesada de los puntos adicionales\n");
     registrar_error("No se ha podido comprobar la informacion procesada de los puntos adicionales\n", REGISTRO_ERRORES);
     return ERROR;
   }
-  */
+
+  
+  if (imprimir_informacion_precios(&(informacion_procesada.informacion_precio_compra),
+    "Comprobar_informacion_procesada_precios_compra.csv") == ERROR) {
+    printf("No se ha podido comprobar la informacion procesada de los precios de compra\n");
+    registrar_error("No se ha podido comprobar la informacion procesada de los precios de compra\n",REGISTRO_ERRORES);
+    return ERROR;
+  }
+
+    // Se imprime la informacion procesada de los precios de venta
+  if (imprimir_informacion_precios(&informacion_procesada.informacion_precio_venta,
+    "Comprobar_informacion_procesada_precios_venta.csv") == ERROR) {
+    printf("No se ha podido comprobar la informacion procesada de los precios de venta\n");
+    registrar_error("No se ha podido comprobar la informacion de los precios de venta\n",REGISTRO_ERRORES);
+    return ERROR;
+  }
+  /**/
   return EXITO;
 }

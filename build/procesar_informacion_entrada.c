@@ -56,7 +56,10 @@ void procesar_informacion_restricciones(datos_csv_restricciones_t* datos_csv_res
   int columna_max_potencia_terminal_12 = datos_csv_restricciones->posiciones_informacion_restricciones.columna_max_potencia_terminal_12;
   //Cargo el puntero al csv de las restricciones
   datos_csv_t* datos_restricciones = &(datos_csv_restricciones->informacion_restricciones);
-  informacion_restricciones->potencia_maxima_red = (OSQPFloat)atof(datos_restricciones->datos[fila_valores][columna_max_potencia_sistema] - '0');
+  informacion_restricciones->potencia_maxima_red = (OSQPFloat)atof(datos_restricciones->datos[fila_valores][columna_max_potencia_sistema]);
+  printf("FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWEEEEEEEEEEEEEEEEEEEEE\n");
+  printf("LA RESTRICCION DE POTENCIA MAXIMA ES \n");
+  printf("%s\n", datos_restricciones->datos[fila_valores][columna_max_potencia_sistema]);
   informacion_restricciones->potencia_maxima_red_R = informacion_restricciones->potencia_maxima_red / 3;
   informacion_restricciones->potencia_maxima_red_S = informacion_restricciones->potencia_maxima_red / 3;
   informacion_restricciones->potencia_maxima_red_T = informacion_restricciones->potencia_maxima_red / 3;
@@ -136,7 +139,7 @@ int procesar_informacion_vehiculos(informacion_entrada_t* informacion_entrada, i
     informacion_procesada->informacion_vehiculos.vehiculos[numero_vehiculo].bateria_inicial   = (OSQPFloat)atof(informacion_entrada->datos_vehiculos.informacion_vehiculos.datos[numero_vehiculo + 1][columna_bat_inicial]);
     informacion_procesada->informacion_vehiculos.vehiculos[numero_vehiculo].capacidad_bateria = (OSQPFloat)atof(informacion_entrada->datos_vehiculos.informacion_vehiculos.datos[numero_vehiculo + 1][columna_capacidad]);
     informacion_procesada->informacion_vehiculos.vehiculos[numero_vehiculo].numero_terminal   = (OSQPInt)atof(informacion_entrada->datos_vehiculos.informacion_vehiculos.datos[numero_vehiculo + 1][columna_terminal]);
-    informacion_procesada->informacion_vehiculos.vehiculos[numero_vehiculo].modo_carga        = informacion_entrada->datos_vehiculos.informacion_vehiculos.datos[numero_vehiculo + 1][columna_terminal];
+    informacion_procesada->informacion_vehiculos.vehiculos[numero_vehiculo].modo_carga        = informacion_entrada->datos_vehiculos.informacion_vehiculos.datos[numero_vehiculo + 1][columna_modo_carga];
     
     //Se carga la fechas inicial del vehiculo
     printf("Iteracion\n");
@@ -151,7 +154,10 @@ int procesar_informacion_vehiculos(informacion_entrada_t* informacion_entrada, i
     cargar_fecha(&(informacion_entrada->datos_vehiculos.informacion_vehiculos), &(informacion_procesada->informacion_vehiculos.vehiculos[numero_vehiculo].fecha_final),
       columna_anyo_final, columna_mes_final, columna_dia_final, columna_hora_final, columna_minuto_final,
       numero_vehiculo + 1, SI_INCLUIR_MINUTO);
-    
+
+    printf("La fecha final del vehiculo es\n");
+    printTm_2(&(informacion_procesada->informacion_vehiculos.vehiculos[numero_vehiculo].fecha_final));
+
     //Se obtiene de simulacion inicial del vehiculo
     printf("uisi\n");
     printf("El numero del vehiculo es %d\n", numero_vehiculo);
@@ -225,7 +231,23 @@ int procesar_informacion_baterias(informacion_entrada_t * informacion_entrada,in
       printf("Error: el dato de potencia máxima es NULL o está vacío.\n");
       // Manejar el error como sea apropiado
     }
+    //Se procede a cargar la bateria inicial
+    char* bateria_inicial = informacion_entrada->datos_baterias.informacion_baterias.datos[numero_bateria + 1][columna_bateria_inicial];
+    if (bateria_inicial != NULL && *bateria_inicial != '\0') {
+      informacion_procesada->informacion_baterias.baterias[numero_bateria].bateria_inicial = (OSQPFloat)atof(bateria_inicial);
+    }
+    else {
+      printf("Error: el dato de bateria inicial es NULL o está vacío.\n");
+      // Manejar el error como sea apropiado
+    }
+    char* bateria_objetivo = informacion_entrada->datos_baterias.informacion_baterias.datos[numero_bateria + 1][columna_bateria_objetivo];
 
+    if (bateria_objetivo != NULL && *bateria_objetivo != '\0') {
+      informacion_procesada->informacion_baterias.baterias[numero_bateria].bateria_objetivo = (OSQPFloat)atof(bateria_objetivo);
+     }
+     else {
+      printf("Error el dato de bateria objetivo es NULL o está vacío.\n");
+     }
     char * considerar_objetivo = informacion_entrada->datos_baterias.informacion_baterias.datos[numero_bateria + 1][columna_bateria_objetivo];
 
      if (considerar_objetivo != NULL && *considerar_objetivo != '\0') { // Verificar que el dato no sea NULL y no esté vacío
@@ -309,6 +331,9 @@ int procesar_informacion_precio(informacion_entrada_t* informacion_entrada, info
   //Se reserva memoria para almacenar la informacion procesada de los precios:
   informacion_procesada->informacion_precio_compra.precios = (precio_t*)malloc(informacion_procesada->informacion_precio_compra.numero_horas * sizeof(precio_t));
   informacion_procesada->informacion_precio_venta.precios = (precio_t*)malloc(informacion_procesada->informacion_precio_venta.numero_horas * sizeof(precio_t));
+  printf("el numero de horas del precio de compra es %d", informacion_procesada->informacion_precio_compra.numero_horas);
+  printf("el numero de horas del precio de venta es %d", informacion_procesada->informacion_precio_venta.numero_horas);
+
   //Se crea una variable booleana para identificar a cuantos puntos de simulacion hay que asignarles un precio de la
   //electricidad
   bool fin_bucle = false;
@@ -328,8 +353,8 @@ int procesar_informacion_precio(informacion_entrada_t* informacion_entrada, info
   int fila_inicial_precio_compra = 1;
   int fila_inicial_precio_venta = 1;
   /*Se carga el primer precio de compra y venta asi como el primer punto de simulacion, asi como la primera fecha*/
-  printf("%d", columna_precio_compra);
-  printf("%d", columna_precio_venta);
+  printf("%d\n", columna_precio_compra);
+  printf("%d\n", columna_precio_venta);
   OSQPFloat precio_actual_compra = atof(informacion_entrada->datos_precio_compra.informacion_precio.datos[index_precio_actual][columna_precio_compra]);
   OSQPFloat precio_actual_venta = atof(informacion_entrada->datos_precio_venta.informacion_precio.datos[index_precio_actual][columna_precio_venta]);
 
@@ -339,6 +364,7 @@ int procesar_informacion_precio(informacion_entrada_t* informacion_entrada, info
 
   /*Se carga el numero de puntos de simulacion que hay en total*/
   int numero_puntos_simulacion = informacion_procesada->informacion_puntos_simulacion.numero_puntos_simulacion;
+  printf("El numero de puntos simulacion es %d\n", numero_puntos_simulacion);
 
   if (cargar_fecha(&(informacion_entrada->datos_precio_compra.informacion_precio), &(informacion_procesada->informacion_precio_compra.precios[0].fecha_asociada),
     columna_anyo_precio_compra, columna_mes_precio_compra, columna_dia_precio_compra, columna_hora_precio_compra,
@@ -366,14 +392,14 @@ int procesar_informacion_precio(informacion_entrada_t* informacion_entrada, info
 
   printf("LLEGÓ AL BUCLE\n");
   while (!fin_bucle) {
-
+    printf("Iteracion bucle precio\n");
     //Cargo el precio de la hora actual
     if (comprobar_hora(informacion_procesada->informacion_precio_compra.precios[precio_actual].fecha_asociada,
       informacion_procesada->informacion_puntos_simulacion.puntos_simulacion[punto_actual].fecha_punto) == false) {
 
+      printf("Entra condicional precio\n");
       informacion_procesada->informacion_precio_compra.precios[precio_actual].punto_final = punto_actual - 1;
-      informacion_procesada->informacion_precio_compra.precios[precio_actual].punto_final = punto_actual - 1;
-
+      informacion_procesada->informacion_precio_venta.precios[precio_actual].punto_final = punto_actual - 1;
       precio_actual++;
 
       if (cargar_fecha(&(informacion_entrada->datos_precio_compra.informacion_precio), &(informacion_procesada->informacion_precio_compra.precios[precio_actual].fecha_asociada),
@@ -398,14 +424,16 @@ int procesar_informacion_precio(informacion_entrada_t* informacion_entrada, info
       informacion_procesada->informacion_precio_compra.precios[precio_actual].punto_inicial = punto_actual;
       informacion_procesada->informacion_precio_venta.precios[precio_actual].punto_inicial = punto_actual;
 
-      
-
-      if (numero_puntos_simulacion < punto_actual) {
-        fin_bucle = true;
-      }
     }
     punto_actual++;
+    printf("El punto actual es %d", punto_actual);
+    if (numero_puntos_simulacion - 1 < punto_actual) {
+      fin_bucle = true;
+    }
   }
+  informacion_procesada->informacion_precio_compra.precios[precio_actual].punto_final = punto_actual - 1;
+  informacion_procesada->informacion_precio_venta.precios[precio_actual].punto_final = punto_actual - 1;
+
   printf("EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEENNNNNNNNNNNNNNNNNNNNNNNNNNDDDDDDDDDDDDDDDDDD\n");
   return EXITO;
 }
@@ -456,9 +484,12 @@ int configurar_puntos_simulacion(informacion_entrada_t* informacion_entrada, inf
   //Se carga la ubicacion de la resolucion temporal de la simulacion
   int columna_resolucion_minutos = informacion_entrada->datos_algoritmo.posiciones_informacion_algoritmo.resolucion_minutos;
 
+
+  printf("EWEEEEEEEEEEEEEEEEEEEEEEEERRRRRRRRRRRRRRRRRRIIIIIIIIIIII\n");
+  
   //Se carga la resolution temporal de la simulacion
   int delta_resolucion = atoi(informacion_entrada->datos_algoritmo.informacion_algoritmo.datos[fila_valores][columna_resolucion_minutos]);
-
+  printf("%d", delta_resolucion);
 
   
 
@@ -506,7 +537,6 @@ int configurar_puntos_simulacion(informacion_entrada_t* informacion_entrada, inf
   printf("EL numero de fechas adicionales es %d", informacion_procesada->informacion_puntos_adicionales.numero_puntos);
   for (int i = 0; i < informacion_procesada->informacion_puntos_adicionales.numero_puntos; i++) {
     printTm_2(&(informacion_procesada->informacion_puntos_adicionales.puntos[i].fecha_adicional));
-
   }
   /* */
   return EXITO;
@@ -544,7 +574,7 @@ int procesar_informacion_entrada(informacion_entrada_t*    informacion_entrada,
     return ERROR;
   }
   
-  if (procesar_informacion_vehiculos(informacion_entrada, informacion_procesada,informacion_procesada->informacion_puntos_adicionales.puntos) == ERROR) {
+  if (procesar_informacion_vehiculos(informacion_entrada, informacion_procesada) == ERROR) {
     printf("No se ha podido configurar la informacion de los vehiculos correctamente\n");
     registrar_error("No se ha podido configurar la informacion de los vehiculos correctamente\n",REGISTRO_ERRORES);
     return ERROR;

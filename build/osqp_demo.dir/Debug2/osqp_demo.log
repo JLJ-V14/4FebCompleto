@@ -1,7 +1,3 @@
-﻿  procesar_informacion_entrada.c
-procesar_informacion_entrada.c(143,12): warning C4477: 'printf' : format string '%d' requires an argument of type 'int', but variadic argument 1 has type 'OSQPInt'
-procesar_informacion_entrada.c(143,12): message : consider using '%lld' in the format string
-procesar_informacion_entrada.c(143,12): message : consider using '%Id' in the format string
-procesar_informacion_entrada.c(143,12): message : consider using '%I64d' in the format string
-procesar_informacion_entrada.c(547,134): warning C4020: 'procesar_informacion_vehiculos': too many actual parameters
+﻿  calcular_puntos_simulacion.c
+calcular_puntos_simulacion.c(50,65): warning C4113: 'int (__cdecl *)(tm,tm)' differs in parameter lists from '_CoreCrtNonSecureSearchSortCompareFunction'
   osqp_demo.vcxproj -> F:\osqp1feb\osqp-1.0.0.beta1\build\out\osqp_demo.exe

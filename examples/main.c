@@ -38,6 +38,23 @@
     setlocale(LC_NUMERIC, "C");
   }
 
+  static void printTm_4(const struct tm* date) {
+    if (date == NULL) {
+      printf("The date is NULL\n");
+      return;
+    }
+
+    // Note: tm_year is years since 1900, tm_mon is 0-11, and tm_mday is 1-31
+    printf("Year: %d, Month: %02d, Day: %02d\n",
+      date->tm_year + 1900, date->tm_mon + 1, date->tm_mday);
+    printf("Hour: %02d, Minute: %02d, Second: %02d\n",
+      date->tm_hour, date->tm_min, date->tm_sec);
+
+    // Optionally, you can print the day of the week and day of the year
+    printf("Weekday (Sunday=0): %d, Day of the year: %d\n",
+      date->tm_wday, date->tm_yday);
+  }
+
 
 
   int main() {
@@ -112,7 +129,9 @@
     }
     printf("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n");
     printf("%d\n", informacion_procesada.informacion_vehiculos.vehiculos[0].numero_terminal);
-    
+
+    printf("PROBANDO\n");
+    printTm_4(&(informacion_procesada.informacion_vehiculos.vehiculos[2].fecha_final));
     //Se procesa la informacion 
     if (comprobar_informacion_procesada(informacion_procesada) == ERROR) {
       printf("La informacion procesada no ha sido correctamente\n");

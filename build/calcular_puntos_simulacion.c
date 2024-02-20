@@ -502,12 +502,14 @@ int cacular_puntos_simulacion(informacion_entrada_t* informacion_entrada, struct
   //Se convierte el delta de simulacion de minutos a segundos
   int delta_simulacion_segundos = delta_simulacion * 60;
   informacion_procesada->informacion_puntos_simulacion.delta_minutos = delta_simulacion;
+  printf("SUEEEEEEEEEEEEEEEEEEECCCCCCCCCCCCCCCCIIIIIIIIIIIIIIIIIIAAAAAAAAA\n");
+  printf("%d\n", informacion_procesada->informacion_puntos_simulacion.delta_minutos);
 
   //Se obtiene el tamaño provisional del numero de puntos de simulacion
   int numero_puntos_provisionales = calcular_numero_puntos_provisional(&tiempo_actual, &tiempo_final, delta_simulacion_segundos,
     fechas_adicionales);
 
-  informacion_procesada->informacion_puntos_simulacion.puntos_simulacion = calloc(numero_puntos_provisionales, sizeof(puntos_adicionales_t));
+  informacion_procesada->informacion_puntos_simulacion.puntos_simulacion = calloc(numero_puntos_provisionales, sizeof(punto_simulacion_t));
 
 
   //Se maneja el caso de que no se reserve memoria correctamente
@@ -528,18 +530,41 @@ int cacular_puntos_simulacion(informacion_entrada_t* informacion_entrada, struct
   //Se crea una variable para llevar la cuenta de por cual punto de simulacion se va //
   int punto_actual = 0;
 
+  /*Se cargan la fecha inicial del algoritmo como el primer punto*/
+  informacion_procesada->informacion_puntos_simulacion.puntos_simulacion[punto_actual].fecha_punto = *fecha_inicial_algoritmo;
+  informacion_procesada->informacion_puntos_simulacion.puntos_simulacion[punto_actual].punto_simulacion = punto_actual;
+  informacion_procesada->informacion_puntos_simulacion.puntos_simulacion[punto_actual].delta = 0;
+
+  //Se comprueba si la primera fecha adicional a añadir coincide con la fecha inicial del algoritmo si es así
+  //se ajusta la posicion del array de fechas adicionales a la siguiente posición
+  if (comparar_valores_tm((*fechas_adicionales)[index_fecha_adicional],*fecha_inicial_algoritmo)!=-1) {
+  
+    informacion_procesada->informacion_puntos_adicionales.puntos[index_fecha_adicional].numero_punto = punto_actual;
+    informacion_procesada->informacion_puntos_adicionales.puntos[index_fecha_adicional].fecha_adicional = *fecha_inicial_algoritmo;
+    index_fecha_adicional++;
+  }
+
+  punto_actual++;
+  tiempo_actual += delta_simulacion_segundos;
+  fecha_actual = localtime(&tiempo_actual);
 
   while (tiempo_actual < tiempo_final) {
 
-    fecha_actual = localtime(&tiempo_actual);
-
+   // fecha_actual = localtime(&tiempo_actual);
+    
     if (index_fecha_adicional < *numero_fechas_adicionales) {
       //Se compara la fecha que se va a añadir en la simulacion con la fecha siguiente a añadir de fechas
-      // adicionales en concreto si es igual a una fecha adicional que se va a añadir o si esta por encima
+      //adicionales en concreto si es igual a una fecha adicional que se va a añadir o si esta por encima
        //teniendo en cuenta que la forma de proceder es distinta
 
      //Si la fecha a añadir es superior a la fecha adicional significa que se ha pasado por encima de la
-      // fecha adicional y que hay que añadir la fecha adicional manualmente
+     //fecha adicional y que hay que añadir la fecha adicional manualmente
+      printf("La fecha actual es\n");
+    //  printTm(&(informacion_procesada->informacion_puntos_simulacion.puntos_simulacion[punto_actual-1].fecha_punto));
+      printf("\n");
+      printf("la fecha adicional es\n");
+      //printTm((fechas_adicionales)[index_fecha_adicional]);
+      printf("\n");
 
       if (comparar_valores_tm(*fecha_actual, ((*fechas_adicionales)[index_fecha_adicional])) == 1) {
         informacion_procesada->informacion_puntos_simulacion.puntos_simulacion[punto_actual].fecha_punto = ((*fechas_adicionales)[index_fecha_adicional]);
@@ -556,6 +581,8 @@ int cacular_puntos_simulacion(informacion_entrada_t* informacion_entrada, struct
 
       }
 
+      /*Si el siguiente punto en simulacion a añadir coincide con la siguiente fecha adicional a incluir en
+        simulacion*/
       else if (comparar_valores_tm(*fecha_actual, ((*fechas_adicionales)[index_fecha_adicional])) == 0) {
         printf("El punto actual es %d", punto_actual);
         informacion_procesada->informacion_puntos_simulacion.puntos_simulacion[punto_actual].fecha_punto = *fecha_actual;
@@ -570,10 +597,19 @@ int cacular_puntos_simulacion(informacion_entrada_t* informacion_entrada, struct
         punto_actual++;
         index_fecha_adicional++;
       }
+      else {
+        printf("Entra en el alternativo\n");
+        informacion_procesada->informacion_puntos_simulacion.puntos_simulacion[punto_actual].fecha_punto = *fecha_actual;
+        informacion_procesada->informacion_puntos_simulacion.puntos_simulacion[punto_actual].punto_simulacion = punto_actual;
+        informacion_procesada->informacion_puntos_simulacion.puntos_simulacion[punto_actual].delta = delta_simulacion;
+        punto_actual++;
+        
+      }
 
     }
 
-
+    /*Si el siguiente punto a añadir en simulacion no es un punto adicional simplemente un punto que se obtiene
+      al sumarle la resolucion de tiempo al punto anterior*/
     else {
       informacion_procesada->informacion_puntos_simulacion.puntos_simulacion[punto_actual].fecha_punto = *fecha_actual;
       informacion_procesada->informacion_puntos_simulacion.puntos_simulacion[punto_actual].punto_simulacion = punto_actual;
@@ -582,13 +618,24 @@ int cacular_puntos_simulacion(informacion_entrada_t* informacion_entrada, struct
       punto_actual++;
     }
 
+    /*Se calcula cual es el siguiente tiempo a añadir en simulacion el modo de proceder es diferente si el siguiente
+     punto es una hora en punto o no*/
 
-
-    tiempo_actual = mktime(&((*fechas_adicionales)[index_fecha_adicional]));
     tiempo_actual += delta_simulacion_segundos;
+    fecha_actual = localtime(&tiempo_actual);
+
+    if (comparar_valores_tm(*fecha_actual, (*fechas_adicionales)[index_fecha_adicional])!=-1) {
+      tiempo_actual = mktime(&((*fechas_adicionales)[index_fecha_adicional]));
+      tiempo_actual += delta_simulacion_segundos;
+    }
+    
+   // tiempo_actual = mktime(&((*fechas_adicionales)[index_fecha_adicional]));
+    //tiempo_actual += delta_simulacion_segundos;
 
   }
 
+  //Se procede a añadir las fechas adicionales restantes que hay entre el punto actual hasta el final de
+  //la simulacion.
   for (int i = index_fecha_adicional; i < *numero_fechas_adicionales; i++) {
     informacion_procesada->informacion_puntos_simulacion.puntos_simulacion[punto_actual].fecha_punto = ((*fechas_adicionales)[index_fecha_adicional]);
     informacion_procesada->informacion_puntos_simulacion.puntos_simulacion[punto_actual].punto_simulacion = punto_actual;
@@ -606,8 +653,12 @@ int cacular_puntos_simulacion(informacion_entrada_t* informacion_entrada, struct
   informacion_procesada->informacion_puntos_simulacion.puntos_simulacion[punto_actual].fecha_punto = *fecha_final_algoritmo;
   informacion_procesada->informacion_puntos_simulacion.puntos_simulacion[punto_actual].punto_simulacion = punto_actual;
   informacion_procesada->informacion_puntos_simulacion.puntos_simulacion[punto_actual].delta = obtener_diferencia_minutos(&(informacion_procesada->informacion_puntos_simulacion.puntos_simulacion[punto_actual - 1].fecha_punto), &((*fechas_adicionales)[index_fecha_adicional]));
-}
 
+  }
+  /*Se escribe en la variable correspondiente el número de puntos que se tienen en la simulacion*/
+  informacion_procesada->informacion_puntos_simulacion.numero_puntos_simulacion = punto_actual;
+
+  //Caso especial en el que la fecha inicial es igual que la fecha final nunca va a suceder.
   if (fecha_inicial_algoritmo == fecha_final_algoritmo) {
     informacion_procesada->informacion_puntos_simulacion.puntos_simulacion[punto_actual].delta = 0;
   }
