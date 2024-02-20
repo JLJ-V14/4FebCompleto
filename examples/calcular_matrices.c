@@ -5,6 +5,6 @@
 
 int calcular_matrices(informacion_entrada_t *informacion_sistema, OSQPCscMatrix*P,OSQPCscMatrix*A,
                       OSQPInt*l,OSQPInt*u,OSQPInt*n,OSQPInt*m) {
-	//Esta función se encarga de rellenar las matrices P,A,l,u,q con los datos del problema de optimizacion 
-
+	//Esta funciÃ³n se encarga de rellenar las matrices P,A,l,u,q con los datos del problema de optimizacion 
+ 
 }

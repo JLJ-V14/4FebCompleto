@@ -64,7 +64,7 @@
     informacion_entrada_t   informacion_sistema;
     informacion_procesada_t informacion_procesada;
     //Se define la estructura donde van a ir contenidas las matrices del problema de optimizacion
-    //problema_optimizacion_t problema_optimizacion = { 0 };
+    problema_optimizacion_t problema_optimizacion = { 0 };
 
     // Se asume éxito inicialmente.
     int estado = EXITO;
@@ -127,15 +127,19 @@
       registrar_error("La informacion no ha podido ser procesada correctamente\n", REGISTRO_ERRORES);
       goto fin_programa;
     }
-    printf("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n");
-    printf("%d\n", informacion_procesada.informacion_vehiculos.vehiculos[0].numero_terminal);
+   
 
-    printf("PROBANDO\n");
-    printTm_4(&(informacion_procesada.informacion_vehiculos.vehiculos[2].fecha_final));
+    
+    
     //Se procesa la informacion 
     if (comprobar_informacion_procesada(informacion_procesada) == ERROR) {
       printf("La informacion procesada no ha sido correctamente\n");
       registrar_error("La informacion procesada no ha sido correctamente\n", REGISTRO_ERRORES);
+      goto fin_programa;
+    }
+    if (preparar_problema_optimizacion(informacion_procesada,problema_optimizacion) == ERROR) {
+      printf("Las matrices del problema de optimizacion no han sido calculadas correctamente\n");
+      registrar_error("Las matrices del problema de optimización no han sido calculadas correctamente\n", REGISTRO_ERRORES);
       goto fin_programa;
     }
     /* */

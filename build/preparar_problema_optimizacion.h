@@ -8,7 +8,7 @@
 extern "C" {
 #endif
 
-	void preparar_problema_optimizacion(informacion_entrada_t* informacion_sistema,
+	int preparar_problema_optimizacion(informacion_entrada_t* informacion_sistema,
 		problema_optimizacion_t* problema_optimizacion);
 
 #ifdef __cplusplus

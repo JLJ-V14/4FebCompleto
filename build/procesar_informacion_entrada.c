@@ -57,9 +57,7 @@ void procesar_informacion_restricciones(datos_csv_restricciones_t* datos_csv_res
   //Cargo el puntero al csv de las restricciones
   datos_csv_t* datos_restricciones = &(datos_csv_restricciones->informacion_restricciones);
   informacion_restricciones->potencia_maxima_red = (OSQPFloat)atof(datos_restricciones->datos[fila_valores][columna_max_potencia_sistema]);
-  printf("FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWEEEEEEEEEEEEEEEEEEEEE\n");
-  printf("LA RESTRICCION DE POTENCIA MAXIMA ES \n");
-  printf("%s\n", datos_restricciones->datos[fila_valores][columna_max_potencia_sistema]);
+ 
   informacion_restricciones->potencia_maxima_red_R = informacion_restricciones->potencia_maxima_red / 3;
   informacion_restricciones->potencia_maxima_red_S = informacion_restricciones->potencia_maxima_red / 3;
   informacion_restricciones->potencia_maxima_red_T = informacion_restricciones->potencia_maxima_red / 3;
@@ -98,7 +96,7 @@ int procesar_informacion_vehiculos(informacion_entrada_t* informacion_entrada, i
   puntos_adicionales_t* puntos_adicionales = informacion_procesada->informacion_puntos_adicionales.puntos;
 
   informacion_procesada->informacion_vehiculos.numero_vehiculos = informacion_entrada->datos_vehiculos.informacion_vehiculos.filas -1 ;
-  printf("EL numero de vehiculos es%d", informacion_procesada->informacion_vehiculos.numero_vehiculos);
+ 
 
   informacion_procesada->informacion_vehiculos.vehiculos = (vehiculos_t*)malloc(informacion_procesada->informacion_vehiculos.numero_vehiculos * sizeof(vehiculos_t));
 
@@ -142,8 +140,7 @@ int procesar_informacion_vehiculos(informacion_entrada_t* informacion_entrada, i
     informacion_procesada->informacion_vehiculos.vehiculos[numero_vehiculo].modo_carga        = informacion_entrada->datos_vehiculos.informacion_vehiculos.datos[numero_vehiculo + 1][columna_modo_carga];
     
     //Se carga la fechas inicial del vehiculo
-    printf("Iteracion\n");
-    printf("%d\n", informacion_procesada->informacion_vehiculos.vehiculos[numero_vehiculo].numero_terminal);
+   
 
     //Se carga la fecha inicial del vehiculo
     cargar_fecha(&(informacion_entrada->datos_vehiculos.informacion_vehiculos), &(informacion_procesada->informacion_vehiculos.vehiculos[numero_vehiculo].fecha_inicio),
@@ -155,21 +152,20 @@ int procesar_informacion_vehiculos(informacion_entrada_t* informacion_entrada, i
       columna_anyo_final, columna_mes_final, columna_dia_final, columna_hora_final, columna_minuto_final,
       numero_vehiculo + 1, SI_INCLUIR_MINUTO);
 
-    printf("La fecha final del vehiculo es\n");
-    printTm_2(&(informacion_procesada->informacion_vehiculos.vehiculos[numero_vehiculo].fecha_final));
+  
 
     //Se obtiene de simulacion inicial del vehiculo
-    printf("uisi\n");
-    printf("El numero del vehiculo es %d\n", numero_vehiculo);
+   
+  
     obtener_punto_simulacion(&(informacion_procesada->informacion_vehiculos.vehiculos[numero_vehiculo].punto_inicio),
                              &(informacion_procesada->informacion_vehiculos.vehiculos[numero_vehiculo].fecha_inicio), puntos_adicionales);
     
     //Se obtiene el punto de simulacion final del vehiculo
-    printf("uisa\n");
+
     obtener_punto_simulacion(&(informacion_procesada->informacion_vehiculos.vehiculos[numero_vehiculo].punto_final),
                              &(informacion_procesada->informacion_vehiculos.vehiculos[numero_vehiculo].fecha_final), puntos_adicionales);
     /*  */
-    printf("uisu\n");
+    
   }
 
   
@@ -296,12 +292,11 @@ int procesar_informacion_baterias(informacion_entrada_t * informacion_entrada,in
 
 
      char* considerar_objetivo_cadena = informacion_entrada->datos_baterias.informacion_baterias.datos[numero_bateria + 1][columna_consideracion_objetivo_carga];
-     printf("¿Se considera el objetivo?\n");
-     printf("%s\n", considerar_objetivo_cadena);
+  
 
      //Se comprueba si hay que cargar fecha objetivo
      if(considerar_objetivo_cadena != NULL && strings_iguales(considerar_objetivo_cadena, "si") == true) {
-       printf("ENTRAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\n");
+       
        //Se carga la fecha objetivo
        cargar_fecha(&(informacion_entrada->datos_baterias.informacion_baterias), &(informacion_procesada->informacion_baterias.baterias[numero_bateria].fecha_objetivo),
          columna_anyo_objetivo, columna_mes_objetivo, columna_dia_objetivo, columna_hora_objetivo, columna_minuto_objetivo,
@@ -313,7 +308,7 @@ int procesar_informacion_baterias(informacion_entrada_t * informacion_entrada,in
        informacion_procesada->informacion_baterias.baterias[numero_bateria].considerar_objetivo = true;
      }
      else {
-       printf("NO ENTRAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\n");
+       
        informacion_procesada->informacion_baterias.baterias->punto_objetivo = 0;
        memset(&(informacion_procesada->informacion_baterias.baterias[numero_bateria].fecha_objetivo), 0, sizeof(struct tm));
        informacion_procesada->informacion_baterias.baterias[numero_bateria].considerar_objetivo = false;
@@ -324,15 +319,14 @@ int procesar_informacion_baterias(informacion_entrada_t * informacion_entrada,in
 
 /*Este subprograma se utiliza para procesar la informacion de los precios*/
 int procesar_informacion_precio(informacion_entrada_t* informacion_entrada, informacion_procesada_t* informacion_procesada) {
-  printf("HHHHHHHSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS\n");
+  
   // Se carga el numero de precios que hay = numero de horas
   informacion_procesada->informacion_precio_compra.numero_horas = informacion_entrada->datos_precio_compra.informacion_precio.filas - 1;
   informacion_procesada->informacion_precio_venta.numero_horas = informacion_entrada->datos_precio_venta.informacion_precio.filas - 1;
   //Se reserva memoria para almacenar la informacion procesada de los precios:
   informacion_procesada->informacion_precio_compra.precios = (precio_t*)malloc(informacion_procesada->informacion_precio_compra.numero_horas * sizeof(precio_t));
   informacion_procesada->informacion_precio_venta.precios = (precio_t*)malloc(informacion_procesada->informacion_precio_venta.numero_horas * sizeof(precio_t));
-  printf("el numero de horas del precio de compra es %d", informacion_procesada->informacion_precio_compra.numero_horas);
-  printf("el numero de horas del precio de venta es %d", informacion_procesada->informacion_precio_venta.numero_horas);
+  
 
   //Se crea una variable booleana para identificar a cuantos puntos de simulacion hay que asignarles un precio de la
   //electricidad
@@ -353,8 +347,7 @@ int procesar_informacion_precio(informacion_entrada_t* informacion_entrada, info
   int fila_inicial_precio_compra = 1;
   int fila_inicial_precio_venta = 1;
   /*Se carga el primer precio de compra y venta asi como el primer punto de simulacion, asi como la primera fecha*/
-  printf("%d\n", columna_precio_compra);
-  printf("%d\n", columna_precio_venta);
+ 
   OSQPFloat precio_actual_compra = atof(informacion_entrada->datos_precio_compra.informacion_precio.datos[index_precio_actual][columna_precio_compra]);
   OSQPFloat precio_actual_venta = atof(informacion_entrada->datos_precio_venta.informacion_precio.datos[index_precio_actual][columna_precio_venta]);
 
@@ -364,7 +357,7 @@ int procesar_informacion_precio(informacion_entrada_t* informacion_entrada, info
 
   /*Se carga el numero de puntos de simulacion que hay en total*/
   int numero_puntos_simulacion = informacion_procesada->informacion_puntos_simulacion.numero_puntos_simulacion;
-  printf("El numero de puntos simulacion es %d\n", numero_puntos_simulacion);
+  
 
   if (cargar_fecha(&(informacion_entrada->datos_precio_compra.informacion_precio), &(informacion_procesada->informacion_precio_compra.precios[0].fecha_asociada),
     columna_anyo_precio_compra, columna_mes_precio_compra, columna_dia_precio_compra, columna_hora_precio_compra,
@@ -390,14 +383,14 @@ int procesar_informacion_precio(informacion_entrada_t* informacion_entrada, info
   int punto_actual = 0;
   int precio_actual = 0;
 
-  printf("LLEGÓ AL BUCLE\n");
+  
   while (!fin_bucle) {
-    printf("Iteracion bucle precio\n");
+    
     //Cargo el precio de la hora actual
     if (comprobar_hora(informacion_procesada->informacion_precio_compra.precios[precio_actual].fecha_asociada,
       informacion_procesada->informacion_puntos_simulacion.puntos_simulacion[punto_actual].fecha_punto) == false) {
 
-      printf("Entra condicional precio\n");
+      
       informacion_procesada->informacion_precio_compra.precios[precio_actual].punto_final = punto_actual - 1;
       informacion_procesada->informacion_precio_venta.precios[precio_actual].punto_final = punto_actual - 1;
       precio_actual++;
@@ -426,7 +419,7 @@ int procesar_informacion_precio(informacion_entrada_t* informacion_entrada, info
 
     }
     punto_actual++;
-    printf("El punto actual es %d", punto_actual);
+    
     if (numero_puntos_simulacion - 1 < punto_actual) {
       fin_bucle = true;
     }
@@ -434,7 +427,7 @@ int procesar_informacion_precio(informacion_entrada_t* informacion_entrada, info
   informacion_procesada->informacion_precio_compra.precios[precio_actual].punto_final = punto_actual - 1;
   informacion_procesada->informacion_precio_venta.precios[precio_actual].punto_final = punto_actual - 1;
 
-  printf("EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEENNNNNNNNNNNNNNNNNNNNNNNNNNDDDDDDDDDDDDDDDDDD\n");
+ 
   return EXITO;
 }
 int configurar_puntos_simulacion(informacion_entrada_t* informacion_entrada, informacion_procesada_t* informacion_procesada) {
@@ -485,11 +478,11 @@ int configurar_puntos_simulacion(informacion_entrada_t* informacion_entrada, inf
   int columna_resolucion_minutos = informacion_entrada->datos_algoritmo.posiciones_informacion_algoritmo.resolucion_minutos;
 
 
-  printf("EWEEEEEEEEEEEEEEEEEEEEEEEERRRRRRRRRRRRRRRRRRIIIIIIIIIIII\n");
+ 
   
   //Se carga la resolution temporal de la simulacion
   int delta_resolucion = atoi(informacion_entrada->datos_algoritmo.informacion_algoritmo.datos[fila_valores][columna_resolucion_minutos]);
-  printf("%d", delta_resolucion);
+  
 
   
 
@@ -519,8 +512,7 @@ int configurar_puntos_simulacion(informacion_entrada_t* informacion_entrada, inf
  
   informacion_puntos_adicionales->puntos = NULL;
   puntos_adicionales_t ** puntos_adicionales = &(informacion_puntos_adicionales->puntos);
-  printf("EL numero de puntos adicionales es %d", informacion_puntos_adicionales->numero_puntos);
-  printf("LE NUMBER %d", informacion_puntos_adicionales->numero_puntos);
+ 
 
 
   
@@ -533,11 +525,8 @@ int configurar_puntos_simulacion(informacion_entrada_t* informacion_entrada, inf
     registrar_error("No se ha podido calcular el numero de puntos de simulacion\n", REGISTRO_ERRORES);
     return ERROR;
   }
-  printf("MARKA\n");
-  printf("EL numero de fechas adicionales es %d", informacion_procesada->informacion_puntos_adicionales.numero_puntos);
-  for (int i = 0; i < informacion_procesada->informacion_puntos_adicionales.numero_puntos; i++) {
-    printTm_2(&(informacion_procesada->informacion_puntos_adicionales.puntos[i].fecha_adicional));
-  }
+ 
+  
   /* */
   return EXITO;
 }
@@ -564,7 +553,7 @@ int procesar_informacion_entrada(informacion_entrada_t*    informacion_entrada,
     registrar_error("No se ha podido configurar los puntos de simulacion correctamente\n", REGISTRO_ERRORES);
     return ERROR;
   }
-
+  
   
 
   if (&(informacion_procesada->informacion_puntos_adicionales )== NULL) {
@@ -585,6 +574,7 @@ int procesar_informacion_entrada(informacion_entrada_t*    informacion_entrada,
     registrar_error("No se ha podido configurar la informacion de las baterias\n", REGISTRO_ERRORES);
     return ERROR;
   }
+
   
   if (procesar_informacion_precio(informacion_entrada, informacion_procesada) == ERROR) {
     printf("No se ha podido configurar la informacion de los precios\n");
@@ -592,5 +582,6 @@ int procesar_informacion_entrada(informacion_entrada_t*    informacion_entrada,
     return ERROR;
   }
   /* /* */
+  
   return EXITO;
 }

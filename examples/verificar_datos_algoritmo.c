@@ -152,15 +152,14 @@ static int verificar_parametros_temporales(datos_csv_algoritmo_t* datos_algoritm
 		fila_datos_algoritmo, SI_INCLUIR_MINUTO);
 
 	if (verificar_orden_fechas(fecha_inicial, fecha_final, INCLUIR_FECHA_IGUAL) == ERROR) {
-    
-
 		printf("Las fechas inicial y final del algoritmo no son correctas\n");
 		registrar_error("Las fechas inicial y final del algoritmo no son correctas\n", REGISTRO_ERRORES);
 		return ERROR;
 	}
 
 	if (comprobar_resolucion_tiempo_simulacion(datos_algoritmo) == ERROR) {
-
+    printf("La resolucion temporal de la simulacion no es correcta\n");
+    registrar_error("La resolucion temporal de la simulacion no es correcta\n", REGISTRO_ERRORES);
 		return ERROR;
 	}
 
@@ -178,7 +177,6 @@ int verificar_datos_algoritmo(datos_csv_algoritmo_t* datos_algoritmo) {
 
 	if (comprobar_dimensiones_csv_fijo(datos_algoritmo_informacion, NUM_FILAS_CSV_INFO_ALGORITMO,
 		NUM_COLUMNAS_CSV_INFO_ALGORITMO, "Informacion Algoritmo") == ERROR) {
-
 		printf("Las Dimensiones del CSV de los datos del algoritmo son incorrectas\n");
 		registrar_error("Las Dimensiones del CSV de los datos del algoritmo son incorrectas", REGISTRO_ERRORES);
 		return ERROR;
