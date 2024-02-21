@@ -528,11 +528,6 @@ int cacular_puntos_simulacion(informacion_entrada_t* informacion_entrada, struct
 
   while (tiempo_actual < tiempo_final) {
 
-    printf("La fecha actual es\n");
-    printTm(fecha_actual);
-    printf("\n");
-    printf("La fecha adicional es\n");
-    printTm(&((*fechas_adicionales)[index_fecha_adicional]));
    // fecha_actual = localtime(&tiempo_actual);
     
     if (index_fecha_adicional < *numero_fechas_adicionales) {

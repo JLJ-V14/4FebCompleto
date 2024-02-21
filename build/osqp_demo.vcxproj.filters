@@ -91,6 +91,33 @@
     <ClCompile Include="inicializar_informacion_procesada.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="calcular_matriz_a.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="calcular_matriz_p.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="calcular_matriz_q.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="calcular_numero_restricciones.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="calcular_numero_variables.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="calcular_vector_l.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="calcular_vector_u.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="configurar_ajustes_problema_optimizacion.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="preparar_solver_optimizacion.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="F:\osqp1feb\osqp-1.0.0.beta1\CMakeLists.txt" />
@@ -198,6 +225,33 @@
       <Filter>Head Files</Filter>
     </ClInclude>
     <ClInclude Include="inicializar_informacion_procesada.h">
+      <Filter>Head Files</Filter>
+    </ClInclude>
+    <ClInclude Include="calcular_matriz_p.h">
+      <Filter>Head Files</Filter>
+    </ClInclude>
+    <ClInclude Include="calcular_matriz_q.h">
+      <Filter>Head Files</Filter>
+    </ClInclude>
+    <ClInclude Include="calcular_matriz_a.h">
+      <Filter>Head Files</Filter>
+    </ClInclude>
+    <ClInclude Include="calcular_vector_l.h">
+      <Filter>Head Files</Filter>
+    </ClInclude>
+    <ClInclude Include="calcular_vector_u.h">
+      <Filter>Head Files</Filter>
+    </ClInclude>
+    <ClInclude Include="calcular_numero_variables.h">
+      <Filter>Head Files</Filter>
+    </ClInclude>
+    <ClInclude Include="calcular_numero_restricciones.h">
+      <Filter>Head Files</Filter>
+    </ClInclude>
+    <ClInclude Include="configurar_ajustes_optimizacion.h">
+      <Filter>Head Files</Filter>
+    </ClInclude>
+    <ClInclude Include="preparar_solver_optimizacion.h">
       <Filter>Head Files</Filter>
     </ClInclude>
   </ItemGroup>

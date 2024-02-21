@@ -126,24 +126,36 @@ void liberar_memoria_informacion_procesada(informacion_procesada_t* informacion_
 }
 
 
-void finalizar_problema_optimizacion(problema_optimizacion_t* problema_optimizacion) {
+void liberar_memoria_problema_optimizacion(problema_optimizacion_t* problema_optimizacion) {
   /*En este subprograma se liberan las posiciones en memoria reservadas a las matrices para la resolucion del
   problema*/
-  /*Se libera los contenidos de la matriz de objetivos*/
-  free(problema_optimizacion->matriz_objetivos.P_x);
-  free(problema_optimizacion->matriz_objetivos.P_i);
-  free(problema_optimizacion->matriz_objetivos.P_p);
-  free(problema_optimizacion->matriz_objetivos.q);
-  if (problema_optimizacion->matriz_objetivos.P) free(problema_optimizacion->matriz_objetivos.P);
-  /*Se libera los contenidos de la matriz de restriccion*/
-  free(problema_optimizacion->matriz_restricciones.A_i);
-  free(problema_optimizacion->matriz_restricciones.A_x);
-  free(problema_optimizacion->matriz_restricciones.A_p);
-  free(problema_optimizacion->matriz_restricciones.l);
-  free(problema_optimizacion->matriz_restricciones.u);
-  if (problema_optimizacion->matriz_restricciones.A) free(problema_optimizacion->matriz_restricciones.A);
+
+
+  //Se libera los contenidos de la matriz P
+  if (problema_optimizacion->matriz_p.P)free(problema_optimizacion->matriz_p.P);
+  if(problema_optimizacion->matriz_p.P_x)free(problema_optimizacion->matriz_p.P_x);
+  if(problema_optimizacion->matriz_p.P_i)free(problema_optimizacion->matriz_p.P_i);
+  if(problema_optimizacion->matriz_p.P_p)free(problema_optimizacion->matriz_p.P_p);
+
+  //Se libera los contenidos del vector q
+  if(problema_optimizacion->vector_q)free(problema_optimizacion->vector_q);
+
+  
+  // Se libera los contenidos de la matriz A
+  if (problema_optimizacion->matriz_a.A)free(problema_optimizacion->matriz_a.A);
+  if(problema_optimizacion->matriz_a.A_i)free(problema_optimizacion->matriz_a.A_i);
+  if(problema_optimizacion->matriz_a.A_x)free(problema_optimizacion->matriz_a.A_x);
+  if(problema_optimizacion->matriz_a.A_p)free(problema_optimizacion->matriz_a.A_p);
+
+  //Se liberan los contenidos de los vectores l y u
+  if(problema_optimizacion->vector_l)free(problema_optimizacion->vector_l);
+  if (problema_optimizacion->vector_u)free(problema_optimizacion->vector_u);
+
+  //Se liberan los ajustes 
   if (problema_optimizacion->ajustes)free(problema_optimizacion->ajustes);
+
+
   //Se limpia el solver
-  osqp_cleanup(problema_optimizacion->solver);
+  if(problema_optimizacion->solver)osqp_cleanup(problema_optimizacion->solver);
 
 }

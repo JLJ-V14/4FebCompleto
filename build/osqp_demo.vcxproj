@@ -334,10 +334,19 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClCompile Include="..\examples\verificar_restricciones.c" />
     <ClCompile Include="..\examples\verificar_vehiculos.c" />
     <ClCompile Include="calcular_dimensiones_problema.c" />
+    <ClCompile Include="calcular_matriz_a.c" />
+    <ClCompile Include="calcular_matriz_p.c" />
+    <ClCompile Include="calcular_matriz_q.c" />
+    <ClCompile Include="calcular_numero_restricciones.c" />
+    <ClCompile Include="calcular_numero_variables.c" />
     <ClCompile Include="calcular_puntos_simulacion.c" />
+    <ClCompile Include="calcular_vector_l.c" />
+    <ClCompile Include="calcular_vector_u.c" />
     <ClCompile Include="comprobar_informacion_procesada.c" />
+    <ClCompile Include="configurar_ajustes_problema_optimizacion.c" />
     <ClCompile Include="inicializar_informacion_procesada.c" />
     <ClCompile Include="preparar_problema_optimizacion.c" />
+    <ClCompile Include="preparar_solver_optimizacion.c" />
     <ClCompile Include="procesar_informacion_entrada.c" />
   </ItemGroup>
   <ItemGroup>
@@ -355,9 +364,17 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
   <ItemGroup>
     <ClInclude Include="calcular_matrices.h" />
     <ClInclude Include="calcular_dimensiones_problema.h" />
+    <ClInclude Include="calcular_matriz_a.h" />
+    <ClInclude Include="calcular_matriz_p.h" />
+    <ClInclude Include="calcular_matriz_q.h" />
+    <ClInclude Include="calcular_numero_restricciones.h" />
+    <ClInclude Include="calcular_numero_variables.h" />
     <ClInclude Include="calcular_puntos_simulacion.h" />
+    <ClInclude Include="calcular_vector_l.h" />
+    <ClInclude Include="calcular_vector_u.h" />
     <ClInclude Include="comprobar_informacion_procesada.h" />
     <ClInclude Include="comprobar_lectura_datos.h" />
+    <ClInclude Include="configurar_ajustes_optimizacion.h" />
     <ClInclude Include="conversion_numeros.h" />
     <ClInclude Include="csv.h" />
     <ClInclude Include="definiciones_globales.h" />
@@ -373,6 +390,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClInclude Include="operaciones_fecha.h" />
     <ClInclude Include="operaciones_string.h" />
     <ClInclude Include="preparar_problema_optimizacion.h" />
+    <ClInclude Include="preparar_solver_optimizacion.h" />
     <ClInclude Include="procesar_informacion_entrada.h" />
     <ClInclude Include="registrar_errores.h" />
     <ClInclude Include="tipos_optimizacion.h" />

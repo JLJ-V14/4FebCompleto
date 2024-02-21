@@ -8,6 +8,7 @@
   //#pragma comment(lib, "OSQPLIB.lib")
 #include <stdio.h>
 #include <locale.h>
+#include <io.h>
 #include "comprobar_lectura_datos.h"
 #include "comprobar_informacion_procesada.h"
 #include "definiciones_globales.h"
@@ -16,8 +17,8 @@
 #include "leer_entradas.h"
 #include "liberar_memoria.h"
 #include "main.h"
-#include <io.h>
 #include "osqp.h"
+#include "preparar_problema_optimizacion.h"
 #include "procesar_informacion_entrada.h"
 #include "registrar_errores.h"
 #include "tipos_optimizacion.h"
@@ -127,28 +128,27 @@
       registrar_error("La informacion no ha podido ser procesada correctamente\n", REGISTRO_ERRORES);
       goto fin_programa;
     }
-   
 
-    
-    
+   
     //Se procesa la informacion 
     if (comprobar_informacion_procesada(informacion_procesada) == ERROR) {
       printf("La informacion procesada no ha sido correctamente\n");
       registrar_error("La informacion procesada no ha sido correctamente\n", REGISTRO_ERRORES);
       goto fin_programa;
     }
-    if (preparar_problema_optimizacion(informacion_procesada,problema_optimizacion) == ERROR) {
+    if (preparar_problema_optimizacion(&informacion_procesada,&problema_optimizacion) == ERROR) {
       printf("Las matrices del problema de optimizacion no han sido calculadas correctamente\n");
       registrar_error("Las matrices del problema de optimización no han sido calculadas correctamente\n", REGISTRO_ERRORES);
       goto fin_programa;
     }
     /* */
-    fin_programa:
+   fin_programa:
+
     // Se libera la memoria reservada
     liberar_memoria_informacion_procesada(&informacion_procesada);
     printf("Memoria de informacion procesada liberada\n");
     liberar_memoria_csvs(&informacion_sistema);
-   // finalizar_problema_optimizacion(&problema_optimizacion);
+    liberar_memoria_problema_optimizacion(&problema_optimizacion);
 
 
     

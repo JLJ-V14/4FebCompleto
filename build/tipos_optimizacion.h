@@ -164,7 +164,7 @@ typedef struct {
     OSQPInt*       P_i;
     OSQPInt*       P_p;
     OSQPFloat*     q;
-}matriz_objetivos_t;
+}matriz_p_t;
 
 //La matriz A sirve para indicar las restricciones a las que están sometidas las variables 
 //de decisión 
@@ -173,8 +173,7 @@ typedef struct {
 //A_i-> Este vector contiene los índices de las filas en las que se encuentran los términos diferentes 
 //de 0 
 //A_p-> Indica cuando empiezan las columnas respecto al vector A_i 
-//l-> valor inferior de la restricción
-//u-> valor superior de la restricción
+
 
 typedef struct {
     OSQPCscMatrix* A;
@@ -182,20 +181,24 @@ typedef struct {
     OSQPFloat*     A_x;
     OSQPInt*       A_i;
     OSQPInt*       A_p;
-    OSQPFloat*     l;
-    OSQPFloat*     u;
-}matriz_restricciones_t;
+}matriz_a_t;
 
 //Ajustes generales del problema de optimizacion en este estructura
-//se guardan las matrices, el solver los ajustes el numero de variables
+//se guardan las matrices,los vectores, los vectores l y u son 
+//los valores mínimos y máximos que pueden tomar las variables.
+//El vector q representa los objetivos no cuadráticos
+// el solver los ajustes el numero de variables
 //y restricciones.
 
 typedef struct {
     OSQPSolver*                solver;
     OSQPSettings*              ajustes;
     OSQPInt                    bandera_salida;
-    matriz_objetivos_t         matriz_objetivos;
-    matriz_restricciones_t     matriz_restricciones;
+    matriz_a_t                 matriz_a;
+    matriz_p_t                 matriz_p;
+    OSQPFloat*                 vector_q;
+    OSQPFloat*                 vector_l;
+    OSQPFloat*                 vector_u;
     OSQPInt                    numero_variables;
     OSQPInt                    numero_restricciones;
 }problema_optimizacion_t;
