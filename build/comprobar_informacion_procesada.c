@@ -210,6 +210,28 @@ int imprimir_informacion_precios(const informacion_precio_t* informacion_precios
 
 }
 
+
+
+
+// Se utiliza el siguiente subprograma para imprimir la informacion procesada de los precios
+int imprimir_informacion_terminales(informacion_terminales_t* informacion_terminales,const char* nombre_archivo) {
+  FILE* archivo = fopen(nombre_archivo, "w");
+  if (!archivo) {
+    perror("No se ha podido abrir el archivo de comprobación de los puntos adicionales\n");
+    registrar_error("No se ha podido abrir el archivo de comprobacion de la informacion de los terminales\n", REGISTRO_ERRORES);
+    return ERROR;
+  }
+  //Se imprimen los encabezados 
+  fprintf(archivo, "Numero Terminal,Fase\n");
+  //Se imprimime 
+  for (int numero_terminal = 0; numero_terminal < NUMERO_TERMINALES; numero_terminal++) {
+    fprintf(archivo, "%d,%c\n", numero_terminal + 1, informacion_terminales->fases_electricas[numero_terminal]);
+  }
+  fclose(archivo);
+  return EXITO;
+}
+
+
 /*Se imprime los puntos adicionales en un archivo con extension csv para comprobar que todo es correcto*/
 int imprimir_informacion_puntos_adicionales(informacion_puntos_adicionales_t* informacion_fechas_adicionales,
                                             const char* nombre_archivo ) {
@@ -295,7 +317,7 @@ int comprobar_informacion_procesada(informacion_procesada_t informacion_procesad
     registrar_error("No se ha podido comprobar la informacion procesada de los precios de compra\n",REGISTRO_ERRORES);
     return ERROR;
   }
-
+  
     // Se imprime la informacion procesada de los precios de venta
   if (imprimir_informacion_precios(&informacion_procesada.informacion_precio_venta,
     "Comprobar_informacion_procesada_precios_venta.csv") == ERROR) {
@@ -304,5 +326,13 @@ int comprobar_informacion_procesada(informacion_procesada_t informacion_procesad
     return ERROR;
   }
   /**/
+
+  
+  if (imprimir_informacion_terminales(&(informacion_procesada.informacion_terminales), "Comprobar_informacion_procesada_terminales.csv") == ERROR) {
+    printf("No se ha podido comprobar la informacion procesada de los terminales\n");
+    registrar_error("No se ha podido comprobar la informacion procesada de los terminales\n", REGISTRO_ERRORES);
+    return ERROR;
+  }
+  
   return EXITO;
 }

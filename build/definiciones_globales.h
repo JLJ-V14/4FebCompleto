@@ -81,6 +81,7 @@ typedef enum {
 //Se define informacion relacionada con los
 //terminales de la placa de redistribucion.
 #define  NUMERO_TERMINALES 12
+#define  NUMERO_VARIABLES  36
 #define  COLUMNA_NUMERO_TERMINAL 0
 #define  COLUMNA_FASE            1
 
@@ -102,6 +103,10 @@ typedef enum {
 #define INFORMACION_RESTRICCIONES_SISTEMA "Restricciones_Sistema.csv"
 #define REGISTRO_ERRORES                  "registro_errores.log"
 
+//Se definen algunos términos  relacionados con las ecuaciones de restricciones
+#define NUMERO_TERMINOS_BALANCE_POTENCIA   2
+#define NUMERO_ECUACIONES_BALANCE_POTENCIA 3 
+#define NUMERO_FASES 3
 
 
 

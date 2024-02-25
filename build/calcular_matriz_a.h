@@ -9,7 +9,7 @@ extern "C" {
 #endif
 
 
-	int calcular_matriz_a(informacion_procesada_t* informacion_sistema, matriz_a_t* matriz_a);
+	int calcular_matriz_a(informacion_procesada_t* informacion_sistema, problema_optimizacion_t* problema_optimizacion);
 
 #ifdef __cplusplus
 }

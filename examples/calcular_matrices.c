@@ -10,6 +10,7 @@
 #include <stdio.h>
 
 
+
 int calcular_matrices(informacion_procesada_t *informacion_sistema, problema_optimizacion_t* problema_optimizacion) {
 	//Esta función se encarga de rellenar las matrices P,A,l,u,q con los datos del problema de optimizacion 
   if (calcular_matriz_a(informacion_sistema, &(problema_optimizacion->matriz_a)) == ERROR) {

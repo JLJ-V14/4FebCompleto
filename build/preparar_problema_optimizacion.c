@@ -9,6 +9,7 @@
 #include "tipos_optimizacion.h"
 #include <stdio.h>
 
+
 //Este subprograma se utiliza para 
 int preparar_problema_optimizacion(informacion_entrada_t* informacion_sistema,
                                    problema_optimizacion_t* problema_optimizacion) {
@@ -21,11 +22,7 @@ int preparar_problema_optimizacion(informacion_entrada_t* informacion_sistema,
   }
 
   //Se procede a calcular el numero de restricciones que tiene el problema de optimizacion
-  if (calcular_numero_restricciones(informacion_sistema, &(problema_optimizacion->numero_restricciones)) == ERROR) {
-    printf("No se ha podido calcular el numero de restricciones que tiene el problema de optimizacion\n");
-    registrar_error("No se ha podido calcular el numero de restricciones que tiene el problema de optimizacion\n", REGISTRO_ERRORES);
-    return ERROR;
-  }
+  calcular_numero_restricciones(informacion_sistema, problema_optimizacion->numero_restricciones);
 
   //Se procede a calcular las diferentes matrices del problema de optimizacion
   if (calcular_matrices(informacion_sistema,problema_optimizacion) == ERROR) {

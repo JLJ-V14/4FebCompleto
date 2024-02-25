@@ -59,13 +59,13 @@
 
 
   int main() {
-
+    
   
     // Se crean variables para almacenar los datos de los CSV
     informacion_entrada_t   informacion_sistema;
     informacion_procesada_t informacion_procesada;
     //Se define la estructura donde van a ir contenidas las matrices del problema de optimizacion
-    problema_optimizacion_t problema_optimizacion = { 0 };
+   // problema_optimizacion_t problema_optimizacion = { 0 };
 
     // Se asume éxito inicialmente.
     int estado = EXITO;
@@ -136,21 +136,24 @@
       registrar_error("La informacion procesada no ha sido correctamente\n", REGISTRO_ERRORES);
       goto fin_programa;
     }
+
+    
     if (preparar_problema_optimizacion(&informacion_procesada,&problema_optimizacion) == ERROR) {
       printf("Las matrices del problema de optimizacion no han sido calculadas correctamente\n");
       registrar_error("Las matrices del problema de optimización no han sido calculadas correctamente\n", REGISTRO_ERRORES);
       goto fin_programa;
     }
-    /* */
+    
+
    fin_programa:
 
     // Se libera la memoria reservada
     liberar_memoria_informacion_procesada(&informacion_procesada);
     printf("Memoria de informacion procesada liberada\n");
     liberar_memoria_csvs(&informacion_sistema);
-    liberar_memoria_problema_optimizacion(&problema_optimizacion);
+    //liberar_memoria_problema_optimizacion(&problema_optimizacion);
 
-
+    
     
   }
 

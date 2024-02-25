@@ -9,8 +9,9 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-	int calcular_numero_restricciones(informacion_procesada_t* informacion_sistema, OSQPInt* numero_restricciones);
-
+	void calcular_numero_restricciones(informacion_procesada_t* informacion_sistema, OSQPInt* numero_restricciones);
+	void calcular_numero_ecuaciones_estado_bateria(informacion_procesada_t* informacion_sistema,
+		int* numero_ecuaciones_bateria);
 
 #ifdef __cplusplus
 }

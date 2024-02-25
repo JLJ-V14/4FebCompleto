@@ -118,6 +118,10 @@
     <ClCompile Include="preparar_solver_optimizacion.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="funciones_calcular_a_x.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="funciones_calcular_a_i.c" />
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="F:\osqp1feb\osqp-1.0.0.beta1\CMakeLists.txt" />
@@ -252,6 +256,12 @@
       <Filter>Head Files</Filter>
     </ClInclude>
     <ClInclude Include="preparar_solver_optimizacion.h">
+      <Filter>Head Files</Filter>
+    </ClInclude>
+    <ClInclude Include="funciones_calcular_a_x.h">
+      <Filter>Head Files</Filter>
+    </ClInclude>
+    <ClInclude Include="funciones_calcular_a_i.h">
       <Filter>Head Files</Filter>
     </ClInclude>
   </ItemGroup>

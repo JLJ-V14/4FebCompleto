@@ -260,9 +260,9 @@ typedef struct {
     OSQPFloat    bateria_inicial;
     OSQPFloat    bateria_objetivo;
     OSQPFloat    maxima_potencia;
-    struct tm   fecha_inicio;
-    struct tm   fecha_final;
-    struct tm   fecha_objetivo;
+    struct tm    fecha_inicio;
+    struct tm    fecha_final;
+    struct tm    fecha_objetivo;
 }bateria_t;
 
 // Numero_baterias-> Numero de baterías presente en el sistema
@@ -341,6 +341,12 @@ typedef struct {
     puntos_adicionales_t* puntos;
 }informacion_puntos_adicionales_t;
 
+
+typedef struct {
+    char fases_electricas[12]; // Array de 12 caracteres.
+}informacion_terminales_t;
+
+
 // Se definen structs para almacenar la informacion ya extraida de los CSVs de
 // entrada para poder rellenar las matrices con la informacion relevante fácilmente
 // informacion_vehiculos_t -> este struct se utiliza para almacenar toda la informacion relevante a los vehiculos
@@ -356,5 +362,6 @@ typedef struct {
     informacion_precio_t                informacion_precio_compra;
     informacion_precio_t                informacion_precio_venta;
     informacion_puntos_adicionales_t    informacion_puntos_adicionales;
+    informacion_terminales_t            informacion_terminales;
 }informacion_procesada_t;
 

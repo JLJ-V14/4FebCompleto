@@ -28,12 +28,36 @@ void printTm_2(const struct tm* date) {
     date->tm_wday, date->tm_yday);
 }
 
+/*Este subprograma se utiliza para */
+void procesar_informacion_terminales(informacion_entrada_t *informacion_entrada,
+                                     informacion_procesada_t* informacion_procesada) {
+  // primero cargo las ubicaciones donde se cuentra la informacion de a que fase está conectado a cada
+  // terminal
+  int columna_valores_fases = informacion_entrada->datos_terminales.posiciones_informacion_terminales.columna_fase;
+
+  //Se almacena la fase a la que está conectada los terminales y se almacena en la variable correspondiente.
+  for (int fila_actual = 0; fila_actual < NUMERO_TERMINALES; fila_actual++) {
+
+    if (strings_iguales(informacion_entrada->datos_terminales.informacion_terminales.datos[fila_actual+1][columna_valores_fases], "Nada")) {
+      informacion_procesada->informacion_terminales.fases_electricas[fila_actual] = '0';
+    }
+    else if (strings_iguales(informacion_entrada->datos_terminales.informacion_terminales.datos[fila_actual+1][columna_valores_fases],"Neutro")){
+      informacion_procesada->informacion_terminales.fases_electricas[fila_actual] = 'N';
+    }
+    else {
+      informacion_procesada->informacion_terminales.fases_electricas[fila_actual] = *(informacion_entrada->datos_terminales.informacion_terminales.datos[fila_actual + 1][columna_valores_fases]);
+    }
+    
+  }
+}
+
+
+
+
 //Se utiliza este subprograma para obtener las fechas adicionales de las baterias que hay que añadir
 //Por cada bateria hay que añadir la fecha inicial a partir la cual la bateria esta conectada, la fecha
 //final en la que la bateria se desconecta, y si se considera algun objetivo de carga de la bateria la fecha
 //a la que se desea un determinado estado de carga para la bateria
-
-
 
 
 //Este subprograma se utiliza para guardar las restricciones del sistema en la variable correspondiente.
@@ -547,7 +571,7 @@ int procesar_informacion_entrada(informacion_entrada_t*    informacion_entrada,
   procesar_informacion_restricciones(&(informacion_entrada->datos_restricciones), &(informacion_procesada->informacion_restricciones_sistema));
 
   
-  
+  //Se configuran cuantos puntos de simulacion son necesarios 
   if (configurar_puntos_simulacion(informacion_entrada, informacion_procesada) == ERROR) {
     printf("No se ha podido configurar los puntos de simulacion correctamente\n");
     registrar_error("No se ha podido configurar los puntos de simulacion correctamente\n", REGISTRO_ERRORES);
@@ -555,33 +579,35 @@ int procesar_informacion_entrada(informacion_entrada_t*    informacion_entrada,
   }
   
   
-
+  
   if (&(informacion_procesada->informacion_puntos_adicionales )== NULL) {
     // Handle memory allocation failure
     printf("Error al asignar memoria para puntos adicionales\n");
     registrar_error("Error al asignar memoria para puntos adicionales\n", REGISTRO_ERRORES);
     return ERROR;
   }
-  
+
+  //Se proceda la informacion de los vehiculos 
   if (procesar_informacion_vehiculos(informacion_entrada, informacion_procesada) == ERROR) {
     printf("No se ha podido configurar la informacion de los vehiculos correctamente\n");
     registrar_error("No se ha podido configurar la informacion de los vehiculos correctamente\n",REGISTRO_ERRORES);
     return ERROR;
   }
-  
+
+  //Se procesa la informacion de las baterias 
   if (procesar_informacion_baterias(informacion_entrada, informacion_procesada) == ERROR) {
     printf("No se ha podido configurar la informacion de las baterias\n");
     registrar_error("No se ha podido configurar la informacion de las baterias\n", REGISTRO_ERRORES);
     return ERROR;
   }
 
-  
+  //Se procesa la informacion de los precios 
   if (procesar_informacion_precio(informacion_entrada, informacion_procesada) == ERROR) {
     printf("No se ha podido configurar la informacion de los precios\n");
     registrar_error("No se ha podido configurar la informacion de los precios\n", REGISTRO_ERRORES);
     return ERROR;
   }
-  /* /* */
+  procesar_informacion_terminales(informacion_entrada, informacion_procesada);
   
   return EXITO;
 }
