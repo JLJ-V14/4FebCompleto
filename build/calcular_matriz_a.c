@@ -1,7 +1,8 @@
 #include "calcular_numero_restricciones.h"
 #include "definiciones_globales.h"
-#include "funciones_calcular_a_x.h"
 #include "funciones_calcular_a_i.h"
+#include "funciones_calcular_a_x.h"
+#include "funciones_calcular_a_p.h"
 #include "registrar_errores.h"
 #include "tipos_optimizacion.h"
 #include <stdio.h>
@@ -71,14 +72,60 @@ int calcular_vector_A_i(informacion_procesada_t* informacion_sistema, OSQPFloat*
     registrar_error("No se ha podido indicar las filas del termino de la potencia del terminal en la matriz A_i", REGISTRO_ERRORES);
     return ERROR;
   }
+  int ultima_fila_balance_bateria = fila_actual;
+
+  incluir_filas_potencia_red(informacion_sistema, *A_i, &ultima_fila_balance_bateria, &index_actual);
+  incluir_filas_potencia_entrada_red(informacion_sistema, *A_i, &ultima_fila_balance_bateria, &index_actual);
+  incluir_filas_potencia_salida_red(informacion_sistema, *A_i, &ultima_fila_balance_bateria, &index_actual);
+  incluir_filas_potencia_red_fase(informacion_sistema, *A_i, &ultima_fila_balance_bateria, &index_actual, 'R');
+  incluir_filas_potencia_red_fase(informacion_sistema, *A_i, &ultima_fila_balance_bateria, &index_actual, 'S');
+  incluir_filas_potencia_red_fase(informacion_sistema, *A_i, &ultima_fila_balance_bateria, &index_actual, 'T');
+  incluir_filas_potencia_entrada_red_fase(informacion_sistema, *A_i, &ultima_fila_balance_bateria, &index_actual, 'R');
+  incluir_filas_potencia_entrada_red_fase(informacion_sistema, *A_i, &ultima_fila_balance_bateria, &index_actual, 'S');
+  incluir_filas_potencia_entrada_red_fase(informacion_sistema, *A_i, &ultima_fila_balance_bateria, &index_actual, 'T');
+  incluir_filas_potencia_salida_red_fase(informacion_sistema, *A_i, &ultima_fila_balance_bateria, &index_actual, 'R');
+  incluir_filas_potencia_salida_red_fase(informacion_sistema, *A_i, &ultima_fila_balance_bateria, &index_actual, 'S');
+  incluir_filas_potencia_salida_red_fase(informacion_sistema, *A_i, &ultima_fila_balance_bateria, &index_actual, 'T');
   return EXITO;
 }
 
 //Se calcula el vector A_p contiene los índices de las columnas donde se encuentran los
 //  valores diferentes de 0 
 
-int calcular_vector_A_p(informacion_procesada_t* informacion_sistema, OSQPFloat** A_p) {
-  
+int calcular_vector_A_p(informacion_procesada_t* informacion_sistema, OSQPInt** A_p) {
+  //cargo el numero de puntos de simulacion
+  int numero_puntos_simulacion = informacion_sistema->informacion_puntos_simulacion.numero_puntos_simulacion;
+  //Calculo el numero de columnas que se tienen en la matriz
+  int numero_columnas = NUMERO_VARIABLES * numero_puntos_simulacion;
+  int index_actual = 0;
+  int columna_a_actual = 0;
+  *A_p = (OSQPInt*)malloc((numero_columnas + 1) * sizeof(OSQPInt));
+  //Se comprueba que la reserva de memoria ha sido exitosa
+  if (*A_p == NULL) {
+    printf("No se ha podido reservar memoria para el vector A_p\n");
+    registrar_error("No se ha podido reservar memoria para el vector A_p",REGISTRO_ERRORES);
+    return ERROR;
+  }
+
+  //Se incluyen las columnas en las que se encuentran los terminos de los estados de bateria
+  if (incluir_columnas_baterias(informacion_sistema, *A_p, &index_actual, &columna_a_actual) == ERROR) {
+    printf("No se ha podido incluir las columnas en las que se encuentran los terminos de estados de bateria\n");
+    registrar_error("No se ha podido incluir las columnas en las que se encuentran los terminos de estados de bateria\n",REGISTRO_ERRORES);
+    return ERROR;
+ }
+  //Se incluyen las columnas en la que se encuentran los terminos de las potencias que intercambian los terminales
+  if (incluir_columnas_potencias_terminales(informacion_sistema, *A_p, &index_actual, &columna_a_actual) == ERROR) {
+    printf("No se ha podido incluir las columnas en las que se encuentran los terminos de potencia de los terminales\n");
+    registrar_error("No se ha podido incluir las columnas en las que se encuentran los terminos de potencia de los terminales\n", REGISTRO_ERRORES);
+    return ERROR;
+  }
+  incluir_columnas_potencia_red(informacion_sistema,*A_p,&index_actual,&columna_a_actual);
+  incluir_columnas_potencia_entrada_red(informacion_sistema, *A_p, &index_actual, &columna_a_actual);
+  incluir_columnas_potencia_salida_red(informacion_sistema, *A_p, &index_actual, &columna_a_actual);
+  incluir_columnas_potencias_red_fase(informacion_sistema, *A_p, &index_actual, &columna_a_actual);
+  incluir_columnas_potencia_entrada_red_fase(informacion_sistema, *A_p, &index_actual, &columna_a_actual);
+  incluir_columnas_potencia_salida_red_fase(informacion_sistema, *A_p, &index_actual, &columna_a_actual);
+  return EXITO;
 }
 
 // Este subprograma se utiliza para calcular el numero de términos diferentes de 0
@@ -151,6 +198,6 @@ int calcular_matriz_a(informacion_procesada_t * informacion_sistema, problema_op
     return ERROR;
   }
   //Se rellenan los datos de las matrices
-  //csc_set_data(matriz_a->A,numero_variables,numero_restricciones,)
+  csc_set_data(matriz_a->A, m, n, A_nnz, matriz_a->A_x, matriz_a->A_i, matriz_a->A_p);
   return EXITO;
 }

@@ -8,6 +8,205 @@
 #include <stdbool.h>
 
 
+
+void incluir_filas_potencia_salida_red_fase(informacion_procesada_t* informacion_sistema, OSQPInt* A_i,
+  int* ultima_fila_balance_bateria, int* index_actual, char fase) {
+  //Cargo el numero de puntos de simulacion
+  int numero_puntos_simulacion = informacion_sistema->informacion_puntos_simulacion.numero_puntos_simulacion;
+  int fila_restriccion_borde = 0;
+  int fila_ecuacion_35 = 0;
+  int fila_ecuacion_37 = 44 * numero_puntos_simulacion + (*ultima_fila_balance_bateria);
+  if (fase == 'R') {
+    fila_restriccion_borde = 33 * numero_puntos_simulacion;
+    fila_ecuacion_35 = 40 * numero_puntos_simulacion + (*ultima_fila_balance_bateria);
+  }
+  else if (fase == 'S') {
+    fila_restriccion_borde = 34 * numero_puntos_simulacion;
+    fila_ecuacion_35 = 41 * numero_puntos_simulacion + (*ultima_fila_balance_bateria);
+  }
+  else if (fase == 'T') {
+    fila_restriccion_borde = 35 * numero_puntos_simulacion;
+    fila_ecuacion_35 = 42 * numero_puntos_simulacion + (*ultima_fila_balance_bateria);
+  }
+  for (int i = 0; i < numero_puntos_simulacion; i++) {
+    A_i[(*index_actual)] = fila_restriccion_borde;
+    (*index_actual)++;
+    (fila_restriccion_borde)++;
+    A_i[(*index_actual)] = fila_ecuacion_35;
+    (*index_actual)++;
+    (fila_ecuacion_35)++;
+    A_i[(*index_actual)] = fila_ecuacion_37;
+    (*index_actual)++;
+    (fila_ecuacion_37)++;
+  }
+}
+
+//Este subprograma se utiliza para incluir la filas en las que se encuentra el término Pin grid p,t
+void incluir_filas_potencia_entrada_red_fase(informacion_procesada_t* informacion_sistema, OSQPInt* A_i,
+                                             int* ultima_fila_balance_bateria, int* index_actual, char fase) {
+  //Cargo el numero de puntos de simulacion
+  int numero_puntos_simulacion = informacion_sistema->informacion_puntos_simulacion.numero_puntos_simulacion;
+  int fila_restriccion_borde = 0;
+  int fila_ecuacion_35 = 0;
+  int fila_ecuacion_36 = 43 * numero_puntos_simulacion +(*ultima_fila_balance_bateria);
+  //Dependiendo de la fase el valor de fila a añadir en el vector A_i es diferente.
+  if (fase == 'R') {
+    fila_restriccion_borde = 30 * numero_puntos_simulacion;
+    fila_ecuacion_35 = 40 * numero_puntos_simulacion + (*ultima_fila_balance_bateria);
+  }
+  else if (fase == 'S') {
+    fila_restriccion_borde = 31 * numero_puntos_simulacion;
+    fila_ecuacion_35 = 41 * numero_puntos_simulacion + (*ultima_fila_balance_bateria);
+  }
+  else if (fase == 'T') {
+    fila_restriccion_borde = 32 * numero_puntos_simulacion;
+    fila_ecuacion_35 = 42 * numero_puntos_simulacion + (*ultima_fila_balance_bateria);
+  }
+  for (int i = 0; i < numero_puntos_simulacion; i++) {
+    A_i[(*index_actual)] = fila_restriccion_borde;
+    (*index_actual)++;
+    (fila_restriccion_borde)++;
+    A_i[(*index_actual)] = fila_ecuacion_35;
+    (*index_actual)++;
+    (fila_ecuacion_35)++;
+    A_i[(*index_actual)] = fila_ecuacion_36;
+    (*index_actual)++;
+    (fila_ecuacion_36)++;
+  }
+}
+
+
+
+//Este subprograma se utiliza para incluir los terminos P grid,p,t, las filas depende de la fase que se estén
+//añadiendo
+
+void incluir_filas_potencia_red_fase(informacion_procesada_t* informacion_sistema, OSQPInt* A_i,
+                                     int* ultima_fila_balance_bateria, int* index_actual, char fase) {
+  //Cargo el numero de puntos de simulacion
+  int numero_puntos_simulacion = informacion_sistema->informacion_puntos_simulacion.numero_puntos_simulacion;
+  //Defino una serie de variables para indicar las filas en donde se encuentran los términos de restricción
+  int fila_restriccion_borde = 0;
+  int fila_restriccion_balance =0;
+  int fila_ecuacion_35=0;
+  int fila_ecuacion_38 = 45 * numero_puntos_simulacion + (*ultima_fila_balance_bateria);
+  if (fase == 'R') {
+    fila_restriccion_borde = 27 * numero_puntos_simulacion;
+    fila_restriccion_balance = NUMERO_VARIABLES * numero_puntos_simulacion;
+    fila_ecuacion_35 = 40 * numero_puntos_simulacion + (*ultima_fila_balance_bateria);
+  }
+  else if (fase == 'S') {
+    fila_restriccion_borde = (27 +1) * numero_puntos_simulacion;
+    fila_restriccion_balance = (NUMERO_VARIABLES + 1) * numero_puntos_simulacion;
+    fila_ecuacion_35 = (40 + 1) * numero_puntos_simulacion + (*ultima_fila_balance_bateria);
+  }
+  else if (fase == 'T') {
+    fila_restriccion_borde = (27 + 2) * numero_puntos_simulacion;
+    fila_restriccion_balance = (NUMERO_VARIABLES + 2) * numero_puntos_simulacion;
+    fila_ecuacion_35 = (40 + 2) * numero_puntos_simulacion + (*ultima_fila_balance_bateria);
+  }
+  //Una vez situada las filas a añadir dependiendo de la fase se pasa a añadir las filas en el vector A_i
+  for (int i = 0; i < numero_puntos_simulacion; i++) {
+    A_i[(*index_actual)] = fila_restriccion_borde;
+    (*index_actual)++;
+    (fila_restriccion_borde)++;
+    A_i[(*index_actual)] = fila_restriccion_balance;
+    (*index_actual)++;
+    (fila_restriccion_balance)++;
+    A_i[(*index_actual)] = fila_ecuacion_35;
+    (*index_actual)++;
+    (fila_ecuacion_35)++;
+    A_i[(*index_actual)] = fila_ecuacion_38;
+    (*index_actual)++;
+    (fila_ecuacion_38)++;
+  }
+}
+
+
+
+
+//Se utiliza el siguiente siguiente subprograma para incluir las filas en donde se encuentra el termino Pgrid,out,t
+void incluir_filas_potencia_salida_red(informacion_procesada_t* informacion_sistema, OSQPInt* A_i,
+  int* ultima_fila_balance_bateria, int* index_actual) {
+
+  //Se carga el numero de puntos de simulacion
+  int numero_puntos_simulacion = informacion_sistema->informacion_puntos_simulacion.numero_puntos_simulacion;
+  //Se carga la fila en donde se encuentra la restricion de borde
+  int fila_restriccion_borde = (2 * NUMERO_TERMINALES + 2) * numero_puntos_simulacion;
+  //Se carga la primera fila de la ecuacion 34
+  int fila_balance_ec_34 = NUMERO_VARIABLES * numero_puntos_simulacion + NUMERO_FASES * numero_puntos_simulacion + (*ultima_fila_balance_bateria);
+  //Se carga la primera fila de la ecuacion 37
+  int fila_balance_ec_37 = fila_balance_ec_34 + 5 * numero_puntos_simulacion;
+
+  for (int i = 0; i < numero_puntos_simulacion; i++) {
+    A_i[(*index_actual)] = fila_restriccion_borde;
+    (*index_actual)++;
+    (fila_restriccion_borde)++;
+    A_i[(*index_actual)] = fila_balance_ec_34;
+    (*index_actual)++;
+    (fila_balance_ec_34)++;
+    A_i[(*index_actual)] = fila_balance_ec_37;
+    (*index_actual)++;
+    (fila_balance_ec_37)++;
+  }
+}
+
+
+//Se utiliza el siguiente subprograma para incluir las filas en donde se encuentra el termino Pgrid,in,t
+void incluir_filas_potencia_entrada_red(informacion_procesada_t* informacion_sistema,OSQPInt* A_i,
+                                        int* ultima_fila_balance_bateria,int*index_actual) {
+  //Se carga el numero de puntos de simulacion
+  int numero_puntos_simulacion = informacion_sistema->informacion_puntos_simulacion.numero_puntos_simulacion;
+  //Se carga la fila en donde se encuentra la restriccion de borde
+  int fila_restriccion_borde = (2 * NUMERO_TERMINALES + 1) * numero_puntos_simulacion;
+  //Se carga la primera fila de la ecuacion 34
+  int fila_balance_ec_34 = NUMERO_VARIABLES * numero_puntos_simulacion + NUMERO_FASES * numero_puntos_simulacion + (*ultima_fila_balance_bateria);
+  //Se carga la primera fila de la ecuacion 36
+  int fila_balance_ec_36 = fila_balance_ec_34 + 4 * numero_puntos_simulacion;
+  for (int i = 0; i < numero_puntos_simulacion; i++) {
+    A_i[(*index_actual)] = fila_restriccion_borde;
+    (*index_actual)++;
+    (fila_restriccion_borde)++;
+    A_i[(*index_actual)] = fila_balance_ec_34;
+    (*index_actual)++;
+    (fila_balance_ec_34)++;
+    A_i[(*index_actual)] = fila_balance_ec_36;
+    (*index_actual)++;
+    (fila_balance_ec_36)++;
+  }
+}
+
+
+
+
+//Se utiliza el siguiente subprograma para incluir las filas en donde se encuentran los terminos Pgrid,t
+void incluir_filas_potencia_red(informacion_procesada_t* informacion_sistema,OSQPInt* A_i,
+                               int* ultima_fila_balance_bateria,int*index_actual) {
+  //Se carga el numero de puntos de simulacion
+  int numero_puntos_simulacion = informacion_sistema->informacion_puntos_simulacion.numero_puntos_simulacion;
+  //Se carga la primera fila de la restricción de borde del término Pgrid,t
+  int fila_restriccion_borde = (2 * NUMERO_TERMINALES) * numero_puntos_simulacion;
+  //Se carga la primera fila del balance en la fase de red depende de la fase por supuesto
+  int fila_balance_ec_34 = NUMERO_VARIABLES * numero_puntos_simulacion + NUMERO_FASES * numero_puntos_simulacion + (*ultima_fila_balance_bateria);
+  //Sitúo la primera fila de la ecuación 38 
+  int fila_balance_ec_38 = fila_balance_ec_34 + 6 * numero_puntos_simulacion;
+  for (int i = 0; i < numero_puntos_simulacion; i++) {
+    //Se indica la fila en la que está la restricción de borde Pgrid,t
+    A_i[(*index_actual)] = fila_restriccion_borde;
+    (fila_restriccion_borde)++;
+    (*index_actual)++;
+    A_i[(*index_actual)] = fila_balance_ec_34;
+    (fila_balance_ec_34)++;
+    (*index_actual)++;
+    A_i[(*index_actual)] = fila_balance_ec_38;
+    (fila_balance_ec_38)++;
+    (*index_actual)++;
+  }
+}
+
+
+
+
+
 //Se utiliza el siguiente subprograma para indicar las filas en la que se encuentra la potencia intercambiada
 //por un terminal en concreto
 
@@ -203,45 +402,51 @@ int incluir_filas_terminos_baterias_terminal(informacion_procesada_t* informacio
   //Se pasa a escribir las filas en donde se encuentran los terminos SOC 
   if (numero_elementos_terminales > 0) {
     for (int punto_actual = 0; punto_actual < numero_puntos_simulacion; punto_actual++) {
-      if (comprobar_rango(punto_actual, puntos_iniciales[index_adicional], puntos_finales[index_adicional]) == true) {
+      if (numero_elementos_terminales > index_adicional) {
+        if (comprobar_rango(punto_actual, puntos_iniciales[index_adicional], puntos_finales[index_adicional]) == true) {
 
-        //Primer termino SOC de las ecuaciones del comportamiento de bateria (1ºpunto simulacion en el
-        // que está presente la batería)
+          //Primer termino SOC de las ecuaciones del comportamiento de bateria (1ºpunto simulacion en el
+          // que está presente la batería)
 
-        if (punto_actual == puntos_iniciales[index_adicional]) {
-          //Se escribe en el vector A_i la fila en la que está la batería SOC
+          if (punto_actual == puntos_iniciales[index_adicional]) {
+            //Se escribe en el vector A_i la fila en la que está la batería SOC
 
-          A_i[*index_actual] = fila_termino_bateria_borde;
-          //Se incrementa el index del vector A_i y la siguiente fila de la batería SOC de la restricción de borde a añadir
-          (fila_termino_bateria_borde)++;
-          (*index_actual)++;
-          //Se indica donde en que fila está el término SOC de la ecuacion del comportamiento de la batería
-          A_i[*index_actual] = fila_termino_bateria_balance;
-          (fila_termino_bateria_balance)++;
-          (*index_actual)++;
+            A_i[*index_actual] = fila_termino_bateria_borde;
+            //Se incrementa el index del vector A_i y la siguiente fila de la batería SOC de la restricción de borde a añadir
+            (fila_termino_bateria_borde)++;
+            (*index_actual)++;
+            //Se indica donde en que fila está el término SOC de la ecuacion del comportamiento de la batería
+            A_i[*index_actual] = fila_termino_bateria_balance;
+            (fila_termino_bateria_balance)++;
+            (*index_actual)++;
+          }
+          else {
+
+            //Se indica en que fila están los términos de SOC en un punto de simulacion que hay una batería
+            //presente ya bien sea de un vehículo o una batería
+
+            //Se añade el termino del estado de bateria del punto anterior 
+            A_i[*index_actual] = fila_termino_bateria_balance;
+            (*index_actual)++;
+            //Se añade el termino de las restriccion de la bateria de borde
+            A_i[*index_actual] = fila_termino_bateria_borde;
+            (fila_termino_bateria_borde)++;
+            (*index_actual)++;
+            //Se añade el termino de la ecuacion del estado de bateria del punto actual
+            A_i[*index_actual] = fila_termino_bateria_balance;
+            (*index_actual)++;
+            (fila_termino_bateria_balance)++;
+          }
+          if (puntos_finales[index_adicional] == punto_actual) {
+            index_adicional++;
+          }
         }
         else {
-
-          //Se indica en que fila están los términos de SOC en un punto de simulacion que hay una batería
-          //presente ya bien sea de un vehículo o una batería
-
-          //Se añade el termino del estado de bateria del punto anterior 
-          A_i[*index_actual] = fila_termino_bateria_balance;
-          (*index_actual)++;
-          //Se añade el termino de las restriccion de la bateria de borde
           A_i[*index_actual] = fila_termino_bateria_borde;
+          (*index_actual)++;
           (fila_termino_bateria_borde)++;
-          (*index_actual)++;
-          //Se añade el termino de la ecuacion del estado de bateria del punto actual
-          A_i[*index_actual] = fila_termino_bateria_balance;
-          (*index_actual)++;
-          (fila_termino_bateria_balance)++;
         }
-        if (puntos_finales[index_adicional] == punto_actual) {
-          index_adicional++;
-        }
-     }
-
+      }
       else {
         A_i[*index_actual] = fila_termino_bateria_borde;
         (*index_actual)++;
@@ -259,7 +464,7 @@ int incluir_filas_terminos_baterias_terminal(informacion_procesada_t* informacio
     }
   }
 
-  (*fila_actual) = fila_termino_bateria_borde;
+  (*fila_actual) = fila_termino_bateria_balance;
 
   return EXITO;
 }

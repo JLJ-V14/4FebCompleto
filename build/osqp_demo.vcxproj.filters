@@ -121,7 +121,21 @@
     <ClCompile Include="funciones_calcular_a_x.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="funciones_calcular_a_i.c" />
+    <ClCompile Include="funcionces_calcular_a_p.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="funciones_calcular_vector_l.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="funciones_calcular_a_i.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="funciones_calcular_vector_u.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="funciones_auxiliares_l_u.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="F:\osqp1feb\osqp-1.0.0.beta1\CMakeLists.txt" />
@@ -262,6 +276,18 @@
       <Filter>Head Files</Filter>
     </ClInclude>
     <ClInclude Include="funciones_calcular_a_i.h">
+      <Filter>Head Files</Filter>
+    </ClInclude>
+    <ClInclude Include="funciones_calcular_a_p.h">
+      <Filter>Head Files</Filter>
+    </ClInclude>
+    <ClInclude Include="funciones_calcular_vector_l.h">
+      <Filter>Head Files</Filter>
+    </ClInclude>
+    <ClInclude Include="funciones_calcular_vector_u.h">
+      <Filter>Head Files</Filter>
+    </ClInclude>
+    <ClInclude Include="funciones_auxiliares_l_u.h">
       <Filter>Head Files</Filter>
     </ClInclude>
   </ItemGroup>
