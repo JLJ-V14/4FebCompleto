@@ -1,8 +1,7 @@
 #include "calcular_matriz_a.h"
 #include "calcular_matriz_p.h"
 #include "calcular_matriz_q.h"
-#include "calcular_vector_l.h"
-#include "calcular_vector_u.h"
+#include "calcular_vector_l_u.h"
 #include "definiciones_globales.h"
 #include "osqp.h"
 #include "registrar_errores.h"
@@ -28,15 +27,11 @@ int calcular_matrices(informacion_procesada_t *informacion_sistema, problema_opt
     registrar_error("No se ha podido calcular la matriz Q en el problema de optimizacion", REGISTRO_ERRORES);
     return ERROR;
   }
-  if (calcular_vector_l(informacion_sistema, problema_optimizacion->vector_l) == ERROR) {
+  if (calcular_vector_l_u(informacion_sistema,&(problema_optimizacion->vector_l),&(problema_optimizacion->vector_u)) == ERROR) {
     printf("No se ha podido calcular el vector l en el problema de optimizacion\n");
     registrar_error("No se ha podido calcular el vector l en el problema de optimizacion\n", REGISTRO_ERRORES);
     return ERROR;
   }
-  if (calcular_vector_u(informacion_sistema, problema_optimizacion->vector_u) == ERROR) {
-    printf("No se ha podido calcular el vector u en el problema de optimizacion\n");
-    registrar_error("No se ha podido calcular el vector u en el problema de optimizacion\n", REGISTRO_ERRORES);
-    return ERROR;
-  }
+  
   return EXITO;
 }

@@ -82,6 +82,7 @@ typedef enum {
 //terminales de la placa de redistribucion.
 #define  NUMERO_TERMINALES 12
 #define  NUMERO_VARIABLES  36
+#define  NUMERO_ECUACIONES_BASE 11
 #define  COLUMNA_NUMERO_TERMINAL 0
 #define  COLUMNA_FASE            1
 

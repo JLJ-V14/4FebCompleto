@@ -340,14 +340,14 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClCompile Include="calcular_numero_restricciones.c" />
     <ClCompile Include="calcular_numero_variables.c" />
     <ClCompile Include="calcular_puntos_simulacion.c" />
-    <ClCompile Include="calcular_vector_l.c" />
-    <ClCompile Include="calcular_vector_u.c" />
+    <ClCompile Include="calcular_vector_l_u.c" />
     <ClCompile Include="comprobar_informacion_procesada.c" />
     <ClCompile Include="configurar_ajustes_problema_optimizacion.c" />
     <ClCompile Include="funcionces_calcular_a_p.c" />
     <ClCompile Include="funciones_auxiliares_l_u.c" />
     <ClCompile Include="funciones_calcular_a_i.c" />
     <ClCompile Include="funciones_calcular_a_x.c" />
+    <ClCompile Include="funciones_calcular_restricciones_ecuaciones.c" />
     <ClCompile Include="funciones_calcular_vector_l.c" />
     <ClCompile Include="funciones_calcular_vector_u.c" />
     <ClCompile Include="inicializar_informacion_procesada.c" />
@@ -376,8 +376,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClInclude Include="calcular_numero_restricciones.h" />
     <ClInclude Include="calcular_numero_variables.h" />
     <ClInclude Include="calcular_puntos_simulacion.h" />
-    <ClInclude Include="calcular_vector_l.h" />
-    <ClInclude Include="calcular_vector_u.h" />
+    <ClInclude Include="calcular_vector_l_u.h" />
     <ClInclude Include="comprobar_informacion_procesada.h" />
     <ClInclude Include="comprobar_lectura_datos.h" />
     <ClInclude Include="configurar_ajustes_optimizacion.h" />
@@ -388,6 +387,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClInclude Include="funciones_calcular_a_p.h" />
     <ClInclude Include="funciones_calcular_a_i.h" />
     <ClInclude Include="funciones_calcular_a_x.h" />
+    <ClInclude Include="funciones_calcular_restricciones_ecuaciones.h" />
     <ClInclude Include="funciones_calcular_vector_l.h" />
     <ClInclude Include="funciones_calcular_vector_u.h" />
     <ClInclude Include="funciones_plataforma_dependiente.h" />

@@ -65,7 +65,7 @@
     informacion_entrada_t   informacion_sistema;
     informacion_procesada_t informacion_procesada;
     //Se define la estructura donde van a ir contenidas las matrices del problema de optimizacion
-   // problema_optimizacion_t problema_optimizacion = { 0 };
+    problema_optimizacion_t problema_optimizacion = { 0 };
 
     // Se asume éxito inicialmente.
     int estado = EXITO;

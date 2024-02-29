@@ -224,6 +224,7 @@ typedef struct {
     OSQPFloat     bateria_inicial;
     OSQPFloat     bateria_final;
     OSQPFloat     capacidad_bateria;
+    OSQPFloat     potencia_maxima;
     char*         modo_carga;
 }vehiculos_t;
 

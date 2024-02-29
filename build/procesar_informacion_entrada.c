@@ -136,7 +136,7 @@ int procesar_informacion_vehiculos(informacion_entrada_t* informacion_entrada, i
   
   //Se procede a cargar las ubicaciones donde se encuentra la informacion en el csv de los vehiculos.
   int columna_capacidad = informacion_entrada->datos_vehiculos.posiciones_informacion_vehiculos.columna_capacidad_bateria;
-  int columna_maxima = informacion_entrada->datos_vehiculos.posiciones_informacion_vehiculos.columna_maxima_potencia;
+  int columna_maxima_potencia = informacion_entrada->datos_vehiculos.posiciones_informacion_vehiculos.columna_maxima_potencia;
   int columna_modo_carga = informacion_entrada->datos_vehiculos.posiciones_informacion_vehiculos.columna_modo_carga;
   int columna_bat_deseada = informacion_entrada->datos_vehiculos.posiciones_informacion_vehiculos.columna_porcentaje_bateria_deseada;
   int columna_bat_inicial = informacion_entrada->datos_vehiculos.posiciones_informacion_vehiculos.columna_porcentaje_bateria_inicial;
@@ -162,7 +162,7 @@ int procesar_informacion_vehiculos(informacion_entrada_t* informacion_entrada, i
     informacion_procesada->informacion_vehiculos.vehiculos[numero_vehiculo].capacidad_bateria = (OSQPFloat)atof(informacion_entrada->datos_vehiculos.informacion_vehiculos.datos[numero_vehiculo + 1][columna_capacidad]);
     informacion_procesada->informacion_vehiculos.vehiculos[numero_vehiculo].numero_terminal   = (OSQPInt)atof(informacion_entrada->datos_vehiculos.informacion_vehiculos.datos[numero_vehiculo + 1][columna_terminal]);
     informacion_procesada->informacion_vehiculos.vehiculos[numero_vehiculo].modo_carga        = informacion_entrada->datos_vehiculos.informacion_vehiculos.datos[numero_vehiculo + 1][columna_modo_carga];
-    
+    informacion_procesada->informacion_vehiculos.vehiculos[numero_vehiculo].potencia_maxima = (OSQPFloat)atof(informacion_entrada->datos_vehiculos.informacion_vehiculos.datos[numero_vehiculo + 1][columna_maxima_potencia]);
     //Se carga la fechas inicial del vehiculo
    
 
