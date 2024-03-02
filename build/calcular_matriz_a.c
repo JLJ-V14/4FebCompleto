@@ -9,6 +9,9 @@
 
 
 
+
+
+
 // Se calcula el vector A_x contienen los valores diferentes de cero
 int calcular_vector_A_x(informacion_procesada_t* informacion_sistema, OSQPFloat** A_x,OSQPInt A_nnz) {
 

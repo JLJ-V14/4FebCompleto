@@ -87,6 +87,9 @@ typedef enum {
 #define  COLUMNA_FASE            1
 
 
+//Se definen los coeficientes de importancia en las funciones objetivos:
+#define COEFICIENTE_REDUCIR_PRECIO 1
+#define COEFICIENTE_CARGA  1000
 
 
 

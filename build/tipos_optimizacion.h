@@ -10,6 +10,23 @@
 
 #define NUMERO_TERMINALES 12
 
+/*Este tipo de variable se utiliza para almacenar los valores de los puntos iniciales y finales 
+  y los variables booleanos que indican el modode la carga*/
+
+typedef struct {
+    int punto_inicio;
+    int punto_final;
+    bool carga_rapida;
+}informacion_elemento_carga_t;
+
+/*Se define un tipo para almacenar la informacion relevante de los elementos que tienen la carga programada 
+  en el terminal */
+typedef struct {
+
+}elementos_carga_programada_terminal_t;
+
+
+
   //Tipo que sirve para almacenar la posicion de una fecha en los
   //csvs.
 typedef struct {
