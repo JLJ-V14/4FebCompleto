@@ -136,6 +136,9 @@
     <ClCompile Include="funciones_calcular_restricciones_ecuaciones.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="obtener_informacion_carga_terminales.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="F:\osqp1feb\osqp-1.0.0.beta1\CMakeLists.txt" />
@@ -288,6 +291,9 @@
       <Filter>Head Files</Filter>
     </ClInclude>
     <ClInclude Include="funciones_calcular_restricciones_ecuaciones.h">
+      <Filter>Head Files</Filter>
+    </ClInclude>
+    <ClInclude Include="obtener_informacion_carga_terminales.h">
       <Filter>Head Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -20,6 +20,8 @@ extern "C" {
     void liberar_memoria_csvs(informacion_entrada_t* informacion_sistema);
     void liberar_memoria_informacion_procesada(informacion_procesada_t* informacion_procesada);
     void liberar_memoria_problema_optimizacion(problema_optimizacion_t* problema_optimizacion);
+    void liberar_informacion_carga_terminales(informacion_carga_terminales_t* informacion_carga_terminales);
+
 #ifdef __cplusplus
 }
 #endif

@@ -8,8 +8,8 @@
 extern "C" {
 #endif
 
-	int preparar_problema_optimizacion(informacion_entrada_t* informacion_sistema,
-		problema_optimizacion_t* problema_optimizacion);
+	int preparar_problema_optimizacion(informacion_entrada_t* informacion_sistema,problema_optimizacion_t* problema_optimizacion,
+		informacion_carga_terminales_t* programacion_carga_terminales);
 
 #ifdef __cplusplus
 }

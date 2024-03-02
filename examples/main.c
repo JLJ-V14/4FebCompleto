@@ -17,6 +17,7 @@
 #include "leer_entradas.h"
 #include "liberar_memoria.h"
 #include "main.h"
+#include "obtener_informacion_carga_terminales.h"
 #include "osqp.h"
 #include "preparar_problema_optimizacion.h"
 #include "procesar_informacion_entrada.h"
@@ -62,8 +63,18 @@
     
   
     // Se crean variables para almacenar los datos de los CSV
-    informacion_entrada_t   informacion_sistema;
-    informacion_procesada_t informacion_procesada;
+    // Se definen las variables donde va a ir contenida la informacion del sistema
+    
+    // Informacion_sistema -> Contiene la informacion bruta leida de los archivos.csvs
+    // Informacion_procesada -> Contiene la informacion procesada leida de los archivos.csvs clasificada y trada
+    // Informacion_carga_terminales -> Contiene la informacion de los elementos que tienen programada la carga
+    // en cada uno de los terminales.
+
+
+    informacion_entrada_t          informacion_sistema;
+    informacion_procesada_t        informacion_procesada;
+    informacion_carga_terminales_t informacion_carga_terminales = {0};
+   
     //Se define la estructura donde van a ir contenidas las matrices del problema de optimizacion
     problema_optimizacion_t problema_optimizacion = { 0 };
 
@@ -137,8 +148,17 @@
       goto fin_programa;
     }
 
+    //Se almacena la informacion de los diferentes vehiculos y baterias que tienen su carga programada en
+    //los diferentes terminales
+
+    if (obtener_informacion_carga_terminales(&informacion_procesada, &informacion_carga_terminales) == ERROR) {
+      printf("La informacion de los elementos que tienen su carga programada en los terminales no ha podido ser cargada correctamente\n");
+      registrar_error("La informacion de los elementos que tienen su carga programada en los terminales no ha podido ser cargada correctamente\n",REGISTRO_ERRORES);
+      goto fin_programa;
+    }
+
     
-    if (preparar_problema_optimizacion(&informacion_procesada,&problema_optimizacion) == ERROR) {
+    if (preparar_problema_optimizacion(&informacion_procesada,&problema_optimizacion,&informacion_carga_terminales) == ERROR) {
       printf("Las matrices del problema de optimizacion no han sido calculadas correctamente\n");
       registrar_error("Las matrices del problema de optimización no han sido calculadas correctamente\n", REGISTRO_ERRORES);
       goto fin_programa;
@@ -149,6 +169,7 @@
 
     // Se libera la memoria reservada
     liberar_memoria_informacion_procesada(&informacion_procesada);
+    liberar_informacion_carga_terminales(&informacion_carga_terminales);
     printf("Memoria de informacion procesada liberada\n");
     liberar_memoria_csvs(&informacion_sistema);
     //liberar_memoria_problema_optimizacion(&problema_optimizacion);

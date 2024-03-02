@@ -11,21 +11,34 @@
 #define NUMERO_TERMINALES 12
 
 /*Este tipo de variable se utiliza para almacenar los valores de los puntos iniciales y finales 
-  y los variables booleanos que indican el modode la carga*/
+  y los variables booleanos que indican la información relevante del elemento que tiene su carga 
+  programada en el terminal */
 
 typedef struct {
     int punto_inicio;
     int punto_final;
+    int punto_objetivo;
     bool carga_rapida;
+    bool vehiculo;
+    bool bateria;
+    bool considerar_objetivo
 }informacion_elemento_carga_t;
 
 /*Se define un tipo para almacenar la informacion relevante de los elementos que tienen la carga programada 
   en el terminal */
+
 typedef struct {
+    informacion_elemento_carga_t* elementos_terminal;
+    int numero_elementos_terminal;
+    int numero_vehiculos_terminal;
+    int numero_baterias_terminal;
+}informacion_elementos_terminal_t;
 
-}elementos_carga_programada_terminal_t;
-
-
+/*Se define un tipo para almacenar la informacion relevante de los elementos que tienen su carga programada en un terminal*/
+//Cada posicion de este array se corresponde con un terminal 
+typedef struct {
+    informacion_elementos_terminal_t informacion_carga_terminales[12];
+}informacion_carga_terminales_t;
 
   //Tipo que sirve para almacenar la posicion de una fecha en los
   //csvs.

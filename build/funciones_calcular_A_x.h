@@ -10,7 +10,9 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-	int incluir_terminos_baterias(informacion_procesada_t* informacion_sistema, OSQPFloat* A_x, int* index_actual);
+	int incluir_terminos_baterias(informacion_procesada_t* informacion_sistema, OSQPFloat* A_x, int* index_actual,
+		informacion_carga_terminales_t* programacion_carga_elementos_terminal);
+
 	int incluir_terminos_potencias(informacion_procesada_t* informacion_sistema, OSQPFloat* A_x, int* index_actual);
 	int cargar_puntos_iniciales_finales(informacion_procesada_t* informacion_sistema, OSQPInt terminal_actual,
 		int* numero_elementos_terminales, int** puntos_iniciales,

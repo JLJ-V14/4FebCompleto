@@ -11,8 +11,8 @@
 
 
 //Este subprograma se utiliza para 
-int preparar_problema_optimizacion(informacion_entrada_t* informacion_sistema,
-                                   problema_optimizacion_t* problema_optimizacion) {
+int preparar_problema_optimizacion(informacion_entrada_t* informacion_sistema,problema_optimizacion_t* problema_optimizacion,
+  informacion_carga_terminales_t* programacion_carga_terminales) {
 
   //Se procede a calcular el numero de variables que tiene el problema de optimizacion
   if (calcular_numero_variables(informacion_sistema, &(problema_optimizacion->numero_variables)) == ERROR) {
@@ -25,7 +25,7 @@ int preparar_problema_optimizacion(informacion_entrada_t* informacion_sistema,
   calcular_numero_restricciones(informacion_sistema, problema_optimizacion->numero_restricciones);
 
   //Se procede a calcular las diferentes matrices del problema de optimizacion
-  if (calcular_matrices(informacion_sistema,problema_optimizacion) == ERROR) {
+  if (calcular_matrices(informacion_sistema,problema_optimizacion,programacion_carga_terminales) == ERROR) {
     printf("No se han podido calcular las matrices del problema de optimizacion\n");
     registrar_error("No se han podido calcular las matrices del problema de optimizacion\n", REGISTRO_ERRORES);
     return ERROR;

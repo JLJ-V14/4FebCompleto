@@ -302,7 +302,7 @@ int incluir_columnas_bateria_terminal(informacion_procesada_t* informacion_siste
 }
 
 int incluir_columnas_baterias(informacion_procesada_t* informacion_sistema, OSQPInt* A_p, int* index_actual,
-  int* comienzo_columna_actual) {
+  int* comienzo_columna_actual,informacion_carga_terminales_t* programacion_elementos_carga_terminal) {
   //Se crea una variable booleana para controlar el bucle donde se añaden las columnas en donde se encuentran los
   //términos de los estados de batería
   bool fin_bucle = false;

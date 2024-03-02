@@ -144,7 +144,7 @@ int cargar_puntos_iniciales_finales(informacion_procesada_t* informacion_sistema
 
 
 int incluir_terminos_baterias_terminal(informacion_procesada_t* informacion_sistema,OSQPInt terminal_actual,
-                                       int*index_actual,OSQPFloat* A_x) {
+    int*index_actual,OSQPFloat* A_x,informacion_carga_terminales_t* elementos_programados_carga_terminal) {
 
   //Se procede a crear dos arrays un array que contiene los puntos iniciales y finales
   //de vehiculos y baterias conectadas a los terminales 
@@ -223,16 +223,19 @@ int incluir_terminos_baterias_terminal(informacion_procesada_t* informacion_sist
   //baterías, en las restricciones pueden aparecer en dos tipos de restricciones las de borde y las de ecuación
   //del comportamiento de la batería
 
-int incluir_terminos_baterias(informacion_procesada_t* informacion_sistema, OSQPFloat* A_x,int* index_actual) {
+int incluir_terminos_baterias(informacion_procesada_t* informacion_sistema, OSQPFloat* A_x,int* index_actual,
+  informacion_carga_terminales_t* programacion_carga_terminales) {
 
   //Se crea una variable booleana para controlar el bucle donde se añaden los terminos de la variable del estado
   //de bateria, y una variable de tipo int para controlar por que terminal se va escribiendo, y una variable
   //tipo int para ver por que punto de simulacion se va.
+
   bool fin_bucle = false;
   OSQPInt  terminal_actual = 1;
   
   while (!fin_bucle) {
-    if (incluir_terminos_baterias_terminal(informacion_sistema, terminal_actual, index_actual, A_x) == ERROR) {
+    if (incluir_terminos_baterias_terminal(informacion_sistema, terminal_actual, index_actual, A_x,
+        programacion_carga_terminales) == ERROR) {
       printf("No se ha podido incluir los terminos de la batería en las ecuaciones de la matriz A_x\n");
       registrar_error("No se ha podido incluir los términos de la batería en las ecuaciones de la matriz A_x", REGISTRO_ERRORES);
       return ERROR;

@@ -133,22 +133,22 @@ void liberar_memoria_problema_optimizacion(problema_optimizacion_t* problema_opt
 
   //Se libera los contenidos de la matriz P
   if (problema_optimizacion->matriz_p.P)free(problema_optimizacion->matriz_p.P);
-  if(problema_optimizacion->matriz_p.P_x)free(problema_optimizacion->matriz_p.P_x);
-  if(problema_optimizacion->matriz_p.P_i)free(problema_optimizacion->matriz_p.P_i);
-  if(problema_optimizacion->matriz_p.P_p)free(problema_optimizacion->matriz_p.P_p);
+  if (problema_optimizacion->matriz_p.P_x)free(problema_optimizacion->matriz_p.P_x);
+  if (problema_optimizacion->matriz_p.P_i)free(problema_optimizacion->matriz_p.P_i);
+  if (problema_optimizacion->matriz_p.P_p)free(problema_optimizacion->matriz_p.P_p);
 
   //Se libera los contenidos del vector q
-  if(problema_optimizacion->vector_q)free(problema_optimizacion->vector_q);
+  if (problema_optimizacion->vector_q)free(problema_optimizacion->vector_q);
 
-  
+
   // Se libera los contenidos de la matriz A
   if (problema_optimizacion->matriz_a.A)free(problema_optimizacion->matriz_a.A);
-  if(problema_optimizacion->matriz_a.A_i)free(problema_optimizacion->matriz_a.A_i);
-  if(problema_optimizacion->matriz_a.A_x)free(problema_optimizacion->matriz_a.A_x);
-  if(problema_optimizacion->matriz_a.A_p)free(problema_optimizacion->matriz_a.A_p);
+  if (problema_optimizacion->matriz_a.A_i)free(problema_optimizacion->matriz_a.A_i);
+  if (problema_optimizacion->matriz_a.A_x)free(problema_optimizacion->matriz_a.A_x);
+  if (problema_optimizacion->matriz_a.A_p)free(problema_optimizacion->matriz_a.A_p);
 
   //Se liberan los contenidos de los vectores l y u
-  if(problema_optimizacion->vector_l)free(problema_optimizacion->vector_l);
+  if (problema_optimizacion->vector_l)free(problema_optimizacion->vector_l);
   if (problema_optimizacion->vector_u)free(problema_optimizacion->vector_u);
 
   //Se liberan los ajustes 
@@ -156,6 +156,28 @@ void liberar_memoria_problema_optimizacion(problema_optimizacion_t* problema_opt
 
 
   //Se limpia el solver
-  if(problema_optimizacion->solver)osqp_cleanup(problema_optimizacion->solver);
+  if (problema_optimizacion->solver)osqp_cleanup(problema_optimizacion->solver);
 
 }
+
+/*Se utiliza este subprograma para liberar la memoria reservada a la informacion sobre los vehiculos y baterias que
+  tienen su carga programada */
+
+  void liberar_informacion_carga_terminales(informacion_carga_terminales_t * informacion_carga_terminales) {
+
+    if (informacion_carga_terminales != NULL) {
+
+      //Se itera por cada uno de los terminales
+      for (int numero_terminal = 0; numero_terminal < 12; numero_terminal++) {
+
+        informacion_elementos_terminal_t* info_terminal_carga = &(informacion_carga_terminales->informacion_carga_terminales);
+        //Se procede a liberar la informacion asociada a los vehiculos y baterias que tienen su carga programada
+        //en el terminal
+        if (info_terminal_carga->elementos_terminal != NULL) {
+          free(info_terminal_carga->elementos_terminal);
+          info_terminal_carga->elementos_terminal = NULL;
+
+        }
+      }
+    }
+  }

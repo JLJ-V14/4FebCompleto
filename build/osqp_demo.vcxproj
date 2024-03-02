@@ -351,6 +351,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClCompile Include="funciones_calcular_vector_l.c" />
     <ClCompile Include="funciones_calcular_vector_u.c" />
     <ClCompile Include="inicializar_informacion_procesada.c" />
+    <ClCompile Include="obtener_informacion_carga_terminales.c" />
     <ClCompile Include="preparar_problema_optimizacion.c" />
     <ClCompile Include="preparar_solver_optimizacion.c" />
     <ClCompile Include="procesar_informacion_entrada.c" />
@@ -398,6 +399,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClInclude Include="leer_entradas.h" />
     <ClInclude Include="liberar_memoria.h" />
     <ClInclude Include="main.h" />
+    <ClInclude Include="obtener_informacion_carga_terminales.h" />
     <ClInclude Include="operaciones_csv.h" />
     <ClInclude Include="operaciones_fecha.h" />
     <ClInclude Include="operaciones_string.h" />

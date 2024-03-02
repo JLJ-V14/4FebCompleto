@@ -12,8 +12,11 @@
 
 
 
-// Se calcula el vector A_x contienen los valores diferentes de cero
-int calcular_vector_A_x(informacion_procesada_t* informacion_sistema, OSQPFloat** A_x,OSQPInt A_nnz) {
+// Se calcula el vector A_x contienen los valores diferentes de cero, en las restricciones, esto incluye tanto
+// las restricciones de borde como los terminos que aparecen en las diferentes ecuaciones
+
+int calcular_vector_A_x(informacion_procesada_t* informacion_sistema, OSQPFloat** A_x,OSQPInt A_nnz,
+  informacion_carga_terminales_t* elementos_programados_terminales) {
 
   //Primeramente hay que dimensionar el tamaño del vector A_x este vector sera tan grande como sea el numero
   //de términos diferentes de 0
@@ -27,9 +30,12 @@ int calcular_vector_A_x(informacion_procesada_t* informacion_sistema, OSQPFloat*
   }
 
   //Se llama a los subprogramas para incluir los diferentes términos en el vector A_x
-  //Incluyo una variable para saber donde situar los valores del vector A_x
+  //Incluyo una variable para saber donde situar los valores del vector A_x, es la posicion del vector por el cual
+  //se están añadiendo términos.
   int index_actual = 0;
-  if (incluir_terminos_baterias(informacion_sistema, *A_x, &index_actual) == ERROR) {
+
+  //Se llama al siguiente subprograma para incluir en la matriz de restricciones los terminos de la variable SOC 
+  if (incluir_terminos_baterias(informacion_sistema, *A_x, &index_actual,elementos_programados_terminales) == ERROR) {
     printf("No se han podido incluir los términos de las baterias en el vector A_x\n");
     registrar_error("No se han podido incluir los términos de las baterías en el vector A_x\n", REGISTRO_ERRORES);
     return ERROR;
@@ -51,7 +57,8 @@ int calcular_vector_A_x(informacion_procesada_t* informacion_sistema, OSQPFloat*
 
 // Se calcula el vector A_i contiene los índices de las filas donde se encuentre los valores
 //  diferentes de 0
-int calcular_vector_A_i(informacion_procesada_t* informacion_sistema, OSQPFloat** A_i,OSQPInt A_nnz) {
+int calcular_vector_A_i(informacion_procesada_t* informacion_sistema, OSQPFloat** A_i,OSQPInt A_nnz,
+  informacion_carga_terminales_t* elementos_programados_terminales) {
 
   //Primeramente hay que dimensionar el tamaño del vector A_i este vector será tan grande como
   //A_x y tan grande como número de elementos diferentes de 0 haya.
@@ -95,7 +102,8 @@ int calcular_vector_A_i(informacion_procesada_t* informacion_sistema, OSQPFloat*
 //Se calcula el vector A_p contiene los índices de las columnas donde se encuentran los
 //  valores diferentes de 0 
 
-int calcular_vector_A_p(informacion_procesada_t* informacion_sistema, OSQPInt** A_p) {
+int calcular_vector_A_p(informacion_procesada_t* informacion_sistema, OSQPInt** A_p,
+  informacion_carga_terminales_t* informacion_carga_terminales) {
   //cargo el numero de puntos de simulacion
   int numero_puntos_simulacion = informacion_sistema->informacion_puntos_simulacion.numero_puntos_simulacion;
   //Calculo el numero de columnas que se tienen en la matriz
@@ -111,7 +119,7 @@ int calcular_vector_A_p(informacion_procesada_t* informacion_sistema, OSQPInt** 
   }
 
   //Se incluyen las columnas en las que se encuentran los terminos de los estados de bateria
-  if (incluir_columnas_baterias(informacion_sistema, *A_p, &index_actual, &columna_a_actual) == ERROR) {
+  if (incluir_columnas_baterias(informacion_sistema, *A_p, &index_actual, &columna_a_actual,informacion_carga_terminales) == ERROR) {
     printf("No se ha podido incluir las columnas en las que se encuentran los terminos de estados de bateria\n");
     registrar_error("No se ha podido incluir las columnas en las que se encuentran los terminos de estados de bateria\n",REGISTRO_ERRORES);
     return ERROR;
@@ -167,7 +175,8 @@ void calcular_numero_terminos(informacion_procesada_t* informacion_sistema,OSQPI
 
 // Se calcula la matriz A que sirve para indicar las restricciones del sistema
 
-int calcular_matriz_a(informacion_procesada_t * informacion_sistema, problema_optimizacion_t* problema_optimizacion) {
+int calcular_matriz_a(informacion_procesada_t * informacion_sistema, problema_optimizacion_t* problema_optimizacion,
+  informacion_carga_terminales_t* programacion_carga_terminales) {
   matriz_a_t* matriz_a = &(problema_optimizacion->matriz_a);
   //Se procede a cargar el numero de variables
   OSQPInt n     = problema_optimizacion->numero_variables;
@@ -176,19 +185,19 @@ int calcular_matriz_a(informacion_procesada_t * informacion_sistema, problema_op
   calcular_numero_terminos(informacion_sistema, &A_nnz);
 
   //Se procede a calcular el vector A_x
-  if (calcular_vector_A_x(informacion_sistema, &(matriz_a->A_x),A_nnz,n) == ERROR) {
+  if (calcular_vector_A_x(informacion_sistema, &(matriz_a->A_x),A_nnz,n,programacion_carga_terminales) == ERROR) {
     printf("No se ha podido calcular el vector A_x\n");
     registrar_error("No se ha podido calcular el vector A_x\n", REGISTRO_ERRORES);
     return ERROR;
   }
   //Se procede a calcular el vector A_i
-  if (calcular_vector_A_i(informacion_sistema, &(matriz_a->A_i),A_nnz) == ERROR) {
+  if (calcular_vector_A_i(informacion_sistema, &(matriz_a->A_i),A_nnz,programacion_carga_terminales) == ERROR) {
     printf("No se ha podido calcular el vector A_i\n");
     registrar_error("No se ha podido calcular el vector A_i\n", REGISTRO_ERRORES);
     return ERROR;
   }
   //Se procede a calcular el vector A_p
-  if (calcular_vector_A_p(informacion_sistema, &(matriz_a->A_p)) == ERROR) {
+  if (calcular_vector_A_p(informacion_sistema, &(matriz_a->A_p),programacion_carga_terminales) == ERROR) {
     printf("No se ha podido calcular el vector A_p\n");
     registrar_error("No se ha podido calcular el vector A_p\n", REGISTRO_ERRORES);
     return ERROR;

@@ -10,9 +10,11 @@
 
 
 
-int calcular_matrices(informacion_procesada_t *informacion_sistema, problema_optimizacion_t* problema_optimizacion) {
+int calcular_matrices(informacion_procesada_t *informacion_sistema, problema_optimizacion_t* problema_optimizacion,
+ informacion_carga_terminales_t* elementos_programados_terminales) {
+
 	//Esta función se encarga de rellenar las matrices P,A,l,u,q con los datos del problema de optimizacion 
-  if (calcular_matriz_a(informacion_sistema, &(problema_optimizacion->matriz_a)) == ERROR) {
+  if (calcular_matriz_a(informacion_sistema, &(problema_optimizacion->matriz_a),elementos_programados_terminales) == ERROR) {
     printf("No se ha podido calcular la matriz A en el problema de optimizacion\n");
     registrar_error("No se ha podido calcular la matriz A en el problema de optimizacion", REGISTRO_ERRORES);
     return ERROR;
