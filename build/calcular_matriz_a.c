@@ -35,17 +35,18 @@ int calcular_vector_A_x(informacion_procesada_t* informacion_sistema, OSQPFloat*
   int index_actual = 0;
 
   //Se llama al siguiente subprograma para incluir en la matriz de restricciones los terminos de la variable SOC 
-  if (incluir_terminos_baterias(informacion_sistema, *A_x, &index_actual,elementos_programados_terminales) == ERROR) {
+  if (incluir_terminos_baterias_A_x(informacion_sistema, *A_x, &index_actual,elementos_programados_terminales) == ERROR) {
     printf("No se han podido incluir los términos de las baterias en el vector A_x\n");
     registrar_error("No se han podido incluir los términos de las baterías en el vector A_x\n", REGISTRO_ERRORES);
     return ERROR;
   }
 
-  if (incluir_terminos_potencias(informacion_sistema, *A_x, &index_actual) == ERROR) {
+  if (incluir_terminos_potencias_A_x(informacion_sistema, *A_x, &index_actual,elementos_programados_terminales) == ERROR) {
     printf("No se han podido incluir los términos de potencia en el vector A_x\n");
     registrar_error("No se han podido incluir los términos de potencia en el vector A_x\n", REGISTRO_ERRORES);
     return ERROR;
   }
+
   incluir_termino_potencia_red(informacion_sistema, *A_x, &index_actual);
   incluir_termino_potencia_entrada_sistema(informacion_sistema, *A_x, &index_actual);
   incluir_termino_potencia_salida_sistema(informacion_sistema, *A_x, &index_actual);
@@ -69,20 +70,26 @@ int calcular_vector_A_i(informacion_procesada_t* informacion_sistema, OSQPFloat*
     return ERROR;
   }
   int index_actual = 0;
-  int fila_actual  = 0;
 
-  if (incluir_localizacion_baterias(informacion_sistema, *A_i, &index_actual, &fila_actual) == ERROR) {
+  //Cargo el numero de puntos de simulacion
+  int numero_puntos_simulacion = informacion_sistema->informacion_puntos_simulacion.numero_puntos_simulacion;
+
+  //Se define la primera fila en la cual se situa la ecuacion del balance de bateria
+  int fila_actual_balance_bateria  = (NUMERO_VARIABLES +3) * numero_puntos_simulacion;
+
+  if (incluir_filas_baterias(informacion_sistema, *A_i, &index_actual, &fila_actual_balance_bateria,elementos_programados_terminales) == ERROR) {
     printf("No se ha podido indicar las filas del termino estado de bateria en la matriz A_i\n");
     registrar_error("No se ha podido indicar las filas del termino del estado de bateria en la matriz A_i", REGISTRO_ERRORES);
     return ERROR;
   }
 
-  if (incluir_filas_potencias_terminales(informacion_sistema, *A_i, &index_actual, &fila_actual) == ERROR) {
+  if (incluir_filas_potencias_terminales(informacion_sistema, *A_i, &index_actual, &fila_actual_balance_bateria,elementos_programados_terminales) == ERROR) {
     printf("No se ha podido indicar las filas del termino de la potencia del terminal en la matriz A_i\n");
     registrar_error("No se ha podido indicar las filas del termino de la potencia del terminal en la matriz A_i", REGISTRO_ERRORES);
     return ERROR;
   }
-  int ultima_fila_balance_bateria = fila_actual;
+
+  int ultima_fila_balance_bateria = fila_actual_balance_bateria;
 
   incluir_filas_potencia_red(informacion_sistema, *A_i, &ultima_fila_balance_bateria, &index_actual);
   incluir_filas_potencia_entrada_red(informacion_sistema, *A_i, &ultima_fila_balance_bateria, &index_actual);
@@ -110,13 +117,17 @@ int calcular_vector_A_p(informacion_procesada_t* informacion_sistema, OSQPInt** 
   int numero_columnas = NUMERO_VARIABLES * numero_puntos_simulacion;
   int index_actual = 0;
   int columna_a_actual = 0;
+
   *A_p = (OSQPInt*)malloc((numero_columnas + 1) * sizeof(OSQPInt));
+
   //Se comprueba que la reserva de memoria ha sido exitosa
   if (*A_p == NULL) {
     printf("No se ha podido reservar memoria para el vector A_p\n");
     registrar_error("No se ha podido reservar memoria para el vector A_p",REGISTRO_ERRORES);
     return ERROR;
   }
+
+
 
   //Se incluyen las columnas en las que se encuentran los terminos de los estados de bateria
   if (incluir_columnas_baterias(informacion_sistema, *A_p, &index_actual, &columna_a_actual,informacion_carga_terminales) == ERROR) {
@@ -125,7 +136,7 @@ int calcular_vector_A_p(informacion_procesada_t* informacion_sistema, OSQPInt** 
     return ERROR;
  }
   //Se incluyen las columnas en la que se encuentran los terminos de las potencias que intercambian los terminales
-  if (incluir_columnas_potencias_terminales(informacion_sistema, *A_p, &index_actual, &columna_a_actual) == ERROR) {
+  if (incluir_columnas_potencias_terminales(informacion_sistema, *A_p, &index_actual, &columna_a_actual,informacion_carga_terminales) == ERROR) {
     printf("No se ha podido incluir las columnas en las que se encuentran los terminos de potencia de los terminales\n");
     registrar_error("No se ha podido incluir las columnas en las que se encuentran los terminos de potencia de los terminales\n", REGISTRO_ERRORES);
     return ERROR;

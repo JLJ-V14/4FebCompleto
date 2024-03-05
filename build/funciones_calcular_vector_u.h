@@ -12,7 +12,9 @@ extern "C" {
 
 	void calcular_limite_superior_restricciones_bateria(informacion_procesada_t* informacion_sistema, OSQPFloat* u);
 	void calcular_restricciones_superiores_borde_potencias_red(informacion_procesada_t* informacion_sistema, OSQPFloat* u);
-	int  calcular_limites_superior_potencia_terminales(informacion_procesada_t* informacion_sistema, OSQPFloat* u);
+	
+	void calcular_limites_superior_potencia_terminales(informacion_procesada_t* informacion_sistema, OSQPFloat* u,
+		 informacion_carga_terminales_t* elementos_programados_carga_terminales);
 	void calcular_restricciones_superiores_potencia_red_fase(informacion_procesada_t* informacion_sistema, OSQPFloat* u);
 	void calcular_restricciones_superiores_potencia_entrada_fase(informacion_procesada_t* informacion_sistema, OSQPFloat* u);
 	void calcular_restricciones_borde_superiores_potencia_salida_fase(informacion_procesada_t* informacion_sistema, OSQPFloat* u);

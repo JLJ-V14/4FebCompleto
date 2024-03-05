@@ -13,11 +13,11 @@ void calcular_numero_ecuaciones_estado_bateria(informacion_procesada_t* informac
   //inicial que batería es igual al estado inicial = batería final.
 
   for (int i = 0; i < informacion_sistema->informacion_vehiculos.numero_vehiculos; i++) {
-    *numero_ecuaciones_bateria += informacion_sistema->informacion_vehiculos.vehiculos[i].punto_final - informacion_sistema->informacion_vehiculos.vehiculos[i].punto_inicio - 1;
+    *numero_ecuaciones_bateria += informacion_sistema->informacion_vehiculos.vehiculos[i].punto_final - informacion_sistema->informacion_vehiculos.vehiculos[i].punto_inicio;
   }
 
   for (int i = 0; i < informacion_sistema->informacion_baterias.numero_baterias; i++){
-    *numero_ecuaciones_bateria += informacion_sistema->informacion_baterias.baterias[i].punto_final - informacion_sistema->informacion_baterias.baterias[i].punto_final - 1;
+    *numero_ecuaciones_bateria += informacion_sistema->informacion_baterias.baterias[i].punto_final - informacion_sistema->informacion_baterias.baterias[i].punto_inicio;
   }
 }
 

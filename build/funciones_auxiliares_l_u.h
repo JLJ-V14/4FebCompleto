@@ -10,10 +10,9 @@
 extern "C" {
 #endif
 
-	int calcular_puntos_iniciales_finales_baterias(informacion_procesada_t* informacion_sistema, OSQPInt terminal_actual,
-		int* numero_baterias_terminales, int** puntos_iniciales, int** puntos_finales);
-	int calcular_maxima_potencia_baterias(informacion_procesada_t* informacion_sistema, OSQPInt terminal_actual,
-		int* numero_baterias_terminales, int* puntos_iniciales, int* puntos_finales, OSQPFloat** potencias_maximas);
+
+	void calcular_minima_potencia_baterias(informacion_procesada_t* informacion_sistema, int terminal_actual,
+		 informacion_carga_terminales_t* elementos_carga_terminales);
 
 #ifdef __cplusplus
 }

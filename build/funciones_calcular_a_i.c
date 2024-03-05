@@ -46,8 +46,8 @@ void incluir_filas_potencia_entrada_red_fase(informacion_procesada_t* informacio
                                              int* ultima_fila_balance_bateria, int* index_actual, char fase) {
   //Cargo el numero de puntos de simulacion
   int numero_puntos_simulacion = informacion_sistema->informacion_puntos_simulacion.numero_puntos_simulacion;
-  int fila_restriccion_borde = 0;
-  int fila_ecuacion_35 = 0;
+  int fila_restriccion_borde ;
+  int fila_ecuacion_35 ;
   int fila_ecuacion_36 = 43 * numero_puntos_simulacion +(*ultima_fila_balance_bateria);
   //Dependiendo de la fase el valor de fila a añadir en el vector A_i es diferente.
   if (fase == 'R') {
@@ -85,10 +85,11 @@ void incluir_filas_potencia_red_fase(informacion_procesada_t* informacion_sistem
   //Cargo el numero de puntos de simulacion
   int numero_puntos_simulacion = informacion_sistema->informacion_puntos_simulacion.numero_puntos_simulacion;
   //Defino una serie de variables para indicar las filas en donde se encuentran los términos de restricción
-  int fila_restriccion_borde = 0;
-  int fila_restriccion_balance =0;
-  int fila_ecuacion_35=0;
+  int fila_restriccion_borde;
+  int fila_restriccion_balance;
+  int fila_ecuacion_35;
   int fila_ecuacion_38 = 45 * numero_puntos_simulacion + (*ultima_fila_balance_bateria);
+
   if (fase == 'R') {
     fila_restriccion_borde = 27 * numero_puntos_simulacion;
     fila_restriccion_balance = NUMERO_VARIABLES * numero_puntos_simulacion;
@@ -138,6 +139,7 @@ void incluir_filas_potencia_salida_red(informacion_procesada_t* informacion_sist
   int fila_balance_ec_37 = fila_balance_ec_34 + 5 * numero_puntos_simulacion;
 
   for (int i = 0; i < numero_puntos_simulacion; i++) {
+
     A_i[(*index_actual)] = fila_restriccion_borde;
     (*index_actual)++;
     (fila_restriccion_borde)++;
@@ -211,7 +213,8 @@ void incluir_filas_potencia_red(informacion_procesada_t* informacion_sistema,OSQ
 //por un terminal en concreto
 
 int incluir_filas_potencias_terminal(informacion_procesada_t* informacion_sistema, OSQPInt* A_i, int* fila_actual,
-  int* numero_ecuaciones_bateria, char fase, OSQPInt numero_terminal, int* index_actual) {
+  int* numero_ecuaciones_bateria, char fase, OSQPInt numero_terminal, int* index_actual,
+  informacion_carga_terminales_t* programacion_elementos_carga_terminales) {
 
  
   //Cargo el numero de puntos de simulacion en la optimizacion
@@ -220,11 +223,15 @@ int incluir_filas_potencias_terminal(informacion_procesada_t* informacion_sistem
 
   //Cargo el offset para las ecuaciones del comportamiento de la bateria
   int offset_bateria = NUMERO_VARIABLES * numero_puntos_simulacion + NUMERO_FASES * numero_puntos_simulacion;
+
+  //Se carga cual seria el valor de la fila de la primera ecuacion del balance de bateria teniendo en cuenta
+  //todas las demas baterías que han sido consideradas
   int fila_ecuacion_bateria = offset_bateria + (*numero_ecuaciones_bateria);
 
   //Cargo la fila inicial de la restriccion de borde
-  int fila_actual_restriccion_borde = (numero_terminal - 1) * numero_puntos_simulacion;
+  int fila_actual_restriccion_borde = (numero_terminal ) * numero_puntos_simulacion;
   int fila_ecuacion_balance = 0;
+
   if (fase == 'R') {
     fila_ecuacion_balance = NUMERO_VARIABLES * numero_puntos_simulacion;
   }
@@ -237,56 +244,74 @@ int incluir_filas_potencias_terminal(informacion_procesada_t* informacion_sistem
   }
 
 
-  //Creo dos arrays para almacenar los puntos iniciales y finales en el que hay algún vehículo
-  int* puntos_iniciales = NULL;
-  int* puntos_finales = NULL;
-  //Se crea una variable para indicar cuantos vehiculos o baterias se tienen en el terminal
-  int numero_elementos_terminales = 0;
-  int index_adicional = 0;
+  //Se carga el numero de elementos que tienen su carga prgoramada en el terminal
+  int numero_elementos_terminal = programacion_elementos_carga_terminales->informacion_carga_terminales->numero_elementos_terminal;
+  int index_elemento_carga_terminal = 0;
+
+  
 
 
-  if (cargar_puntos_iniciales_finales(informacion_sistema, numero_terminal, &numero_elementos_terminales,
-    &puntos_iniciales, &puntos_finales) == ERROR) {
-    printf("No se han podido cargar los puntos iniciales y finales de las baterías y vehículos en la elaboración del vector A_i\n");
-    registrar_error("No se han podido cargar los puntos iniciales y finales de las baterías y vehículos en la elaboración del vector A_i\n", REGISTRO_ERRORES);
-    return ERROR;
-  }
-  qsort(puntos_iniciales, numero_elementos_terminales, sizeof(int), comparar_ints);
-  qsort(puntos_iniciales, numero_elementos_terminales, sizeof(int), comparar_ints);
+  if ((numero_elementos_terminal > 0) && ((fase == 'R') || (fase == 'S') || (fase == 'T'))) {
 
-  if (numero_elementos_terminales > 0) {
+    //Se carga el punto inicial y el final del primer vehiculo o batería que tiene su carga programada en el terminal
+    int punto_inicial = programacion_elementos_carga_terminales->informacion_carga_terminales[numero_terminal].elementos_terminal[0].punto_inicio;
+    int punto_final = programacion_elementos_carga_terminales->informacion_carga_terminales[numero_terminal].elementos_terminal[0].punto_final;
+
+
     for (int punto_actual = 0; punto_actual < numero_puntos_simulacion; punto_actual++) {
-      if (numero_elementos_terminales > index_adicional) {
-        if (comprobar_rango(punto_actual, puntos_iniciales[index_adicional], puntos_finales[index_adicional]) == true) {
+
+      if (numero_elementos_terminal > index_elemento_carga_terminal) {
+
+        //Se comprueba si para el punto actual en el que se están calculando las diferentes filas en las que hay
+        //un termino que es la potencia intercambiada un terminal
+
+        if (comprobar_rango(punto_actual, punto_inicial, punto_final) == true) {
+
           //El primer punto que hay una bateria conectada ya sea de una bateria o de un vehiculo propiamente dicho
-          if (punto_actual == puntos_iniciales[index_adicional]) {
+          //no hay ecuacion de balance de bateria ya que la bateria = bateria inicial
+
+          if (punto_actual == punto_inicial) {
+
+            //Se incluye la fila de la restricción de borde
             A_i[(*index_actual)] = fila_actual_restriccion_borde;
             (fila_actual_restriccion_borde)++;
             (*index_actual)++;
+
+            //Se incluye la fila de la ecuacion del balance bateria.
             A_i[(*index_actual)] = fila_ecuacion_balance;
             (fila_ecuacion_balance)++;
             (*index_actual)++;
+
             //Es necesario tambien actualizar el numero de ecuaciones que modelan el comportamiento de una bateria
             (*numero_ecuaciones_bateria)++;
           }
           else {
+
+            //Se incluye la restricción de borde
             A_i[(*index_actual)] = fila_actual_restriccion_borde;
             (fila_actual_restriccion_borde)++;
             (*index_actual)++;
+
+            //Se incluye la ecuación del balance de potencia
             A_i[(*index_actual)] = fila_ecuacion_balance;
             (*index_actual)++;
             (fila_ecuacion_balance)++;
+
+            //Se incluye la ecuación del balance de batería
             A_i[(*index_actual)] = fila_ecuacion_bateria;
             (*index_actual)++;
             (fila_ecuacion_bateria)++;
+
             //Es necesario tambien actualizar el numero de ecuaciones que modelan el comportamiento de una bateria
             (*numero_ecuaciones_bateria)++;
 
           }
+
           //Se actualiza el index_adicional
-          if (puntos_finales[index_adicional] == punto_actual) {
-            index_adicional++;
+          if (punto_final == punto_actual) {
+            (*index_actual)++;
           }
+
         }
       }
       else {
@@ -295,6 +320,7 @@ int incluir_filas_potencias_terminal(informacion_procesada_t* informacion_sistem
         A_i[(*index_actual)] = fila_actual_restriccion_borde;
         (fila_actual_restriccion_borde)++;
         (*index_actual)++;
+        //Se añade la ecuacion del balance
         A_i[(*index_actual)] = fila_ecuacion_balance;
         (fila_ecuacion_balance)++;
         (*index_actual)++;
@@ -328,39 +354,36 @@ int incluir_filas_potencias_terminal(informacion_procesada_t* informacion_sistem
 
 // Se utiliza el siguiente subprograma para indicar las filas en las que se encuentran las potencias
 int incluir_filas_potencias_terminales(informacion_procesada_t* informacion_sistema,OSQPInt* A_i,
-    int* index_actual, int* fila_actual) {
+    int* index_actual, int* fila_actual,informacion_carga_terminales_t* elementos_programados_terminales) {
+
   //Variable booleana para saber cuando terminar el bucle while
   bool fin_bucle = false;
-  //Variable tipo int para llevar la cuenta del terminal actual
-  OSQPInt terminal_actual = 1;
+ 
   //variable char para saber en que fase está el terminal
   char fase;
 
   //Cargo el numero de puntos de simulacion
   int numero_puntos_simulacion = informacion_sistema->informacion_puntos_simulacion.numero_puntos_simulacion;
+
   //Cargo la primera fila donde se encuentra un termino de potencia intercambiado por un terminal (restricciones de borde)
   *fila_actual = NUMERO_TERMINALES * (numero_puntos_simulacion);
+
   //Se carga el numero de ecuaciones de modelado de bateria que se han anyadido hasta el momento
   int numero_ecuaciones_modelado_bateria = 0;
 
-  while (fin_bucle) {
-    fase = informacion_sistema->informacion_terminales.fases_electricas[terminal_actual - 1];
-    if (incluir_filas_potencias_terminal(informacion_sistema,A_i,fila_actual,&numero_ecuaciones_modelado_bateria,
-                                         fase,terminal_actual,index_actual) == ERROR) {
+  for (int numero_terminal = 0; numero_terminal < NUMERO_TERMINALES; numero_terminal++) {
+
+    fase = informacion_sistema->informacion_terminales.fases_electricas[numero_terminal];
+
+    if (incluir_filas_potencias_terminal(informacion_sistema, A_i, fila_actual, &numero_ecuaciones_modelado_bateria,
+      fase, numero_terminal, index_actual, elementos_programados_terminales) == ERROR) {
       printf("No se han podido incluir las filas de las potencias intercambiadas por los terminales en el vector A_i\n");
       registrar_error("No se han podido incluir las filas de las potencias intercambiadas por los terminales en el vector A_i\n", REGISTRO_ERRORES);
       return ERROR;
     }
 
-    if (terminal_actual >= 12) {
-      fin_bucle = true;
-    }
-
-    else {
-      terminal_actual += 1;
-    }
-
   }
+
   return EXITO;
 }
 
@@ -368,47 +391,50 @@ int incluir_filas_potencias_terminales(informacion_procesada_t* informacion_sist
 
 
 
-/*Se incluye las localizaciones en las que se encuentran los terminos de los estados de las baterías SOC*/
+/*Se incluye las filas en las que se encuentran los terminos de los estados de las baterías SOC*/
 int incluir_filas_terminos_baterias_terminal(informacion_procesada_t* informacion_sistema,OSQPInt terminal_actual,
-     int*index_actual,OSQPInt*A_i,int* fila_actual) {
+     int*index_actual,OSQPInt*A_i,int* fila_actual_balance,informacion_carga_terminales_t* elementos_programados_terminales) {
 
-  //Se crean dos arrays para almacenar los puntos iniciales y finales de los vehículos y baterías conectadas a los
-  //terminales los puntos iniciales y finales.
+  //Se carga el numero de elementos que se tienen en el terminal
+  int numero_elementos_terminales = elementos_programados_terminales->informacion_carga_terminales->numero_elementos_terminal;
 
-  int* puntos_iniciales = NULL;
-  int* puntos_finales = NULL;
+  //Variable que sirve para acceder a los diferentes elementos que tienen su carga programada en el terminal.
+  int index_elemento_terminal = 0;
 
-  int numero_elementos_terminales = 0;
-  //Variable para acceder al array de los puntos iniciales y finales
-  int index_adicional = 0;
   //  Se carga el numero de puntos de simulacion
   int numero_puntos_simulacion = informacion_sistema->informacion_puntos_simulacion.numero_puntos_simulacion;
-  int fila_termino_bateria_borde   = (*fila_actual);
-  int fila_termino_bateria_balance = (NUMERO_TERMINALES * numero_puntos_simulacion) + *fila_actual;
+  //Se carga las filas iniciales en las que se encuentra la informacion
+
+  //Se define la primera fila en la que se encuentra la restriccion de borde de la batería de este terminal
+  int fila_termino_bateria_borde = terminal_actual * numero_puntos_simulacion;
+
+  //Se define la primera fila en la que se encuentra el balance de bateria 
+  int fila_termino_bateria_balance = (*fila_actual_balance);
+
+
   //Se crea una variable para indicar el numero de fila de ecuacion que se está rellenando en la matriz A_i
-  
 
-  if (cargar_puntos_iniciales_finales(informacion_sistema, terminal_actual, &numero_elementos_terminales,
-    &puntos_iniciales, &puntos_finales) == ERROR) {
-    printf("No se han podido cargar los puntos iniciales y finales de las baterias en la realización del vector A_i");
-    registrar_error("No se han podido cargar los puntos iniciales y finales de las baterias en la realización del vector A_i", REGISTRO_ERRORES);
-    return ERROR;
-  }
+  //Se crean dos variables para poder guardar el punto inicial y final del elemento que tienen su carga
+  //programada en el terminal:
+  int punto_inicial;
+  int punto_final;
 
-  //Se reordenan los arrays de puntos iniciales y finales de menor a mayor
-  qsort(puntos_iniciales, numero_elementos_terminales, sizeof(int), comparar_ints);
-  qsort(puntos_finales, numero_elementos_terminales, sizeof(int), comparar_ints);
 
   //Se pasa a escribir las filas en donde se encuentran los terminos SOC 
   if (numero_elementos_terminales > 0) {
+
+    punto_inicial = elementos_programados_terminales->informacion_carga_terminales[terminal_actual].elementos_terminal[index_elemento_terminal].punto_inicio;
+    punto_final = elementos_programados_terminales->informacion_carga_terminales[terminal_actual].elementos_terminal[index_elemento_terminal].punto_final;
+
     for (int punto_actual = 0; punto_actual < numero_puntos_simulacion; punto_actual++) {
-      if (numero_elementos_terminales > index_adicional) {
-        if (comprobar_rango(punto_actual, puntos_iniciales[index_adicional], puntos_finales[index_adicional]) == true) {
+
+      if (numero_elementos_terminales > index_elemento_terminal) {
+        if (comprobar_rango(punto_actual,punto_inicial,punto_final) == true) {
 
           //Primer termino SOC de las ecuaciones del comportamiento de bateria (1ºpunto simulacion en el
           // que está presente la batería)
 
-          if (punto_actual == puntos_iniciales[index_adicional]) {
+          if (punto_actual == punto_inicial) {
             //Se escribe en el vector A_i la fila en la que está la batería SOC
 
             A_i[*index_actual] = fila_termino_bateria_borde;
@@ -437,16 +463,30 @@ int incluir_filas_terminos_baterias_terminal(informacion_procesada_t* informacio
             (*index_actual)++;
             (fila_termino_bateria_balance)++;
           }
-          if (puntos_finales[index_adicional] == punto_actual) {
-            index_adicional++;
+          //Si el punto actual coincide con el punto final en el siguiente punto de simulacion no es necesario
+          //incluir más terminos.
+          if (punto_final== punto_actual) {
+            index_elemento_terminal++;
+          //Se actualiza el index que sirve para acceder a los elementos que tienen su carga programada
+            if (numero_elementos_terminales >index_elemento_terminal) {
+              punto_inicial = elementos_programados_terminales->informacion_carga_terminales[terminal_actual].elementos_terminal[index_elemento_terminal].punto_inicio;
+              punto_final = elementos_programados_terminales->informacion_carga_terminales[terminal_actual].elementos_terminal[index_elemento_terminal].punto_final;
+            }
           }
+
+
         }
+
+        //Si no hay elemento que tenga la carga programada en el terminal, cada termino SOC  está en una nueva fila
         else {
           A_i[*index_actual] = fila_termino_bateria_borde;
           (*index_actual)++;
           (fila_termino_bateria_borde)++;
         }
       }
+
+      //Si no hay elemento que tenga la carga programada, simplemente hay que indicar donde están las restricciones
+      //de borde
       else {
         A_i[*index_actual] = fila_termino_bateria_borde;
         (*index_actual)++;
@@ -454,7 +494,8 @@ int incluir_filas_terminos_baterias_terminal(informacion_procesada_t* informacio
       }
     }
   }
-  
+  //Si no hay elemento que tenga la carga programada, simplemente hay que indicar donde están las restricciones
+   //de borde
   else {
     for (int i = 0; i < numero_puntos_simulacion; i++) {
       A_i[(*index_actual)] = (fila_termino_bateria_borde);
@@ -464,7 +505,7 @@ int incluir_filas_terminos_baterias_terminal(informacion_procesada_t* informacio
     }
   }
 
-  (*fila_actual) = fila_termino_bateria_balance;
+  (*fila_actual_balance) = fila_termino_bateria_balance;
 
   return EXITO;
 }
@@ -472,28 +513,24 @@ int incluir_filas_terminos_baterias_terminal(informacion_procesada_t* informacio
 /*Este subprograma se utiliza para indicar en que filas de la matriz A se encuentran los terminos del problema
   de optimizacion SOC */
 
-int incluir_localizacion_baterias(informacion_procesada_t* informacion_sistema, OSQPInt* A_i, int* index_actual,
-                                  int* fila_actual) {
+int incluir_filas_baterias(informacion_procesada_t* informacion_sistema, OSQPInt* A_i, int* index_actual,
+                                  int* fila_actual, informacion_carga_terminales_t* elementos_programados_terminal) {
 
-  //Se crea una variable booleana para controlar el bucle donde se añaden los terminos de la variable del estado
-  //de bateria, y una variable de tipo int para controlar por que terminal se va escribiendo, y una variable
-  //tipo int para ver por que punto de simulacion se va.
-  bool fin_bucle = false;
-  OSQPInt terminal_actual = 1;
+  
+  /*Se va iterando por todos los terminos SOC, es necesario iterar por cada terminal, para incluir las filas
+    en las que se ecuentran estos terminos.*/
 
-  while (!fin_bucle) {
-    if (incluir_filas_terminos_baterias_terminal(informacion_sistema, terminal_actual, index_actual, A_i,fila_actual) == ERROR) {
+  for (int numero_terminal = 0; numero_terminal<NUMERO_TERMINALES; numero_terminal++) {
+
+    if (incluir_filas_terminos_baterias_terminal(informacion_sistema,numero_terminal, index_actual, A_i,fila_actual,
+      elementos_programados_terminal) == ERROR) {
       printf("No se ha podido incluir los terminos de la batería en las ecuaciones de la matriz A_x\n");
       registrar_error("No se ha podido incluir los términos de la batería en las ecuaciones de la matriz A_x", REGISTRO_ERRORES);
       return ERROR;
     }
-    if (terminal_actual >= 12) {
-      fin_bucle = true;
+    
     }
-    else {
-      terminal_actual += 1;
-    }
-  }
+  
   return EXITO;
 }
 

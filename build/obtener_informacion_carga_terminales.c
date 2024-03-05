@@ -59,11 +59,20 @@ int obtener_informacion_carga_vehiculos(informacion_procesada_t* informacion_sis
     else {
       //Cargo el numero de vehiculo a rellenar la informacion
       int index_vehiculo_actual = programacion_carga_terminales->informacion_carga_terminales[numero_terminal].numero_elementos_terminal - 1;
+      //Se utiliza la memoria reservada para almacenar la informacion
       programacion_carga_terminales->informacion_carga_terminales[numero_terminal].elementos_terminal = temp;
+      //Se carga el inicio y final de la carga del vehiculo.
       int punto_inicio_vehiculo = informacion_sistema->informacion_vehiculos.vehiculos[vehiculo_actual].punto_inicio;
       int punto_final_vehiculo = informacion_sistema->informacion_vehiculos.vehiculos[vehiculo_actual].punto_final;
       //Se procede a inspeccionar si la carga del vehiculo es rapida o normal
       bool carga_rapida_vehiculo;
+
+      //Se carga la capacidad de la bateria, el porcentaje de la bateria inicial, el porcentaje de bateria deseada
+      //y la potencia limite que puede intercambiar el vehiculo.
+      OSQPFloat capacidad_bateria = informacion_sistema->informacion_vehiculos.vehiculos[vehiculo_actual].capacidad_bateria;
+      OSQPFloat bateria_inicial = informacion_sistema->informacion_vehiculos.vehiculos[vehiculo_actual].bateria_inicial;
+      OSQPFloat bateria_deseada = informacion_sistema->informacion_vehiculos.vehiculos[vehiculo_actual].bateria_final;
+      OSQPFloat potencia_limite = informacion_sistema->informacion_vehiculos.vehiculos[vehiculo_actual].potencia_maxima;
 
       if (strings_iguales(informacion_sistema->informacion_vehiculos.vehiculos[vehiculo_actual].modo_carga,"Rapida")) {
         carga_rapida_vehiculo = true;
@@ -81,7 +90,11 @@ int obtener_informacion_carga_vehiculos(informacion_procesada_t* informacion_sis
       programacion_carga_terminales->informacion_carga_terminales[numero_terminal].elementos_terminal[index_vehiculo_actual].considerar_objetivo = true;
       programacion_carga_terminales->informacion_carga_terminales[numero_terminal].elementos_terminal[index_vehiculo_actual].vehiculo = true;
       programacion_carga_terminales->informacion_carga_terminales[numero_terminal].elementos_terminal[index_vehiculo_actual].bateria = false;
-
+      programacion_carga_terminales->informacion_carga_terminales[numero_terminal].elementos_terminal[index_vehiculo_actual].capacidad_bateria = capacidad_bateria;
+      programacion_carga_terminales->informacion_carga_terminales[numero_terminal].elementos_terminal[index_vehiculo_actual].bateria_inicial = bateria_inicial;
+      programacion_carga_terminales->informacion_carga_terminales[numero_terminal].elementos_terminal[index_vehiculo_actual].bateria_deseada = bateria_deseada;
+      programacion_carga_terminales->informacion_carga_terminales[numero_terminal].elementos_terminal[index_vehiculo_actual].potencia_maxima = potencia_limite;
+      programacion_carga_terminales->informacion_carga_terminales[numero_terminal].elementos_terminal[index_vehiculo_actual].potencia_minima = 0;
     }
 
   }
@@ -125,28 +138,47 @@ int obtener_informacion_carga_baterias(informacion_procesada_t* informacion_sist
 
       int index_bateria_actual = programacion_carga_terminales->informacion_carga_terminales[numero_terminal].numero_elementos_terminal - 1;
       programacion_carga_terminales->informacion_carga_terminales[numero_terminal].elementos_terminal = temp;
-      int punto_inicio_bateria = informacion_sistema->informacion_vehiculos.vehiculos[index_bateria_actual].punto_inicio;
-      int punto_final_bateria = informacion_sistema->informacion_vehiculos.vehiculos[index_bateria_actual].punto_final;
+      //Se carga el inicio y fin de la carga de la batería
+      int punto_inicio_bateria = informacion_sistema->informacion_baterias.baterias[numero_bateria].punto_inicio;
+      int punto_final_bateria = informacion_sistema->informacion_baterias.baterias[numero_bateria].punto_final;
+
+      //Se carga la información de la batería
+      OSQPFloat bateria_inicial   = informacion_sistema->informacion_baterias.baterias[numero_bateria].punto_inicio;
+      OSQPFloat capacidad_bateria = informacion_sistema->informacion_baterias.baterias[numero_bateria].capacidad_bateria;
+      OSQPFloat potencia_maxima = informacion_sistema->informacion_baterias.baterias[numero_bateria].maxima_potencia;
+      OSQPFloat bateria_deseada;
 
       //Se procede a inspeccionar si la carga del vehiculo es rapida o normal
       bool consideracion_objetivo_carga;
 
+      //Si se desea que la bateria cumpla un determinado objetivo de carga en alguna fecha, se carga la información
+      //correspondiente
       if (informacion_sistema->informacion_baterias.baterias[numero_bateria].considerar_objetivo == true) {
+
+        //Se carga que se considera el objetivo de carga y se procede a cargar el porcentaje de bateria deseada y
+        //el punto de simulacion en el cual se desea que la bateria esté cargada
         consideracion_objetivo_carga = true;
         OSQPInt punto_objetivo_carga = informacion_sistema->informacion_baterias.baterias[numero_bateria].punto_objetivo;
         programacion_carga_terminales->informacion_carga_terminales[numero_terminal].elementos_terminal[index_bateria_actual].punto_objetivo = punto_objetivo_carga;
+        bateria_deseada = informacion_sistema->informacion_baterias.baterias[numero_bateria].bateria_objetivo;
+        programacion_carga_terminales->informacion_carga_terminales[numero_terminal].elementos_terminal[index_bateria_actual].bateria_deseada = bateria_deseada;
       }
 
+      //Si no se desea que la cumpla ningún determinado objetivo de carga pues no se carga este tipo de información
       else {
         consideracion_objetivo_carga = false;
         programacion_carga_terminales->informacion_carga_terminales[numero_terminal].elementos_terminal[index_bateria_actual].punto_objetivo = 0;
+        programacion_carga_terminales->informacion_carga_terminales[numero_terminal].elementos_terminal[index_bateria_actual].bateria_deseada = 0;
       }
 
-      //Se rellena la informacion del vehiculo
+      //Se rellena la informacion de la bateria
       programacion_carga_terminales->informacion_carga_terminales[numero_terminal].elementos_terminal[index_bateria_actual].punto_inicio = punto_inicio_bateria;
       programacion_carga_terminales->informacion_carga_terminales[numero_terminal].elementos_terminal[index_bateria_actual].punto_final = punto_final_bateria;
+      programacion_carga_terminales->informacion_carga_terminales[numero_terminal].elementos_terminal[index_bateria_actual].bateria_inicial = bateria_inicial;
+      programacion_carga_terminales->informacion_carga_terminales[numero_terminal].elementos_terminal[index_bateria_actual].capacidad_bateria = capacidad_bateria;
+      programacion_carga_terminales->informacion_carga_terminales[numero_terminal].elementos_terminal[index_bateria_actual].potencia_maxima =   potencia_maxima;
+      programacion_carga_terminales->informacion_carga_terminales[numero_terminal].elementos_terminal[index_bateria_actual].potencia_minima = - potencia_maxima;
       programacion_carga_terminales->informacion_carga_terminales[numero_terminal].elementos_terminal[index_bateria_actual].carga_rapida = false;
-      
       programacion_carga_terminales->informacion_carga_terminales[numero_terminal].elementos_terminal[index_bateria_actual].considerar_objetivo = consideracion_objetivo_carga;
       programacion_carga_terminales->informacion_carga_terminales[numero_terminal].elementos_terminal[index_bateria_actual].vehiculo = false;
       programacion_carga_terminales->informacion_carga_terminales[numero_terminal].elementos_terminal[index_bateria_actual].bateria = true;

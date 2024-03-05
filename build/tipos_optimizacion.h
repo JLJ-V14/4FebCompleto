@@ -18,6 +18,11 @@ typedef struct {
     int punto_inicio;
     int punto_final;
     int punto_objetivo;
+    OSQPFloat bateria_inicial;
+    OSQPFloat capacidad_bateria;
+    OSQPFloat bateria_deseada;
+    OSQPFloat potencia_maxima;
+    OSQPFloat potencia_minima;
     bool carga_rapida;
     bool vehiculo;
     bool bateria;

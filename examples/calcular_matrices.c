@@ -29,7 +29,8 @@ int calcular_matrices(informacion_procesada_t *informacion_sistema, problema_opt
     registrar_error("No se ha podido calcular la matriz Q en el problema de optimizacion", REGISTRO_ERRORES);
     return ERROR;
   }
-  if (calcular_vector_l_u(informacion_sistema,&(problema_optimizacion->vector_l),&(problema_optimizacion->vector_u)) == ERROR) {
+  if (calcular_vector_l_u(informacion_sistema, &(problema_optimizacion->vector_l), &(problema_optimizacion->vector_u);
+      elementos_programados_terminales) == ERROR) {
     printf("No se ha podido calcular el vector l en el problema de optimizacion\n");
     registrar_error("No se ha podido calcular el vector l en el problema de optimizacion\n", REGISTRO_ERRORES);
     return ERROR;

@@ -16,6 +16,7 @@ void calcular_limite_inferior_restricciones_bateria(informacion_procesada_t* inf
   //Como hay 12 terminales hay 12 variables de estados de bateria
   for (int numero_terminal = 0; numero_terminal < NUMERO_TERMINALES; numero_terminal++) {
     offset_index_vector_l = numero_terminal * numero_puntos_simulacion;
+
     for (int punto_simulacion = 0; punto_simulacion < numero_puntos_simulacion; punto_simulacion++) {
       l[offset_index_vector_l + punto_simulacion] =(OSQPFloat) 0.0;
     }
@@ -28,17 +29,14 @@ void calcular_limite_inferior_restricciones_bateria(informacion_procesada_t* inf
 /*Este subprograma se utiliza para indicar los límites de las potencias de los terminales, si se tiene un vehiculo o
   no se tiene nada el límite inferior es 0, si se tiene una batería puede ser bidireccional*/
 
-int calcular_limite_inferior_restricciones_potencia_terminales(informacion_procesada_t* informacion_sistema,
-  OSQPFloat* l) {
+void calcular_limite_inferior_restricciones_potencia_terminales(informacion_procesada_t* informacion_sistema,
+  OSQPFloat* l, informacion_carga_terminales_t* elementos_programados_carga_terminales) {
 
   //Se carga el numero de puntos de simulacion
   int numero_puntos_simulacion = informacion_sistema->informacion_puntos_simulacion.numero_puntos_simulacion;
   //Se crea una variable para situar los terminos en el punto correcto del vector
   int offset_index_vector_l;
 
-  //Se define una serie de arrays auxiliares.
-  int* puntos_iniciales = NULL;
-  int* puntos_finales = NULL;
 
   // Se crea un array para almacenar la minima potencia que puede intercambiar el terminal dependiendo de si
   //hay una bateria conectada o no.
@@ -49,54 +47,80 @@ int calcular_limite_inferior_restricciones_potencia_terminales(informacion_proce
     int offset_potencia_terminal = NUMERO_TERMINALES * numero_puntos_simulacion;
 
     int  numero_baterias_terminal = 0;
-    int  index_adicional = 0;
-    //Se rellenan los arrays, en donde quedan guardado cuando se conectan y se desconectan las baterías de los
-    //terminales
+    int  index_elemento_terminal = 0;
 
-    if (calcular_puntos_iniciales_finales_baterias(informacion_sistema,numero_terminal+1,&numero_baterias_terminal,
-        &puntos_iniciales,&puntos_finales) == ERROR) {
-      printf("No se ha podido cargar los puntos iniciales de las baterias conectadas a los diferentes terminales\n");
-      registrar_error("No se ha podido cargar los puntos iniciales de las baterias conectadas a los diferentes terminales\n", REGISTRO_ERRORES);
-      return ERROR;
-    }
-    qsort(puntos_iniciales, numero_baterias_terminal, sizeof(int), comparar_ints);
-    qsort(puntos_finales, numero_baterias_terminal, sizeof(int), comparar_ints);
+    int punto_inicial;
+    int punto_final;
 
-    if (calcular_maxima_potencia_baterias(informacion_sistema,numero_terminal + 1,&numero_baterias_terminal,puntos_iniciales,
-        puntos_finales,&potencias_maxima_terminal) == ERROR) {
-      printf("No se ha podido calcular el limite inferior de las potencias intercambiadas por los terminales\n");
-      registrar_error("No se ha podido calcular el limite inferior de las potencias intercambiadas por los terminales\n", REGISTRO_ERRORES);
-      return ERROR;
-    }
+    //Se carga el numero de elementos que tienen su carga programada en el terminal actual
+    int numero_elementos_terminal = elementos_programados_carga_terminales->informacion_carga_terminales->numero_elementos_terminal;
+
+
+
+    //Se llama a este subprograma para calcular la mínima potencia que pueden intercambiar las baterías, ya que hay
+    //que tener en cuenta que las baterias pueden donar energía a otros elementos en el sistema.
+
+    calcular_minima_potencia_baterias(informacion_sistema, numero_terminal, elementos_programados_carga_terminales);
+
 
     for (int punto_simulacion = 0; punto_simulacion < numero_puntos_simulacion; punto_simulacion++) {
-      if (numero_baterias_terminal > index_adicional) {
-        if (comprobar_rango(punto_simulacion, puntos_iniciales[index_adicional], puntos_finales[index_adicional]) == true) {
-          if (punto_simulacion == puntos_finales[index_adicional]) {
-            l[offset_potencia_terminal + numero_terminal * numero_puntos_simulacion + punto_simulacion] = -(OSQPFloat)potencias_maxima_terminal[index_adicional];
-            index_adicional++;
+
+      //Se carga los puntos iniciales y finales 
+      punto_inicial = elementos_programados_carga_terminales->informacion_carga_terminales[numero_terminal].elementos_terminal->punto_inicio;
+      punto_final = elementos_programados_carga_terminales->informacion_carga_terminales[numero_terminal].elementos_terminal->punto_final;
+
+      
+
+      if (numero_elementos_terminal > index_elemento_terminal) {
+
+        //Si el siguiente elemento del terminal es un vehículo se salta.
+       
+
+          if (comprobar_rango(punto_simulacion, punto_inicial, punto_final) == true) {
+
+            //Dependiendo de si la carga programada en el terminal, es un vehículo o una batería el valor a escribir
+            //en el vector l es diferente.
+            bool bateria = elementos_programados_carga_terminales->informacion_carga_terminales[numero_terminal].elementos_terminal[index_elemento_terminal].bateria;
+
+            if (bateria == false) {
+              l[offset_potencia_terminal + numero_terminal * numero_puntos_simulacion + punto_simulacion] = (OSQPFloat)0.0;
+
+              //Si el punto de simulacion coincide con el punto final del elmento que tiene su carga programada en el terminal
+              if (punto_simulacion == punto_final) {
+                index_elemento_terminal++;
+              }
+            }
+
+            //Si es el primer punto SOC = SOC inicial y el terminal no puede haber intercambiado potencia
+            else if (punto_simulacion == punto_inicial){
+              l[offset_potencia_terminal + numero_terminal * numero_puntos_simulacion + punto_simulacion] =(OSQPFloat) 0.0;
+            }
+
+            else if (punto_simulacion == punto_final) {
+              l[offset_potencia_terminal + numero_terminal * numero_puntos_simulacion + punto_simulacion] = elementos_programados_carga_terminales->informacion_carga_terminales[numero_terminal].elementos_terminal[index_elemento_terminal].potencia_minima;
+              index_elemento_terminal++;
+            }
+
+
+            else {
+              l[offset_potencia_terminal + numero_terminal * numero_puntos_simulacion + punto_simulacion] = elementos_programados_carga_terminales->informacion_carga_terminales[numero_terminal].elementos_terminal[index_elemento_terminal].potencia_minima;
+            }
+
           }
+
           else {
-            l[offset_potencia_terminal + numero_terminal * numero_puntos_simulacion + punto_simulacion] = -(OSQPFloat)potencias_maxima_terminal[index_adicional];
+            l[offset_potencia_terminal + numero_terminal * numero_puntos_simulacion + punto_simulacion] = (OSQPFloat)0.0;
           }
         }
-        else {
-          l[offset_potencia_terminal + numero_terminal * numero_puntos_simulacion + punto_simulacion] =(OSQPFloat) 0.0;
-        }
-      }
       else {
         //Si no hay una bateria presente el limite inferior es 0
-        l[offset_potencia_terminal + numero_terminal * numero_puntos_simulacion + punto_simulacion] =(OSQPFloat)0.0;
+        l[offset_potencia_terminal + numero_terminal * numero_puntos_simulacion + punto_simulacion] = (OSQPFloat)0.0;
+      }
       }
     }
-  }
-
-  //Se libera la memoria de los arrays auxiliares
-  if (puntos_iniciales) free(puntos_iniciales);
-  if (puntos_finales)free(puntos_finales);
-  if (potencias_maxima_terminal) free(potencias_maxima_terminal);
-
-  return EXITO;
+  
+ 
+  
 }
 
 /*Este subprograma se utiliza para calcular las restricciones de borde inferiores de las potencias que intercambia

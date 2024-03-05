@@ -11,10 +11,12 @@
 extern "C" {
 #endif
 
-	int  incluir_localizacion_baterias(informacion_procesada_t* informacion_sistema, OSQPInt* A_i, int* index_actual,
-		                               int* fila_actual);
+	int  incluir_filas_baterias(informacion_procesada_t* informacion_sistema, OSQPInt* A_i, int* index_actual,
+		                        int* fila_actual, informacion_carga_terminales_t* elementos_programados_terminales);
+
 	int  incluir_filas_potencias_terminales(informacion_procesada_t* informacion_sistema, OSQPInt* A_i, int* index_actual,
-		                                    int* fila_actual);
+		                                    int* fila_actual, informacion_carga_terminales_t* elementos_programados_terminales);
+
 	void incluir_filas_potencia_red(informacion_procesada_t* informacion_sistema, OSQPInt* A_i,int* ultima_fila_balance_bateria,
 		                            int* index_actual);
 	void incluir_filas_potencia_entrada_red(informacion_procesada_t* informacion_sistema, OSQPInt* A_i, int* ultima_fila_balance_bateria,

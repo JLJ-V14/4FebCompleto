@@ -75,6 +75,7 @@ void incluir_columnas_potencia_red(informacion_procesada_t* informacion_sistema,
                                    int* comienzo_columna_actual) {
   //cargo el numero de puntos de simulacion
   int numero_puntos_simulacion = informacion_sistema->informacion_puntos_simulacion.numero_puntos_simulacion;
+
   //Aparece en 3 ecuaciones distintas asi que por cada punto de simulacion hay 3 variables
   for (int punto_simulacion = 0; punto_simulacion < numero_puntos_simulacion; punto_simulacion++) {
     (*comienzo_columna_actual) += 2;
@@ -82,6 +83,7 @@ void incluir_columnas_potencia_red(informacion_procesada_t* informacion_sistema,
     (*index_actual)++;
     (*comienzo_columna_actual)++;
   }
+
 }
 
 //Este subprograma se utiliza para incluir las columnas del termino Pin grid,t
@@ -105,6 +107,7 @@ void incluir_columnas_potencia_salida_red(informacion_procesada_t* informacion_s
 
   //Se carga el numero de puntos de simulacion
   int numero_puntos_simulacion = informacion_sistema->informacion_puntos_simulacion.numero_puntos_simulacion;
+
   for (int punto_simulacion = 0; punto_simulacion < numero_puntos_simulacion; punto_simulacion++) {
     (*comienzo_columna_actual) += 2;
     A_p[(*index_actual)] = (*comienzo_columna_actual);
@@ -117,14 +120,11 @@ void incluir_columnas_potencia_salida_red(informacion_procesada_t* informacion_s
 /*Este subprograma se utiliza para indicar las posiciones de las columnas que representan los terminos de las potencias
   intercambiados por los terminales*/
 int incluir_columnas_potencia_terminal(informacion_procesada_t* informacion_sistema, OSQPInt* A_p, int* index_actual,
-  OSQPInt terminal_actual, int* comienzo_columna_actual, char fase) {
+  int terminal_actual, int* comienzo_columna_actual, char fase,informacion_carga_terminales_t* programacion_elementos_carga_terminales) {
 
   //Cargo el numero de puntos de simulacion que se tienen
   int numero_puntos_simulacion = informacion_sistema->informacion_puntos_simulacion.numero_puntos_simulacion;
-  //Creo dos arrays para almacenar los puntos iniciales y finales de las baterias y vehiculos conectados a los
-  //terminales
-  int* puntos_iniciales = NULL;
-  int* puntos_finales = NULL;
+  
 
   //Se crea una variable para llevar la cuenta de a que puntos se accede del arrya de puntos iniciales y finales
   int index_adicional = 0;
@@ -132,30 +132,42 @@ int incluir_columnas_potencia_terminal(informacion_procesada_t* informacion_sist
   //Se crea una variable para almacenar cuantos elementos se tienen el terminal
   int numero_elementos_terminales = 0;
 
+  //Se definen variables para cargar los puntos iniiciales y finales que tienen su carga programada terminal
+  int punto_inicial;
+  int punto_final;
+
   //Si el terminal esta conectado a la fase R,S o T puede haber vehiculos conectados
   if ((fase == 'R') || (fase == 'S') || (fase == 'T')) {
-    if (cargar_puntos_iniciales_finales(informacion_sistema, terminal_actual, &numero_elementos_terminales,
-      &puntos_iniciales, &puntos_finales) == ERROR) {
-      printf("No se han podido cargar los puntos iniciales y finales de las baterías y vehículos en la elaboración de la matriz A_p\n");
-      registrar_error("No se han podido cargar los puntos iniciales y finales de las baterías y vehículos en la elaboración de la matriz A_p\n", REGISTRO_ERRORES);
-      return ERROR;
-    }
-    qsort(puntos_iniciales, numero_elementos_terminales, sizeof(int), comparar_ints);
-    qsort(puntos_iniciales, numero_elementos_terminales, sizeof(int), comparar_ints);
-
     if (numero_elementos_terminales > 0) {
+
+      //Se carga el punto inicial del elemento de terminal actual
+      punto_inicial = programacion_elementos_carga_terminales->informacion_carga_terminales[terminal_actual].elementos_terminal[index_adicional].punto_inicio;
+      punto_final = programacion_elementos_carga_terminales->informacion_carga_terminales[terminal_actual].elementos_terminal[index_adicional].punto_final;
+
+
       for (int punto_actual = 0; punto_actual < numero_puntos_simulacion; punto_actual++) {
+
+        //Si hay elementos que tienen su carga programada en el terminal, hay que tener en cuenta a la hora de añadir
+        //los elementos en el vector A_p
+
         if (numero_elementos_terminales > index_adicional) {
-          if (comprobar_rango(punto_actual, puntos_iniciales[index_adicional], puntos_finales[index_adicional]) == true) {
+
+          if (comprobar_rango(punto_actual,punto_inicial,punto_final) == true) {
+
             //Si coincide con el primer punto de la simulacion en el cual la batería o vehículo está presente, solo
-            //hay que añadir la ecuación del balance
-            if (punto_actual == puntos_iniciales[index_adicional]) {
+            //hay que añadir la ecuación del balance.
+
+            //Se incluye el termino que aparece en el balance de fase
+            if (punto_actual == punto_inicial) {
+
               (*comienzo_columna_actual)++;
               A_p[(*index_actual)] = (*comienzo_columna_actual);
               (*index_actual)++;
               (*comienzo_columna_actual)++;
             }
 
+            //Se tiene en cuenta que la potencia intercambiada por el terminal aparace en la ecuacion de
+            //balance de fase, restricción de borde y balance de batería.
             else {
               (*comienzo_columna_actual) += 2;
               A_p[(*index_actual)] = (*comienzo_columna_actual);
@@ -163,13 +175,13 @@ int incluir_columnas_potencia_terminal(informacion_procesada_t* informacion_sist
               (*comienzo_columna_actual)++;
             }
             //Se actualiza el index de los puntos adicionales si ya el vehiculo o bateria no estaba presene
-            if (puntos_finales[index_adicional] == punto_actual) {
+            if (punto_final== punto_actual) {
               index_adicional++;
             }
           }
 
           //Si no quedan mas ecuaciones del comportamiento del bateria, solo quedan añadir las columnas de las ecuaciones
-          //del balance de la fase de la restriccion de borde
+          //del balance de la fase y la restriccion de borde
           else {
             (*comienzo_columna_actual)++;
             A_p[(*index_actual)] = (*comienzo_columna_actual);
@@ -177,6 +189,10 @@ int incluir_columnas_potencia_terminal(informacion_procesada_t* informacion_sist
             (*comienzo_columna_actual)++;
           }
         }
+
+        //Si no quedan más vehículos o baterías que tengan su carga programada en el terminal, se actualiza el
+        //vector A_p teniendo eso en cuenta.
+
         else {
           (*comienzo_columna_actual)++;
           A_p[(*index_actual)] = (*comienzo_columna_actual);
@@ -200,29 +216,23 @@ int incluir_columnas_potencia_terminal(informacion_procesada_t* informacion_sist
 
 /*Este subprograma se utiliza para incluir  las columnas en las que se encuentran los terminos de la potencia de los terminale*/
 int incluir_columnas_potencias_terminales(informacion_procesada_t* informacion_sistema,OSQPInt* A_p,int* index_actual,
-  int* comienzo_columna_actual) {
-  //Variable booleana para saber cuando terminar el bucle while
-  bool fin_bucle = false;
-  //Variable tipo int para llevar la cuenta del terminal actual 
-  OSQPInt terminal_actual = 1;
+  int* comienzo_columna_actual, informacion_carga_terminales_t* programacion_elementos_carga_terminales) {
+
   //Variable para saber en que fase está el terminal
   char fase;
 
-  while (!fin_bucle) {
-    //Se carga la fase en la que está el terminal
-    fase = informacion_sistema->informacion_terminales.fases_electricas[terminal_actual - 1];
+  for (int numero_terminal = 0; numero_terminal < NUMERO_TERMINALES; numero_terminal++){
 
-    if (incluir_columnas_potencia_terminal(informacion_sistema, A_p, index_actual, terminal_actual, comienzo_columna_actual,fase) == ERROR) {
+    //Se carga la fase en la que está el terminal
+    fase = informacion_sistema->informacion_terminales.fases_electricas[numero_terminal];
+
+    if (incluir_columnas_potencia_terminal(informacion_sistema, A_p, index_actual,numero_terminal, comienzo_columna_actual,fase,
+        programacion_elementos_carga_terminales) == ERROR) {
       printf("No se han podido incluir las columnas en las que se encuentran las columnas en donde se encuentran los terminos de las potencias de los terminales\n");
       registrar_error("No se han podido incluir las columnas en las que se encuentran las columnas en donde están las potencias de los terminales\n", REGISTRO_ERRORES);
       return ERROR;
     }
-    if (terminal_actual >= 12) {
-      fin_bucle = true;
-    }
-    else {
-      terminal_actual += 1;
-    }
+  
   }
   return EXITO;
 }
@@ -234,47 +244,45 @@ int incluir_columnas_potencias_terminales(informacion_procesada_t* informacion_s
   como ultimo valor de A en el que empezaba la ultima columna */
 
 int incluir_columnas_bateria_terminal(informacion_procesada_t* informacion_sistema,OSQPInt* A_p, int* index_actual,
-                                      OSQPInt terminal_actual, int* comienzo_columna_actual) {
+  OSQPInt terminal_actual, int* comienzo_columna_actual, informacion_carga_terminales_t *programacion_elementos_carga_terminal) {
+
   //Cargo el numero de puntos de simulacion que se tienen
   int numero_puntos_simulacion = informacion_sistema->informacion_puntos_simulacion.numero_puntos_simulacion;
 
-  //Creo dos arrays para almacenar los puntos iniciales y finales de las baterias y vehiculos conectados a los terminales
-  int* puntos_iniciales = NULL;
-  int* puntos_finales   = NULL;
-
   //Se crea una variable para llevar la cuenta 
-  int index_adicional = 0;
+  int index_elemento_carga = 0;
 
   //Creo una variable para almacenar cuantos elementos se tienen en el terminal
   int numero_elementos_terminales = 0;
 
 
-  //Se cargan los arrays de puntos iniciales y finales de los vehiculos y baterias conectados al terminal 
-  if (cargar_puntos_iniciales_finales(informacion_sistema, terminal_actual, &numero_elementos_terminales,
-    &puntos_iniciales, &puntos_finales) == ERROR) {
-    printf("No se ha podido cargar los puntos iniciales y finales de vehiculos y baterías en la realización del vector A_p\n");
-    registrar_error("No se han podido cargar los puntos iniciales y finales de los vehiculo y baterías en la realización del vector A_p\n", REGISTRO_ERRORES);
-    return ERROR;
-  }
-  //Se reordenan los arrays de los puntos iniciales y los finales de menor a mayor
-  qsort(puntos_iniciales, numero_elementos_terminales, sizeof(int), comparar_ints);
-  qsort(puntos_finales, numero_elementos_terminales, sizeof(int), comparar_ints);
-
   if (numero_elementos_terminales > 0) {
+
+    //Se carga el punto inicial y el punto final del primer elemento a poner en la carga
+    int punto_inicial = programacion_elementos_carga_terminal->informacion_carga_terminales[terminal_actual].elementos_terminal[index_elemento_carga].punto_inicio;
+    int punto_final   = programacion_elementos_carga_terminal->informacion_carga_terminales[terminal_actual].elementos_terminal[index_elemento_carga].punto_final;
+
     for (int punto_actual = 0; punto_actual < numero_puntos_simulacion; punto_actual++) {
-      if (numero_elementos_terminales > index_adicional) {
+
+      if (numero_elementos_terminales > index_elemento_carga) {
+
         //el primer punto de simulacion cuando la ecuacion es SOC = SOC inicial
-        if (comprobar_rango(punto_actual, puntos_iniciales[index_adicional], puntos_finales[index_adicional]) == true) {
-          (*comienzo_columna_actual) = (*comienzo_columna_actual) + 3;
-          A_p[(*index_actual)] = (*comienzo_columna_actual);
-          (*index_actual)++;
-        }
-        //si es el ultimo punto de simulacion en el que está presente la batería o vehículo 
-        else if (punto_actual == puntos_finales[index_adicional]) {
+        if (comprobar_rango(punto_actual, punto_inicial, punto_final) == true) {
+
+          if (punto_actual != punto_final) {
+            (*comienzo_columna_actual) = (*comienzo_columna_actual) + 3;
+            A_p[(*index_actual)] = (*comienzo_columna_actual);
+            (*index_actual)++;
+          }
+          //si es el ultimo punto de simulacion en el que está presente la batería o vehículo 
+        else {
           (*comienzo_columna_actual) = (*comienzo_columna_actual) + 2;
           A_p[(*index_actual)] = (*comienzo_columna_actual);
           (*index_actual)++;
+
+          }
         }
+
         else {
           A_p[(*index_actual)] = (*comienzo_columna_actual);
           (*comienzo_columna_actual)++;
@@ -305,23 +313,20 @@ int incluir_columnas_baterias(informacion_procesada_t* informacion_sistema, OSQP
   int* comienzo_columna_actual,informacion_carga_terminales_t* programacion_elementos_carga_terminal) {
   //Se crea una variable booleana para controlar el bucle donde se añaden las columnas en donde se encuentran los
   //términos de los estados de batería
-  bool fin_bucle = false;
-  OSQPInt terminal_actual = 1;
  
 
-  while (!fin_bucle) {
-    if (incluir_columnas_bateria_terminal(informacion_sistema, A_p, index_actual,terminal_actual,
-                                          comienzo_columna_actual) == ERROR) {
+  //Se incluye el primer valor del vector A_P
+  A_p[(*index_actual)] = 0;
+
+  for (int numero_terminal = 0; numero_terminal < NUMERO_TERMINALES; numero_terminal++){
+
+    if (incluir_columnas_bateria_terminal(informacion_sistema, A_p, index_actual,numero_terminal,
+        comienzo_columna_actual,programacion_elementos_carga_terminal) == ERROR) {
       printf("No se ha podido incluir las columnas en las que se encuentran los terminos estados de bateria en el vector A_p\n");
       registrar_error("No se ha podido incluir las columnas en las que se encuentran los terminos estados de bateria en el vector A_p\n",REGISTRO_ERRORES);
       return ERROR;
     }
-    if (terminal_actual >= 12) {
-      fin_bucle = true;
-    }
-    else {
-      terminal_actual += 1;
-    }
+
   }
   return EXITO;
 }

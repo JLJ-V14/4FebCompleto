@@ -12,7 +12,8 @@
 
 /*El siguiente subprograma se utiliza para calcular los vectores l y u */
 
-int calcular_vector_l_u(informacion_procesada_t* informacion_sistema, OSQPFloat** l,OSQPFloat**u) {
+int calcular_vector_l_u(informacion_procesada_t* informacion_sistema, OSQPFloat** l,OSQPFloat**u,
+  informacion_carga_terminales_t* elementos_programados_carga_terminal) {
 
   //Se carga el numero de puntos de simulacion
   int numero_puntos = informacion_sistema->informacion_puntos_simulacion.numero_puntos_simulacion;
@@ -34,11 +35,9 @@ int calcular_vector_l_u(informacion_procesada_t* informacion_sistema, OSQPFloat*
   /*A continuación se añaden los terminos de las restricciones inferiores de las potencias que pueden intercambiar
     los terminales -> */
 
-  if (calcular_limite_inferior_restricciones_potencia_terminales(informacion_sistema, *l) == ERROR) {
-    printf("No se han podido calcular los límites inferiores de las potencias que pueden intercambiar los terminales\n");
-    registrar_error("No se han podido calcular los límites inferiores de las potencias que pueden intercambiar los terminales\n", REGISTRO_ERRORES);
-    return ERROR;
-  }
+   calcular_limite_inferior_restricciones_potencia_terminales(informacion_sistema, *l,
+   elementos_programados_carga_terminal);
+   
 
   /*Es necesario tener en cuenta que si hay una bateria conectado al terminal los valores de la potencia que pueden
     intercambiar el terminal es negativo*/
