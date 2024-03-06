@@ -11,7 +11,8 @@ extern "C" {
 
 	void calcular_resultado_balance_fase(informacion_procesada_t* informacion_sistema,OSQPFloat*l, OSQPFloat*u);
 	void calcular_resto_ecuaciones(informacion_procesada_t* informacion_sistema, OSQPFloat* l, OSQPFloat* u);
-	int calcular_ecuaciones_balance_bateria(informacion_procesada_t* informacion_sistema, OSQPFloat* l, OSQPFloat* u);
+	void calcular_ecuaciones_balance_bateria(informacion_procesada_t* informacion_sistema, OSQPFloat* l, OSQPFloat* u,
+		 informacion_carga_terminales_t* elementos_carga_terminales);
 #ifdef __cplusplus
 }
 #endif

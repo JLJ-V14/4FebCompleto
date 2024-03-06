@@ -26,6 +26,11 @@ int calcular_vector_l_u(informacion_procesada_t* informacion_sistema, OSQPFloat*
   OSQPFloat* l = (OSQPFloat*)malloc(numero_elementos_inicial);
   OSQPFloat* u = (OSQPFloat*)malloc(numero_elementos_inicial);
 
+  if ((*l == NULL) || (*u == NULL)) {
+    printf("No se ha podido reservar memoria para los vectores l y u\n");
+    registrar_error("No se ha podido reservar memoria para los vectores l y u\n");
+    return ERROR;
+  }
 
   //Se procede a calcular los terminos de los vectores l y u
   //Primero se añaden los terminos de las restricciones de borde de las baterias
@@ -41,11 +46,7 @@ int calcular_vector_l_u(informacion_procesada_t* informacion_sistema, OSQPFloat*
 
   /*Es necesario tener en cuenta que si hay una bateria conectado al terminal los valores de la potencia que pueden
     intercambiar el terminal es negativo*/
-  if (calcular_limites_superior_potencia_terminales(informacion_sistema,*u) == ERROR){
-    printf("No se han podido calcular la restricciones de borde superiores de las potencias de los terminales\n");
-    registrar_error("No se han podido calcular la restricciones de borde superiores de las potencias de los terminales\n", REGISTRO_ERRORES);
-    return ERROR;
-  }
+  calcular_limites_superior_potencia_terminales(informacion_sistema, *u, elementos_programados_carga_terminal);
   calcular_restricciones_borde_inferiores_potencia_red(informacion_sistema,*l);
   calcular_restricciones_superiores_borde_potencias_red(informacion_sistema, *u);
   calcular_limite_inferior_borde_potencia_red_fases(informacion_sistema, *l);
@@ -58,11 +59,7 @@ int calcular_vector_l_u(informacion_procesada_t* informacion_sistema, OSQPFloat*
   //Se pasa a llamar a los subprogramas que sirven para calcular el resultado de la ecuación del balance de fase
 
   calcular_resultado_balance_fase(informacion_sistema, *l, *u);
-  if (calcular_ecuaciones_balance_bateria(informacion_sistema, *l, *u) == ERROR) {
-    printf("No se han podido calcular las ecuaciones de balance de batería en la realización del vector l y u\n");
-    registrar_error("No se han podido calcular las ecuaciones de balance de batería en la realización del vector l y u\n", REGISTRO_ERRORES);
-    return ERROR;
-  }
+  calcular_ecuaciones_balance_bateria(informacion_sistema, *l, *u, elementos_programados_carga_terminal);
   calcular_resto_ecuaciones(informacion_sistema, *l, *u);
   return EXITO;
 }

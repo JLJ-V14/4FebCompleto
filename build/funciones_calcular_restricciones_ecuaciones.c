@@ -93,89 +93,80 @@ void calcular_resultado_balance_fase(informacion_procesada_t* informacion_sistem
   }
 }
 
-int calcular_ecuacion_balance_terminal(informacion_procesada_t* informacion_sistema, OSQPFloat* l, OSQPFloat* u,
-  OSQPInt numero_terminal) {
+void calcular_ecuacion_balance_terminal(informacion_procesada_t* informacion_sistema, OSQPFloat* l, OSQPFloat* u,
+     int numero_terminal, informacion_carga_terminales_t* elementos_carga_terminales) {
 
-  //Al igual que en otros subprogramas se crean arrays para almacenar los puntos iniciales en los que se encuentran
-  //las baterias o vehiculos conectadas en el terminales
 
-  int* puntos_iniciales = NULL;
-  int* puntos_finales   = NULL;
-  OSQPFloat* baterias_iniciales = NULL;
-  int numero_elementos_terminales = 0; 
+  // Se define una variable en la que se carga el numero de elementos que tienen su carga programada en el terminal
+  int numero_elementos_terminales = elementos_carga_terminales->informacion_carga_terminales[numero_terminal].numero_elementos_terminal;
 
   //Se carga los puntos iniciales y finales en los que hay conectado un vehiculo o bateria conectado al terminal
-  if (cargar_puntos_iniciales_finales(informacion_sistema, numero_terminal, &numero_elementos_terminales, &puntos_iniciales, &puntos_finales) == ERROR) {
-    printf("No se han podido registrar los puntos iniciales y finales de las baterias\n");
-    registrar_error("No se han podido registrar los puntos iniciales y finales de las baterias\n", REGISTRO_ERRORES);
-    if (puntos_iniciales)free(puntos_iniciales);
-    if (puntos_finales)free(puntos_finales);
-    return ERROR;
-  }
-  //Se reordenan los arrays de los puntos iniciales en orden 
-  qsort(puntos_iniciales, numero_elementos_terminales, sizeof(int), comparar_ints);
-
-  if (crear_array_baterias_iniciales(informacion_sistema, numero_elementos_terminales, &baterias_iniciales,
-    puntos_iniciales) == ERROR) {
-    printf("No se ha podido reservar memoria para el array de baterias iniciales\n");
-    registrar_error("No se ha podido reservar memoria para el array de baterias iniciales\n", REGISTRO_ERRORES);
-    if (puntos_iniciales)free(puntos_iniciales);
-    if (puntos_finales)free(puntos_finales);
-    if (baterias_iniciales)free(baterias_iniciales);
-    return ERROR;
-  }
 
   //Se pasan a rellenar los terminos de las ecuaciones del balance de baterias
   //Se crea una variable para poder acceder al array que almacena los puntos iniciales
-  int index_puntos_iniciales = 0;
+  int index_elementos_adicionales = 0;
 
   //Se carga el numero de puntos de simulacion
 
   int numero_puntos_simulacion = informacion_sistema->informacion_puntos_simulacion.numero_puntos_simulacion;
 
   //Se define una variable para acceder a las posiciones correctas del vector l y u
-  int offset_ecuacion_balance_bateria = (NUMERO_VARIABLES + (numero_terminal-1))*numero_puntos_simulacion;
-  
+  int offset_ecuacion_balance_bateria = (NUMERO_VARIABLES + (numero_terminal))*numero_puntos_simulacion;
+
+  if (index_elementos_adicionales < numero_elementos_terminales) {
+
+    //Se carga el punto inicial y final del siguiente vehiculo o bateria que tiene su carga programada en
+    //el terminal
+
+    int punto_inicial = elementos_carga_terminales->informacion_carga_terminales[numero_terminal].elementos_terminal[index_elementos_adicionales].punto_inicio;
+   
+
     for (int punto_simulacion = 0; punto_simulacion < numero_elementos_terminales; punto_simulacion++) {
 
-      if (index_puntos_iniciales < numero_elementos_terminales) {
+      if (index_elementos_adicionales < numero_elementos_terminales) {
 
-        if (punto_simulacion == puntos_iniciales[index_puntos_iniciales]) {
-          l[offset_ecuacion_balance_bateria+punto_simulacion] = baterias_iniciales[index_puntos_iniciales];
-          u[offset_ecuacion_balance_bateria+punto_simulacion] = baterias_iniciales[index_puntos_iniciales];
+        if (punto_simulacion == punto_inicial) {
+          l[offset_ecuacion_balance_bateria + punto_simulacion] = elementos_carga_terminales->informacion_carga_terminales[numero_terminal].elementos_terminal[index_elementos_adicionales].bateria_inicial;
+          u[offset_ecuacion_balance_bateria + punto_simulacion] = elementos_carga_terminales->informacion_carga_terminales[numero_terminal].elementos_terminal[index_elementos_adicionales].bateria_inicial;
+          index_elementos_adicionales++;
         }
+
         else {
-          l[offset_ecuacion_balance_bateria + punto_simulacion] = 0.0;
-          u[offset_ecuacion_balance_bateria + punto_simulacion] = 0.0;
+          l[offset_ecuacion_balance_bateria + punto_simulacion] = (OSQPFloat) 0.0;
+          u[offset_ecuacion_balance_bateria + punto_simulacion] = (OSQPFloat) 0.0;
         }
 
       }
-
       else {
-        l[offset_ecuacion_balance_bateria + punto_simulacion] = (OSQPFloat)0.0;
-        u[offset_ecuacion_balance_bateria + punto_simulacion] = (OSQPFloat)0.0;
+        l[offset_ecuacion_balance_bateria + punto_simulacion] =(OSQPFloat) 0.0;
+        u[offset_ecuacion_balance_bateria + punto_simulacion] =(OSQPFloat) 0.0;
       }
 
     }
-  
-    return EXITO;
-}
+  }
+  for (int punto_simulacion = 0; punto_simulacion < numero_puntos_simulacion; punto_simulacion++) {
 
-int calcular_ecuaciones_balance_bateria(informacion_procesada_t* informacion_sistema, OSQPFloat* l, OSQPFloat* u) {
+    l[offset_ecuacion_balance_bateria + punto_simulacion] = (OSQPFloat)0.0;
+    u[offset_ecuacion_balance_bateria + punto_simulacion] = (OSQPFloat)0.0;
+  
+  }
+    }
+  
+   
+
+
+void calcular_ecuaciones_balance_bateria(informacion_procesada_t* informacion_sistema, OSQPFloat* l, OSQPFloat* u,
+  informacion_carga_terminales_t* elementos_carga_terminal) {
 
   //Cargo el numero de puntos de simulacion  que hay en la simulacion
   int numero_puntos_simulacion = informacion_sistema->informacion_puntos_simulacion.numero_puntos_simulacion;
   int offset_ecuaciones = (NUMERO_VARIABLES + 3) * numero_puntos_simulacion;
 
 
-  for (OSQPInt numero_terminal = 1; numero_terminal <= NUMERO_TERMINALES; numero_terminal++) {
-    if (calcular_ecuacion_balance_terminal(informacion_sistema,l,u,numero_terminal) == ERROR) {
-      printf("No se ha podido incluir el termino de bateria inicial en las ecuaciones del balance del terminal\n");
-      registrar_error("No se ha podido incluir el termino de bateria inicial en las ecuaciones del balance del terminal\n",REGISTRO_ERRORES);
-      return ERROR;
-    }
+  for (int numero_terminal = 0; numero_terminal < NUMERO_TERMINALES; numero_terminal++) {
+    calcular_ecuacion_balance_terminal(informacion_sistema, l, u, numero_terminal, elementos_carga_terminal);
   }
-  return EXITO;
+  
 }
 
 
