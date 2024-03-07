@@ -1,17 +1,17 @@
-#include "osqp.h"
-#include <stdlib.h>
-#include <stdio.h>
+
 
 
 
 #define _CRT_SECURE_NO_WARNINGS
   //#pragma comment(lib, "OSQPLIB.lib")
 #include <stdio.h>
+#include <stdlib.h>
 #include <locale.h>
 #include <io.h>
 #include "comprobar_lectura_datos.h"
 #include "comprobar_informacion_procesada.h"
 #include "definiciones_globales.h"
+#include "extraer_soluciones_problemas_optimizacion.h"
 #include "inicializar_csv.h"
 #include "inicializar_informacion_procesada.h"
 #include "leer_entradas.h"
@@ -158,24 +158,48 @@
     }
 
     
-    if (preparar_problema_optimizacion(&informacion_procesada,&problema_optimizacion,&informacion_carga_terminales) == ERROR) {
+    if (preparar_problema_optimizacion(&informacion_procesada,&problema_optimizacion,&informacion_carga_terminales) == ERROR){
       printf("Las matrices del problema de optimizacion no han sido calculadas correctamente\n");
       registrar_error("Las matrices del problema de optimización no han sido calculadas correctamente\n", REGISTRO_ERRORES);
       goto fin_programa;
     }
+
     
+  
+
+    //Se resuelve el problema de optimizacion:
+    if (!problema_optimizacion.bandera_salida)problema_optimizacion.bandera_salida = osqp_solve(problema_optimizacion.solver);
+
+    //Se extrae las soluciones del problema de optimizacion
+    if (!problema_optimizacion.bandera_salida) {
+
+    }
+
+
+    if ((int)problema_optimizacion.bandera_salida) {
+      printf("La optimizacion no ha tenido éxito\n");
+      registrar_error("La optimizacion no ha tenido éxito", REGISTRO_ERRORES);
+    }
+    else {
+      printf("La optimizacion ha sido éxito\n");
+      extraer_soluciones_problema_optimizacion(&informacion_sistema,&problema_optimizacion);
+    }
 
    fin_programa:
 
     // Se libera la memoria reservada
     liberar_memoria_informacion_procesada(&informacion_procesada);
     liberar_informacion_carga_terminales(&informacion_carga_terminales);
+    liberar_memoria_problema_optimizacion(&problema_optimizacion);
     printf("Memoria de informacion procesada liberada\n");
     liberar_memoria_csvs(&informacion_sistema);
     //liberar_memoria_problema_optimizacion(&problema_optimizacion);
 
-    
-    
+    //Se devuelve el exitflag para saber si la optimizacion ha tenido exito
+
+   
+
+    return(int)problema_optimizacion.bandera_salida;
   }
 
 

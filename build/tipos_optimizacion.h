@@ -26,7 +26,7 @@ typedef struct {
     bool carga_rapida;
     bool vehiculo;
     bool bateria;
-    bool considerar_objetivo
+    bool considerar_objetivo;
 }informacion_elemento_carga_t;
 
 /*Se define un tipo para almacenar la informacion relevante de los elementos que tienen la carga programada 

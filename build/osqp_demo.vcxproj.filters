@@ -139,6 +139,9 @@
     <ClCompile Include="obtener_informacion_carga_terminales.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="extraer_soluciones_problema_optimizacion.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="F:\osqp1feb\osqp-1.0.0.beta1\CMakeLists.txt" />
@@ -294,6 +297,9 @@
       <Filter>Head Files</Filter>
     </ClInclude>
     <ClInclude Include="obtener_informacion_carga_terminales.h">
+      <Filter>Head Files</Filter>
+    </ClInclude>
+    <ClInclude Include="extraer_soluciones_problemas_optimizacion.h">
       <Filter>Head Files</Filter>
     </ClInclude>
   </ItemGroup>

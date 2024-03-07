@@ -200,7 +200,7 @@ int calcular_vector_q(informacion_procesada_t* informacion_sistema,OSQPFloat **q
   int numero_puntos_simulacion = informacion_sistema->informacion_puntos_simulacion.numero_puntos_simulacion;
 
   //Primero hay que dimensionar  el tamaño de la matriz/vector q
-  OSQPFloat* q = (OSQPFloat*)calloc(NUMERO_VARIABLES * numero_puntos_simulacion,sizeof(OSQPFloat));
+  *q = (OSQPFloat*)calloc(NUMERO_VARIABLES * numero_puntos_simulacion,sizeof(OSQPFloat));
 
   if (q == NULL) {
     printf("No se ha podido reservar memoria para la matriz/vector q\n");
