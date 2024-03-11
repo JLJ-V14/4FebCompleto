@@ -38,5 +38,5 @@ void borrar_contenido_log(const char* nombre_archivo) {
     perror("Error abriendo el  para borrar contenido");
     return;
   }
-  fclose(nombre_archivo);
+  fclose(archivo);
 }

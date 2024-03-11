@@ -142,6 +142,12 @@
     <ClCompile Include="extraer_soluciones_problema_optimizacion.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="mostrar_informacion_terminales.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="comprobar_informacion_matrices.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="F:\osqp1feb\osqp-1.0.0.beta1\CMakeLists.txt" />
@@ -300,6 +306,12 @@
       <Filter>Head Files</Filter>
     </ClInclude>
     <ClInclude Include="extraer_soluciones_problemas_optimizacion.h">
+      <Filter>Head Files</Filter>
+    </ClInclude>
+    <ClInclude Include="mostrar_informacion_terminales.h">
+      <Filter>Head Files</Filter>
+    </ClInclude>
+    <ClInclude Include="comprobar_informacion_matrices.h">
       <Filter>Head Files</Filter>
     </ClInclude>
   </ItemGroup>

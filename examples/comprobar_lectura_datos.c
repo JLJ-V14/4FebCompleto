@@ -71,12 +71,16 @@ int comprobar_informacion_entrada(informacion_entrada_t* informacion_sistema) {
 	FILE* comprobacion_datos_precio_compra;
 	FILE* comprobacion_datos_precio_venta;
 
+ 
+
 	if (abrir_archivo(ARCHIVO_COMPROBACION_ALGORITMO, "w", &comprobacion_datos_algoritmo) != 0) {
 		printf("Error en la comprobacion de los datos del algoritmo\n");
 		registrar_error("Fallo en la comprobacion de los datos del algoritmo", REGISTRO_ERRORES);
 		fclose(comprobacion_datos_algoritmo);
 		return ERROR;
 	}
+
+  
 	if (abrir_archivo(ARCHIVO_COMPROBACION_VEHICULOS, "w", &comprobacion_datos_vehiculos) != 0) {
 		printf("Error en la comprobacion de los datos de los vehiculo\n");
 		registrar_error("Fallo en la comprobación de los datos del vehículo", REGISTRO_ERRORES);

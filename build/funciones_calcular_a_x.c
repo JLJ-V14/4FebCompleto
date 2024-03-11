@@ -1,4 +1,5 @@
 #include "definiciones_globales.h"
+#include "mostrar_informacion_terminales.h"
 #include "osqp.h"
 #include "registrar_errores.h"
 #include "tipos_optimizacion.h"
@@ -10,7 +11,7 @@
 
 //Este subprograma se utiliza para actualizar la posicion a comprobar de baterias presentes en el terminal
 int  actualizar_index_elemento_carga(int* index_elemento_carga,int punto_final_actual,int punto_actual) {
-  if (punto_final_actual< punto_actual){
+  if (punto_final_actual < punto_actual){
     (*index_elemento_carga) ++;
   }
 }
@@ -96,14 +97,15 @@ int crear_array_baterias(informacion_procesada_t* informacion_sistema, OSQPFloat
   los terminos SOC, (state of charge) estos terminos aparecen en las restricciones de borde, y las ecuaciones
   del balance de batería*/
 
-int incluir_terminos_baterias_terminal_A_x(informacion_procesada_t* informacion_sistema,OSQPInt terminal_actual,
+int incluir_terminos_baterias_terminal_A_x(informacion_procesada_t* informacion_sistema,int terminal_actual,
     int*index_actual,OSQPFloat* A_x,informacion_carga_terminales_t* elementos_programados_carga_terminal) {
 
   //Se carga el numero de puntos de simulacion 
   int  numero_puntos_simulacion = informacion_sistema->informacion_puntos_simulacion.numero_puntos_simulacion;
- 
+
+
   //Se carga el numero de elementos que se tienen en el terminal
-  int numero_elementos_terminales = elementos_programados_carga_terminal->informacion_carga_terminales->numero_elementos_terminal;
+  int numero_elementos_terminales = elementos_programados_carga_terminal->informacion_carga_terminales[terminal_actual].numero_elementos_terminal;
 
   //Se crea una variable para llevar la cuenta de que vehiculo o bateria tiene programada su carga en el terminal
   int index_elemento_terminal = 0;
@@ -199,7 +201,7 @@ int incluir_terminos_baterias_A_x(informacion_procesada_t* informacion_sistema, 
   //tipo int para ver por que punto de simulacion se va.
 
   
- for (OSQPInt numero_terminal = 0; numero_terminal < NUMERO_TERMINALES; numero_terminal++){
+ for (int numero_terminal = 0; numero_terminal < NUMERO_TERMINALES; numero_terminal++){
 
     if (incluir_terminos_baterias_terminal_A_x(informacion_sistema,numero_terminal, index_actual, A_x,
         programacion_carga_terminales) == ERROR) {

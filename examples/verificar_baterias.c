@@ -3,6 +3,7 @@
 #include "definiciones_globales.h"
 #include "operaciones_csv.h"
 #include "operaciones_fecha.h"
+#include "operaciones_string.h"
 #include "registrar_errores.h"
 #include "tipos_optimizacion.h"
 #include "validaciones.h"
@@ -29,10 +30,10 @@
 
 static int comprobar_objetivo_bateria(const char* objetivo) {
 
-  if (strcmp("si", objetivo) == 0) {
+  if (strings_iguales("si", objetivo) == 0) {
     return EXITO;
   }
-  else if (strcmp("no", objetivo) == 0) {
+  else if (strings_iguales("no", objetivo) == 0) {
     return EXITO;
   }
   else {

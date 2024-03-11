@@ -1,5 +1,6 @@
 #include "definiciones_globales.h"
 #include "funciones_calcular_a_x.h"
+#include "mostrar_informacion_terminales.h"
 #include "osqp.h"
 #include "registrar_errores.h"
 #include "tipos_optimizacion.h"
@@ -419,7 +420,7 @@ int incluir_filas_terminos_baterias_terminal(informacion_procesada_t* informacio
   int punto_inicial;
   int punto_final;
 
-
+  
   //Se pasa a escribir las filas en donde se encuentran los terminos SOC 
   if (numero_elementos_terminales > 0) {
 

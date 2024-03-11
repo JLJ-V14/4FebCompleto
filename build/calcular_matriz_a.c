@@ -3,6 +3,7 @@
 #include "funciones_calcular_a_i.h"
 #include "funciones_calcular_a_x.h"
 #include "funciones_calcular_a_p.h"
+#include "mostrar_informacion_terminales.h"
 #include "registrar_errores.h"
 #include "tipos_optimizacion.h"
 #include <stdio.h>
@@ -21,7 +22,10 @@ int calcular_vector_A_x(informacion_procesada_t* informacion_sistema, OSQPFloat*
   //Primeramente hay que dimensionar el tamaño del vector A_x este vector sera tan grande como sea el numero
   //de términos diferentes de 0
 
-  *A_x = (OSQPFloat*)malloc(A_nnz * sizeof(OSQPFloat));
+  
+
+
+  *A_x = (OSQPFloat*) malloc(A_nnz * sizeof(OSQPFloat));
 
   if (*A_x == NULL) {
     printf("No se ha podido reservar memoria para el vector A_x\n");
@@ -34,6 +38,9 @@ int calcular_vector_A_x(informacion_procesada_t* informacion_sistema, OSQPFloat*
   //se están añadiendo términos.
   int index_actual = 0;
 
+
+ 
+  
   //Se llama al siguiente subprograma para incluir en la matriz de restricciones los terminos de la variable SOC 
   if (incluir_terminos_baterias_A_x(informacion_sistema, *A_x, &index_actual,elementos_programados_terminales) == ERROR) {
     printf("No se han podido incluir los términos de las baterias en el vector A_x\n");
@@ -41,6 +48,8 @@ int calcular_vector_A_x(informacion_procesada_t* informacion_sistema, OSQPFloat*
     return ERROR;
   }
 
+ 
+  
   if (incluir_terminos_potencias_A_x(informacion_sistema, *A_x, &index_actual,elementos_programados_terminales) == ERROR) {
     printf("No se han podido incluir los términos de potencia en el vector A_x\n");
     registrar_error("No se han podido incluir los términos de potencia en el vector A_x\n", REGISTRO_ERRORES);
@@ -53,6 +62,7 @@ int calcular_vector_A_x(informacion_procesada_t* informacion_sistema, OSQPFloat*
   incluir_terminos_potencia_red_fase(informacion_sistema, *A_x, &index_actual);
   incluir_terminos_potencia_entrada_fase(informacion_sistema, *A_x, &index_actual);
   incluir_terminos_potencia_salida_fase(informacion_sistema,*A_x,&index_actual);
+  printf("el index actual es %d \n", index_actual);
   return EXITO;
 }
 
@@ -154,6 +164,7 @@ int calcular_vector_A_p(informacion_procesada_t* informacion_sistema, OSQPInt** 
 //  en la matriz A 
 
 void calcular_numero_terminos(informacion_procesada_t* informacion_sistema,OSQPInt* A_nnz) {
+
   //El numero   de términos  diferentes de 0 en la matriz A es la siguiente
   //Restriccion de valores del estado de baterías (umbral inferior y superior ) 12  * puntos_simulacion
   //Restriccion de valores de la potencia que pueden intercambiar los terminales 12 * puntos_simulacion
@@ -165,21 +176,38 @@ void calcular_numero_terminos(informacion_procesada_t* informacion_sistema,OSQPI
   //Restriccion de valores de potencia que puede salir  al sistema de la red 3 * puntos_simulacion
   //Término de la potencia que intercambia la red con el sistema por cada fase 3 * puntos_simulacion (balance
   //potencia un balance por cada fase
-  //12 * puntos_simulacion (numero terminales) (Ecuación de balance de potencia)
+
+  //Terminos de Borde 36 * puntos de simulacion (si o si)
+
+
+
+  //Balance en la fase 3 terminos * puntos de simulacion si o si
   
- 
+  //Ecuaciones de balance de bateria 12 terminos * puntos de simulacion si o si 
+  
+
+  //Terminos fijos que aparecen en las ecuaciones del balance:
+  
   //Ecuacion del balance de potencia entrada/salida con la red 3 * puntos_simulacion
   //Ecuación del balance de potencia entrada/salida con la red 3 * puntos_simulacion * 3 fases = 9 *puntos_simulacion
   //Ecuacion de la potencia de entrada de la red = balance de entrada por cada fase 4 * puntos_simulacion
   //Ecuación de que la potencia de salida de la red = 4 * puntos_simulacion
   //Ecuación de que la potencia intercambiada por la red = sumatorio de lo que intercambia por cada fase 4 * puntos_simulacion
+
+  //Terminos de ecuacion de balance aparecen 24 * puntos de simulacion (si o si)
+
+
   //Parte fija = 75 * puntos_simulacion
 
   OSQPInt numero_terminos_restricciones_fijas = 75 * informacion_sistema->informacion_puntos_simulacion.numero_puntos_simulacion;
+
   //Batería inicial en la ecuación de balance de batería depende de cuantas conexiones y desconexiones hay
   //12 * puntos_simulacion (estado_baterias) tantas baterias como terminales.
   //12* puntos_simulacion  (Potencia intercambiada por el terminal) en las ecuaciones de balance de bateria
+
   OSQPInt numero_ecuaciones_baterias = 0;
+
+
   calcular_numero_ecuaciones_estado_bateria(informacion_sistema,&numero_ecuaciones_baterias);
   *A_nnz = numero_terminos_restricciones_fijas + numero_ecuaciones_baterias;
 }
@@ -193,14 +221,20 @@ int calcular_matriz_a(informacion_procesada_t * informacion_sistema, problema_op
   OSQPInt n     = problema_optimizacion->numero_variables;
   OSQPInt m     = problema_optimizacion->numero_restricciones;
   OSQPInt A_nnz = 0;
+
   calcular_numero_terminos(informacion_sistema, &A_nnz);
 
+  printf("El numero de términos diferentes de cero en la matriz A es %d\n", A_nnz);
+
   //Se procede a calcular el vector A_x
-  if (calcular_vector_A_x(informacion_sistema, &(matriz_a->A_x),A_nnz,n,programacion_carga_terminales) == ERROR) {
+  if (calcular_vector_A_x(informacion_sistema, &(matriz_a->A_x),A_nnz,programacion_carga_terminales) == ERROR) {
     printf("No se ha podido calcular el vector A_x\n");
     registrar_error("No se ha podido calcular el vector A_x\n", REGISTRO_ERRORES);
     return ERROR;
   }
+
+  printf("El numero de términos diferentes de cero en la matriz A es %d\n", A_nnz);
+
   //Se procede a calcular el vector A_i
   if (calcular_vector_A_i(informacion_sistema, &(matriz_a->A_i),A_nnz,programacion_carga_terminales) == ERROR) {
     printf("No se ha podido calcular el vector A_i\n");

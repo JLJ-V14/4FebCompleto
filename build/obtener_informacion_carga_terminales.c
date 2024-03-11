@@ -30,13 +30,16 @@ int obtener_informacion_carga_vehiculos(informacion_procesada_t* informacion_sis
   //Se carga el numero de vehiculos que se tienen en el sistema
   int numero_vehiculos = informacion_sistema->informacion_vehiculos.numero_vehiculos;
 
+ 
+
   for (int vehiculo_actual = 0; vehiculo_actual<numero_vehiculos; vehiculo_actual++) {
 
     //Se carga el numero de terminal al que está conectado el vehículo
-    int numero_terminal = informacion_sistema->informacion_vehiculos.vehiculos[vehiculo_actual].numero_terminal;
+    int numero_terminal = informacion_sistema->informacion_vehiculos.vehiculos[vehiculo_actual].numero_terminal - 1;
 
     //Se procede a cargar la informacion de la carga del vehiculo en la posicion correspondiente dentro de la
     //variable programacion carga terminales
+   
 
     //Primero se actualiza el numero de vehiculos que se tienen en el terminal
     programacion_carga_terminales->informacion_carga_terminales[numero_terminal].numero_elementos_terminal++,
@@ -113,12 +116,16 @@ int obtener_informacion_carga_baterias(informacion_procesada_t* informacion_sist
 
   for (int numero_bateria = 0; numero_bateria < numero_baterias; numero_bateria++) {
 
+    
     //Se carga el numero de terminal al que esta conectado la bateria
-    int numero_terminal = informacion_sistema->informacion_baterias.baterias[numero_bateria].numero_terminal;
+    int numero_terminal = informacion_sistema->informacion_baterias.baterias[numero_bateria].numero_terminal -1;
+
+   
+    
 
     //Es necesario actualizar el numero de baterias y elementos que se tienen en el terminal
-    programacion_carga_terminales->informacion_carga_terminales->numero_elementos_terminal++;
-    programacion_carga_terminales->informacion_carga_terminales->numero_baterias_terminal++;
+    programacion_carga_terminales->informacion_carga_terminales[numero_terminal].numero_elementos_terminal++;
+    programacion_carga_terminales->informacion_carga_terminales[numero_terminal].numero_baterias_terminal++;
 
 
     //Se reajusta la cantidad de memoria reservada para los elementos que se tienen conectados al terminal
@@ -143,9 +150,9 @@ int obtener_informacion_carga_baterias(informacion_procesada_t* informacion_sist
       int punto_final_bateria = informacion_sistema->informacion_baterias.baterias[numero_bateria].punto_final;
 
       //Se carga la información de la batería
-      OSQPFloat bateria_inicial   = informacion_sistema->informacion_baterias.baterias[numero_bateria].punto_inicio;
+      OSQPFloat bateria_inicial   = informacion_sistema->informacion_baterias.baterias[numero_bateria].bateria_inicial;
       OSQPFloat capacidad_bateria = informacion_sistema->informacion_baterias.baterias[numero_bateria].capacidad_bateria;
-      OSQPFloat potencia_maxima = informacion_sistema->informacion_baterias.baterias[numero_bateria].maxima_potencia;
+      OSQPFloat potencia_maxima   = informacion_sistema->informacion_baterias.baterias[numero_bateria].maxima_potencia;
       OSQPFloat bateria_deseada;
 
       //Se procede a inspeccionar si la carga del vehiculo es rapida o normal
@@ -212,6 +219,7 @@ void reordenar_elementos_cargas_terminales(informacion_procesada_t* informacion_
 int obtener_informacion_carga_terminales(informacion_procesada_t* informacion_sistema,
   informacion_carga_terminales_t* programacion_carga_terminales) {
 
+  
   //Se llama al subprograma que almacena la programacion de la carga de los diferentes vehiculo
   if (obtener_informacion_carga_vehiculos(informacion_sistema,programacion_carga_terminales) == ERROR) {
     printf("No se ha podido programar la carga de los vehiculos de los terminales por problemas de reserva de memoria\n");
@@ -219,6 +227,8 @@ int obtener_informacion_carga_terminales(informacion_procesada_t* informacion_si
     return ERROR;
   }
 
+ 
+  
   //Se llama al subprograma que almacena la programacion de carga de las baterias
   if (obtener_informacion_carga_baterias(informacion_sistema, programacion_carga_terminales) == ERROR) {
     printf("No se ha podido programar la carga de las baterias de los terminales por problemas de reserva de memoria\n");
@@ -226,6 +236,11 @@ int obtener_informacion_carga_terminales(informacion_procesada_t* informacion_si
     return ERROR;
   }
 
+  
+
+  //Se llama a ver si la informacion se ha almacenado correctamente
+  
+  
   //Se reordenan los elementos conectados a los diferentes terminales en orden de conexión
   reordenar_elementos_cargas_terminales(informacion_sistema,programacion_carga_terminales);
 

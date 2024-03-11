@@ -341,6 +341,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClCompile Include="calcular_numero_variables.c" />
     <ClCompile Include="calcular_puntos_simulacion.c" />
     <ClCompile Include="calcular_vector_l_u.c" />
+    <ClCompile Include="comprobar_informacion_matrices.c" />
     <ClCompile Include="comprobar_informacion_procesada.c" />
     <ClCompile Include="configurar_ajustes_problema_optimizacion.c" />
     <ClCompile Include="extraer_soluciones_problema_optimizacion.c" />
@@ -352,6 +353,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClCompile Include="funciones_calcular_vector_l.c" />
     <ClCompile Include="funciones_calcular_vector_u.c" />
     <ClCompile Include="inicializar_informacion_procesada.c" />
+    <ClCompile Include="mostrar_informacion_terminales.c" />
     <ClCompile Include="obtener_informacion_carga_terminales.c" />
     <ClCompile Include="preparar_problema_optimizacion.c" />
     <ClCompile Include="preparar_solver_optimizacion.c" />
@@ -379,6 +381,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClInclude Include="calcular_numero_variables.h" />
     <ClInclude Include="calcular_puntos_simulacion.h" />
     <ClInclude Include="calcular_vector_l_u.h" />
+    <ClInclude Include="comprobar_informacion_matrices.h" />
     <ClInclude Include="comprobar_informacion_procesada.h" />
     <ClInclude Include="comprobar_lectura_datos.h" />
     <ClInclude Include="configurar_ajustes_optimizacion.h" />
@@ -401,6 +404,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClInclude Include="leer_entradas.h" />
     <ClInclude Include="liberar_memoria.h" />
     <ClInclude Include="main.h" />
+    <ClInclude Include="mostrar_informacion_terminales.h" />
     <ClInclude Include="obtener_informacion_carga_terminales.h" />
     <ClInclude Include="operaciones_csv.h" />
     <ClInclude Include="operaciones_fecha.h" />

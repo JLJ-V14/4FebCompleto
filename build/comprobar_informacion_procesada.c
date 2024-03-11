@@ -75,19 +75,24 @@ int imprimir_informacion_procesada_bateria(const informacion_baterias_t * inform
  
   /*Se abre el archivo para escribir*/
   
-
+  
 
   FILE* file = fopen(nombre_archivo, "w");
- 
+  
   if (!file) {
     perror("Error al abrir la informacion para comprobar la informacion procesada de las baterias");
     registrar_error("Error al abrir la informacion para comprobar la informacion procesada de las baterias", REGISTRO_ERRORES);
     return ERROR;
   }
+
+ 
   //Se imprimir los encabezados de los CSV
-  fprintf(file, "NumeroTerminal,PuntoInicio,PuntoFinal,PuntoObjetivo,CapacidadBateria,BateriaInicial,BateriaObjetivo,MaximaPotencia,FechaInicio,FechaFinal,FechaObjetivo\n");
+
+
+  fprintf(file, "NumeroTerminal,PuntoInicio,PuntoFinal,CapacidadBateria,BateriaInicial,MaximaPotencia,FechaInicio,FechaFinal,BateriaObjetivo,PuntoObjetivo,FechaObjetivo\n");
   //Se itera por cada bateria y se imprime la infomracion procesada de cada bateria
   for (int i = 0; i < informacion_baterias->numero_baterias; i++) {
+
     const bateria_t* b = &(informacion_baterias->baterias[i]);
 
     char fechaInicioStr[20]; // Ensure the buffer is large enough for the formatted date-time string
@@ -96,21 +101,38 @@ int imprimir_informacion_procesada_bateria(const informacion_baterias_t * inform
     char fechaFinalStr[20];
     strftime(fechaFinalStr, sizeof(fechaFinalStr), "%Y-%m-%d %H:%M", &(b->fecha_final));
 
-    char fechaObjetivoStr[20];
-    strftime(fechaObjetivoStr, sizeof(fechaObjetivoStr), "%Y-%m-%d %H:%M", &(b->fecha_objetivo));
+    if (informacion_baterias->baterias[i].considerar_objetivo) {
+      char fechaObjetivoStr[20];
+      strftime(fechaObjetivoStr, sizeof(fechaObjetivoStr), "%Y-%m-%d %H:%M", &(b->fecha_objetivo));
 
-    fprintf(file, "%d,%d,%d,%d,%.2f,%.2f,%.2f,%.2f,%s,%s,%s\n",
-      b->numero_terminal,
-      b->punto_inicio,
-      b->punto_final,
-      b->punto_objetivo,
-      b->capacidad_bateria,
-      b->bateria_inicial,
-      b->bateria_objetivo,
-      b->maxima_potencia,
-      fechaInicioStr,
-      fechaFinalStr,
-      fechaObjetivoStr);
+      fprintf(file, "%d,%d,%d,%.2f,%.2f,%.2f,%s,%s,%.2f,%d,%s\n",
+        b->numero_terminal,
+        b->punto_inicio,
+        b->punto_final,
+        b->capacidad_bateria,
+        b->bateria_inicial,
+        b->maxima_potencia,
+        fechaInicioStr,
+        fechaFinalStr,
+        b->bateria_objetivo,
+        b->punto_objetivo,
+        fechaObjetivoStr);
+    }
+
+
+    else {
+      fprintf(file, "%d,%d,%d,%.2f,%.2f,%.2f,%s,%s\n",
+        b->numero_terminal,
+        b->punto_inicio,
+        b->punto_final,
+       
+        b->capacidad_bateria,
+        b->bateria_inicial,
+        
+        b->maxima_potencia,
+        fechaInicioStr,
+        fechaFinalStr);
+    }
   }
   /* */
   fclose(file);
@@ -267,7 +289,7 @@ int comprobar_informacion_procesada(informacion_procesada_t informacion_procesad
   }
   
   
- 
+  
   //Se imprime la informacion procesada de las baterias
   
   if (imprimir_informacion_procesada_bateria(&(informacion_procesada.informacion_baterias),

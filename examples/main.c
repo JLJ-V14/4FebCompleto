@@ -10,6 +10,7 @@
 #include <io.h>
 #include "comprobar_lectura_datos.h"
 #include "comprobar_informacion_procesada.h"
+#include "comprobar_informacion_matrices.h"
 #include "definiciones_globales.h"
 #include "extraer_soluciones_problemas_optimizacion.h"
 #include "inicializar_csv.h"
@@ -17,6 +18,7 @@
 #include "leer_entradas.h"
 #include "liberar_memoria.h"
 #include "main.h"
+#include "mostrar_informacion_terminales.h"
 #include "obtener_informacion_carga_terminales.h"
 #include "osqp.h"
 #include "preparar_problema_optimizacion.h"
@@ -73,7 +75,7 @@
 
     informacion_entrada_t          informacion_sistema;
     informacion_procesada_t        informacion_procesada;
-    informacion_carga_terminales_t informacion_carga_terminales = {0};
+    informacion_carga_terminales_t informacion_carga_terminales = { 0 };
    
     //Se define la estructura donde van a ir contenidas las matrices del problema de optimizacion
     problema_optimizacion_t problema_optimizacion = { 0 };
@@ -89,10 +91,16 @@
     ajustes_punto_decimal();
    
     
-
-    //Se borran los errores de ejecuciones anteriores del programa
     borrar_contenido_log(REGISTRO_ERRORES);
 
+    //Se inicializa la informacion procesada.
+    inicializar_informacion_procesada(&informacion_procesada);
+
+    
+    //Se borran los errores de ejecuciones anteriores del programa
+    
+
+    
     // Se inicializan las variables que almacenan los datos de entrada.
     if (inicializar_informacion_entrada(&informacion_sistema) == ERROR) {
         printf("Fallo en la inicialización del algoritmo\n");
@@ -105,19 +113,21 @@
     //Se pasa a leer los datos de entrada->
     if (leer_entradas(&informacion_sistema) == ERROR) {
         printf("Fallo en la lectura de las entradas\n");
-        registrar_error("Fallo en la lectura de los datos de entrada", REGISTRO_ERRORES);
+        registrar_error("Fallo en la lectura de los datos de entrada\n", REGISTRO_ERRORES);
         goto fin_programa;
     }
+
     
     
     //Se inspecciona si la lectura se esta haciendo adecuadamente
     if (comprobar_informacion_entrada(&informacion_sistema) == ERROR) {
         printf("Fallo en la comprobacion de la informacion de entrada\n");
-        registrar_error("Fallo en la comprobacion de la informacion de entrada", REGISTRO_ERRORES);
+        registrar_error("Fallo en la comprobacion de la informacion de entrada\n", REGISTRO_ERRORES);
         goto fin_programa;
     }
-
     
+    
+
     
     //Se verifica que la informacion de entrada es correcta
     if (verificar_entradas(&informacion_sistema) == ERROR) {
@@ -125,37 +135,39 @@
         registrar_error("Fallo las entradas son incorrectas\n", REGISTRO_ERRORES);
         goto fin_programa;
     }
-  
    
+    
 
     //Se procesa la informacion de entrada
-    
-    inicializar_informacion_procesada(&informacion_procesada);
-    
-    
-    
     if (procesar_informacion_entrada(&informacion_sistema, &informacion_procesada) == ERROR) {
       printf("La informacion no ha podido ser procesada correctamente\n");
       registrar_error("La informacion no ha podido ser procesada correctamente\n", REGISTRO_ERRORES);
       goto fin_programa;
     }
+    
 
-   
+    
     //Se procesa la informacion 
     if (comprobar_informacion_procesada(informacion_procesada) == ERROR) {
       printf("La informacion procesada no ha sido correctamente\n");
       registrar_error("La informacion procesada no ha sido correctamente\n", REGISTRO_ERRORES);
       goto fin_programa;
     }
-
+    
+    
     //Se almacena la informacion de los diferentes vehiculos y baterias que tienen su carga programada en
     //los diferentes terminales
 
+    
     if (obtener_informacion_carga_terminales(&informacion_procesada, &informacion_carga_terminales) == ERROR) {
       printf("La informacion de los elementos que tienen su carga programada en los terminales no ha podido ser cargada correctamente\n");
       registrar_error("La informacion de los elementos que tienen su carga programada en los terminales no ha podido ser cargada correctamente\n",REGISTRO_ERRORES);
       goto fin_programa;
     }
+   
+   
+    //Se muestra la informacion de los terminales.
+    // mostrar_informacion_carga_terminales(&informacion_carga_terminales);
 
     
     if (preparar_problema_optimizacion(&informacion_procesada,&problema_optimizacion,&informacion_carga_terminales) == ERROR){
@@ -165,8 +177,16 @@
     }
 
     
-  
 
+    //Se muestra la informacion de las matrices para comprobar si se han escrito correctamente
+    if (imprimir_matrices_problema_optimizacion(&problema_optimizacion) == ERROR){
+      printf("No se ha podido escribir las matrices del problema de optimización en el csv\n");
+      registrar_error("No se han podido escribir las matrices del problema de optimización en el csv\n", REGISTRO_ERRORES);
+      goto fin_programa;
+    }
+    
+
+    
     //Se resuelve el problema de optimizacion:
     if (!problema_optimizacion.bandera_salida)problema_optimizacion.bandera_salida = osqp_solve(problema_optimizacion.solver);
 
@@ -185,15 +205,17 @@
       extraer_soluciones_problema_optimizacion(&informacion_sistema,&problema_optimizacion);
     }
 
-   fin_programa:
+    
+    fin_programa:
 
     // Se libera la memoria reservada
     liberar_memoria_informacion_procesada(&informacion_procesada);
     liberar_informacion_carga_terminales(&informacion_carga_terminales);
+    
     liberar_memoria_problema_optimizacion(&problema_optimizacion);
     printf("Memoria de informacion procesada liberada\n");
     liberar_memoria_csvs(&informacion_sistema);
-    //liberar_memoria_problema_optimizacion(&problema_optimizacion);
+    liberar_memoria_problema_optimizacion(&problema_optimizacion);
 
     //Se devuelve el exitflag para saber si la optimizacion ha tenido exito
 

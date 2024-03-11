@@ -162,8 +162,8 @@ static void inicializar_ubicacion_informacion_vehiculos(ubicacion_csv_vehiculos_
     ubicacion_info_vehiculos->columna_terminales = COLUMNA_CSV_VEHICULOS_NUM_TERMINAL;
     ubicacion_info_vehiculos->columna_modo_carga = COLUMNA_CSV_VEHICULOS_MODO_CARGA;
     ubicacion_info_vehiculos->columna_capacidad_bateria = COLUMNA_CSV_VEHICULOS_CAPACIDAD_BATERIA;
-    ubicacion_info_vehiculos->columna_porcentaje_bateria_deseada = COLUMNA_CSV_VEHICULOS_BATERIA_INICIAL;
-    ubicacion_info_vehiculos->columna_porcentaje_bateria_inicial = COLUMNA_CSV_VEHICULOS_BATERIA_DESEADA;
+    ubicacion_info_vehiculos->columna_porcentaje_bateria_deseada = COLUMNA_CSV_VEHICULOS_BATERIA_DESEADA;
+    ubicacion_info_vehiculos->columna_porcentaje_bateria_inicial = COLUMNA_CSV_VEHICULOS_BATERIA_INICIAL;
     ubicacion_info_vehiculos->columna_maxima_potencia = COLUMNA_CSV_VEHICULOS_MAXIMA_POTENCIA;
 
     //Se carga la informacion de en que columnas se encuentra

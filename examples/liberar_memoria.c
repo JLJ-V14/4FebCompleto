@@ -167,17 +167,23 @@ void liberar_memoria_problema_optimizacion(problema_optimizacion_t* problema_opt
 
     if (informacion_carga_terminales != NULL) {
 
+     
       //Se itera por cada uno de los terminales
       for (int numero_terminal = 0; numero_terminal < 12; numero_terminal++) {
 
-        informacion_elementos_terminal_t* info_terminal_carga = &(informacion_carga_terminales->informacion_carga_terminales);
+        
+
+        informacion_elemento_carga_t* info_terminal_carga = (informacion_carga_terminales->informacion_carga_terminales[numero_terminal].elementos_terminal);
         //Se procede a liberar la informacion asociada a los vehiculos y baterias que tienen su carga programada
         //en el terminal
-        if (info_terminal_carga->elementos_terminal != NULL) {
-          free(info_terminal_carga->elementos_terminal);
-          info_terminal_carga->elementos_terminal = NULL;
 
+        if (info_terminal_carga!= NULL) {
+          free(info_terminal_carga);
+          info_terminal_carga = NULL;
         }
       }
+
+      
     }
+    
   }

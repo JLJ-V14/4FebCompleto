@@ -1,6 +1,7 @@
 
 
 #include "tipos_optimizacion.h"
+
 #ifndef COMPROBAR_INFORMACION_PROCESADA_H
 #define COMPROBAR_INFORMACION_PROCESADA_H
 
