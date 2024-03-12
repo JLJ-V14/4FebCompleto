@@ -447,12 +447,56 @@ static int verificar_encabezados_baterias(datos_csv_t* datos_baterias) {
 	return EXITO;
 }
 
+/*El siguiente subprograma se utiliz para comprobar que la fase a la que está conectada la fase es R,S o T*/
+
+
+
+
 /*
 * En este subprograma se va comprobando que los datos del csv que contiene la informacion de 
 * las baterias es correcto
 */
+static int verificar_fase_bateria(const datos_csv_baterias_t* datos_csv_baterias,const datos_csv_terminales_t* datos_terminales,
+                                  const int numero_fila_bateria) {
 
-int verificar_baterias(const datos_csv_baterias_t* datos_csv_baterias, const datos_csv_algoritmo_t* datos_csv_algoritmo) {
+  //Se columna donde se encuentra el terminal al que está conectado la batería
+  int columna_terminal = datos_csv_baterias->posiciones_informacion_baterias.columna_terminal;
+
+  //Se carga la columna donde se encuentra la fase a la que está conectada el terminal en el csv de los terminales
+  int columna_fase_terminal = datos_terminales->posiciones_informacion_terminales.columna_fase;
+
+  //Se carga el terminal al que está conectado la bateria.
+  char* terminal = datos_csv_baterias->informacion_baterias.datos[numero_fila_bateria][columna_terminal];
+
+  int numero_terminal;
+  //Se convierte el terminal de tipo char a tipo númerico
+
+  if (convertir_a_entero(terminal, &numero_terminal) == ERROR) {
+    printf("Ha habido un error comprobando la fase a la que están conectadas las baterías\n");
+    registrar_error("Ha habido un error comprobando la fase a la que están conectadas las baterías\n", REGISTRO_ERRORES);
+    return ERROR;
+  }
+
+  //Se accede a la fase a la que está conectada la batería
+ 
+  char* fase = datos_terminales->informacion_terminales.datos[numero_terminal][columna_fase_terminal];
+  const char* valores_aceptables[] = { "R","S","T" };
+  const int numero_valores_aceptables = sizeof(valores_aceptables) / sizeof(valores_aceptables[0]);
+
+  for (int i = 0; i < numero_valores_aceptables; i++) {
+    if (strings_iguales(valores_aceptables[i], fase)) {
+      return EXITO;
+    }
+  }
+  printf("No se puede conectar la bateria a un terminal que no esté conectado a fase R,S o T\n");
+  registrar_error("No se puede conectar la bateria a un terminal que no esté contectado a fase R S o T\n", REGISTRO_ERRORES);
+  return ERROR;
+}
+
+
+
+int verificar_baterias(const datos_csv_baterias_t* datos_csv_baterias, const datos_csv_algoritmo_t* datos_csv_algoritmo,
+  const datos_csv_terminales_t * datos_terminales) {
 
 	// Cargo el  numero de filas que hay en el csv de las baterias
 	int numero_filas_csv_baterias = datos_csv_baterias->informacion_baterias.filas;
@@ -495,6 +539,13 @@ int verificar_baterias(const datos_csv_baterias_t* datos_csv_baterias, const dat
 			registrar_error("Los datos de las baterias son incorrectos\n", REGISTRO_ERRORES);
 			return ERROR;
 		}
+
+    //Se comprueba la fase a la que está conectada la batería
+    if (verificar_fase_bateria(datos_csv_baterias, datos_terminales, numero_bateria) == ERROR) {
+      printf("Hay una batería no conectada a fase R,S o T \n");
+      registrar_error("Hay una batería no conectda a fase R,S o T\n", REGISTRO_ERRORES);
+      return ERROR;
+    }
 	}
 	return EXITO;
 }

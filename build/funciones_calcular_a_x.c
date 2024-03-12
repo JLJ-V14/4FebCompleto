@@ -10,7 +10,7 @@
 
 
 //Este subprograma se utiliza para actualizar la posicion a comprobar de baterias presentes en el terminal
-int  actualizar_index_elemento_carga(int* index_elemento_carga,int punto_final_actual,int punto_actual) {
+void  actualizar_index_elemento_carga(int* index_elemento_carga,int punto_final_actual,int punto_actual) {
   if (punto_final_actual < punto_actual){
     (*index_elemento_carga) ++;
   }
@@ -97,7 +97,7 @@ int crear_array_baterias(informacion_procesada_t* informacion_sistema, OSQPFloat
   los terminos SOC, (state of charge) estos terminos aparecen en las restricciones de borde, y las ecuaciones
   del balance de batería*/
 
-int incluir_terminos_baterias_terminal_A_x(informacion_procesada_t* informacion_sistema,int terminal_actual,
+void incluir_terminos_baterias_terminal_A_x(informacion_procesada_t* informacion_sistema,int terminal_actual,
     int*index_actual,OSQPFloat* A_x,informacion_carga_terminales_t* elementos_programados_carga_terminal) {
 
   //Se carga el numero de puntos de simulacion 
@@ -119,10 +119,10 @@ int incluir_terminos_baterias_terminal_A_x(informacion_procesada_t* informacion_
     for (int punto_actual = 0; punto_actual < numero_puntos_simulacion; punto_actual++) {
 
       //Se carga el punto inicial del vehiculo o bateria cuyo termino SOC se está considerando
-      int punto_inicial = elementos_programados_carga_terminal->informacion_carga_terminales->elementos_terminal[index_elemento_terminal].punto_inicio;
+      int punto_inicial = elementos_programados_carga_terminal->informacion_carga_terminales[terminal_actual].elementos_terminal[index_elemento_terminal].punto_inicio;
 
       //Cargo el punto final del vehiculo o bateria cuyo termino SOC, se está considerando
-      int punto_final = elementos_programados_carga_terminal->informacion_carga_terminales->elementos_terminal[index_elemento_terminal].punto_final;
+      int punto_final = elementos_programados_carga_terminal->informacion_carga_terminales[terminal_actual].elementos_terminal[index_elemento_terminal].punto_final;
 
       //Se comprueba si es necesario actualizar el index del elemento que tiene su carga programada en el terminal 
       actualizar_index_elemento_carga(&index_elemento_terminal, punto_final, punto_actual);
@@ -140,6 +140,8 @@ int incluir_terminos_baterias_terminal_A_x(informacion_procesada_t* informacion_
           //Se añade la restricción de borde y el primer termino de la ecuacion del balance de bateria
 
           if (punto_actual == punto_inicial) {
+            printf("El punto inicial es %d \n", punto_inicial);
+
             A_x[*index_actual] = 1;
             (*index_actual)++;
             A_x[*index_actual] = 1;
@@ -161,12 +163,16 @@ int incluir_terminos_baterias_terminal_A_x(informacion_procesada_t* informacion_
         else {
           A_x[*index_actual] = 1;
           (*index_actual)++;
+          A_x[*index_actual] = 1;
+          (*index_actual)++;
         }
       }
 
       //Si no hay ningún vehículo o batería conectada al terminal, simplemente hay que considerar la restricción
       //de borde.
       else {
+        A_x[*index_actual] = 1;
+        (*index_actual)++;
         A_x[*index_actual] = 1;
         (*index_actual)++;
       }
@@ -180,9 +186,11 @@ int incluir_terminos_baterias_terminal_A_x(informacion_procesada_t* informacion_
     for (int i = 0; i < numero_puntos_simulacion; i++) {
       A_x[*index_actual] = 1;
       (*index_actual)++;
+      A_x[*index_actual] = 1;
+      (*index_actual)++;
     }
   }
-  return EXITO;
+  
 }
 
 
@@ -193,7 +201,7 @@ int incluir_terminos_baterias_terminal_A_x(informacion_procesada_t* informacion_
   //baterías, en las restricciones pueden aparecer en dos tipos de restricciones las de borde y las de ecuación
   //del comportamiento de la batería
 
-int incluir_terminos_baterias_A_x(informacion_procesada_t* informacion_sistema, OSQPFloat* A_x,int* index_actual,
+void incluir_terminos_baterias_A_x(informacion_procesada_t* informacion_sistema, OSQPFloat* A_x,int* index_actual,
   informacion_carga_terminales_t* programacion_carga_terminales) {
 
   //Se crea una variable booleana para controlar el bucle donde se añaden los terminos de la variable del estado
@@ -203,24 +211,26 @@ int incluir_terminos_baterias_A_x(informacion_procesada_t* informacion_sistema, 
   
  for (int numero_terminal = 0; numero_terminal < NUMERO_TERMINALES; numero_terminal++){
 
-    if (incluir_terminos_baterias_terminal_A_x(informacion_sistema,numero_terminal, index_actual, A_x,
-        programacion_carga_terminales) == ERROR) {
-      printf("No se ha podido incluir los terminos de la batería en las ecuaciones de la matriz A_x\n");
-      registrar_error("No se ha podido incluir los términos de la batería en las ecuaciones de la matriz A_x", REGISTRO_ERRORES);
-      return ERROR;
-    }
-  
+   //Se incluye los términos SOC en el vector A_x
+
+   incluir_terminos_baterias_terminal_A_x(informacion_sistema, numero_terminal, index_actual, A_x,
+     programacion_carga_terminales);
     
   }
-  return EXITO;
+  
 }
 
 
 /*Este subprograma se utiliza para incluir en el vector A_x los terminos de las potencias que intercambian
   los diferentes terminales */
 
-int incluir_terminos_potencias_terminal_A_x(informacion_procesada_t* informacion_sistema, OSQPInt terminal_actual,
+void incluir_terminos_potencias_terminal_A_x(informacion_procesada_t* informacion_sistema, OSQPInt terminal_actual,
   int* index_actual, OSQPFloat* A_x, char fase_terminal, informacion_carga_terminales_t* elementos_programados_terminal) {
+
+
+
+ 
+
 
   //Este subprograma se utiliza para escribir en el vector A_x los términos correspondientes a las potencias
   //intercambiada por el terminal
@@ -228,6 +238,9 @@ int incluir_terminos_potencias_terminal_A_x(informacion_procesada_t* informacion
 
   //Se carga el numero de elementos que se tiene en el terminal
   int numero_elementos_terminales = elementos_programados_terminal->informacion_carga_terminales[terminal_actual].numero_elementos_terminal;
+
+  printf("El terminal actual es %d\n", terminal_actual);
+  printf("El numero de elementos en el terminal es %d\n", numero_elementos_terminales);
 
   //Se carga el numero de puntos de simulacion
   int numero_puntos_simulacion = informacion_sistema->informacion_puntos_simulacion.numero_puntos_simulacion;
@@ -248,6 +261,9 @@ int incluir_terminos_potencias_terminal_A_x(informacion_procesada_t* informacion
 
     int punto_inicial = elementos_programados_terminal->informacion_carga_terminales[terminal_actual].elementos_terminal[index_adicional].punto_inicio;
     int punto_final = elementos_programados_terminal->informacion_carga_terminales[terminal_actual].elementos_terminal[index_adicional].punto_final;
+
+    printf("El punto inicial es %d\n", punto_inicial);
+    printf("El punto final es %d\n", punto_final);
 
     for (int punto_actual = 0; punto_actual < numero_puntos_simulacion; punto_actual++) {
       if (numero_elementos_terminales > index_adicional) {
@@ -322,21 +338,23 @@ int incluir_terminos_potencias_terminal_A_x(informacion_procesada_t* informacion
 
   else {
 
-    for (int i = 0; i < numero_puntos_simulacion; i++) {
-      //Se incluye la restricción de borde
-      A_x[*index_actual] = 1;
-      (*index_actual)++;
-      //Si el terminal está en fase Neutro o nada, no se incluye en el balance
-      if ((fase_terminal != 'N') && (fase_terminal != '0')) {
+    if ((fase_terminal != 'N') && (fase_terminal != '0')) {
+      for (int i = 0; i < numero_puntos_simulacion; i++) {
+        A_x[*index_actual] = 1;
+        (*index_actual)++;
         A_x[*index_actual] = -1;
         (*index_actual)++;
       }
+
     }
+    else {
+      A_x[*index_actual] = 1;
+      (*index_actual)++;
+    }
+
+  
   }
 
- 
-
-  return EXITO;
 }
 
 
@@ -345,22 +363,17 @@ int incluir_terminos_potencias_terminal_A_x(informacion_procesada_t* informacion
 // Este subprograma se utiliza para incluir los terminos de las potencias en las estaciones de carga y en la
 // restricciones de borde en el vector A_x que es el vector que contiene los elementos diferentes de 0.
 
-int incluir_terminos_potencias_A_x(informacion_procesada_t* informacion_sistema,OSQPFloat* A_x, int* index_actual,
+void incluir_terminos_potencias_A_x(informacion_procesada_t* informacion_sistema,OSQPFloat* A_x, int* index_actual,
   informacion_carga_terminales_t* elementos_programados_terminal) {
 
-  for (OSQPInt terminal_actual = 0; terminal_actual < NUMERO_TERMINALES; terminal_actual++){
+  for (OSQPInt terminal_actual = 0; terminal_actual < NUMERO_TERMINALES; terminal_actual++) {
 
     char fase_terminal = informacion_sistema->informacion_terminales.fases_electricas[terminal_actual];
-
-    if (incluir_terminos_potencias_terminal_A_x(informacion_sistema, terminal_actual, index_actual, A_x,fase_terminal,
-      elementos_programados_terminal) == ERROR) {
-      printf("No se han podido incluir los terminos de potencia  de los terminales en la matriz A_x\n");
-      registrar_error("No se han podido incluir los terminos de potencia de los terminales en la matriz A_x\n", REGISTRO_ERRORES);
-      return ERROR;
-    }
-  
+    incluir_terminos_potencias_terminal_A_x(informacion_sistema, terminal_actual, index_actual, A_x, fase_terminal,
+      elementos_programados_terminal);
   }
-  return EXITO;
+  
+ 
 }
 
 

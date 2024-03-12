@@ -11,6 +11,14 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+
+
+
+
+
+
+
+
 /*En este archivo esta el subprograma que se encarga
 * de la verificacion de las entradas.
 *
@@ -59,14 +67,14 @@ int verificar_entradas(informacion_entrada_t* informacion_sistema) {
 	}
 
 
-	if (verificar_datos_vehiculos(datos_vehiculos, datos_algoritmo) == ERROR) {
+	if (verificar_datos_vehiculos(datos_vehiculos, datos_algoritmo,datos_terminales) == ERROR) {
 		printf("los datos del csv de los vehiculos son incorrectos\n");
 		registrar_error("La informacion de los vehiculos es incorrecta\n", REGISTRO_ERRORES);
 		return ERROR;
 	}
 
 
-	if (verificar_baterias(datos_baterias, datos_algoritmo) == ERROR) {
+	if (verificar_baterias(datos_baterias, datos_algoritmo,datos_terminales) == ERROR) {
 		printf("los datos del csv de las baterias son incorrectas\n");
 		registrar_error("La informacion de las baterias es incorrecta\n", REGISTRO_ERRORES);
 		return ERROR;

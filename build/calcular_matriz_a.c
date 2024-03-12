@@ -42,20 +42,10 @@ int calcular_vector_A_x(informacion_procesada_t* informacion_sistema, OSQPFloat*
  
   
   //Se llama al siguiente subprograma para incluir en la matriz de restricciones los terminos de la variable SOC 
-  if (incluir_terminos_baterias_A_x(informacion_sistema, *A_x, &index_actual,elementos_programados_terminales) == ERROR) {
-    printf("No se han podido incluir los términos de las baterias en el vector A_x\n");
-    registrar_error("No se han podido incluir los términos de las baterías en el vector A_x\n", REGISTRO_ERRORES);
-    return ERROR;
-  }
-
- 
-  
-  if (incluir_terminos_potencias_A_x(informacion_sistema, *A_x, &index_actual,elementos_programados_terminales) == ERROR) {
-    printf("No se han podido incluir los términos de potencia en el vector A_x\n");
-    registrar_error("No se han podido incluir los términos de potencia en el vector A_x\n", REGISTRO_ERRORES);
-    return ERROR;
-  }
-
+  incluir_terminos_baterias_A_x(informacion_sistema, *A_x, &index_actual, elementos_programados_terminales);
+  printf("El index actual despues de añadir las baterias es %d\n", index_actual);
+  incluir_terminos_potencias_A_x(informacion_sistema, *A_x, &index_actual, elementos_programados_terminales);
+  printf("El index actual despues de añadir los terminas de potencias intercambiados por los terminales es %d\n", index_actual);
   incluir_termino_potencia_red(informacion_sistema, *A_x, &index_actual);
   incluir_termino_potencia_entrada_sistema(informacion_sistema, *A_x, &index_actual);
   incluir_termino_potencia_salida_sistema(informacion_sistema, *A_x, &index_actual);
@@ -179,26 +169,15 @@ void calcular_numero_terminos(informacion_procesada_t* informacion_sistema,OSQPI
 
   //Terminos de Borde 36 * puntos de simulacion (si o si)
 
+  //En las ecuaciones de balance aparecen si o si 3 * puntos de simulacion balance de fase
+  //En las ecuaciones de balance de bateria aparecen si o si 12 * puntos de simulacion terminos de los estados de batería
+  //Ecuacion 34 -> 3 terminos * puntos de simulacion
+  //Ecuacion 35 -> 9 terminos * puntos de simulacion
+  //Ecuacion 36 -> 4 terminos * puntos de simulacion
+  //Ecuacion 37 -> 4 terminos * puntos de simulacion
+  //Ecuacion 38 -> 4 terminos * puntos de simulacion 
 
-
-  //Balance en la fase 3 terminos * puntos de simulacion si o si
-  
-  //Ecuaciones de balance de bateria 12 terminos * puntos de simulacion si o si 
-  
-
-  //Terminos fijos que aparecen en las ecuaciones del balance:
-  
-  //Ecuacion del balance de potencia entrada/salida con la red 3 * puntos_simulacion
-  //Ecuación del balance de potencia entrada/salida con la red 3 * puntos_simulacion * 3 fases = 9 *puntos_simulacion
-  //Ecuacion de la potencia de entrada de la red = balance de entrada por cada fase 4 * puntos_simulacion
-  //Ecuación de que la potencia de salida de la red = 4 * puntos_simulacion
-  //Ecuación de que la potencia intercambiada por la red = sumatorio de lo que intercambia por cada fase 4 * puntos_simulacion
-
-  //Terminos de ecuacion de balance aparecen 24 * puntos de simulacion (si o si)
-
-
-  //Parte fija = 75 * puntos_simulacion
-
+  //Terminos fijos = 
   OSQPInt numero_terminos_restricciones_fijas = 75 * informacion_sistema->informacion_puntos_simulacion.numero_puntos_simulacion;
 
   //Batería inicial en la ecuación de balance de batería depende de cuantas conexiones y desconexiones hay
@@ -207,9 +186,22 @@ void calcular_numero_terminos(informacion_procesada_t* informacion_sistema,OSQPI
 
   OSQPInt numero_ecuaciones_baterias = 0;
 
+  //Se pasa a calcular los terminos adicionales que deben ser incluidos en las ecuaciones de balance de baterías
+  //y las ecuaciones del balance de fase
+  OSQPInt terminos_adicionales_balance_fase = 0;
+  OSQPInt terminos_adicionales_balance_bateria = 0;
 
-  calcular_numero_ecuaciones_estado_bateria(informacion_sistema,&numero_ecuaciones_baterias);
-  *A_nnz = numero_terminos_restricciones_fijas + numero_ecuaciones_baterias;
+  calcular_numero_terminos_ecuaciones_baterias(informacion_sistema,&terminos_adicionales_balance_bateria);
+  calcular_numero_terminos_ecuacion_balance_fase(informacion_sistema,&terminos_adicionales_balance_fase);
+
+
+  printf("El numero de terminos en las ecuaciones de baterias es %d\n", terminos_adicionales_balance_fase);
+  printf("El numero de terminos en las ecuaciones de balance de bateria es %d\n", terminos_adicionales_balance_bateria);
+  printf("El numero de terminos fijos  es %d\n", numero_terminos_restricciones_fijas);
+
+  //calcular_numero_ecuaciones_estado_bateria(informacion_sistema,&numero_ecuaciones_baterias);
+
+  *A_nnz = numero_terminos_restricciones_fijas +terminos_adicionales_balance_fase + terminos_adicionales_balance_bateria;
 }
 
 // Se calcula la matriz A que sirve para indicar las restricciones del sistema

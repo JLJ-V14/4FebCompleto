@@ -1,26 +1,4 @@
-﻿  calcular_matriz_a.c
-calcular_matriz_a.c(88,51): warning C4133: 'function': incompatible types - from 'OSQPFloat *' to 'OSQPInt *'
-calcular_matriz_a.c(94,63): warning C4133: 'function': incompatible types - from 'OSQPFloat *' to 'OSQPInt *'
-calcular_matriz_a.c(102,51): warning C4133: 'function': incompatible types - from 'OSQPFloat *' to 'OSQPInt *'
-calcular_matriz_a.c(103,59): warning C4133: 'function': incompatible types - from 'OSQPFloat *' to 'OSQPInt *'
-calcular_matriz_a.c(104,58): warning C4133: 'function': incompatible types - from 'OSQPFloat *' to 'OSQPInt *'
-calcular_matriz_a.c(105,56): warning C4133: 'function': incompatible types - from 'OSQPFloat *' to 'OSQPInt *'
-calcular_matriz_a.c(106,56): warning C4133: 'function': incompatible types - from 'OSQPFloat *' to 'OSQPInt *'
-calcular_matriz_a.c(107,56): warning C4133: 'function': incompatible types - from 'OSQPFloat *' to 'OSQPInt *'
-calcular_matriz_a.c(108,64): warning C4133: 'function': incompatible types - from 'OSQPFloat *' to 'OSQPInt *'
-calcular_matriz_a.c(109,64): warning C4133: 'function': incompatible types - from 'OSQPFloat *' to 'OSQPInt *'
-calcular_matriz_a.c(110,64): warning C4133: 'function': incompatible types - from 'OSQPFloat *' to 'OSQPInt *'
-calcular_matriz_a.c(111,63): warning C4133: 'function': incompatible types - from 'OSQPFloat *' to 'OSQPInt *'
-calcular_matriz_a.c(112,63): warning C4133: 'function': incompatible types - from 'OSQPFloat *' to 'OSQPInt *'
-calcular_matriz_a.c(113,63): warning C4133: 'function': incompatible types - from 'OSQPFloat *' to 'OSQPInt *'
-calcular_matriz_a.c(191,65): warning C4133: 'function': incompatible types - from 'OSQPInt *' to 'int *'
-calcular_matriz_a.c(206,10): warning C4477: 'printf' : format string '%d' requires an argument of type 'int', but variadic argument 1 has type 'OSQPInt'
-calcular_matriz_a.c(206,10): message : consider using '%lld' in the format string
-calcular_matriz_a.c(206,10): message : consider using '%Id' in the format string
-calcular_matriz_a.c(206,10): message : consider using '%I64d' in the format string
-calcular_matriz_a.c(215,10): warning C4477: 'printf' : format string '%d' requires an argument of type 'int', but variadic argument 1 has type 'OSQPInt'
-calcular_matriz_a.c(215,10): message : consider using '%lld' in the format string
-calcular_matriz_a.c(215,10): message : consider using '%Id' in the format string
-calcular_matriz_a.c(215,10): message : consider using '%I64d' in the format string
-calcular_matriz_a.c(218,48): warning C4133: 'function': incompatible types - from 'OSQPInt **' to 'OSQPFloat **'
+﻿  verificar_vehiculos.c
+..\examples\verificar_vehiculos.c(327,42): warning C4133: 'function': incompatible types - from 'datos_csv_vehiculos_t *' to 'datos_csv_t *'
+..\examples\verificar_vehiculos.c(330,38): warning C4133: 'function': incompatible types - from 'datos_csv_vehiculos_t *' to 'datos_csv_t *'
   osqp_demo.vcxproj -> F:\osqp1feb\osqp-1.0.0.beta1\build\out\osqp_demo.exe

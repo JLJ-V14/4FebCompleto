@@ -41,6 +41,7 @@ void calcular_numero_terminos_ecuacion_balance_fase(informacion_procesada_t* inf
     //Si se está conectado a alguna de las tres fases es necesario incluir el término 
     if ((terminal_actual == 'R') || (terminal_actual == 'r') || (terminal_actual == 'S') ||(terminal_actual == 's')||
        (terminal_actual == 'T')  || (terminal_actual == 't')){
+      
       *numero_terminos_adicionales = *numero_terminos_adicionales + numero_puntos_simulacion;
     }
 
@@ -66,16 +67,19 @@ void calcular_numero_terminos_ecuaciones_baterias(informacion_procesada_t* infor
 
     //Se añade el termino de potencia intercambiado por el terminal y el termino de la bateria del punto anterior
     //conectado al terminal
-    (*numero_terminos_adicionales) += (punto_final - punto_inicial - 1);
+    (*numero_terminos_adicionales) += 2 * (punto_final - punto_inicial - 1);
   }
 
   for (int bateria = 0; bateria < numero_baterias; bateria++) {
 
     int punto_final = informacion_sistema->informacion_baterias.baterias[bateria].punto_final;
     int punto_inicial = informacion_sistema->informacion_baterias.baterias[bateria].punto_inicio;
-    (*numero_terminos_adicionales) += (punto_final - punto_inicial - 1);
+    (*numero_terminos_adicionales) += 2 * (punto_final - punto_inicial - 1);
 
   }
+
+ 
+
   /*Se itera por el número de ecuaciones de batería*/
 
 }

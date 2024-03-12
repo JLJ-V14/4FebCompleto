@@ -207,7 +207,7 @@
 
     
     fin_programa:
-
+    
     // Se libera la memoria reservada
     liberar_memoria_informacion_procesada(&informacion_procesada);
     liberar_informacion_carga_terminales(&informacion_carga_terminales);

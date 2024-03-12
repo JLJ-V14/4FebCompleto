@@ -12,7 +12,8 @@
 extern "C" {
 #endif
 
-	int verificar_datos_vehiculos(datos_csv_vehiculos_t* datos_vehiculos, datos_csv_algoritmo_t* datos_algoritmo);
+	int verificar_datos_vehiculos(datos_csv_vehiculos_t* datos_vehiculos, datos_csv_algoritmo_t* datos_algoritmo,
+		datos_csv_terminales_t* datos_terminales);
 
 #ifdef __cplusplus
 }

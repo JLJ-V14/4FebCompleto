@@ -8,6 +8,7 @@
 #include "tipos_optimizacion.h"
 #include "validaciones.h"
 #include <stdio.h>
+#include <stdbool.h>
 
 #define MINIMO_FILAS_CSV_VEHICULOS    1
 #define NUMERO_COLUMNAS_CSV_VEHICULOS 16
@@ -58,6 +59,66 @@ int comprobar_encabezados_vehiculos(datos_csv_t* datos_vehiculos) {
 
 	return EXITO;
 }
+
+/*Este subprograma se utiliza para comprobar que la fase
+  a la que está conectada el vehículo sea R,S o T*/
+
+static int verificar_fase_vehiculo(datos_csv_vehiculos_t* datos_vehiculos,datos_csv_terminales_t* datos_terminales) {
+
+
+  //Se carga el numero de filas que tiene el csv
+  int numero_filas_csv_vehiculos = datos_vehiculos->informacion_vehiculos.filas;
+  //Se carga la columna donde esta el terminal al que está conectado en el csv de los vehículos
+  int columna_terminal = datos_vehiculos->posiciones_informacion_vehiculos.columna_terminales;
+  //Se carga la columna donde está la fase del terminal en el csv que indican a que fase están
+  //conectados los terminales
+  int columna_fase = datos_terminales->posiciones_informacion_terminales.columna_fase;
+  //Variable booleana para 
+  bool fase_correcta;
+
+  for (int numero_fila = 1; numero_fila < numero_filas_csv_vehiculos; numero_fila++) {
+
+    char* terminal = datos_vehiculos->informacion_vehiculos.datos[numero_fila][columna_terminal];
+    int   numero_terminal;
+    fase_correcta = false;
+
+    if (convertir_a_entero(terminal, &numero_terminal) == ERROR) {
+      printf("Ha habido un error comprobando la fase a la que están conectados los vehículos\n");
+      registrar_error("Ha habido un error comprobando la fase a la que están conectados los vehículos", REGISTRO_ERRORES);
+      return ERROR;
+    }
+
+    
+    //Se accede a la fase la que está conectado el vehiculo
+    char* fase = datos_terminales->informacion_terminales.datos[numero_terminal][columna_fase];
+    const char* valores_aceptables[] = { "R","S","T" };
+    const int numero_valores_aceptables = sizeof(valores_aceptables) / sizeof(valores_aceptables[0]);
+
+    for (int i = 0; i < numero_valores_aceptables; i++) {
+      if (strings_iguales(valores_aceptables[i], fase)) {
+        fase_correcta = true;
+      }
+    }
+
+    if (fase_correcta == false) {
+      printf("Error los vehiculos deben estar conectados a fase R,S o T\n");
+      printf("Error en la fila %d\n", numero_fila);
+      registrar_error("Error en la fila %d\n",REGISTRO_ERRORES);
+      registrar_error("Error los vehiculos deben estar conectados a fase R,S o T\n", REGISTRO_ERRORES);
+      return ERROR;
+
+    
+    }
+  }
+
+  return EXITO;
+}
+
+
+
+
+
+
 //Este subprograma se utiliza
 //para verificar que los modos
 //de carga de los Vehiculos 
@@ -187,7 +248,8 @@ static int verificar_datos_bateria_vehiculo(datos_csv_vehiculos_t* datos_csv, co
 //vehiculos son correctos.
 
 
-static int comprobar_datos_csv_vehiculos(datos_csv_vehiculos_t* datos_vehiculos, datos_csv_algoritmo_t* datos_algoritmo) {
+static int comprobar_datos_csv_vehiculos(datos_csv_vehiculos_t* datos_vehiculos, datos_csv_algoritmo_t* datos_algoritmo,
+                                         datos_csv_terminales_t* datos_terminales) {
 
 	//Cargo el puntero que apunta a la posicion de memoria donde se encuentra la informacion de los
 	//vehiculos y el algoritmo
@@ -242,12 +304,21 @@ static int comprobar_datos_csv_vehiculos(datos_csv_vehiculos_t* datos_vehiculos,
 			return ERROR;
 		}
 
-
 	}
+
+  if (verificar_fase_vehiculo(datos_vehiculos, datos_terminales) == ERROR) {
+    char mensaje_error[512];
+    printf("La fase a la que están conectados los vehículos debe ser R,S o T \n");
+    registrar_error(mensaje_error, REGISTRO_ERRORES);
+    printf("Llega aquí\n");
+    return ERROR;
+  }
+
 	return EXITO;
 }
 
-int verificar_datos_vehiculos(datos_csv_vehiculos_t* datos_vehiculos, datos_csv_algoritmo_t* datos_algoritmo) {
+int verificar_datos_vehiculos(datos_csv_vehiculos_t* datos_vehiculos, datos_csv_algoritmo_t* datos_algoritmo,
+                              datos_csv_terminales_t* datos_terminales) {
 	//Este subprograma se utiliza para
 	//comprobar que el CSV 
 	//que contiene los datos de los 
@@ -259,7 +330,7 @@ int verificar_datos_vehiculos(datos_csv_vehiculos_t* datos_vehiculos, datos_csv_
 	if (comprobar_encabezados_vehiculos(datos_vehiculos) == ERROR) {
 		return ERROR;
 	}
-	if (comprobar_datos_csv_vehiculos(datos_vehiculos, datos_algoritmo) == ERROR) {
+	if (comprobar_datos_csv_vehiculos(datos_vehiculos, datos_algoritmo,datos_terminales) == ERROR) {
 		return ERROR;
 	}
 
