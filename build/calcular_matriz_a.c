@@ -43,16 +43,14 @@ int calcular_vector_A_x(informacion_procesada_t* informacion_sistema, OSQPFloat*
   
   //Se llama al siguiente subprograma para incluir en la matriz de restricciones los terminos de la variable SOC 
   incluir_terminos_baterias_A_x(informacion_sistema, *A_x, &index_actual, elementos_programados_terminales);
-  printf("El index actual despues de añadir las baterias es %d\n", index_actual);
   incluir_terminos_potencias_A_x(informacion_sistema, *A_x, &index_actual, elementos_programados_terminales);
-  printf("El index actual despues de añadir los terminas de potencias intercambiados por los terminales es %d\n", index_actual);
   incluir_termino_potencia_red(informacion_sistema, *A_x, &index_actual);
   incluir_termino_potencia_entrada_sistema(informacion_sistema, *A_x, &index_actual);
   incluir_termino_potencia_salida_sistema(informacion_sistema, *A_x, &index_actual);
   incluir_terminos_potencia_red_fase(informacion_sistema, *A_x, &index_actual);
   incluir_terminos_potencia_entrada_fase(informacion_sistema, *A_x, &index_actual);
   incluir_terminos_potencia_salida_fase(informacion_sistema,*A_x,&index_actual);
-  printf("el index actual es %d \n", index_actual);
+  
   return EXITO;
 }
 
@@ -191,13 +189,11 @@ void calcular_numero_terminos(informacion_procesada_t* informacion_sistema,OSQPI
   OSQPInt terminos_adicionales_balance_fase = 0;
   OSQPInt terminos_adicionales_balance_bateria = 0;
 
-  calcular_numero_terminos_ecuaciones_baterias(informacion_sistema,&terminos_adicionales_balance_bateria);
+  calcular_numero_terminos_ecuaciones_baterias  (informacion_sistema,&terminos_adicionales_balance_bateria);
   calcular_numero_terminos_ecuacion_balance_fase(informacion_sistema,&terminos_adicionales_balance_fase);
 
 
-  printf("El numero de terminos en las ecuaciones de baterias es %d\n", terminos_adicionales_balance_fase);
-  printf("El numero de terminos en las ecuaciones de balance de bateria es %d\n", terminos_adicionales_balance_bateria);
-  printf("El numero de terminos fijos  es %d\n", numero_terminos_restricciones_fijas);
+  
 
   //calcular_numero_ecuaciones_estado_bateria(informacion_sistema,&numero_ecuaciones_baterias);
 
@@ -216,8 +212,7 @@ int calcular_matriz_a(informacion_procesada_t * informacion_sistema, problema_op
 
   calcular_numero_terminos(informacion_sistema, &A_nnz);
 
-  printf("El numero de términos diferentes de cero en la matriz A es %d\n", A_nnz);
-
+  
   //Se procede a calcular el vector A_x
   if (calcular_vector_A_x(informacion_sistema, &(matriz_a->A_x),A_nnz,programacion_carga_terminales) == ERROR) {
     printf("No se ha podido calcular el vector A_x\n");
@@ -225,7 +220,7 @@ int calcular_matriz_a(informacion_procesada_t * informacion_sistema, problema_op
     return ERROR;
   }
 
-  printf("El numero de términos diferentes de cero en la matriz A es %d\n", A_nnz);
+ 
 
   //Se procede a calcular el vector A_i
   if (calcular_vector_A_i(informacion_sistema, &(matriz_a->A_i),A_nnz,programacion_carga_terminales) == ERROR) {

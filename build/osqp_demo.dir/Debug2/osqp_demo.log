@@ -1,4 +1,2 @@
-﻿  verificar_vehiculos.c
-..\examples\verificar_vehiculos.c(327,42): warning C4133: 'function': incompatible types - from 'datos_csv_vehiculos_t *' to 'datos_csv_t *'
-..\examples\verificar_vehiculos.c(330,38): warning C4133: 'function': incompatible types - from 'datos_csv_vehiculos_t *' to 'datos_csv_t *'
+﻿  funciones_calcular_vector_u.c
   osqp_demo.vcxproj -> F:\osqp1feb\osqp-1.0.0.beta1\build\out\osqp_demo.exe

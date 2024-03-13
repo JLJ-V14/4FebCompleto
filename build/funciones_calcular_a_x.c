@@ -140,7 +140,7 @@ void incluir_terminos_baterias_terminal_A_x(informacion_procesada_t* informacion
           //Se añade la restricción de borde y el primer termino de la ecuacion del balance de bateria
 
           if (punto_actual == punto_inicial) {
-            printf("El punto inicial es %d \n", punto_inicial);
+            
 
             A_x[*index_actual] = 1;
             (*index_actual)++;
@@ -227,11 +227,6 @@ void incluir_terminos_baterias_A_x(informacion_procesada_t* informacion_sistema,
 void incluir_terminos_potencias_terminal_A_x(informacion_procesada_t* informacion_sistema, OSQPInt terminal_actual,
   int* index_actual, OSQPFloat* A_x, char fase_terminal, informacion_carga_terminales_t* elementos_programados_terminal) {
 
-
-
- 
-
-
   //Este subprograma se utiliza para escribir en el vector A_x los términos correspondientes a las potencias
   //intercambiada por el terminal
 
@@ -239,8 +234,7 @@ void incluir_terminos_potencias_terminal_A_x(informacion_procesada_t* informacio
   //Se carga el numero de elementos que se tiene en el terminal
   int numero_elementos_terminales = elementos_programados_terminal->informacion_carga_terminales[terminal_actual].numero_elementos_terminal;
 
-  printf("El terminal actual es %d\n", terminal_actual);
-  printf("El numero de elementos en el terminal es %d\n", numero_elementos_terminales);
+  
 
   //Se carga el numero de puntos de simulacion
   int numero_puntos_simulacion = informacion_sistema->informacion_puntos_simulacion.numero_puntos_simulacion;
@@ -262,10 +256,10 @@ void incluir_terminos_potencias_terminal_A_x(informacion_procesada_t* informacio
     int punto_inicial = elementos_programados_terminal->informacion_carga_terminales[terminal_actual].elementos_terminal[index_adicional].punto_inicio;
     int punto_final = elementos_programados_terminal->informacion_carga_terminales[terminal_actual].elementos_terminal[index_adicional].punto_final;
 
-    printf("El punto inicial es %d\n", punto_inicial);
-    printf("El punto final es %d\n", punto_final);
 
     for (int punto_actual = 0; punto_actual < numero_puntos_simulacion; punto_actual++) {
+     
+
       if (numero_elementos_terminales > index_adicional) {
 
         //Se carga el punto inicial y final del siguiente vehiculo o bateria cuya carga está programada en el terminal
@@ -321,6 +315,15 @@ void incluir_terminos_potencias_terminal_A_x(informacion_procesada_t* informacio
               }
               }
           }
+          //Si no hay ningún vehiculo o batería que tengan programada su carga para el punto actual se añade los
+          //terminos de la restricción de borde y la ecuación del balance de fase.
+          else {
+            
+            A_x[(*index_actual)] = 1;
+            (*index_actual)++;
+            A_x[(*index_actual)] = -1;
+            (*index_actual)++;
+          }
       }
 
       //Si no queda ninguna bateria o vehículo que tenga su carga programada en el terminal 
@@ -339,6 +342,7 @@ void incluir_terminos_potencias_terminal_A_x(informacion_procesada_t* informacio
   else {
 
     if ((fase_terminal != 'N') && (fase_terminal != '0')) {
+      
       for (int i = 0; i < numero_puntos_simulacion; i++) {
         A_x[*index_actual] = 1;
         (*index_actual)++;
@@ -347,9 +351,14 @@ void incluir_terminos_potencias_terminal_A_x(informacion_procesada_t* informacio
       }
 
     }
+
+    //Si el terminal no está conectado ni a fase R, S o T simplemente hay que añadir las restricciones de
+    //borde
     else {
+      for (int i = 0; i < numero_puntos_simulacion; i++) {
       A_x[*index_actual] = 1;
       (*index_actual)++;
+      }
     }
 
   

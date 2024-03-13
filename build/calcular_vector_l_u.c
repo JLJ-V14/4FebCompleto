@@ -20,11 +20,11 @@ int calcular_vector_l_u(informacion_procesada_t* informacion_sistema, OSQPFloat*
 
   //Se reserva memoria para los vectores l y u el tamaño de estos vectores es igual al numero de restricciones
   //de borde y el numero de ecuaciones que se tienen en el sistema
-  int numero_elementos_inicial = (NUMERO_VARIABLES+NUMERO_ECUACIONES_BASE) * numero_puntos;
-  size_t size = sizeof(OSQPFloat) * numero_elementos_inicial;
+  int numero_elementos = (NUMERO_VARIABLES+NUMERO_ECUACIONES_BASE) * numero_puntos;
+  size_t size = sizeof(OSQPFloat) * numero_elementos;
 
-  *l = (OSQPFloat*)malloc(numero_elementos_inicial);
-  *u = (OSQPFloat*)malloc(numero_elementos_inicial);
+  *l = (OSQPFloat*)malloc(numero_elementos);
+  *u = (OSQPFloat*)malloc(numero_elementos);
 
   if ((*l == NULL) || (*u == NULL)) {
     printf("No se ha podido reservar memoria para los vectores l y u\n");

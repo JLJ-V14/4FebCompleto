@@ -32,7 +32,7 @@ void calcular_minima_potencia_baterias(informacion_procesada_t* informacion_sist
   int limite_potencia_bateria;
 
   //Se calcula el número de elementos que tiene el terminal:
-  int elementos_terminal = elementos_carga_terminales->informacion_carga_terminales->numero_elementos_terminal;
+  int elementos_terminal = elementos_carga_terminales->informacion_carga_terminales[terminal_actual].numero_elementos_terminal;
 
   //Se itera por todos los elementos que tienen su carga programada en el terminal y si es una bateria se tiene en
   //cuenta que la potencia mínima puede ser negativa

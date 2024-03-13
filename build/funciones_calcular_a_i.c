@@ -397,7 +397,7 @@ int incluir_filas_terminos_baterias_terminal(informacion_procesada_t* informacio
      int*index_actual,OSQPInt*A_i,int* fila_actual_balance,informacion_carga_terminales_t* elementos_programados_terminales) {
 
   //Se carga el numero de elementos que se tienen en el terminal
-  int numero_elementos_terminales = elementos_programados_terminales->informacion_carga_terminales->numero_elementos_terminal;
+  int numero_elementos_terminales = elementos_programados_terminales->informacion_carga_terminales[terminal_actual].numero_elementos_terminal;
 
   //Variable que sirve para acceder a los diferentes elementos que tienen su carga programada en el terminal.
   int index_elemento_terminal = 0;

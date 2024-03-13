@@ -180,7 +180,6 @@ void calcular_objetivo_precio(informacion_procesada_t* informacion_sistema, OSQP
   //se plantea de la siguiente forma Cu,t * Pin grid,t -B,t * Pout grid,t
 
   for (int punto_actual = 1; punto_actual < numero_puntos_simulacion; punto_actual++) {
-
     obtener_precio_compra_venta(informacion_sistema, &precio_compra, &precio_venta, punto_actual, &index_actual_precio);
     //Cargo el delta de simulacion
     OSQPFloat delta_simulacion = informacion_sistema->informacion_puntos_simulacion.puntos_simulacion[punto_actual].delta;
@@ -202,17 +201,17 @@ int calcular_vector_q(informacion_procesada_t* informacion_sistema,OSQPFloat **q
   //Primero hay que dimensionar  el tamaño de la matriz/vector q
   *q = (OSQPFloat*)calloc(NUMERO_VARIABLES * numero_puntos_simulacion,sizeof(OSQPFloat));
 
-  if (q == NULL) {
+  if (*q == NULL) {
     printf("No se ha podido reservar memoria para la matriz/vector q\n");
     registrar_error("No se ha podido reservar memoria para la matriz/vector q\n", REGISTRO_ERRORES);
     return ERROR;
   }
 
   //Se incluye el objetivo lineal de los precios
-  calcular_objetivo_precio(informacion_sistema,q);
+  calcular_objetivo_precio(informacion_sistema,*q);
 
   //Se incluye el objetivo lineal de las cargas de las baterías
-  obtener_objetivos_carga_lineales(informacion_sistema, q, elementos_carga_programados_terminales);
+  obtener_objetivos_carga_lineales(informacion_sistema,*q, elementos_carga_programados_terminales);
    
   
   return EXITO;

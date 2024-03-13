@@ -69,7 +69,7 @@ void calcular_limite_superior_potencia_terminal(informacion_procesada_t* informa
   int numero_puntos_simulacion = informacion_sistema->informacion_puntos_simulacion.numero_puntos_simulacion;
 
   //Cargo la primera posicion a escribir en el vector u
-  int offset_potencia_terminal = NUMERO_VARIABLES * numero_puntos_simulacion + (numero_terminal) * numero_puntos_simulacion;
+  int offset_potencia_terminal = NUMERO_TERMINALES * numero_puntos_simulacion + (numero_terminal) * numero_puntos_simulacion;
 
   //Cargo una variable para poder acceder al array que almacena los puntos iniciales
   int index_elemento_carga = 0;
@@ -95,8 +95,9 @@ void calcular_limite_superior_potencia_terminal(informacion_procesada_t* informa
 
   if (index_elemento_carga < numero_elementos_terminal) {
 
-    for (int punto_actual = 0; punto_actual < numero_puntos_simulacion; punto_actual) {
+    for (int punto_actual = 0; punto_actual < numero_puntos_simulacion; punto_actual++) {
 
+      
       //Se carga el punto inicial y el punto final del elemento que tiene programada su carga ya sea vehículo o
       //batería
 
@@ -109,7 +110,7 @@ void calcular_limite_superior_potencia_terminal(informacion_procesada_t* informa
             u[offset_potencia_terminal + punto_actual] = 0.0;
           }
           else {
-            u[offset_potencia_terminal + punto_actual] = elementos_programados_carga_terminales->informacion_carga_terminales[numero_elementos_terminal].elementos_terminal[index_elemento_carga].potencia_maxima;
+            u[offset_potencia_terminal + punto_actual] = elementos_programados_carga_terminales->informacion_carga_terminales[numero_terminal].elementos_terminal[index_elemento_carga].potencia_maxima;
 
             //Se actualiza el index adicional si es necesario
             if (punto_final == punto_actual) {

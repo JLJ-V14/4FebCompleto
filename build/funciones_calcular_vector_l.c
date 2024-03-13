@@ -53,7 +53,7 @@ void calcular_limite_inferior_restricciones_potencia_terminales(informacion_proc
     int punto_final;
 
     //Se carga el numero de elementos que tienen su carga programada en el terminal actual
-    int numero_elementos_terminal = elementos_programados_carga_terminales->informacion_carga_terminales->numero_elementos_terminal;
+    int numero_elementos_terminal = elementos_programados_carga_terminales->informacion_carga_terminales[numero_terminal].numero_elementos_terminal;
 
 
 
@@ -63,18 +63,20 @@ void calcular_limite_inferior_restricciones_potencia_terminales(informacion_proc
     calcular_minima_potencia_baterias(informacion_sistema, numero_terminal, elementos_programados_carga_terminales);
 
 
+    //Se carga los puntos iniciales y finales del primer elemento que tiene su carga programada en el terminal
+    if (numero_elementos_terminal>index_elemento_terminal ) {
+      punto_inicial = elementos_programados_carga_terminales->informacion_carga_terminales[numero_terminal].elementos_terminal[index_elemento_terminal].punto_inicio;
+      punto_final = elementos_programados_carga_terminales->informacion_carga_terminales[numero_terminal].elementos_terminal[index_elemento_terminal].punto_final;
+    }
+
+
+
+
     for (int punto_simulacion = 0; punto_simulacion < numero_puntos_simulacion; punto_simulacion++) {
-
-      //Se carga los puntos iniciales y finales 
-      punto_inicial = elementos_programados_carga_terminales->informacion_carga_terminales[numero_terminal].elementos_terminal->punto_inicio;
-      punto_final = elementos_programados_carga_terminales->informacion_carga_terminales[numero_terminal].elementos_terminal->punto_final;
-
-      
 
       if (numero_elementos_terminal > index_elemento_terminal) {
 
         //Si el siguiente elemento del terminal es un vehículo se salta.
-       
 
           if (comprobar_rango(punto_simulacion, punto_inicial, punto_final) == true) {
 
@@ -88,6 +90,13 @@ void calcular_limite_inferior_restricciones_potencia_terminales(informacion_proc
               //Si el punto de simulacion coincide con el punto final del elmento que tiene su carga programada en el terminal
               if (punto_simulacion == punto_final) {
                 index_elemento_terminal++;
+
+                if (numero_elementos_terminal > index_elemento_terminal) {
+                  //Si hay mas elementos que tengan su carga programada en el terminal se actualiza las variables punto inicial y punto final
+                  punto_inicial = elementos_programados_carga_terminales->informacion_carga_terminales[numero_terminal].elementos_terminal[index_elemento_terminal].punto_inicio;
+                  punto_final = elementos_programados_carga_terminales->informacion_carga_terminales[numero_terminal].elementos_terminal[index_elemento_terminal].punto_final;
+                }
+
               }
             }
 
@@ -99,6 +108,13 @@ void calcular_limite_inferior_restricciones_potencia_terminales(informacion_proc
             else if (punto_simulacion == punto_final) {
               l[offset_potencia_terminal + numero_terminal * numero_puntos_simulacion + punto_simulacion] = elementos_programados_carga_terminales->informacion_carga_terminales[numero_terminal].elementos_terminal[index_elemento_terminal].potencia_minima;
               index_elemento_terminal++;
+
+              if (numero_elementos_terminal > index_elemento_terminal) {
+                //Se actualiza el punto inicial y el punto final 
+                punto_inicial = elementos_programados_carga_terminales->informacion_carga_terminales[numero_terminal].elementos_terminal[index_elemento_terminal].punto_inicio;
+                punto_final = elementos_programados_carga_terminales->informacion_carga_terminales[numero_terminal].elementos_terminal[index_elemento_terminal].punto_final;
+              }
+
             }
 
 

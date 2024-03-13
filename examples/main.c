@@ -169,6 +169,8 @@
     //Se muestra la informacion de los terminales.
     // mostrar_informacion_carga_terminales(&informacion_carga_terminales);
 
+
+    
     
     if (preparar_problema_optimizacion(&informacion_procesada,&problema_optimizacion,&informacion_carga_terminales) == ERROR){
       printf("Las matrices del problema de optimizacion no han sido calculadas correctamente\n");
@@ -176,6 +178,7 @@
       goto fin_programa;
     }
 
+    printf("Problema de optimizacion realizado\n");
     
 
     //Se muestra la informacion de las matrices para comprobar si se han escrito correctamente
@@ -185,7 +188,7 @@
       goto fin_programa;
     }
     
-
+    
     
     //Se resuelve el problema de optimizacion:
     if (!problema_optimizacion.bandera_salida)problema_optimizacion.bandera_salida = osqp_solve(problema_optimizacion.solver);

@@ -25,6 +25,7 @@ int preparar_problema_optimizacion(informacion_entrada_t* informacion_sistema,pr
   //Se procede a calcular el numero de restricciones que tiene el problema de optimizacion
   calcular_numero_restricciones(informacion_sistema,&(problema_optimizacion->numero_restricciones));
 
+  
   //Se procede a calcular las diferentes matrices del problema de optimizacion
   if (calcular_matrices(informacion_sistema,problema_optimizacion,programacion_carga_terminales) == ERROR) {
     printf("No se han podido calcular las matrices del problema de optimizacion\n");
@@ -39,7 +40,7 @@ int preparar_problema_optimizacion(informacion_entrada_t* informacion_sistema,pr
     registrar_error("No se ha podido configurar los ajustes del problema de optimizacion\n",REGISTRO_ERRORES);
     return ERROR;
   }
-
+  
   //Se procede a preparar el solver del problema de optimizacion.
   if (preparar_solver_optimizacion(&(problema_optimizacion->solver) == ERROR)) {
     printf("No se ha podido preparar el solver para el problema optimizacion\n");

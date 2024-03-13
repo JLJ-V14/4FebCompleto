@@ -7,10 +7,121 @@
 #include <stdbool.h>
 
 
+/*Este subprograma se utiliza para calcular el numero de objetivos del vehiculo en cuestión deben ser
+  añadidos en la matriz P*/
+
+static void calcular_numero_objetivos_carga_vehiculos(informacion_elemento_carga_t* elemento_carga,OSQPInt* P_nnz) {
+
+  //El numero de objetivos a añadir en la matriz P es diferente dependiendo de si el modo de carga es rapida o no
+
+  if (elemento_carga->carga_rapida == true) {
+
+    //Se carga el punto de inicio y el punto final en los cuales el vehiculo está conectado
+    int punto_inicio = elemento_carga->punto_inicio;
+    int punto_final = elemento_carga->punto_final;
+
+    //Para todos los puntos entre el punto final y el punto inicial (punto final incluido) deben ser añadidos
+    //en la matriz P
+    *P_nnz += (punto_final - punto_inicio);
+
+  }
+
+  else {
+    //Solo es necesario añadir el punto en el que el objetivo de carga tiene que estar satisfecho.
+    (*P_nnz)++;
+  }
+
+}
+
+static void calcular_numero_objetivos_carga_bateria(informacion_elemento_carga_t* elemento_carga,OSQPInt* P_nnz) {
+
+  //Si para la batería se considera el objetivo de carga es necesario añadir el estado de bateria para el punto
+  //objetivo a la matriz P.
+
+  if (elemento_carga->considerar_objetivo == true) {
+    (*P_nnz)++;
+  }
+
+
+}
+
+/*El siguiente subprograma se utiliza para calcular el numero de objetivos de carga que se tiene*/
+static void calcular_numero_objetivos_carga_terminal(informacion_carga_terminales_t* elementos_programados_carga_terminales,
+  OSQPInt* P_nnz, int numero_terminal) {
+
+  //Se carga el numero de elementos que tienen su carga programada en el terminal actual
+  int numero_elementos_terminal = elementos_programados_carga_terminales->informacion_carga_terminales[numero_terminal].numero_elementos_terminal;
+
+  
+
+  //Se itera por todos los elementos que tiene el terminal
+  for (int elemento_terminal = 0; elemento_terminal < numero_elementos_terminal; elemento_terminal++) {
+    
+    if (elementos_programados_carga_terminales->informacion_carga_terminales[numero_terminal].elementos_terminal[elemento_terminal].vehiculo == true) {
+      calcular_numero_objetivos_carga_vehiculos(&(elementos_programados_carga_terminales->informacion_carga_terminales[numero_terminal].elementos_terminal[elemento_terminal]), P_nnz);
+    }
+
+    else {
+      calcular_numero_objetivos_carga_bateria(&(elementos_programados_carga_terminales->informacion_carga_terminales[numero_terminal].elementos_terminal[elemento_terminal]), P_nnz);
+    }
+  }
+}
+
+/*El siguiente subprograma se utilizaz para dimensionar el tamaño de la matriz P */
+static int dimensionar_matriz_P(informacion_procesada_t* informacion_sistema,informacion_carga_terminales_t* elementos_programados_carga_terminales,
+  matriz_p_t* matriz_p) {
+  //Se inicializa el numero de elementos diferentes de 0
+  matriz_p->P_nnz = 0;
+  //Se itera por todos los terminales para ver cuantos elementos tienen su carga programada, así como el modo de
+  //carga para poder dimensionar la matriz P.
+
+  
+  for (int terminal = 0; terminal < NUMERO_TERMINALES; terminal++) {
+    calcular_numero_objetivos_carga_terminal(elementos_programados_carga_terminales, &(matriz_p->P_nnz),terminal);
+  }
+  
+  //Se dimensionan los vectores P_x y los vectores P_i
+  matriz_p->P_x = (OSQPFloat*)malloc((matriz_p->P_nnz) * sizeof(OSQPFloat));
+
+  if (matriz_p->P_x == NULL) {
+    printf("No se ha podido dimensionar el vector P_x correctamente\n");
+    registrar_error("No se ha podido dimensionar el vector P_x correctamente\n", REGISTRO_ERRORES);
+    return ERROR;
+  }
+
+  matriz_p->P_i = (OSQPInt*)malloc((matriz_p->P_nnz) * sizeof(OSQPInt));
+
+  if (matriz_p->P_i == NULL) {
+    printf("No se ha podido dimensionar el vector P_i correctamente\n");
+    registrar_error("No se ha podido dimensionar el vector P_i correctamente\n", REGISTRO_ERRORES);
+    return ERROR;
+  }
+
+  //Se dimensiona el vector P_p
+  //Se carga el numero de puntos de simulacion
+  int numero_puntos_simulacion = informacion_sistema->informacion_puntos_simulacion.numero_puntos_simulacion;
+  int dimension_vector_P_p = (NUMERO_VARIABLES)*numero_puntos_simulacion + 1;
+  //Se dimensiona el vector P_p
+  matriz_p->P_p = (OSQPInt*)malloc((dimension_vector_P_p) * sizeof(OSQPInt));
+
+  //Se comprueba que las reservas de memoria han sido exitosas
+  if (matriz_p->P_p == NULL) {
+    printf("No se ha podido dimensionar el vector P_p correctamente\n");
+    registrar_error("No se ha podido dimensionar el vector P_p correctamente\n", REGISTRO_ERRORES);
+    return ERROR;
+  }
+  return EXITO;
+}
+
+
+
+
+
+
 //Este subprograma se utiliza para incluir el objetivo cuadratico de carga de las baterias en la matriz p 
 void incluir_objetivo_cuadratico_bateria(informacion_procesada_t* informacion_sistema, matriz_p_t* matriz_p,
   informacion_carga_terminales_t* elementos_programados_carga_terminales, int numero_terminal,
-  int numero_elemento,int* index_actual,OSQPInt* P_nnz) {
+  int numero_elemento,int* index_actual) {
 
   //Se carga el numero de puntos de simulacion
   int numero_puntos_simulacion = informacion_sistema->informacion_puntos_simulacion.numero_puntos_simulacion;
@@ -26,7 +137,6 @@ void incluir_objetivo_cuadratico_bateria(informacion_procesada_t* informacion_si
     //Se carga el elemento diferente de 0, la fila en la que se encuentra y la columna donde se encuentra.
     matriz_p->P_x[(*index_actual)] = COEFICIENTE_CARGA;
     matriz_p->P_i[(*index_actual)] = fila_objetivo;
-    (*P_nnz)++;
     (*index_actual)++;
   }
 }
@@ -34,7 +144,7 @@ void incluir_objetivo_cuadratico_bateria(informacion_procesada_t* informacion_si
 //Este subprograma se utiliza para incluir el objetivo de carga de vehiculos en la matriz p
 void incluir_objetivo_cuadratico_vehiculo(informacion_procesada_t* informacion_sistema, matriz_p_t* matriz_p,
   informacion_carga_terminales_t* elementos_programados_carga_terminales,int numero_terminal, int numero_elemento,
-  int* index_actual,OSQPInt* P_nnz) {
+  int* index_actual) {
 
 
   //Se carga el numero de puntos de simulacion
@@ -49,6 +159,9 @@ void incluir_objetivo_cuadratico_vehiculo(informacion_procesada_t* informacion_s
   //Se carga el punto final en el que está presente el vehículo
   int punto_final = elementos_programados_carga_terminales->informacion_carga_terminales[numero_terminal].elementos_terminal[numero_elemento].punto_final;
 
+
+ 
+
   if (carga_rapida == true) {
 
     //Se carga el punto inicial y el punto final
@@ -60,16 +173,17 @@ void incluir_objetivo_cuadratico_vehiculo(informacion_procesada_t* informacion_s
       matriz_p->P_x[(*index_actual)] = COEFICIENTE_CARGA;
       matriz_p->P_i[(*index_actual)] = offset_fila_bateria_terminal + punto_actual;
       (*index_actual)++;
-      (*P_nnz)++;
+      
       
     }
   }
 
   else {
+    
     matriz_p->P_x[(*index_actual)] = COEFICIENTE_CARGA;
     matriz_p->P_i[(*index_actual)] = offset_fila_bateria_terminal + punto_final;
     (*index_actual)++;
-    (*P_nnz)++;
+    
   }
 }
 
@@ -81,27 +195,29 @@ void incluir_objetivo_cuadratico_vehiculo(informacion_procesada_t* informacion_s
 
 void calcular_objetivos_cuadraticos_carga_terminal(informacion_procesada_t* informacion_sistema, matriz_p_t* matriz_p,
   informacion_carga_terminales_t* elementos_programados_carga_terminales,int numero_terminal,int* index_actual,
-  int* fila_actual,OSQPInt* P_nnz) {
+  int* fila_actual) {
 
   //Se procede a iterar por todos los elementos que tienen su carga programada en el terminal
   //Primero se carga el numero de elementos que tienen su carga programada en el terminal
   int numero_elementos_terminal = elementos_programados_carga_terminales->informacion_carga_terminales[numero_terminal].numero_elementos_terminal;
 
 
-  for (int elemento_terminal = 0; elemento_terminal < numero_elementos_terminal; elemento_terminal++) {
+  
 
+  for (int elemento_terminal = 0; elemento_terminal < numero_elementos_terminal; elemento_terminal++) {
+    
     //La forma de incluir el objetivo cuadratico es diferente de si el elemento a añadir es un vehiculo o
     //una bateria.
     if (elementos_programados_carga_terminales->informacion_carga_terminales[numero_terminal].elementos_terminal[elemento_terminal].vehiculo == true) {
 
       incluir_objetivo_cuadratico_vehiculo(informacion_sistema, matriz_p, elementos_programados_carga_terminales,
-        numero_terminal,elemento_terminal,index_actual,P_nnz);
+        numero_terminal,elemento_terminal,index_actual);
     }
 
     else {
 
       incluir_objetivo_cuadratico_bateria(informacion_sistema, matriz_p, elementos_programados_carga_terminales,
-        numero_terminal,elemento_terminal, index_actual,P_nnz);
+        numero_terminal,elemento_terminal, index_actual);
     }
   }
  
@@ -110,7 +226,7 @@ void calcular_objetivos_cuadraticos_carga_terminal(informacion_procesada_t* info
 
 
 void calcular_objetivos_cuadraticos_carga(informacion_procesada_t* informacion_sistema, matriz_p_t* matriz_p,
-  informacion_carga_terminales_t* elementos_programados_carga_terminales,OSQPInt* P_nnz) {
+  informacion_carga_terminales_t* elementos_programados_carga_terminales) {
 
   //Se carga el numero de puntos de simulacion
   int numero_puntos_simulacion = informacion_sistema->informacion_puntos_simulacion.numero_puntos_simulacion;
@@ -123,7 +239,7 @@ void calcular_objetivos_cuadraticos_carga(informacion_procesada_t* informacion_s
   for (int numero_terminal = 0; numero_terminal < NUMERO_TERMINALES; numero_terminal++) {
 
     calcular_objetivos_cuadraticos_carga_terminal(informacion_sistema, matriz_p, elementos_programados_carga_terminales,
-    numero_terminal, &index_actual,&fila_actual,P_nnz);
+    numero_terminal, &index_actual,&fila_actual);
 
   }
 
@@ -380,8 +496,7 @@ int calcular_matriz_p(informacion_procesada_t* informacion_sistema,problema_opti
   //Se procede a calcular el numero de variables
   OSQPInt numero_variables = problema_optimizacion->numero_variables;
 
-  //Se define una variable para almacenar cuantos elementos diferentes de cero tiene la matriz P
-  OSQPInt P_nnz = 0;
+ 
 
   //Se carga el numero de variables
   
@@ -391,13 +506,20 @@ int calcular_matriz_p(informacion_procesada_t* informacion_sistema,problema_opti
     registrar_error("No se ha podido reservar memoria para la matriz P\n",REGISTRO_ERRORES);
     return ERROR;
   }
+ 
+  if (dimensionar_matriz_P(informacion_sistema, elementos_programados_carga_terminales, matriz_p) == ERROR) {
+    printf("No se ha podido dimensionar la matriz P correctamente\n");
+    registrar_error("No se ha podido dimensionar la matriz P correctamente\n", REGISTRO_ERRORES);
+    return ERROR;
+  }
+ 
 
-  calcular_objetivos_cuadraticos_carga(informacion_sistema,matriz_p,elementos_programados_carga_terminales,P_nnz);
+  calcular_objetivos_cuadraticos_carga(informacion_sistema,matriz_p,elementos_programados_carga_terminales);
   calcular_vector_P_p(informacion_sistema, matriz_p, elementos_programados_carga_terminales);
 
 
   //Se rellenan los datos de la matriz P
-  csc_set_data(matriz_p->P,numero_variables,numero_variables,P_nnz,matriz_p->P_x,matriz_p->P_i,matriz_p->P_p);
+  csc_set_data(matriz_p->P,numero_variables,numero_variables,matriz_p->P_nnz,matriz_p->P_x,matriz_p->P_i,matriz_p->P_p);
 
   return EXITO;
 }

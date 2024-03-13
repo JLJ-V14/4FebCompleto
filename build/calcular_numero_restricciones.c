@@ -67,14 +67,14 @@ void calcular_numero_terminos_ecuaciones_baterias(informacion_procesada_t* infor
 
     //Se añade el termino de potencia intercambiado por el terminal y el termino de la bateria del punto anterior
     //conectado al terminal
-    (*numero_terminos_adicionales) += 2 * (punto_final - punto_inicial - 1);
+    (*numero_terminos_adicionales) += 2 * (punto_final - punto_inicial);
   }
 
   for (int bateria = 0; bateria < numero_baterias; bateria++) {
 
     int punto_final = informacion_sistema->informacion_baterias.baterias[bateria].punto_final;
     int punto_inicial = informacion_sistema->informacion_baterias.baterias[bateria].punto_inicio;
-    (*numero_terminos_adicionales) += 2 * (punto_final - punto_inicial - 1);
+    (*numero_terminos_adicionales) += 2 * (punto_final - punto_inicial);
 
   }
 
