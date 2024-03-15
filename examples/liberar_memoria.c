@@ -144,8 +144,9 @@ void liberar_memoria_problema_optimizacion(problema_optimizacion_t* problema_opt
   // Se libera los contenidos de la matriz A
   if (problema_optimizacion->matriz_a.A)free(problema_optimizacion->matriz_a.A);
   if (problema_optimizacion->matriz_a.A_i)free(problema_optimizacion->matriz_a.A_i);
-  if (problema_optimizacion->matriz_a.A_x)free(problema_optimizacion->matriz_a.A_x);
   if (problema_optimizacion->matriz_a.A_p)free(problema_optimizacion->matriz_a.A_p);
+  if (problema_optimizacion->matriz_a.A_x)free(problema_optimizacion->matriz_a.A_x);
+  
 
   //Se liberan los contenidos de los vectores l y u
   if (problema_optimizacion->vector_l)free(problema_optimizacion->vector_l);

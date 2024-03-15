@@ -3,6 +3,7 @@
 #include "calcular_numero_variables.h"
 #include "calcular_numero_restricciones.h"
 #include "configurar_ajustes_optimizacion.h"
+#include "comprobar_informacion_matrices.h"
 #include "definiciones_globales.h"
 #include "mostrar_informacion_terminales.h"
 #include "preparar_solver_optimizacion.h"
@@ -34,20 +35,33 @@ int preparar_problema_optimizacion(informacion_entrada_t* informacion_sistema,pr
   }
 
   
-  /*
+  
   //Se procede a configurar los ajustes del problema de optimizacion
   if (configurar_ajustes_problema_optimizacion(&(problema_optimizacion->ajustes)) == ERROR) {
     printf("No se ha podido configurar los ajustes del problema de optimizacion\n");
     registrar_error("No se ha podido configurar los ajustes del problema de optimizacion\n",REGISTRO_ERRORES);
     return ERROR;
   }
-  
+
+
+  //Se muestra la informacion de las matrices para comprobar si se han escrito correctamente
+  if (imprimir_matrices_problema_optimizacion(&problema_optimizacion) == ERROR) {
+    printf("No se ha podido escribir las matrices del problema de optimización en el csv\n");
+    registrar_error("No se han podido escribir las matrices del problema de optimización en el csv\n", REGISTRO_ERRORES);
+    return ERROR;
+  }
+
+
+
+
+  /*
   //Se procede a preparar el solver del problema de optimizacion.
-  if (preparar_solver_optimizacion(&(problema_optimizacion->solver) == ERROR)) {
+  if (preparar_solver_optimizacion(&(problema_optimizacion->solver)) == ERROR) {
     printf("No se ha podido preparar el solver para el problema optimizacion\n");
     registrar_error("No se ha podido preparar el solver para el problema de optimizacion\n", REGISTRO_ERRORES);
     return ERROR;
   }
- */
+  */
+  /**/
   return EXITO;
 }

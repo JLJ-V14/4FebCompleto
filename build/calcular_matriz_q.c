@@ -207,9 +207,10 @@ int calcular_vector_q(informacion_procesada_t* informacion_sistema,OSQPFloat **q
     return ERROR;
   }
 
+  
   //Se incluye el objetivo lineal de los precios
   calcular_objetivo_precio(informacion_sistema,*q);
-
+  
   //Se incluye el objetivo lineal de las cargas de las baterías
   obtener_objetivos_carga_lineales(informacion_sistema,*q, elementos_carga_programados_terminales);
    

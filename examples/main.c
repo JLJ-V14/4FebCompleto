@@ -182,14 +182,8 @@
     printf("Problema de optimizacion realizado\n");
     
 
-    /*
-    //Se muestra la informacion de las matrices para comprobar si se han escrito correctamente
-    if (imprimir_matrices_problema_optimizacion(&problema_optimizacion) == ERROR){
-      printf("No se ha podido escribir las matrices del problema de optimización en el csv\n");
-      registrar_error("No se han podido escribir las matrices del problema de optimización en el csv\n", REGISTRO_ERRORES);
-      goto fin_programa;
-    }
-    */
+   
+ 
     
     /*
     //Se resuelve el problema de optimizacion:
@@ -220,7 +214,6 @@
     liberar_memoria_problema_optimizacion(&problema_optimizacion);
     printf("Memoria de informacion procesada liberada\n");
     liberar_memoria_csvs(&informacion_sistema);
-    liberar_memoria_problema_optimizacion(&problema_optimizacion);
 
     //Se devuelve el exitflag para saber si la optimizacion ha tenido exito
 
