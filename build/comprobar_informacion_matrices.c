@@ -30,15 +30,18 @@ int imprimir_vector_l(problema_optimizacion_t* informacion_problema_optimizacion
 
   if (archivo == NULL) {
     printf("Error abriendo el csv de comprobación del vector l\n");
+    registrar_error("Error abriendo el csv de comprobación del vector l\n", REGISTRO_ERRORES);
     return ERROR;
   }
 
   //Se calcula el numero de elementos del vector l
-  int numero_elementos_vector_l = (informacion_problema_optimizacion->numero_variables) + (informacion_problema_optimizacion->numero_restricciones);
+  int numero_elementos_vector_l = (informacion_problema_optimizacion->numero_restricciones);
+
+  printf("El numero de variables es %d\n", informacion_problema_optimizacion->numero_variables);
+  printf("El numero de restricciones es %d\n", informacion_problema_optimizacion->numero_restricciones);
 
   for (int elemento_actual = 0; elemento_actual < numero_elementos_vector_l; elemento_actual++) {
     fprintf(archivo, "%f\n", informacion_problema_optimizacion->vector_l[elemento_actual]);
-    fprintf(archivo, "\n");
   }
 
   fclose(archivo);
@@ -54,11 +57,12 @@ int imprimir_vector_u(problema_optimizacion_t* informacion_problema_optimizacion
   }
 
   //Se calcula el numero de elementos del vector u
-  int numero_elementos_vector_u = (informacion_problema_optimizacion->numero_variables + informacion_problema_optimizacion->numero_restricciones);
+  int numero_elementos_vector_u = (informacion_problema_optimizacion->numero_restricciones);
+
+
 
   for (int elemento_actual = 0; elemento_actual < numero_elementos_vector_u; elemento_actual++) {
     fprintf(archivo, "%f\n", informacion_problema_optimizacion->vector_u[elemento_actual]);
-    fprintf(archivo, "\n");
   }
 
   fclose(archivo);
@@ -126,6 +130,8 @@ int imprimir_matriz_A(problema_optimizacion_t* informacion_problema_optimizacion
 
 /*Este subprograma se utiliza para imprimir las diferentes matrices del problema de optimizacion*/
 int imprimir_matrices_problema_optimizacion(problema_optimizacion_t* informacion_problema_optimizacion) {
+
+  printf("Prueba de acceso al vector l %f\n", informacion_problema_optimizacion->vector_l[0]);
 
   if (imprimir_vector_l(informacion_problema_optimizacion) == ERROR) {
     printf("No se han podido imprimir los datos del vector l en el csv de comprobación\n");

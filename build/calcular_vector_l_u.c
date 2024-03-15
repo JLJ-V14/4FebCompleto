@@ -41,7 +41,7 @@ int calcular_vector_l_u(informacion_procesada_t* informacion_sistema, OSQPFloat*
   
   calcular_limite_inferior_restricciones_bateria(informacion_sistema, *l);
 
- 
+  
   
   calcular_limite_superior_restricciones_bateria(informacion_sistema, *u);
   
@@ -73,6 +73,8 @@ int calcular_vector_l_u(informacion_procesada_t* informacion_sistema, OSQPFloat*
    calcular_resultado_balance_fase(informacion_sistema, *l, *u);
    calcular_ecuaciones_balance_bateria(informacion_sistema, *l, *u, elementos_programados_carga_terminal);
    calcular_resto_ecuaciones(informacion_sistema, *l, *u);
+
+   
   /**/
   return EXITO;
 }

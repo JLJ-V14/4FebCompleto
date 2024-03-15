@@ -46,6 +46,6 @@ int calcular_matrices(informacion_procesada_t *informacion_sistema, problema_opt
     return ERROR;
   }
   /* */
-
+  
   return EXITO;
 }

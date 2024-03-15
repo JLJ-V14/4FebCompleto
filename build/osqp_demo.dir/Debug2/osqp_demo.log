@@ -1,12 +1,42 @@
-﻿  main.c
-..\examples\main.c(175,40): warning C4133: 'function': incompatible types - from 'informacion_procesada_t *' to 'informacion_entrada_t *'
-  preparar_problema_optimizacion.c
-preparar_problema_optimizacion.c(20,33): warning C4133: 'function': incompatible types - from 'informacion_entrada_t *' to 'informacion_procesada_t *'
-preparar_problema_optimizacion.c(27,33): warning C4133: 'function': incompatible types - from 'informacion_entrada_t *' to 'informacion_procesada_t *'
-preparar_problema_optimizacion.c(31,25): warning C4133: 'function': incompatible types - from 'informacion_entrada_t *' to 'informacion_procesada_t *'
-preparar_problema_optimizacion.c(48,47): warning C4047: 'function': 'problema_optimizacion_t *' differs in levels of indirection from 'problema_optimizacion_t **'
-preparar_problema_optimizacion.c(48,47): warning C4024: 'imprimir_matrices_problema_optimizacion': different types for formal and actual parameter 1
-preparar_problema_optimizacion.c(58,36): warning C4047: 'function': 'problema_optimizacion_t *' differs in levels of indirection from 'OSQPSolver **'
-preparar_problema_optimizacion.c(58,36): warning C4024: 'preparar_solver_optimizacion': different types for formal and actual parameter 1
-  Generating Code...
+﻿  comprobar_informacion_matrices.c
+comprobar_informacion_matrices.c(40,10): warning C4477: 'printf' : format string '%d' requires an argument of type 'int', but variadic argument 1 has type 'OSQPInt'
+comprobar_informacion_matrices.c(40,10): message : consider using '%lld' in the format string
+comprobar_informacion_matrices.c(40,10): message : consider using '%Id' in the format string
+comprobar_informacion_matrices.c(40,10): message : consider using '%I64d' in the format string
+comprobar_informacion_matrices.c(41,10): warning C4477: 'printf' : format string '%d' requires an argument of type 'int', but variadic argument 1 has type 'OSQPInt'
+comprobar_informacion_matrices.c(41,10): message : consider using '%lld' in the format string
+comprobar_informacion_matrices.c(41,10): message : consider using '%Id' in the format string
+comprobar_informacion_matrices.c(41,10): message : consider using '%I64d' in the format string
+comprobar_informacion_matrices.c(87,20): warning C4477: 'fprintf' : format string '%d' requires an argument of type 'int', but variadic argument 1 has type 'OSQPInt'
+comprobar_informacion_matrices.c(87,20): message : consider using '%lld' in the format string
+comprobar_informacion_matrices.c(87,20): message : consider using '%Id' in the format string
+comprobar_informacion_matrices.c(87,20): message : consider using '%I64d' in the format string
+comprobar_informacion_matrices.c(87,20): warning C4477: 'fprintf' : format string '%d' requires an argument of type 'int', but variadic argument 2 has type 'OSQPInt'
+comprobar_informacion_matrices.c(87,20): message : consider using '%lld' in the format string
+comprobar_informacion_matrices.c(87,20): message : consider using '%Id' in the format string
+comprobar_informacion_matrices.c(87,20): message : consider using '%I64d' in the format string
+comprobar_informacion_matrices.c(94,22): warning C4477: 'fprintf' : format string '%d' requires an argument of type 'int', but variadic argument 1 has type 'OSQPInt'
+comprobar_informacion_matrices.c(94,22): message : consider using '%lld' in the format string
+comprobar_informacion_matrices.c(94,22): message : consider using '%Id' in the format string
+comprobar_informacion_matrices.c(94,22): message : consider using '%I64d' in the format string
+comprobar_informacion_matrices.c(94,22): warning C4477: 'fprintf' : format string '%d' requires an argument of type 'int', but variadic argument 2 has type 'OSQPInt'
+comprobar_informacion_matrices.c(94,22): message : consider using '%lld' in the format string
+comprobar_informacion_matrices.c(94,22): message : consider using '%Id' in the format string
+comprobar_informacion_matrices.c(94,22): message : consider using '%I64d' in the format string
+comprobar_informacion_matrices.c(115,20): warning C4477: 'fprintf' : format string '%d' requires an argument of type 'int', but variadic argument 1 has type 'OSQPInt'
+comprobar_informacion_matrices.c(115,20): message : consider using '%lld' in the format string
+comprobar_informacion_matrices.c(115,20): message : consider using '%Id' in the format string
+comprobar_informacion_matrices.c(115,20): message : consider using '%I64d' in the format string
+comprobar_informacion_matrices.c(115,20): warning C4477: 'fprintf' : format string '%d' requires an argument of type 'int', but variadic argument 2 has type 'OSQPInt'
+comprobar_informacion_matrices.c(115,20): message : consider using '%lld' in the format string
+comprobar_informacion_matrices.c(115,20): message : consider using '%Id' in the format string
+comprobar_informacion_matrices.c(115,20): message : consider using '%I64d' in the format string
+comprobar_informacion_matrices.c(122,22): warning C4477: 'fprintf' : format string '%d' requires an argument of type 'int', but variadic argument 1 has type 'OSQPInt'
+comprobar_informacion_matrices.c(122,22): message : consider using '%lld' in the format string
+comprobar_informacion_matrices.c(122,22): message : consider using '%Id' in the format string
+comprobar_informacion_matrices.c(122,22): message : consider using '%I64d' in the format string
+comprobar_informacion_matrices.c(122,22): warning C4477: 'fprintf' : format string '%d' requires an argument of type 'int', but variadic argument 2 has type 'OSQPInt'
+comprobar_informacion_matrices.c(122,22): message : consider using '%lld' in the format string
+comprobar_informacion_matrices.c(122,22): message : consider using '%Id' in the format string
+comprobar_informacion_matrices.c(122,22): message : consider using '%I64d' in the format string
   osqp_demo.vcxproj -> F:\osqp1feb\osqp-1.0.0.beta1\build\out\osqp_demo.exe

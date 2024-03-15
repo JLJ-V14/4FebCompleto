@@ -113,9 +113,20 @@ int calcular_numero_restricciones(informacion_procesada_t* informacion_sistema,O
   // 
   //El numero total de restricciones (fijas) = 12 + 12 + 1 + 1 + 1 + 3 + 3 + 3 + 3 + 1 + 3 + 1 + 1 + 1 = 46
   //Hay que multiplica el número total de restricciones * el número de puntos simulación
-   OSQPInt numero_restricciones_fijas = 46 * (informacion_sistema->informacion_puntos_simulacion.numero_puntos_simulacion);
+  // OSQPInt numero_restricciones_fijas = 46 * (informacion_sistema->informacion_puntos_simulacion.numero_puntos_simulacion);
    //Se pasa a calcular el numero de ecuaciones de modelado del estado de la batería que existen
-   OSQPInt numero_restricciones_variables = 0;
-   calcular_numero_ecuaciones_estado_bateria(informacion_sistema, &numero_restricciones_variables);
-   *numero_restricciones = numero_restricciones_fijas + numero_restricciones_variables;
+  // OSQPInt numero_restricciones_variables = 0;
+
+
+  // calcular_numero_ecuaciones_estado_bateria(informacion_sistema, &numero_restricciones_variables);
+   //*numero_restricciones = numero_restricciones_fijas + numero_restricciones_variables;
+
+
+  //El numero de restricciones que se tiene es basicamente el numero de variables que se tienen + el numero
+  //de inecuaciones que se tienen esto es ( 36 + 22 ) * numero_puntos_simulacion
+  int numero_puntos_simulacion = informacion_sistema->informacion_puntos_simulacion.numero_puntos_simulacion;
+
+  *numero_restricciones = 58 * numero_puntos_simulacion;
+  
+
 }

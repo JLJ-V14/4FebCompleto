@@ -17,7 +17,7 @@ int preparar_problema_optimizacion(informacion_entrada_t* informacion_sistema,pr
   informacion_carga_terminales_t* programacion_carga_terminales) {
 
   //Se procede a calcular el numero de variables que tiene el problema de optimizacion
-  if (calcular_numero_variables(informacion_sistema, &(problema_optimizacion->numero_variables)) == ERROR) {
+  if ((calcular_numero_variables(informacion_sistema, &(problema_optimizacion->numero_variables))) == ERROR) {
     printf("No se ha podido calcular el numero de variables que tiene el problema de optimizacion\n");
     registrar_error("No se ha podido calcular el numero de variables que tiene el problema de optimizacion\n", REGISTRO_ERRORES);
     return ERROR;
@@ -28,7 +28,7 @@ int preparar_problema_optimizacion(informacion_entrada_t* informacion_sistema,pr
 
   
   //Se procede a calcular las diferentes matrices del problema de optimizacion
-  if (calcular_matrices(informacion_sistema,problema_optimizacion,programacion_carga_terminales) == ERROR) {
+  if ((calcular_matrices(informacion_sistema,problema_optimizacion,programacion_carga_terminales)) == ERROR) {
     printf("No se han podido calcular las matrices del problema de optimizacion\n");
     registrar_error("No se han podido calcular las matrices del problema de optimizacion\n", REGISTRO_ERRORES);
     return ERROR;
@@ -37,15 +37,16 @@ int preparar_problema_optimizacion(informacion_entrada_t* informacion_sistema,pr
   
   
   //Se procede a configurar los ajustes del problema de optimizacion
-  if (configurar_ajustes_problema_optimizacion(&(problema_optimizacion->ajustes)) == ERROR) {
+  if ((configurar_ajustes_problema_optimizacion(&(problema_optimizacion->ajustes))) == ERROR) {
     printf("No se ha podido configurar los ajustes del problema de optimizacion\n");
     registrar_error("No se ha podido configurar los ajustes del problema de optimizacion\n",REGISTRO_ERRORES);
     return ERROR;
   }
 
+  printf("Prueba de acceso al vector l %f\n", problema_optimizacion->vector_l[0]);
 
   //Se muestra la informacion de las matrices para comprobar si se han escrito correctamente
-  if (imprimir_matrices_problema_optimizacion(&problema_optimizacion) == ERROR) {
+  if ((imprimir_matrices_problema_optimizacion((problema_optimizacion))) == ERROR) {
     printf("No se ha podido escribir las matrices del problema de optimización en el csv\n");
     registrar_error("No se han podido escribir las matrices del problema de optimización en el csv\n", REGISTRO_ERRORES);
     return ERROR;
