@@ -24,8 +24,12 @@ int calcular_vector_A_x(informacion_procesada_t* informacion_sistema, OSQPFloat*
 
   
 
-
+  
   *A_x = (OSQPFloat*) malloc(A_nnz * sizeof(OSQPFloat));
+
+
+  printf("El numero de terminos diferentes de 0 es %d\n", A_nnz);
+
 
   if (*A_x == NULL) {
     printf("No se ha podido reservar memoria para el vector A_x\n");
@@ -33,6 +37,8 @@ int calcular_vector_A_x(informacion_procesada_t* informacion_sistema, OSQPFloat*
     return ERROR;
   }
 
+
+  /*
   //Se llama a los subprogramas para incluir los diferentes términos en el vector A_x
   //Incluyo una variable para saber donde situar los valores del vector A_x, es la posicion del vector por el cual
   //se están añadiendo términos.
@@ -50,7 +56,8 @@ int calcular_vector_A_x(informacion_procesada_t* informacion_sistema, OSQPFloat*
   incluir_terminos_potencia_red_fase(informacion_sistema, *A_x, &index_actual);
   incluir_terminos_potencia_entrada_fase(informacion_sistema, *A_x, &index_actual);
   incluir_terminos_potencia_salida_fase(informacion_sistema,*A_x,&index_actual);
-  
+  */
+
   return EXITO;
 }
 
@@ -212,15 +219,15 @@ int calcular_matriz_a(informacion_procesada_t * informacion_sistema, problema_op
 
   calcular_numero_terminos(informacion_sistema, &A_nnz);
 
-  
+ 
   //Se procede a calcular el vector A_x
   if (calcular_vector_A_x(informacion_sistema, &(matriz_a->A_x),A_nnz,programacion_carga_terminales) == ERROR) {
     printf("No se ha podido calcular el vector A_x\n");
     registrar_error("No se ha podido calcular el vector A_x\n", REGISTRO_ERRORES);
     return ERROR;
   }
-
- 
+  
+ /*
 
   //Se procede a calcular el vector A_i
   if (calcular_vector_A_i(informacion_sistema, &(matriz_a->A_i),A_nnz,programacion_carga_terminales) == ERROR) {
@@ -243,5 +250,6 @@ int calcular_matriz_a(informacion_procesada_t * informacion_sistema, problema_op
   }
   //Se rellenan los datos de las matrices
   csc_set_data(matriz_a->A, m, n, A_nnz, matriz_a->A_x, matriz_a->A_i, matriz_a->A_p);
+  */
   return EXITO;
 }

@@ -34,19 +34,25 @@ int calcular_vector_l_u(informacion_procesada_t* informacion_sistema, OSQPFloat*
 
   //Se procede a calcular los terminos de los vectores l y u
   //Primero se añaden los terminos de las restricciones de borde de las baterias
-  calcular_limite_inferior_restricciones_bateria(informacion_sistema, *l, *u);
-  calcular_limite_superior_restricciones_bateria(informacion_sistema, *l, *u);
+  calcular_limite_inferior_restricciones_bateria(informacion_sistema, *l);
+
+
+  /*
+  calcular_limite_superior_restricciones_bateria(informacion_sistema, *u);
 
   /*A continuación se añaden los terminos de las restricciones inferiores de las potencias que pueden intercambiar
     los terminales -> */
 
-   calcular_limite_inferior_restricciones_potencia_terminales(informacion_sistema, *l,
-   elementos_programados_carga_terminal);
+  // calcular_limite_inferior_restricciones_potencia_terminales(informacion_sistema, *l, elementos_programados_carga_terminal);
    
 
-  /*Es necesario tener en cuenta que si hay una bateria conectado al terminal los valores de la potencia que pueden
-    intercambiar el terminal es negativo*/
+  //Es necesario tener en cuenta que si hay una bateria conectado al terminal los valores de la potencia que pueden
+   //intercambiar el terminal es negativo
+
+   /*
   calcular_limites_superior_potencia_terminales(informacion_sistema, *u, elementos_programados_carga_terminal);
+
+  
   calcular_restricciones_borde_inferiores_potencia_red(informacion_sistema,*l);
   calcular_restricciones_superiores_borde_potencias_red(informacion_sistema, *u);
   calcular_limite_inferior_borde_potencia_red_fases(informacion_sistema, *l);
@@ -55,11 +61,13 @@ int calcular_vector_l_u(informacion_procesada_t* informacion_sistema, OSQPFloat*
   calcular_restricciones_superiores_potencia_entrada_fase(informacion_sistema,*u);
   calcular_limite_inferior_borde_potencia_red_salida_fase(informacion_sistema, *l);
   calcular_restricciones_borde_superiores_potencia_salida_fase(informacion_sistema,*u);
-
+  */
   //Se pasa a llamar a los subprogramas que sirven para calcular el resultado de la ecuación del balance de fase
 
+   /*
   calcular_resultado_balance_fase(informacion_sistema, *l, *u);
   calcular_ecuaciones_balance_bateria(informacion_sistema, *l, *u, elementos_programados_carga_terminal);
   calcular_resto_ecuaciones(informacion_sistema, *l, *u);
+  */
   return EXITO;
 }

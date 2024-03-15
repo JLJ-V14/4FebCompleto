@@ -34,6 +34,7 @@ int preparar_problema_optimizacion(informacion_entrada_t* informacion_sistema,pr
   }
 
   
+  /*
   //Se procede a configurar los ajustes del problema de optimizacion
   if (configurar_ajustes_problema_optimizacion(&(problema_optimizacion->ajustes)) == ERROR) {
     printf("No se ha podido configurar los ajustes del problema de optimizacion\n");
@@ -47,6 +48,6 @@ int preparar_problema_optimizacion(informacion_entrada_t* informacion_sistema,pr
     registrar_error("No se ha podido preparar el solver para el problema de optimizacion\n", REGISTRO_ERRORES);
     return ERROR;
   }
- 
+ */
   return EXITO;
 }

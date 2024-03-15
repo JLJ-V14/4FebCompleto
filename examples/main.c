@@ -171,25 +171,27 @@
 
 
     
-    
+   
     if (preparar_problema_optimizacion(&informacion_procesada,&problema_optimizacion,&informacion_carga_terminales) == ERROR){
       printf("Las matrices del problema de optimizacion no han sido calculadas correctamente\n");
       registrar_error("Las matrices del problema de optimización no han sido calculadas correctamente\n", REGISTRO_ERRORES);
       goto fin_programa;
     }
+    
 
     printf("Problema de optimizacion realizado\n");
     
 
+    /*
     //Se muestra la informacion de las matrices para comprobar si se han escrito correctamente
     if (imprimir_matrices_problema_optimizacion(&problema_optimizacion) == ERROR){
       printf("No se ha podido escribir las matrices del problema de optimización en el csv\n");
       registrar_error("No se han podido escribir las matrices del problema de optimización en el csv\n", REGISTRO_ERRORES);
       goto fin_programa;
     }
+    */
     
-    
-    
+    /*
     //Se resuelve el problema de optimizacion:
     if (!problema_optimizacion.bandera_salida)problema_optimizacion.bandera_salida = osqp_solve(problema_optimizacion.solver);
 
@@ -197,8 +199,8 @@
     if (!problema_optimizacion.bandera_salida) {
 
     }
-
-
+    */
+    /*
     if ((int)problema_optimizacion.bandera_salida) {
       printf("La optimizacion no ha tenido éxito\n");
       registrar_error("La optimizacion no ha tenido éxito", REGISTRO_ERRORES);
@@ -207,7 +209,7 @@
       printf("La optimizacion ha sido éxito\n");
       extraer_soluciones_problema_optimizacion(&informacion_sistema,&problema_optimizacion);
     }
-
+    */
     
     fin_programa:
     
@@ -224,7 +226,7 @@
 
    
 
-    return(int)problema_optimizacion.bandera_salida;
+    // return(int)problema_optimizacion.bandera_salida;
   }
 
 
