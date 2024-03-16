@@ -28,7 +28,7 @@ int calcular_vector_A_x(informacion_procesada_t* informacion_sistema, OSQPFloat*
   *A_x = (OSQPFloat*) malloc(A_nnz * sizeof(OSQPFloat));
 
 
-  printf("El numero de terminos diferentes de 0 es %d\n", A_nnz);
+  
 
 
   if (*A_x == NULL) {
@@ -245,8 +245,9 @@ int calcular_matriz_a(informacion_procesada_t * informacion_sistema, problema_op
   OSQPInt A_nnz = 0;
 
   calcular_numero_terminos(informacion_sistema, &A_nnz);
-
- 
+  matriz_a->A_nnz = A_nnz;
+  
+  
   //Se procede a calcular el vector A_x
   if (calcular_vector_A_x(informacion_sistema, &(matriz_a->A_x),A_nnz,programacion_carga_terminales) == ERROR) {
     printf("No se ha podido calcular el vector A_x\n");
@@ -254,7 +255,7 @@ int calcular_matriz_a(informacion_procesada_t * informacion_sistema, problema_op
     return ERROR;
   }
   
- 
+  
 
   //Se procede a calcular el vector A_i
   if (calcular_vector_A_i(informacion_sistema, &(matriz_a->A_i),A_nnz,programacion_carga_terminales) == ERROR) {

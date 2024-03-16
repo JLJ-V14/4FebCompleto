@@ -63,7 +63,7 @@
 
   int main() {
     
-  
+    
     // Se crean variables para almacenar los datos de los CSV
     // Se definen las variables donde va a ir contenida la informacion del sistema
     

@@ -90,7 +90,11 @@ void calcular_resultado_balance_fase(informacion_procesada_t* informacion_sistem
     l[offset_balance_fase_R + punto_simulacion] = (OSQPFloat)0.0;
     l[offset_balance_fase_S + punto_simulacion] = (OSQPFloat)0.0;
     l[offset_balance_fase_T + punto_simulacion] = (OSQPFloat)0.0;
+    u[offset_balance_fase_R + punto_simulacion] = (OSQPFloat)0.0;
+    u[offset_balance_fase_S + punto_simulacion] = (OSQPFloat)0.0;
+    u[offset_balance_fase_T + punto_simulacion] = (OSQPFloat)0.0;
   }
+ 
 }
 
 void calcular_ecuacion_balance_terminal(informacion_procesada_t* informacion_sistema, OSQPFloat* l, OSQPFloat* u,
@@ -111,7 +115,7 @@ void calcular_ecuacion_balance_terminal(informacion_procesada_t* informacion_sis
   int numero_puntos_simulacion = informacion_sistema->informacion_puntos_simulacion.numero_puntos_simulacion;
 
   //Se define una variable para acceder a las posiciones correctas del vector l y u
-  int offset_ecuacion_balance_bateria = (NUMERO_VARIABLES + (numero_terminal))*numero_puntos_simulacion;
+  int offset_ecuacion_balance_bateria = (NUMERO_VARIABLES + NUMERO_FASES + numero_terminal)*numero_puntos_simulacion;
 
   if (index_elementos_adicionales < numero_elementos_terminales) {
 
@@ -121,14 +125,20 @@ void calcular_ecuacion_balance_terminal(informacion_procesada_t* informacion_sis
     int punto_inicial = elementos_carga_terminales->informacion_carga_terminales[numero_terminal].elementos_terminal[index_elementos_adicionales].punto_inicio;
    
 
-    for (int punto_simulacion = 0; punto_simulacion < numero_elementos_terminales; punto_simulacion++) {
+    for (int punto_simulacion = 0; punto_simulacion < numero_puntos_simulacion; punto_simulacion++) {
 
       if (index_elementos_adicionales < numero_elementos_terminales) {
 
         if (punto_simulacion == punto_inicial) {
+          
           l[offset_ecuacion_balance_bateria + punto_simulacion] = elementos_carga_terminales->informacion_carga_terminales[numero_terminal].elementos_terminal[index_elementos_adicionales].bateria_inicial;
           u[offset_ecuacion_balance_bateria + punto_simulacion] = elementos_carga_terminales->informacion_carga_terminales[numero_terminal].elementos_terminal[index_elementos_adicionales].bateria_inicial;
           index_elementos_adicionales++;
+
+          //Se actualiza el punto inicial
+          if (index_elementos_adicionales < numero_elementos_terminales) {
+            punto_inicial = elementos_carga_terminales->informacion_carga_terminales[numero_terminal].elementos_terminal[index_elementos_adicionales].punto_inicio;
+          }
         }
 
         else {
@@ -144,11 +154,15 @@ void calcular_ecuacion_balance_terminal(informacion_procesada_t* informacion_sis
 
     }
   }
-  for (int punto_simulacion = 0; punto_simulacion < numero_puntos_simulacion; punto_simulacion++) {
+  //Si no hay ningún elemento que tengan su carga programada simplemente es añadir 0 a ambos lados de la
+  //inecuación
+  else {
+    for (int punto_simulacion = 0; punto_simulacion < numero_puntos_simulacion; punto_simulacion++) {
 
-    l[offset_ecuacion_balance_bateria + punto_simulacion] = (OSQPFloat)0.0;
-    u[offset_ecuacion_balance_bateria + punto_simulacion] = (OSQPFloat)0.0;
-  
+      l[offset_ecuacion_balance_bateria + punto_simulacion] = (OSQPFloat)0.0;
+      u[offset_ecuacion_balance_bateria + punto_simulacion] = (OSQPFloat)0.0;
+
+    }
   }
     }
   
@@ -158,10 +172,7 @@ void calcular_ecuacion_balance_terminal(informacion_procesada_t* informacion_sis
 void calcular_ecuaciones_balance_bateria(informacion_procesada_t* informacion_sistema, OSQPFloat* l, OSQPFloat* u,
   informacion_carga_terminales_t* elementos_carga_terminal) {
 
-  //Cargo el numero de puntos de simulacion  que hay en la simulacion
-  int numero_puntos_simulacion = informacion_sistema->informacion_puntos_simulacion.numero_puntos_simulacion;
-  int offset_ecuaciones = (NUMERO_VARIABLES + 3) * numero_puntos_simulacion;
-
+ 
 
   for (int numero_terminal = 0; numero_terminal < NUMERO_TERMINALES; numero_terminal++) {
     calcular_ecuacion_balance_terminal(informacion_sistema, l, u, numero_terminal, elementos_carga_terminal);

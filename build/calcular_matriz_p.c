@@ -80,7 +80,7 @@ static int dimensionar_matriz_P(informacion_procesada_t* informacion_sistema,inf
     calcular_numero_objetivos_carga_terminal(elementos_programados_carga_terminales, &(matriz_p->P_nnz),terminal);
   }
 
-  printf("El numero de términos diferentes de 0 en la matriz P es %d\n", matriz_p->P_nnz);
+  
 
 
   //Se dimensionan los vectores P_x y los vectores P_i
@@ -105,7 +105,7 @@ static int dimensionar_matriz_P(informacion_procesada_t* informacion_sistema,inf
   int numero_puntos_simulacion = informacion_sistema->informacion_puntos_simulacion.numero_puntos_simulacion;
   int dimension_vector_P_p = (NUMERO_VARIABLES)*numero_puntos_simulacion + 1;
 
-  printf("La dimension del vector P_p es %d\n", dimension_vector_P_p);
+ 
 
   //Se dimensiona el vector P_p
   matriz_p->P_p = (OSQPInt*)malloc((dimension_vector_P_p) * sizeof(OSQPInt));
@@ -530,7 +530,7 @@ int calcular_matriz_p(informacion_procesada_t* informacion_sistema,problema_opti
     registrar_error("No se ha podido reservar memoria para la matriz P\n",REGISTRO_ERRORES);
     return ERROR;
   }
-
+ 
   
   if (dimensionar_matriz_P(informacion_sistema, elementos_programados_carga_terminales, matriz_p) == ERROR) {
     printf("No se ha podido dimensionar la matriz P correctamente\n");

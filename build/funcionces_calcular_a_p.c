@@ -253,10 +253,14 @@ int incluir_columnas_bateria_terminal(informacion_procesada_t* informacion_siste
   int index_elemento_carga = 0;
 
   //Creo una variable para almacenar cuantos elementos se tienen en el terminal
-  int numero_elementos_terminales = 0;
+  int numero_elementos_terminales = programacion_elementos_carga_terminal->informacion_carga_terminales[terminal_actual].numero_elementos_terminal;
+
+
+
 
 
   if (numero_elementos_terminales > 0) {
+    printf("Entra aquí\n");
 
     //Se carga el punto inicial y el punto final del primer elemento a poner en la carga
     int punto_inicial = programacion_elementos_carga_terminal->informacion_carga_terminales[terminal_actual].elementos_terminal[index_elemento_carga].punto_inicio;
@@ -270,29 +274,31 @@ int incluir_columnas_bateria_terminal(informacion_procesada_t* informacion_siste
         if (comprobar_rango(punto_actual, punto_inicial, punto_final) == true) {
 
           if (punto_actual != punto_final) {
-            (*comienzo_columna_actual) = (*comienzo_columna_actual) + 3;
+            printf("Entra aquí\n");
             A_p[(*index_actual)] = (*comienzo_columna_actual);
+            (*comienzo_columna_actual) = (*comienzo_columna_actual) + 3;
             (*index_actual)++;
           }
           //si es el ultimo punto de simulacion en el que está presente la batería o vehículo 
         else {
-          (*comienzo_columna_actual) = (*comienzo_columna_actual) + 2;
           A_p[(*index_actual)] = (*comienzo_columna_actual);
+          (*comienzo_columna_actual) = (*comienzo_columna_actual) + 2;
           (*index_actual)++;
+          index_elemento_carga++;
 
           }
         }
 
         else {
           A_p[(*index_actual)] = (*comienzo_columna_actual);
-          (*comienzo_columna_actual)++;
+          (*comienzo_columna_actual) = (*comienzo_columna_actual) + 2;
           (*index_actual)++;
         }
       }
       else {
        
         A_p[(*index_actual)] = (*comienzo_columna_actual);
-        (*comienzo_columna_actual)++;
+        *comienzo_columna_actual = (*comienzo_columna_actual) + 2;
         (*index_actual)++;
       }
     }
@@ -301,9 +307,10 @@ int incluir_columnas_bateria_terminal(informacion_procesada_t* informacion_siste
   //Si solo hay restricciones de borde, cada elemento en la matriz A_x, corresponde a una nueva
   //columa, 
   else {
+    printf("Entru\n");
     for (int i = 0; i < numero_puntos_simulacion; i++) {
       A_p[(*index_actual)] = (*comienzo_columna_actual);
-      (*comienzo_columna_actual)++;
+      (*comienzo_columna_actual) = (*comienzo_columna_actual) + 2;
       (*index_actual)++;
     }
   }

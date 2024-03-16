@@ -87,20 +87,22 @@ void obtener_objetivos_carga(informacion_procesada_t* informacion_sistema,int nu
   int numero_elementos_terminal = elementos_programados_carga_terminales->informacion_carga_terminales[numero_terminal].numero_elementos_terminal;
 
 
+
+
   //Se itera por todos los elementos que tiene el terminal 
   for (int elemento_actual = 0; elemento_actual < numero_elementos_terminal; elemento_actual++) {
 
     //Se llama al subprograma que se utiliza para escribir los objetivos lineales de carga de los vehiculos en el vector q
     //si el elemento siguiente que tiene su carga programada en el terminal es un vehículo.
 
-    if (elementos_programados_carga_terminales->informacion_carga_terminales[numero_terminal].elementos_terminal[numero_terminal].vehiculo == true) {
+    if (elementos_programados_carga_terminales->informacion_carga_terminales[numero_terminal].elementos_terminal[elemento_actual].vehiculo == true) {
 
       escribir_objetivo_carga_vehiculos_terminal(informacion_sistema, q, numero_terminal,elemento_actual,
         elementos_programados_carga_terminales);
     }
 
     //Si no se llama al subprograma que escribe el objetivo de carga lineal de las baterias en el vector q
-    if (elementos_programados_carga_terminales->informacion_carga_terminales[numero_terminal].elementos_terminal[numero_terminal].bateria == true) {
+    else if (elementos_programados_carga_terminales->informacion_carga_terminales[numero_terminal].elementos_terminal[elemento_actual].bateria == true) {
 
       escribir_objetivos_carga_baterias_terminal(informacion_sistema, q, numero_terminal,elemento_actual,
          elementos_programados_carga_terminales);

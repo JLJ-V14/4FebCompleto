@@ -164,16 +164,16 @@ void calcular_restricciones_superiores_borde_potencias_red(informacion_procesada
 
 
 
-  printf("El numero de puntos de simulacion es %d", numero_puntos_simulacion);
+  
   int offset_potencia_red = (NUMERO_TERMINALES * 2) * numero_puntos_simulacion;
   int offset_potencia_entrada_red = offset_potencia_red + numero_puntos_simulacion;
-  int offset_potencia_salida_red  = offset_potencia_red + numero_puntos_simulacion;
+  int offset_potencia_salida_red  = offset_potencia_entrada_red + numero_puntos_simulacion;
 
 
   //Cargo los limites máximos de potencia que puede intercambiar la red con el sistema
   OSQPFloat potencia_maxima_red = informacion_sistema->informacion_restricciones_sistema.potencia_maxima_red;
   OSQPFloat potencia_maxima_entrada_red = informacion_sistema->informacion_restricciones_sistema.potencia_maxima_red;
-  OSQPFloat potencia_maxima_salida_red = informacion_sistema->informacion_restricciones_sistema.potencia_minima_red;
+  OSQPFloat potencia_maxima_salida_red = informacion_sistema->informacion_restricciones_sistema.potencia_maxima_red;
 
   for (int punto_simulacion = 0; punto_simulacion < numero_puntos_simulacion; punto_simulacion++) {
     u[offset_potencia_red + punto_simulacion] = potencia_maxima_red;

@@ -40,10 +40,12 @@ int calcular_vector_l_u(informacion_procesada_t* informacion_sistema, OSQPFloat*
   //Primero se añaden los terminos de las restricciones de borde de las baterias
   
   calcular_limite_inferior_restricciones_bateria(informacion_sistema, *l);
-
+  
   
   
   calcular_limite_superior_restricciones_bateria(informacion_sistema, *u);
+
+  
   
    //A continuación se añaden los terminos de las restricciones inferiores de las potencias que pueden intercambiar
    //los terminales ->
@@ -56,10 +58,12 @@ int calcular_vector_l_u(informacion_procesada_t* informacion_sistema, OSQPFloat*
 
    
   calcular_limites_superior_potencia_terminales(informacion_sistema, *u, elementos_programados_carga_terminal);
-
   
    calcular_restricciones_borde_inferiores_potencia_red(informacion_sistema,*l);
+   
+
    calcular_restricciones_superiores_borde_potencias_red(informacion_sistema, *u);
+   
    calcular_limite_inferior_borde_potencia_red_fases(informacion_sistema, *l);
    calcular_restricciones_superiores_potencia_red_fase(informacion_sistema, *u);
    calcular_limite_inferior_borde_potencia_red_entrada_fases(informacion_sistema,*l);
