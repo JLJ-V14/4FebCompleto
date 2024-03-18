@@ -339,6 +339,7 @@ void incluir_terminos_potencias_terminal_A_x(informacion_procesada_t* informacio
   }
 
 
+  //Si está conectado a alguna fase, es necesario añadir los terminos.
   else {
 
     if ((fase_terminal != 'N') && (fase_terminal != '0')) {

@@ -25,8 +25,7 @@ int calcular_matrices(informacion_procesada_t *informacion_sistema, problema_opt
     return ERROR;
   }
 
-  printf("Prueba Aquí\n");
-  printf("%d\n", problema_optimizacion->matriz_a.A_nnz);
+
 
   if (calcular_matriz_p(informacion_sistema,problema_optimizacion,elementos_programados_terminales) == ERROR) {
     printf("No se ha podido calcular la matriz P en el problema de optimizacion\n");

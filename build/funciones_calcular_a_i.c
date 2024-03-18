@@ -225,12 +225,11 @@ int incluir_filas_potencias_terminal(informacion_procesada_t* informacion_sistem
   //Cargo el offset para las ecuaciones del comportamiento de la bateria
   int offset_bateria = NUMERO_VARIABLES * numero_puntos_simulacion + NUMERO_FASES * numero_puntos_simulacion;
 
-  //Se carga cual seria el valor de la fila de la primera ecuacion del balance de bateria teniendo en cuenta
-  //todas las demas baterías que han sido consideradas
-  int fila_ecuacion_bateria = offset_bateria + (*numero_ecuaciones_bateria);
+  //Se carga cual seria el valor de la fila de la primera ecuacion del balance de bateria 
+  int fila_ecuacion_bateria = offset_bateria + numero_terminal * numero_puntos_simulacion;
 
   //Cargo la fila inicial de la restriccion de borde
-  int fila_actual_restriccion_borde = (numero_terminal ) * numero_puntos_simulacion;
+  int fila_actual_restriccion_borde =NUMERO_TERMINALES * numero_puntos_simulacion + (numero_terminal ) * numero_puntos_simulacion;
   int fila_ecuacion_balance = 0;
 
   if (fase == 'R') {
@@ -246,7 +245,7 @@ int incluir_filas_potencias_terminal(informacion_procesada_t* informacion_sistem
 
 
   //Se carga el numero de elementos que tienen su carga prgoramada en el terminal
-  int numero_elementos_terminal = programacion_elementos_carga_terminales->informacion_carga_terminales->numero_elementos_terminal;
+  int numero_elementos_terminal = programacion_elementos_carga_terminales->informacion_carga_terminales[numero_terminal].numero_elementos_terminal;
   int index_elemento_carga_terminal = 0;
 
   
@@ -278,13 +277,12 @@ int incluir_filas_potencias_terminal(informacion_procesada_t* informacion_sistem
             (fila_actual_restriccion_borde)++;
             (*index_actual)++;
 
-            //Se incluye la fila de la ecuacion del balance bateria.
+            //Se incluye la fila de la ecuacion del balance de potencia 
             A_i[(*index_actual)] = fila_ecuacion_balance;
             (fila_ecuacion_balance)++;
             (*index_actual)++;
 
-            //Es necesario tambien actualizar el numero de ecuaciones que modelan el comportamiento de una bateria
-            (*numero_ecuaciones_bateria)++;
+            
           }
           else {
 
@@ -299,19 +297,33 @@ int incluir_filas_potencias_terminal(informacion_procesada_t* informacion_sistem
             (fila_ecuacion_balance)++;
 
             //Se incluye la ecuación del balance de batería
-            A_i[(*index_actual)] = fila_ecuacion_bateria;
+            A_i[(*index_actual)] = fila_ecuacion_bateria + punto_actual;
             (*index_actual)++;
-            (fila_ecuacion_bateria)++;
+            
 
-            //Es necesario tambien actualizar el numero de ecuaciones que modelan el comportamiento de una bateria
-            (*numero_ecuaciones_bateria)++;
+            
 
           }
 
           //Se actualiza el index_adicional
           if (punto_final == punto_actual) {
-            (*index_actual)++;
+            (index_elemento_carga_terminal)++;
           }
+
+        }
+        //Si el vehiculo o bateria no de estar en rango simplemente se añade los terminos de la ecuación
+        //de balance de restricción de borde y el balance en la fase
+        else {
+
+          //Se incluye la fila de la restricción de borde
+          A_i[(*index_actual)] = fila_actual_restriccion_borde;
+          (fila_actual_restriccion_borde)++;
+          (*index_actual)++;
+
+          //Se incluye la fila del balance
+          A_i[(*index_actual)] = fila_ecuacion_balance;
+          (fila_ecuacion_balance)++;
+          (*index_actual)++;
 
         }
       }
@@ -447,7 +459,9 @@ int incluir_filas_terminos_baterias_terminal(informacion_procesada_t* informacio
             (fila_termino_bateria_balance)++;
             (*index_actual)++;
           }
-          else {
+
+
+          else if (punto_actual!=punto_final) {
 
             //Se indica en que fila están los términos de SOC en un punto de simulacion que hay una batería
             //presente ya bien sea de un vehículo o una batería
@@ -464,10 +478,26 @@ int incluir_filas_terminos_baterias_terminal(informacion_procesada_t* informacio
             (*index_actual)++;
             (fila_termino_bateria_balance)++;
           }
+
+
           //Si el punto actual coincide con el punto final en el siguiente punto de simulacion no es necesario
-          //incluir más terminos.
-          if (punto_final== punto_actual) {
+          //incluir más terminos, y no es necesario considerar el termino de bateria en el punto anterior, como
+          //en el resto de puntos de simulacion
+
+          else if (punto_final== punto_actual) {
             index_elemento_terminal++;
+            //Se añade el termino del estado de bateria del punto anterior
+            A_i[*index_actual] = fila_termino_bateria_balance;
+            (*index_actual)++;
+            A_i[*index_actual] = fila_termino_bateria_borde;
+            //Se incrementa el index del vector A_i y la siguiente fila de la batería SOC de la restricción de borde a añadir
+            (fila_termino_bateria_borde)++;
+            (*index_actual)++;
+            //Se indica donde en que fila está el término SOC de la ecuacion del comportamiento de la batería
+            A_i[*index_actual] = fila_termino_bateria_balance;
+            (fila_termino_bateria_balance)++;
+            (*index_actual)++;
+
           //Se actualiza el index que sirve para acceder a los elementos que tienen su carga programada
             if (numero_elementos_terminales >index_elemento_terminal) {
               punto_inicial = elementos_programados_terminales->informacion_carga_terminales[terminal_actual].elementos_terminal[index_elemento_terminal].punto_inicio;
@@ -483,6 +513,9 @@ int incluir_filas_terminos_baterias_terminal(informacion_procesada_t* informacio
           A_i[*index_actual] = fila_termino_bateria_borde;
           (*index_actual)++;
           (fila_termino_bateria_borde)++;
+          A_i[*index_actual] = fila_termino_bateria_balance;
+          (*index_actual)++;
+          (fila_termino_bateria_balance)++;
         }
       }
 
@@ -492,6 +525,9 @@ int incluir_filas_terminos_baterias_terminal(informacion_procesada_t* informacio
         A_i[*index_actual] = fila_termino_bateria_borde;
         (*index_actual)++;
         (fila_termino_bateria_borde)++;
+        A_i[*index_actual] = fila_termino_bateria_balance;
+        (*index_actual)++;
+        (fila_termino_bateria_balance)++;
       }
     }
   }
@@ -502,6 +538,9 @@ int incluir_filas_terminos_baterias_terminal(informacion_procesada_t* informacio
       A_i[(*index_actual)] = (fila_termino_bateria_borde);
       (*index_actual)++;
       (fila_termino_bateria_borde)++;
+      A_i[(*index_actual)] = fila_termino_bateria_balance;
+      (*index_actual)++;
+      (fila_termino_bateria_balance)++;
 
     }
   }

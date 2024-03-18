@@ -127,22 +127,43 @@ int imprimir_matriz_P(problema_optimizacion_t* informacion_problema_optimizacion
   FILE* archivo = fopen("comprobacion_matriz_p.csv", "w");
 
   if (archivo == NULL) {
-    printf("No se ha podido abrir el archivo de comprobación de la matriz P\n");
-    registrar_error("No se ha podido abrir el archivo de comprobación de la matriz P\n", REGISTRO_ERRORES);
+    printf("No se ha podido abrir el archivo de comprobación de la matriz A\n");
+    registrar_error("No se ha podido abrir el archivo de comprobación de la matriz A\n", REGISTRO_ERRORES);
     return ERROR;
   }
 
-  //Se carga la matriz P (se asume que ya está rellenada de datos
+  // Se carga la matriz A (se asume que ya está rellenada de datos)
   OSQPCscMatrix* P = informacion_problema_optimizacion->matriz_p.P;
-  //Se escribe las dimensiones de las matrices en la primera fila
-  fprintf(archivo, "%d,%d\n", P->m, P->n);
 
-  //Se escribe los elementos de la matriz en el csv
+  // Se escribe las dimensiones de las matrices en la primera fila
+  fprintf(archivo, "%d,%d\n", P->n, P->n);
+
+
+
+  printf("n es %d\n", P->n);
+
+
+  // Se escribe los elementos de la matriz en el CSV
   for (int i = 0; i < P->n; i++) {
-    OSQPInt fila = (i < P->m) ? P->i[i] : P->m - 1;      //  If i < P->m, use row index from P->i[i], else use P->m - 1
-    OSQPInt col = (i < P->m) ? P->p[i] : P->p[P->n - 1]; // If i < P->m, use col index from P->p[i], else use P->p[P->n - 1]
-    OSQPFloat valor = (i < P->p[P->n]) ? P->x[i] : 0.0; // If i < number of non-zero elements, use value from P->x[i], else use 0
-    fprintf(archivo, "%d,%d,%f\n", fila, col, valor);
+
+    for (int j = 0; j < P->n; j++) {
+      // Buscar el índice de la matriz A correspondiente a la fila y columna actuales
+      int idx = -1;
+      for (int k = P->p[j]; k < P->p[j + 1]; k++) {
+        if (P->i[k] == i) {
+          idx = k;
+          break;
+        }
+      }
+      // Si el índice es encontrado, escribir el valor correspondiente; de lo contrario, escribir 0
+      if (idx != -1) {
+        fprintf(archivo, "%f,", P->x[idx]);
+      }
+      else {
+        fprintf(archivo, "%f,", 0.0);
+      }
+    }
+    fprintf(archivo, "\n"); // Nueva línea después de cada fila
   }
 
   fclose(archivo);

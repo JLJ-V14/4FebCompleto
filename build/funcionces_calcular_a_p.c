@@ -16,10 +16,10 @@ void incluir_columnas_potencia_salida_red_fase(informacion_procesada_t* informac
 
   for (int fase = 0; fase < NUMERO_FASES; fase++) {
     for (int punto_simulacion = 0; punto_simulacion < numero_puntos_simulacion; punto_simulacion++) {
-      (*comienzo_columna_actual) += 2;
+     
       A_p[(*index_actual)] = (*comienzo_columna_actual);
       (*index_actual)++;
-      (*comienzo_columna_actual)++;
+      (*comienzo_columna_actual) += 3;
     }
   }
   //Hay que indicar la ultima columna cual es su ultimo elemento 
@@ -35,10 +35,10 @@ void incluir_columnas_potencia_entrada_red_fase(informacion_procesada_t* informa
 
   for (int fase = 0; fase < NUMERO_FASES; fase++) {
     for (int punto_simulacion = 0; punto_simulacion < numero_puntos_simulacion; punto_simulacion++) {
-      (*comienzo_columna_actual) += 2;
+      
       A_p[(*index_actual)] = (*comienzo_columna_actual);
       (*index_actual)++;
-      (*comienzo_columna_actual)++;
+      (*comienzo_columna_actual) += 3;
     }
   }
   
@@ -56,10 +56,10 @@ void incluir_columnas_potencias_red_fase(informacion_procesada_t* informacion_si
 
   for (int fase = 0; fase < NUMERO_FASES; fase++) {
     for (int punto_simulacion = 0; punto_simulacion < numero_puntos_simulacion;punto_simulacion++) {
-      (*comienzo_columna_actual) += 3;
+      
       A_p[(*index_actual)] = (*comienzo_columna_actual);
       (*index_actual)++;
-      (*comienzo_columna_actual)++;
+      (*comienzo_columna_actual) += 4;
   }
 }
 }
@@ -78,10 +78,10 @@ void incluir_columnas_potencia_red(informacion_procesada_t* informacion_sistema,
 
   //Aparece en 3 ecuaciones distintas asi que por cada punto de simulacion hay 3 variables
   for (int punto_simulacion = 0; punto_simulacion < numero_puntos_simulacion; punto_simulacion++) {
-    (*comienzo_columna_actual) += 2;
+    
     A_p[(*index_actual)] = (*comienzo_columna_actual);
     (*index_actual)++;
-    (*comienzo_columna_actual)++;
+    (*comienzo_columna_actual) += 3;
   }
 
 }
@@ -94,10 +94,10 @@ void incluir_columnas_potencia_entrada_red(informacion_procesada_t* informacion_
   int numero_puntos_simulacion = informacion_sistema->informacion_puntos_simulacion.numero_puntos_simulacion;
 
   for (int punto_simulacion = 0; punto_simulacion < numero_puntos_simulacion; punto_simulacion++) {
-    (*comienzo_columna_actual) += 2;
+   
     A_p[(*index_actual)] = (*comienzo_columna_actual);
     (*index_actual)++;
-    (*comienzo_columna_actual)++;
+    (*comienzo_columna_actual) += 3;
   }
 }
 
@@ -109,10 +109,10 @@ void incluir_columnas_potencia_salida_red(informacion_procesada_t* informacion_s
   int numero_puntos_simulacion = informacion_sistema->informacion_puntos_simulacion.numero_puntos_simulacion;
 
   for (int punto_simulacion = 0; punto_simulacion < numero_puntos_simulacion; punto_simulacion++) {
-    (*comienzo_columna_actual) += 2;
+   
     A_p[(*index_actual)] = (*comienzo_columna_actual);
     (*index_actual)++;
-    (*comienzo_columna_actual)++;
+    (*comienzo_columna_actual) += 3;
   }
 }
 
@@ -129,8 +129,8 @@ int incluir_columnas_potencia_terminal(informacion_procesada_t* informacion_sist
   //Se crea una variable para llevar la cuenta de a que puntos se accede del arrya de puntos iniciales y finales
   int index_adicional = 0;
 
-  //Se crea una variable para almacenar cuantos elementos se tienen el terminal
-  int numero_elementos_terminales = 0;
+  //Se almacenan cuantos elementos tienen su carga programada en el terminal
+  int numero_elementos_terminales = programacion_elementos_carga_terminales->informacion_carga_terminales[terminal_actual].numero_elementos_terminal;
 
   //Se definen variables para cargar los puntos iniiciales y finales que tienen su carga programada terminal
   int punto_inicial;
@@ -138,6 +138,9 @@ int incluir_columnas_potencia_terminal(informacion_procesada_t* informacion_sist
 
   //Si el terminal esta conectado a la fase R,S o T puede haber vehiculos conectados
   if ((fase == 'R') || (fase == 'S') || (fase == 'T')) {
+
+    printf("El index actual es %d\n", *index_actual);
+    printf("Prueba fase \n");
     if (numero_elementos_terminales > 0) {
 
       //Se carga el punto inicial del elemento de terminal actual
@@ -159,34 +162,35 @@ int incluir_columnas_potencia_terminal(informacion_procesada_t* informacion_sist
 
             //Se incluye el termino que aparece en el balance de fase
             if (punto_actual == punto_inicial) {
-
-              (*comienzo_columna_actual)++;
               A_p[(*index_actual)] = (*comienzo_columna_actual);
               (*index_actual)++;
-              (*comienzo_columna_actual)++;
+              (*comienzo_columna_actual) += 2;
+              printf("El index actual1 es %d\n", *index_actual);
             }
 
             //Se tiene en cuenta que la potencia intercambiada por el terminal aparace en la ecuacion de
             //balance de fase, restricción de borde y balance de batería.
             else {
-              (*comienzo_columna_actual) += 2;
               A_p[(*index_actual)] = (*comienzo_columna_actual);
               (*index_actual)++;
-              (*comienzo_columna_actual)++;
+              (*comienzo_columna_actual) +=3;
+              printf("El index actual2 es %d\n", *index_actual);
+
+              if (punto_final == punto_actual) {
+                index_adicional++;
+              }
             }
             //Se actualiza el index de los puntos adicionales si ya el vehiculo o bateria no estaba presene
-            if (punto_final== punto_actual) {
-              index_adicional++;
-            }
+           
           }
 
           //Si no quedan mas ecuaciones del comportamiento del bateria, solo quedan añadir las columnas de las ecuaciones
           //del balance de la fase y la restriccion de borde
           else {
-            (*comienzo_columna_actual)++;
             A_p[(*index_actual)] = (*comienzo_columna_actual);
             (*index_actual)++;
-            (*comienzo_columna_actual)++;
+            (*comienzo_columna_actual) += 2;
+            printf("El index actual3 es %d\n", *index_actual);
           }
         }
 
@@ -194,10 +198,10 @@ int incluir_columnas_potencia_terminal(informacion_procesada_t* informacion_sist
         //vector A_p teniendo eso en cuenta.
 
         else {
-          (*comienzo_columna_actual)++;
           A_p[(*index_actual)] = (*comienzo_columna_actual);
           (*index_actual)++;
-          (*comienzo_columna_actual)++;
+          (*comienzo_columna_actual) += 2;
+          printf("El index actual4 es %d\n", *index_actual);
         }
       }
     }
@@ -209,6 +213,7 @@ int incluir_columnas_potencia_terminal(informacion_procesada_t* informacion_sist
       A_p[(*index_actual)] = (*comienzo_columna_actual);
       (*index_actual)++;
       (*comienzo_columna_actual)++;
+      printf("El index actual5 es %d\n", *index_actual);
     }
   }
   return EXITO;
