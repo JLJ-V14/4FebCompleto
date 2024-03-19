@@ -185,25 +185,28 @@
    
  
     
-    /*
+    
     //Se resuelve el problema de optimizacion:
     if (!problema_optimizacion.bandera_salida)problema_optimizacion.bandera_salida = osqp_solve(problema_optimizacion.solver);
 
+
+   
     //Se extrae las soluciones del problema de optimizacion
     if (!problema_optimizacion.bandera_salida) {
 
     }
-    */
-    /*
+   
+    
     if ((int)problema_optimizacion.bandera_salida) {
       printf("La optimizacion no ha tenido éxito\n");
       registrar_error("La optimizacion no ha tenido éxito", REGISTRO_ERRORES);
     }
     else {
       printf("La optimizacion ha sido éxito\n");
+
       extraer_soluciones_problema_optimizacion(&informacion_sistema,&problema_optimizacion);
     }
-    */
+    
     
     fin_programa:
     
@@ -219,7 +222,7 @@
 
    
 
-    // return(int)problema_optimizacion.bandera_salida;
+     return(int)problema_optimizacion.bandera_salida;
   }
 
 

@@ -264,14 +264,14 @@ int calcular_matriz_a(informacion_procesada_t * informacion_sistema, problema_op
     return ERROR;
   }
 
- 
+  
   //Se procede a calcular el vector A_p
   if (calcular_vector_A_p(informacion_sistema, &(matriz_a->A_p),programacion_carga_terminales) == ERROR) {
     printf("No se ha podido calcular el vector A_p\n");
     registrar_error("No se ha podido calcular el vector A_p\n", REGISTRO_ERRORES);
     return ERROR;
   }
-
+  
  
   //Se reserva memoria para la matriz A
   matriz_a->A = malloc(sizeof(OSQPCscMatrix));

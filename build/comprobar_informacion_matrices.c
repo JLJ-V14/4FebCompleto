@@ -7,6 +7,49 @@
 #include  <stdlib.h>
 
 
+/*Se utiliza el siguiente subprograma para imprimir los vectores que componen la matriz P */
+int imprimir_vectores_p(problema_optimizacion_t* informacion_problema_optimizacion, informacion_procesada_t* informacion_simulacion) {
+  FILE* archivo_comprobacion_P_x = fopen("archivo_comprobacion_p_x.csv", "w");
+  FILE* archivo_comprobacion_P_p = fopen("archivo_comprobacion_p_p.csv", "w");
+  FILE* archivo_comprobacion_P_i = fopen("archivo_comprobacion_p_i.csv", "w");
+
+  if ((archivo_comprobacion_P_x == NULL) || (archivo_comprobacion_P_i == NULL) || (archivo_comprobacion_P_p == NULL)) {
+    printf("No se han podido abrir los csvs de comprobacion de los vectores de la matriz P\n");
+    registrar_error("No se han podido abrir los csvs de comprobacion de los vectores de la matriz P\n", REGISTRO_ERRORES);
+    return ERROR;
+  }
+  //Se cargan el numero de elementos que se tienen diferentes de 0
+  OSQPInt* P_nnz = informacion_problema_optimizacion->matriz_p.P_nnz;
+
+  //Se cargan los diferentes vectorees P
+  OSQPFloat* P_x = informacion_problema_optimizacion->matriz_p.P_x;
+  OSQPInt* P_i = informacion_problema_optimizacion->matriz_p.P_i;
+  OSQPInt* P_p = informacion_problema_optimizacion->matriz_p.P_p;
+
+  //Se carga el numero de puntos de simulacion
+  int numero_puntos_simulacion = informacion_simulacion->informacion_puntos_simulacion.numero_puntos_simulacion;
+
+  //Se carga el numero de columnas
+  int numero_columnas = (NUMERO_VARIABLES)*numero_puntos_simulacion + 1;
+
+  for (int i = 0; i < P_nnz; i++) {
+    fprintf(archivo_comprobacion_P_x, "%f\n", P_x[i]);
+  }
+
+  for (int i = 0; i < P_nnz; i++) {
+    fprintf(archivo_comprobacion_P_i, "%d\n", P_i[i]);
+  }
+
+  for (int i = 0; i < numero_columnas; i++) {
+    fprintf(archivo_comprobacion_P_p, "%d\n", P_p[i]);
+  }
+
+  fclose(archivo_comprobacion_P_i);
+  fclose(archivo_comprobacion_P_x);
+  fclose(archivo_comprobacion_P_p);
+  return EXITO;
+}
+
 int imprimir_vectores_a(problema_optimizacion_t* informacion_problema_optimizacion,
   informacion_procesada_t* informacion_simulacion) {
   FILE* archivo_comprobacion_A_x = fopen ("archivo_comprobacion_a_x.csv", "w");
@@ -42,8 +85,6 @@ int imprimir_vectores_a(problema_optimizacion_t* informacion_problema_optimizaci
   }
 
   for (int i = 0; i < A_nnz; i++) {
-    printf("Prueba\n");
-    printf("El valor es %d\n", A_i[i]);
     fprintf(archivo_comprobacion_A_i, "%d\n", A_i[i]);
   }
 
@@ -267,6 +308,11 @@ int imprimir_matrices_problema_optimizacion(problema_optimizacion_t* informacion
     return ERROR;
   }
 
+  if (imprimir_vectores_p(informacion_problema_optimizacion, informacion_sistema) == ERROR) {
+    printf("No se ha podido imprimir los datos de los vectores P_x, P_i y P_p\n");
+    registrar_error("No se ha podido imprimir los datos de los vectores P_x, P_i y P_p\n", REGISTRO_ERRORES);
+    return ERROR;
+  }
 
   return EXITO;
 }

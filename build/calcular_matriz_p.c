@@ -258,6 +258,9 @@ void incluir_columnas_objetivo_carga_vehiculo(informacion_carga_terminales_t* el
   //Primero se inspecciona si el vehiculo cuyo objetivo de carga se están añadiendo las columnas
   bool carga_rapida = elementos_programados_carga_terminales->informacion_carga_terminales[numero_terminal].elementos_terminal[*index_elemento_carga_terminales].carga_rapida;
 
+
+  //Se carga el punto inicial del vehiculo que tiene su carga programada
+  int punto_inicial = elementos_programados_carga_terminales->informacion_carga_terminales[numero_terminal].elementos_terminal[*index_elemento_carga_terminales].punto_inicio;
   //Se carga el punto final del vehiculo que tiene su carga programada
   int punto_final = elementos_programados_carga_terminales->informacion_carga_terminales[numero_terminal].elementos_terminal[*index_elemento_carga_terminales].punto_final;
 
@@ -267,10 +270,20 @@ void incluir_columnas_objetivo_carga_vehiculo(informacion_carga_terminales_t* el
 
     //Se carga el objetivo de carga hasta el punto final
     while ((*punto_actual) <= punto_final) {
-      matriz_p->P_p[(*index_vector_P_p)] = (*columna_actual);
-      (*index_vector_P_p)++;
-      (*columna_actual)++;
-      (*punto_actual)++;
+
+
+      if ((*punto_actual) != punto_inicial) {
+        matriz_p->P_p[(*index_vector_P_p)] = (*columna_actual);
+        (*index_vector_P_p)++;
+        (*columna_actual)++;
+        (*punto_actual)++;
+      }
+
+      else {
+        matriz_p->P_p[(*index_vector_P_p)] = (*columna_actual);
+        (*punto_actual)++;
+        (*index_vector_P_p)++;
+      }
     }
   }
 
@@ -362,7 +375,7 @@ void incluir_columnas_vector_P_p_elementos_terminal(informacion_procesada_t* inf
   int numero_puntos_simulacion = informacion_sistema->informacion_puntos_simulacion.numero_puntos_simulacion;
 
   //Se carga el numero que de vehículos o baterías que tienen 
-  int numero_elementos_terminales = elementos_programados_carga_terminales->informacion_carga_terminales->numero_elementos_terminal;
+  int numero_elementos_terminales = elementos_programados_carga_terminales->informacion_carga_terminales[terminal_actual].numero_elementos_terminal;
 
   //Se define una variable para llevar la cuenta de por que punto de simulacion se lleva la cuenta
   int punto_simulacion_actual = 0;
@@ -380,7 +393,7 @@ void incluir_columnas_vector_P_p_elementos_terminal(informacion_procesada_t* inf
     if (numero_elementos_terminales > index_elemento_carga_terminal) {
 
 
-      if (punto_simulacion_actual <= punto_inicial) {
+      if (comprobar_rango(punto_simulacion_actual,punto_inicial,punto_final)) {
 
         //Se crea una variable booleana para identificar si el siguiente elemento que tiene su carga programada en
         //el terminal 
@@ -462,6 +475,7 @@ void calcular_vector_P_p_objetivo_carga (informacion_procesada_t* informacion_si
     //Si no hay elemento que tenga su carga programada en el terminal todas las columnas asociadas a esta variable
     //son 0. 
     else {
+      
       for (int punto_actual = 0; punto_actual < numero_puntos_simulacion; punto_actual++) {
         matriz_p->P_p[(*index_vector_P_p)] = (*index_columna_actual);
         (*index_vector_P_p)++;
