@@ -401,3 +401,22 @@ typedef struct {
     informacion_terminales_t            informacion_terminales;
 }informacion_procesada_t;
 
+/*Se define un tipo propio para almacenar por cada fase si hay algun vehiculo o bateria conectada*/
+
+typedef struct {
+    bool vehiculo;
+    bool bateria;
+}informacion_punto_fase_t;
+
+/*El siguiente tipo contiene la informacion para cada punto de simulacion si hay algún vehículo o batería 
+  conectado a la fase R,S o T*/
+
+typedef struct {
+    informacion_punto_fase_t* informacion_punto_fase;
+}informacion_fase_t;
+
+//Se define la informacion que almacena cada fase:
+
+typedef struct {
+    informacion_fase_t informacion_fase[3];
+}informacion_fases_t;

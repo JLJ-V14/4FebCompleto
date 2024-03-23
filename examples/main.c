@@ -75,6 +75,7 @@
 
     informacion_entrada_t          informacion_sistema;
     informacion_procesada_t        informacion_procesada;
+    //informacion_fases_t            informacion_fases = { 0 };
     informacion_carga_terminales_t informacion_carga_terminales = { 0 };
    
     //Se define la estructura donde van a ir contenidas las matrices del problema de optimizacion
@@ -117,6 +118,7 @@
         goto fin_programa;
     }
 
+
     
     
     //Se inspecciona si la lectura se esta haciendo adecuadamente
@@ -126,7 +128,7 @@
         goto fin_programa;
     }
     
-    
+   
 
     
     //Se verifica que la informacion de entrada es correcta
@@ -135,8 +137,11 @@
         registrar_error("Fallo las entradas son incorrectas\n", REGISTRO_ERRORES);
         goto fin_programa;
     }
+
    
+
     
+    printf("El numero de vehiculos que tienen su carga programada antes de lectura es %d\n", informacion_sistema.datos_vehiculos.informacion_vehiculos.filas - 1);
 
     //Se procesa la informacion de entrada
     if (procesar_informacion_entrada(&informacion_sistema, &informacion_procesada) == ERROR) {
@@ -145,8 +150,10 @@
       goto fin_programa;
     }
     
+    printf("El numero de vehiculos que tienen su carga programada es %d\n", informacion_sistema.datos_vehiculos.informacion_vehiculos.filas - 1);
 
-    
+
+     /*
     //Se procesa la informacion 
     if (comprobar_informacion_procesada(informacion_procesada) == ERROR) {
       printf("La informacion procesada no ha sido correctamente\n");
@@ -182,7 +189,7 @@
     printf("Problema de optimizacion realizado\n");
     
 
-   
+    
  
     
     
@@ -204,10 +211,10 @@
     else {
       printf("La optimizacion ha sido éxito\n");
 
-      extraer_soluciones_problema_optimizacion(&informacion_sistema,&problema_optimizacion);
+      extraer_soluciones_problema_optimizacion(&informacion_procesada,&problema_optimizacion);
     }
     
-    
+    */
     fin_programa:
     
     // Se libera la memoria reservada

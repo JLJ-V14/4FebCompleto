@@ -35,7 +35,7 @@ int calcular_matrices(informacion_procesada_t *informacion_sistema, problema_opt
   }
 
 
-  
+ 
   if (calcular_vector_q(informacion_sistema, &(problema_optimizacion->vector_q),elementos_programados_terminales) == ERROR) {
     printf("No se ha podido calcular la matriz Q en el problema de optimizacion\n");
     registrar_error("No se ha podido calcular la matriz Q en el problema de optimizacion", REGISTRO_ERRORES);

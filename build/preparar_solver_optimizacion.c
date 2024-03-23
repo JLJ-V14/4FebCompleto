@@ -13,6 +13,8 @@ int preparar_solver_optimizacion(problema_optimizacion_t* problema_optimizacion)
     problema_optimizacion->numero_restricciones, problema_optimizacion->numero_variables, problema_optimizacion->ajustes);
 
 
+   
+
     printf("El valor de la bandera de salida\n");
     printf("%d\n",problema_optimizacion->bandera_salida);
 

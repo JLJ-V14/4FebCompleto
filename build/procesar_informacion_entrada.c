@@ -522,7 +522,7 @@ int configurar_puntos_simulacion(informacion_entrada_t* informacion_entrada, inf
 
   
 
-  
+ 
   
   if (leer_fechas_adicionales(&(informacion_entrada->datos_vehiculos),fechas_adicionales, &(informacion_entrada->datos_baterias),
     &(informacion_puntos_adicionales->numero_puntos), fecha_inicial_algoritmo, fecha_final_algoritmo) == ERROR) {
@@ -532,7 +532,7 @@ int configurar_puntos_simulacion(informacion_entrada_t* informacion_entrada, inf
   }
   
   //Se guarda la informacion de las fechas adicionales a añadir en las variables correspondiente
-  
+   
  
   informacion_puntos_adicionales->puntos = NULL;
   puntos_adicionales_t ** puntos_adicionales = &(informacion_puntos_adicionales->puntos);
@@ -540,7 +540,7 @@ int configurar_puntos_simulacion(informacion_entrada_t* informacion_entrada, inf
 
 
   
-
+  
 
   if (cacular_puntos_simulacion(informacion_entrada, fechas_adicionales, informacion_procesada,
     fecha_inicial_algoritmo, fecha_final_algoritmo, delta_resolucion,
@@ -549,7 +549,7 @@ int configurar_puntos_simulacion(informacion_entrada_t* informacion_entrada, inf
     registrar_error("No se ha podido calcular el numero de puntos de simulacion\n", REGISTRO_ERRORES);
     return ERROR;
   }
- 
+  /*
   
   /* */
   return EXITO;
@@ -571,6 +571,8 @@ int procesar_informacion_entrada(informacion_entrada_t*    informacion_entrada,
   procesar_informacion_restricciones(&(informacion_entrada->datos_restricciones), &(informacion_procesada->informacion_restricciones_sistema));
 
   
+
+  
   //Se configuran cuantos puntos de simulacion son necesarios 
   if (configurar_puntos_simulacion(informacion_entrada, informacion_procesada) == ERROR) {
     printf("No se ha podido configurar los puntos de simulacion correctamente\n");
@@ -578,7 +580,7 @@ int procesar_informacion_entrada(informacion_entrada_t*    informacion_entrada,
     return ERROR;
   }
   
-  
+  /*
   
   if (&(informacion_procesada->informacion_puntos_adicionales )== NULL) {
     // Handle memory allocation failure
@@ -608,6 +610,8 @@ int procesar_informacion_entrada(informacion_entrada_t*    informacion_entrada,
     return ERROR;
   }
   procesar_informacion_terminales(informacion_entrada, informacion_procesada);
-  
+
+
+  */
   return EXITO;
 }

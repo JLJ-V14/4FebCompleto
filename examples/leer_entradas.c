@@ -176,10 +176,14 @@ int leer_entradas(informacion_entrada_t* informacion_sistema) {
             return ERROR;
         }
     }
-    
+
+
+   
+
 
     return EXITO;
 
 
 
 }
+

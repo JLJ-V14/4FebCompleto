@@ -30,6 +30,7 @@ void escribir_objetivos_carga_baterias_terminal(informacion_procesada_t* informa
     int posicion_objetivo_carga = numero_terminal * numero_puntos_simulacion + punto_objetivo;
     //Se carga la bateria deseada
     OSQPFloat porcentaje_bateria = elementos_programados_carga_terminales->informacion_carga_terminales[numero_terminal].elementos_terminal[numero_elemento_terminal].bateria_deseada;
+    porcentaje_bateria = porcentaje_bateria / 2;
     q[posicion_objetivo_carga] = -2 * COEFICIENTE_CARGA * porcentaje_bateria;
   }
 
@@ -63,6 +64,7 @@ void escribir_objetivo_carga_vehiculos_terminal(informacion_procesada_t* informa
     //a el punto final
 
     bateria_deseada = elementos_programados_carga_terminales->informacion_carga_terminales[numero_terminal].elementos_terminal[numero_elemento_terminal].bateria_deseada;
+    bateria_deseada = bateria_deseada / 2;
 
     for (int punto_actual = punto_inicial; punto_actual <= punto_final; punto_actual++) {
 
@@ -73,6 +75,7 @@ void escribir_objetivo_carga_vehiculos_terminal(informacion_procesada_t* informa
 
   else {
     OSQPFloat bateria_deseada = elementos_programados_carga_terminales->informacion_carga_terminales[numero_terminal].elementos_terminal[numero_elemento_terminal].bateria_deseada;
+    bateria_deseada = bateria_deseada / 2;
     q[offset_SOC + punto_final] = -2 * COEFICIENTE_CARGA * bateria_deseada;
   }
 }
@@ -181,7 +184,7 @@ void calcular_objetivo_precio(informacion_procesada_t* informacion_sistema, OSQP
   //Se procede a escribir los terminos de los precios para cada punto de simulacion, en general esta función
   //se plantea de la siguiente forma Cu,t * Pin grid,t -B,t * Pout grid,t
 
-  for (int punto_actual = 1; punto_actual < numero_puntos_simulacion; punto_actual++) {
+  for (int punto_actual = 0; punto_actual < numero_puntos_simulacion; punto_actual++) {
     obtener_precio_compra_venta(informacion_sistema, &precio_compra, &precio_venta, punto_actual, &index_actual_precio);
     //Cargo el delta de simulacion
     OSQPFloat delta_simulacion = informacion_sistema->informacion_puntos_simulacion.puntos_simulacion[punto_actual].delta;

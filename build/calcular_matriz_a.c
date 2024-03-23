@@ -246,7 +246,9 @@ int calcular_matriz_a(informacion_procesada_t * informacion_sistema, problema_op
 
   calcular_numero_terminos(informacion_sistema, &A_nnz);
   matriz_a->A_nnz = A_nnz;
-  
+
+  printf("El numero de variables es %d\n", n);
+  printf("El numero de restricciones es %d\n", m);
   
   //Se procede a calcular el vector A_x
   if (calcular_vector_A_x(informacion_sistema, &(matriz_a->A_x),A_nnz,programacion_carga_terminales) == ERROR) {

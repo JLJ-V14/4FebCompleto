@@ -359,7 +359,8 @@ int cargar_fechas_adicionales_vehiculos(datos_csv_vehiculos_t* datos_vehiculos,s
     (*fechas_adicionales)[2 * i + 1].tm_min  = atoi(datos_vehiculos->informacion_vehiculos.datos[i + 1][minuto_final_vehiculo]);
   }
   *numero_fechas_adicionales = 2 * numero_vehiculos;
-  
+
+
 
   return EXITO;
 }
