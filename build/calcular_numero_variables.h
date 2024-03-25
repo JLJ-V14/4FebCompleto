@@ -7,7 +7,7 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-	int calcular_numero_variables(informacion_procesada_t* informacion_sistema, OSQPInt* numero_variables);
+	void calcular_numero_variables(informacion_procesada_t* informacion_sistema, OSQPInt* numero_variables);
 
 
 #ifdef __cplusplus

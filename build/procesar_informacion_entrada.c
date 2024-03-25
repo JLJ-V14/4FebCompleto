@@ -46,6 +46,7 @@ void procesar_informacion_terminales(informacion_entrada_t *informacion_entrada,
     }
     else {
       informacion_procesada->informacion_terminales.fases_electricas[fila_actual] = *(informacion_entrada->datos_terminales.informacion_terminales.datos[fila_actual + 1][columna_valores_fases]);
+      printf("La fase es %c \n", informacion_procesada->informacion_terminales.fases_electricas[fila_actual]);
     }
     
   }
@@ -343,14 +344,39 @@ int procesar_informacion_baterias(informacion_entrada_t * informacion_entrada,in
 
 /*Este subprograma se utiliza para procesar la informacion de los precios*/
 int procesar_informacion_precio(informacion_entrada_t* informacion_entrada, informacion_procesada_t* informacion_procesada) {
+
   
+
+
+
+
+
   // Se carga el numero de precios que hay = numero de horas
   informacion_procesada->informacion_precio_compra.numero_horas = informacion_entrada->datos_precio_compra.informacion_precio.filas - 1;
   informacion_procesada->informacion_precio_venta.numero_horas = informacion_entrada->datos_precio_venta.informacion_precio.filas - 1;
   //Se reserva memoria para almacenar la informacion procesada de los precios:
   informacion_procesada->informacion_precio_compra.precios = (precio_t*)malloc(informacion_procesada->informacion_precio_compra.numero_horas * sizeof(precio_t));
   informacion_procesada->informacion_precio_venta.precios = (precio_t*)malloc(informacion_procesada->informacion_precio_venta.numero_horas * sizeof(precio_t));
-  
+
+
+  if (!informacion_procesada->informacion_precio_compra.precios) {
+    // Handle memory allocation failure
+    printf("No se ha podido reservar memoria para la informacion de los precios de compra correctamente\n");
+    registrar_error("No se ha podido reservar memoria para la informacion de los precios de compra correctamente\n", REGISTRO_ERRORES);
+    return ERROR;
+  }
+
+
+  if (!informacion_procesada->informacion_precio_venta.precios) {
+    // Handle memory allocation failure
+    printf("No se ha podido reservar memoria para la informacion de los precios de compra correctamente\n");
+    registrar_error("No se ha podido reservar memoria para la informacion de los precios de compra correctamente\n", REGISTRO_ERRORES);
+    return ERROR;
+  }
+
+
+
+
 
   //Se crea una variable booleana para identificar a cuantos puntos de simulacion hay que asignarles un precio de la
   //electricidad
@@ -414,9 +440,14 @@ int procesar_informacion_precio(informacion_entrada_t* informacion_entrada, info
     if (comprobar_hora(informacion_procesada->informacion_precio_compra.precios[precio_actual].fecha_asociada,
       informacion_procesada->informacion_puntos_simulacion.puntos_simulacion[punto_actual].fecha_punto) == false) {
 
-      
-      informacion_procesada->informacion_precio_compra.precios[precio_actual].punto_final = punto_actual - 1;
-      informacion_procesada->informacion_precio_venta.precios[precio_actual].punto_final = punto_actual - 1;
+      printf("Entra en la alteracion de precios\n");
+      printf("El numero de puntos de simulacion es %d\n", numero_puntos_simulacion);
+      printf("El punto actual es %d\n", punto_actual);
+
+
+
+      informacion_procesada->informacion_precio_compra.precios[precio_actual].punto_final = punto_actual;
+      informacion_procesada->informacion_precio_venta.precios[precio_actual].punto_final = punto_actual;
       precio_actual++;
 
       if (cargar_fecha(&(informacion_entrada->datos_precio_compra.informacion_precio), &(informacion_procesada->informacion_precio_compra.precios[precio_actual].fecha_asociada),
@@ -438,20 +469,39 @@ int procesar_informacion_precio(informacion_entrada_t* informacion_entrada, info
       OSQPFloat precio_actual_venta = atof(informacion_entrada->datos_precio_venta.informacion_precio.datos[precio_actual][columna_precio_venta]);
       informacion_procesada->informacion_precio_compra.precios[precio_actual].precio = precio_actual_compra;
       informacion_procesada->informacion_precio_venta.precios[precio_actual].precio = precio_actual_venta;
-      informacion_procesada->informacion_precio_compra.precios[precio_actual].punto_inicial = punto_actual;
-      informacion_procesada->informacion_precio_venta.precios[precio_actual].punto_inicial = punto_actual;
+      informacion_procesada->informacion_precio_compra.precios[precio_actual].punto_inicial = punto_actual + 1;
+      informacion_procesada->informacion_precio_venta.precios[precio_actual].punto_inicial = punto_actual + 1;
 
     }
     punto_actual++;
     
-    if (numero_puntos_simulacion - 1 < punto_actual) {
+    if (numero_puntos_simulacion - 1 <= punto_actual) {
+
       fin_bucle = true;
+
+      //Se tiene en cuenta el caso en el que el ultimo punto de simulacion coincide con el inicio de un nuevo precio 
     }
   }
-  informacion_procesada->informacion_precio_compra.precios[precio_actual].punto_final = punto_actual - 1;
-  informacion_procesada->informacion_precio_venta.precios[precio_actual].punto_final = punto_actual - 1;
 
- 
+ //Se tiene en cuenta que el ultimo punto de la simulacion puede coincidir con el inicio de un nuevo precio,
+ //si acaba en en punto.
+
+  if (comprobar_hora(informacion_procesada->informacion_precio_compra.precios[precio_actual].fecha_asociada,
+    informacion_procesada->informacion_puntos_simulacion.puntos_simulacion[punto_actual].fecha_punto) == false) {
+    informacion_procesada->informacion_precio_compra.precios[precio_actual].punto_final = punto_actual;
+    informacion_procesada->informacion_precio_venta.precios[precio_actual].punto_final  = punto_actual;
+  }
+  //Si no existe esa coincidencia
+  
+  else {
+    
+  informacion_procesada->informacion_precio_compra.precios[precio_actual].punto_final = punto_actual ;
+  informacion_procesada->informacion_precio_venta.precios[precio_actual].punto_final = punto_actual ;
+  }
+
+  informacion_procesada->informacion_precio_compra.numero_precios = precio_actual +1;
+  informacion_procesada->informacion_precio_venta.numero_precios = precio_actual + 1;
+
   return EXITO;
 }
 int configurar_puntos_simulacion(informacion_entrada_t* informacion_entrada, informacion_procesada_t* informacion_procesada) {
@@ -530,7 +580,8 @@ int configurar_puntos_simulacion(informacion_entrada_t* informacion_entrada, inf
     registrar_error("No se ha podido añadir las fechas adicionales a la simulacion", REGISTRO_ERRORES);
     return ERROR;
   }
-  
+
+  printf("Marca\n");
   //Se guarda la informacion de las fechas adicionales a añadir en las variables correspondiente
    
  
@@ -541,7 +592,7 @@ int configurar_puntos_simulacion(informacion_entrada_t* informacion_entrada, inf
 
   
   
-
+  
   if (cacular_puntos_simulacion(informacion_entrada, fechas_adicionales, informacion_procesada,
     fecha_inicial_algoritmo, fecha_final_algoritmo, delta_resolucion,
     &(informacion_puntos_adicionales->numero_puntos)) == ERROR) {
@@ -566,12 +617,12 @@ int procesar_informacion_entrada(informacion_entrada_t*    informacion_entrada,
   //Se crea una variable para almacenar las fechas adicionales a añadir, esta variable va a ser utilizada para
   //reconocer más rápidamente a que punto de simulación corresponde la ida o partida de los vehículos o baterías
  
-
+  
   //Se almacena la informacion de restriccion leída del csv de las restricciones
   procesar_informacion_restricciones(&(informacion_entrada->datos_restricciones), &(informacion_procesada->informacion_restricciones_sistema));
 
   
-
+  
   
   //Se configuran cuantos puntos de simulacion son necesarios 
   if (configurar_puntos_simulacion(informacion_entrada, informacion_procesada) == ERROR) {
@@ -580,7 +631,7 @@ int procesar_informacion_entrada(informacion_entrada_t*    informacion_entrada,
     return ERROR;
   }
   
-  /*
+  
   
   if (&(informacion_procesada->informacion_puntos_adicionales )== NULL) {
     // Handle memory allocation failure
@@ -611,7 +662,7 @@ int procesar_informacion_entrada(informacion_entrada_t*    informacion_entrada,
   }
   procesar_informacion_terminales(informacion_entrada, informacion_procesada);
 
-
-  */
+  /**/
+  
   return EXITO;
 }

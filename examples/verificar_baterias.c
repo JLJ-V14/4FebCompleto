@@ -208,7 +208,7 @@ static int comprobar_fecha_inicial_bateria(struct tm* fecha_inicial_bateria, con
 
 
 	//Se comprueba si la fecha inicial de conexion de la bateria es posterior a la fecha de inicio del algoritmo.
-	cargar_fecha(datos_baterias, fecha_inicial_bateria, columna_csv_baterias_anyo_inicial,
+	cargar_fecha( (&datos_baterias->informacion_baterias), fecha_inicial_bateria, columna_csv_baterias_anyo_inicial,
 	columna_csv_baterias_mes_inicial, columna_csv_baterias_dia_inicial,
 	columna_csv_baterias_hora_inicial, columna_csv_baterias_minuto_inicial,
 	numero_bateria,SI_INCLUIR_MINUTO);
@@ -225,8 +225,8 @@ static int comprobar_fecha_inicial_bateria(struct tm* fecha_inicial_bateria, con
 	return EXITO;
 }
 
-static int comprobar_fecha_final_bateria(struct tm* fecha_final_bateria, const datos_csv_baterias_t* datos_baterias,
-	const int numero_bateria, const datos_csv_algoritmo_t * datos_algoritmo) {
+static int comprobar_fecha_final_bateria(struct tm* fecha_final_bateria, datos_csv_baterias_t* datos_baterias,
+	const int numero_bateria,  datos_csv_algoritmo_t * datos_algoritmo) {
 
 	//Se comprueba que la fecha final de la bateria es correcta->
 
@@ -263,7 +263,7 @@ static int comprobar_fecha_final_bateria(struct tm* fecha_final_bateria, const d
 
 	
 	
-	cargar_fecha(datos_baterias, fecha_final_bateria, columna_csv_baterias_anyo_final,
+	cargar_fecha(&(datos_baterias->informacion_baterias), fecha_final_bateria, columna_csv_baterias_anyo_final,
 	columna_csv_baterias_mes_final, columna_csv_baterias_dia_final,
 	columna_csv_baterias_hora_final, columna_csv_baterias_minuto_final,
 	numero_bateria,SI_INCLUIR_MINUTO);
@@ -300,7 +300,7 @@ bool considerar_objetivo_bateria(const char *objetivo) {
 
 //Este subprograma se utiliza apra comprobar que la fecha objetivo de la bateria es correcta.
 
-static int comprobar_fecha_objetivo_baterias(const datos_csv_baterias_t* datos_baterias, const int numero_bateria,
+static int comprobar_fecha_objetivo_baterias( datos_csv_baterias_t* datos_baterias, const int numero_bateria,
 	const struct tm fecha_inicial_bateria, const struct tm fecha_final_bateria) {
 	
 
@@ -367,8 +367,8 @@ static int comprobar_fecha_objetivo_baterias(const datos_csv_baterias_t* datos_b
 	*/
 
 
-static int comprobar_fecha_baterias(const int numero_bateria, const datos_csv_baterias_t* datos_baterias,
-	const datos_csv_algoritmo_t * datos_algoritmo) {
+static int comprobar_fecha_baterias(const int numero_bateria,  datos_csv_baterias_t* datos_baterias,
+	 datos_csv_algoritmo_t * datos_algoritmo) {
 	
 	struct tm fecha_inicial_bateria;
 	struct tm fecha_final_bateria;
@@ -495,18 +495,18 @@ static int verificar_fase_bateria(const datos_csv_baterias_t* datos_csv_baterias
 
 
 
-int verificar_baterias(const datos_csv_baterias_t* datos_csv_baterias, const datos_csv_algoritmo_t* datos_csv_algoritmo,
-  const datos_csv_terminales_t * datos_terminales) {
+int verificar_baterias(datos_csv_baterias_t* datos_csv_baterias,  datos_csv_algoritmo_t* datos_csv_algoritmo,
+  datos_csv_terminales_t * datos_terminales) {
 
 	// Cargo el  numero de filas que hay en el csv de las baterias
 	int numero_filas_csv_baterias = datos_csv_baterias->informacion_baterias.filas;
 
-
+  
 	// Se crea un puntero que apunta a la posicion en memoria donde se encuentra la informacion en
 	// la bateria
 
 	datos_csv_t* informacion_baterias = &(datos_csv_baterias->informacion_baterias);
-
+  
 
 	//Se comprueba las dimensiones del csv de las baterias
 
@@ -516,23 +516,27 @@ int verificar_baterias(const datos_csv_baterias_t* datos_csv_baterias, const dat
 		registrar_error("error en las dimensiones del csv de las baterias", REGISTRO_ERRORES);
 		return ERROR;
 	}
-
+  
 	if ((verificar_encabezados_baterias(informacion_baterias)) == ERROR) {
 		printf("error en los encabezados del csv de las baterias\n");
 		registrar_error("error en los encabezados del csv de las baterias\n", REGISTRO_ERRORES);
 		return ERROR;
 	}
 
+
+ 
+
+
 	//Se pasa a comprobar si los datos de cada bateria en el csv son incorrectos->
 	for (int numero_bateria = 1; numero_bateria < numero_filas_csv_baterias; numero_bateria++) {
-
+    
 		//Se comprueba que las fechas de conexion y desconexion de las baterias son correctas.
 		if (comprobar_fecha_baterias(numero_bateria, datos_csv_baterias, datos_csv_algoritmo) == ERROR) {
 			printf("Las fechas de las baterias son incorrectas\n");
 			registrar_error("Las fechas de las baterias son incorrectas\n",REGISTRO_ERRORES);
 			return ERROR;
 		}
-
+    
 		//Se comprueba que los datos de la bateria son correctos.
 		if (comprobar_datos_bateria(datos_csv_baterias, numero_bateria) == ERROR) {
 			printf("Los datos de las baterias son incorrectos\n");
@@ -545,7 +549,10 @@ int verificar_baterias(const datos_csv_baterias_t* datos_csv_baterias, const dat
       printf("Hay una batería no conectada a fase R,S o T \n");
       registrar_error("Hay una batería no conectda a fase R,S o T\n", REGISTRO_ERRORES);
       return ERROR;
+      
     }
+    
 	}
+   
 	return EXITO;
 }

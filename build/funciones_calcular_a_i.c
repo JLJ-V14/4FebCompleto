@@ -10,12 +10,12 @@
 
 
 
-void incluir_filas_potencia_salida_red_fase(informacion_procesada_t* informacion_sistema, OSQPInt* A_i,
+int incluir_filas_potencia_salida_red_fase(informacion_procesada_t* informacion_sistema, OSQPInt* A_i,
   int* ultima_fila_balance_bateria, int* index_actual, char fase) {
   //Cargo el numero de puntos de simulacion
   int numero_puntos_simulacion = informacion_sistema->informacion_puntos_simulacion.numero_puntos_simulacion;
-  int fila_restriccion_borde = 0;
-  int fila_ecuacion_35 = 0;
+  int fila_restriccion_borde ;
+  int fila_ecuacion_35 ;
   int fila_ecuacion_37 = 44 * numero_puntos_simulacion + (*ultima_fila_balance_bateria);
   if (fase == 'R') {
     fila_restriccion_borde = 33 * numero_puntos_simulacion;
@@ -29,6 +29,15 @@ void incluir_filas_potencia_salida_red_fase(informacion_procesada_t* informacion
     fila_restriccion_borde = 35 * numero_puntos_simulacion;
     fila_ecuacion_35 = 42 * numero_puntos_simulacion + (*ultima_fila_balance_bateria);
   }
+
+  else {
+    
+    printf("Problemas con el termino Pout grid p,t la fase no está indicada correctamente \n");
+    registrar_error("Problemas con el termino Pout grid p,t la fase no está indicada correctamente\n",REGISTRO_ERRORES);
+    return ERROR;
+  }
+
+
   for (int i = 0; i < numero_puntos_simulacion; i++) {
     A_i[(*index_actual)] = fila_restriccion_borde;
     (*index_actual)++;
@@ -40,14 +49,15 @@ void incluir_filas_potencia_salida_red_fase(informacion_procesada_t* informacion
     (*index_actual)++;
     (fila_ecuacion_37)++;
   }
+  return EXITO;
 }
 
 //Este subprograma se utiliza para incluir la filas en las que se encuentra el término Pin grid p,t
-void incluir_filas_potencia_entrada_red_fase(informacion_procesada_t* informacion_sistema, OSQPInt* A_i,
+int incluir_filas_potencia_entrada_red_fase(informacion_procesada_t* informacion_sistema, OSQPInt* A_i,
                                              int* ultima_fila_balance_bateria, int* index_actual, char fase) {
   //Cargo el numero de puntos de simulacion
   int numero_puntos_simulacion = informacion_sistema->informacion_puntos_simulacion.numero_puntos_simulacion;
-  int fila_restriccion_borde ;
+  int fila_restriccion_borde;
   int fila_ecuacion_35 ;
   int fila_ecuacion_36 = 43 * numero_puntos_simulacion +(*ultima_fila_balance_bateria);
   //Dependiendo de la fase el valor de fila a añadir en el vector A_i es diferente.
@@ -63,6 +73,11 @@ void incluir_filas_potencia_entrada_red_fase(informacion_procesada_t* informacio
     fila_restriccion_borde = 32 * numero_puntos_simulacion;
     fila_ecuacion_35 = 42 * numero_puntos_simulacion + (*ultima_fila_balance_bateria);
   }
+  else {
+    printf("Problema con las filas del termino Pin grid p ,t\n");
+    registrar_error("Problema con las filas del termino Pin grid p,t\n", REGISTRO_ERRORES);
+    return ERROR;
+  }
   for (int i = 0; i < numero_puntos_simulacion; i++) {
     A_i[(*index_actual)] = fila_restriccion_borde;
     (*index_actual)++;
@@ -74,6 +89,7 @@ void incluir_filas_potencia_entrada_red_fase(informacion_procesada_t* informacio
     (*index_actual)++;
     (fila_ecuacion_36)++;
   }
+  return EXITO;
 }
 
 
@@ -81,7 +97,7 @@ void incluir_filas_potencia_entrada_red_fase(informacion_procesada_t* informacio
 //Este subprograma se utiliza para incluir los terminos P grid,p,t, las filas depende de la fase que se estén
 //añadiendo
 
-void incluir_filas_potencia_red_fase(informacion_procesada_t* informacion_sistema, OSQPInt* A_i,
+int incluir_filas_potencia_red_fase(informacion_procesada_t* informacion_sistema, OSQPInt* A_i,
                                      int* ultima_fila_balance_bateria, int* index_actual, char fase) {
   //Cargo el numero de puntos de simulacion
   int numero_puntos_simulacion = informacion_sistema->informacion_puntos_simulacion.numero_puntos_simulacion;
@@ -106,6 +122,11 @@ void incluir_filas_potencia_red_fase(informacion_procesada_t* informacion_sistem
     fila_restriccion_balance = (NUMERO_VARIABLES + 2) * numero_puntos_simulacion;
     fila_ecuacion_35 = (40 + 2) * numero_puntos_simulacion + (*ultima_fila_balance_bateria);
   }
+  else {
+    printf("Problemas con las filas del termino Pgrid,p,t no hay una fase valida\n");
+    registrar_error("Problemas con las filas del termin Pgrid,p,t no hay una fase valida\n",REGISTRO_ERRORES);
+    return ERROR;
+  }
   //Una vez situada las filas a añadir dependiendo de la fase se pasa a añadir las filas en el vector A_i
   for (int i = 0; i < numero_puntos_simulacion; i++) {
     A_i[(*index_actual)] = fila_restriccion_borde;
@@ -121,6 +142,7 @@ void incluir_filas_potencia_red_fase(informacion_procesada_t* informacion_sistem
     (*index_actual)++;
     (fila_ecuacion_38)++;
   }
+  return EXITO;
 }
 
 
@@ -213,7 +235,7 @@ void incluir_filas_potencia_red(informacion_procesada_t* informacion_sistema,OSQ
 //Se utiliza el siguiente subprograma para indicar las filas en la que se encuentra la potencia intercambiada
 //por un terminal en concreto
 
-int incluir_filas_potencias_terminal(informacion_procesada_t* informacion_sistema, OSQPInt* A_i, int* fila_actual,
+void incluir_filas_potencias_terminal(informacion_procesada_t* informacion_sistema, OSQPInt* A_i, int* fila_actual,
   int* numero_ecuaciones_bateria, char fase, OSQPInt numero_terminal, int* index_actual,
   informacion_carga_terminales_t* programacion_elementos_carga_terminales) {
 
@@ -388,12 +410,10 @@ int incluir_filas_potencias_terminales(informacion_procesada_t* informacion_sist
 
     fase = informacion_sistema->informacion_terminales.fases_electricas[numero_terminal];
 
-    if (incluir_filas_potencias_terminal(informacion_sistema, A_i, fila_actual, &numero_ecuaciones_modelado_bateria,
-      fase, numero_terminal, index_actual, elementos_programados_terminales) == ERROR) {
-      printf("No se han podido incluir las filas de las potencias intercambiadas por los terminales en el vector A_i\n");
-      registrar_error("No se han podido incluir las filas de las potencias intercambiadas por los terminales en el vector A_i\n", REGISTRO_ERRORES);
-      return ERROR;
-    }
+    incluir_filas_potencias_terminal(informacion_sistema, A_i, fila_actual, &numero_ecuaciones_modelado_bateria,
+      fase, numero_terminal, index_actual, elementos_programados_terminales);
+     
+    
 
   }
 

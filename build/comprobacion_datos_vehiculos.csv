@@ -1,4 +1,2 @@
 ﻿Terminal,Modo Carga,Capacidad Bateria,Bateria Inicial,Bateria Final,Maxima Potencia,Año Inicial Carga,Mes Inicial Carga,Dia Inicial Carga,Hora Inicial Carga,Minuto Inicial Carga,Año Final Carga,Mes Final Carga,Dia Final Carga,Hora Final Carga,Minuto Final Carga
-1,Normal,80,0.1,1,40,2023,1,1,0,20,2023,1,1,23,0
-2,Normal,80,0.1,1,40,2023,1,1,0,20,2023,1,1,23,0
-3,Normal,80,0.1,1,40,2023,1,1,0,20,2023,1,1,23,0
+1,Normal,80,0.1,0.9,80,2023,1,1,0,0,2023,1,1,22,10

@@ -244,7 +244,7 @@ void incluir_terminos_potencias_terminal_A_x(informacion_procesada_t* informacio
   int index_adicional = 0;
 
   //Se define una variable para almacenar la capacidad de la bateria
-  OSQPFloat capacidad_bateria;
+  OSQPFloat capacidad_bateria = 1;
 
 
   //Si hay algún vehículo o batería que tenga la carga programada en el terminal, es necesario considerar las

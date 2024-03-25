@@ -1,3 +1,2 @@
-﻿  calcular_puntos_simulacion.c
-calcular_puntos_simulacion.c(50,65): warning C4113: 'int (__cdecl *)(tm,tm)' differs in parameter lists from '_CoreCrtNonSecureSearchSortCompareFunction'
+﻿  preparar_solver_optimizacion.c
   osqp_demo.vcxproj -> F:\osqp1feb\osqp-1.0.0.beta1\build\out\osqp_demo.exe

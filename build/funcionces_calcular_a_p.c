@@ -22,6 +22,7 @@ void incluir_columnas_potencia_salida_red_fase(informacion_procesada_t* informac
       (*comienzo_columna_actual) += 3;
     }
   }
+  printf("El index actual es %d\n", *index_actual);
   //Hay que indicar la ultima columna cual es su ultimo elemento 
   A_p[(*index_actual)] = (*comienzo_columna_actual);
 }
@@ -41,7 +42,7 @@ void incluir_columnas_potencia_entrada_red_fase(informacion_procesada_t* informa
       (*comienzo_columna_actual) += 3;
     }
   }
-  
+ 
 }
 
 
@@ -119,7 +120,7 @@ void incluir_columnas_potencia_salida_red(informacion_procesada_t* informacion_s
 
 /*Este subprograma se utiliza para indicar las posiciones de las columnas que representan los terminos de las potencias
   intercambiados por los terminales*/
-int incluir_columnas_potencia_terminal(informacion_procesada_t* informacion_sistema, OSQPInt* A_p, int* index_actual,
+void incluir_columnas_potencia_terminal(informacion_procesada_t* informacion_sistema, OSQPInt* A_p, int* index_actual,
   int terminal_actual, int* comienzo_columna_actual, char fase,informacion_carga_terminales_t* programacion_elementos_carga_terminales) {
 
   //Cargo el numero de puntos de simulacion que se tienen
@@ -204,6 +205,16 @@ int incluir_columnas_potencia_terminal(informacion_procesada_t* informacion_sist
         }
       }
     }
+    //Si el terminal no tiene ningun elemento que tenga programado su carga y el terminal está conectado
+    //a una fase valida.
+    else {
+      for (int i = 0; i < numero_puntos_simulacion; i++){
+        A_p[(*index_actual)] = (*comienzo_columna_actual);
+        (*index_actual)++;
+        (*comienzo_columna_actual) += 2;
+
+      }
+    }
   }
   //Si no está conectado a ninguna de las tres fases el termino no está presente ni en la ecuación del balance
   //de la fase, ni en la ecuación del modelado de la batería 
@@ -215,11 +226,11 @@ int incluir_columnas_potencia_terminal(informacion_procesada_t* informacion_sist
       
     }
   }
-  return EXITO;
+ 
 }
 
 /*Este subprograma se utiliza para incluir  las columnas en las que se encuentran los terminos de la potencia de los terminale*/
-int incluir_columnas_potencias_terminales(informacion_procesada_t* informacion_sistema,OSQPInt* A_p,int* index_actual,
+void incluir_columnas_potencias_terminales(informacion_procesada_t* informacion_sistema,OSQPInt* A_p,int* index_actual,
   int* comienzo_columna_actual, informacion_carga_terminales_t* programacion_elementos_carga_terminales) {
 
   //Variable para saber en que fase está el terminal
@@ -230,15 +241,13 @@ int incluir_columnas_potencias_terminales(informacion_procesada_t* informacion_s
     //Se carga la fase en la que está el terminal
     fase = informacion_sistema->informacion_terminales.fases_electricas[numero_terminal];
 
-    if (incluir_columnas_potencia_terminal(informacion_sistema, A_p, index_actual,numero_terminal, comienzo_columna_actual,fase,
-        programacion_elementos_carga_terminales) == ERROR) {
-      printf("No se han podido incluir las columnas en las que se encuentran las columnas en donde se encuentran los terminos de las potencias de los terminales\n");
-      registrar_error("No se han podido incluir las columnas en las que se encuentran las columnas en donde están las potencias de los terminales\n", REGISTRO_ERRORES);
-      return ERROR;
+    incluir_columnas_potencia_terminal(informacion_sistema, A_p, index_actual, numero_terminal, comienzo_columna_actual, fase,
+      programacion_elementos_carga_terminales);
+      
     }
   
-  }
-  return EXITO;
+  
+  
 }
 
 
@@ -247,7 +256,7 @@ int incluir_columnas_potencias_terminales(informacion_procesada_t* informacion_s
   baterias en la matriz A el termino elemento_A_actual es el numero de termino de la matriz A que se ha identificado
   como ultimo valor de A en el que empezaba la ultima columna */
 
-int incluir_columnas_bateria_terminal(informacion_procesada_t* informacion_sistema,OSQPInt* A_p, int* index_actual,
+void incluir_columnas_bateria_terminal(informacion_procesada_t* informacion_sistema,OSQPInt* A_p, int* index_actual,
   OSQPInt terminal_actual, int* comienzo_columna_actual, informacion_carga_terminales_t *programacion_elementos_carga_terminal) {
 
   //Cargo el numero de puntos de simulacion que se tienen
@@ -320,7 +329,7 @@ int incluir_columnas_bateria_terminal(informacion_procesada_t* informacion_siste
   }
 }
 
-int incluir_columnas_baterias(informacion_procesada_t* informacion_sistema, OSQPInt* A_p, int* index_actual,
+void incluir_columnas_baterias(informacion_procesada_t* informacion_sistema, OSQPInt* A_p, int* index_actual,
   int* comienzo_columna_actual,informacion_carga_terminales_t* programacion_elementos_carga_terminal) {
   //Se crea una variable booleana para controlar el bucle donde se añaden las columnas en donde se encuentran los
   //términos de los estados de batería
@@ -331,13 +340,11 @@ int incluir_columnas_baterias(informacion_procesada_t* informacion_sistema, OSQP
 
   for (int numero_terminal = 0; numero_terminal < NUMERO_TERMINALES; numero_terminal++){
 
-    if (incluir_columnas_bateria_terminal(informacion_sistema, A_p, index_actual,numero_terminal,
-        comienzo_columna_actual,programacion_elementos_carga_terminal) == ERROR) {
-      printf("No se ha podido incluir las columnas en las que se encuentran los terminos estados de bateria en el vector A_p\n");
-      registrar_error("No se ha podido incluir las columnas en las que se encuentran los terminos estados de bateria en el vector A_p\n",REGISTRO_ERRORES);
-      return ERROR;
-    }
+    incluir_columnas_bateria_terminal(informacion_sistema, A_p, index_actual, numero_terminal,
+      comienzo_columna_actual, programacion_elementos_carga_terminal);
+    
+    
 
   }
-  return EXITO;
+  
 }

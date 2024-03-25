@@ -324,10 +324,10 @@ int verificar_datos_vehiculos(datos_csv_vehiculos_t* datos_vehiculos, datos_csv_
 	//que contiene los datos de los 
 	//vehiculos es correcto->
 
-	if (comprobar_dimensiones_csv_vehiculos(datos_vehiculos) == ERROR) {
+	if (comprobar_dimensiones_csv_vehiculos(&(datos_vehiculos->informacion_vehiculos)) == ERROR) {
 		return ERROR;
 	}
-	if (comprobar_encabezados_vehiculos(datos_vehiculos) == ERROR) {
+	if (comprobar_encabezados_vehiculos(&(datos_vehiculos->informacion_vehiculos)) == ERROR) {
 		return ERROR;
 	}
 	if (comprobar_datos_csv_vehiculos(datos_vehiculos, datos_algoritmo,datos_terminales) == ERROR) {

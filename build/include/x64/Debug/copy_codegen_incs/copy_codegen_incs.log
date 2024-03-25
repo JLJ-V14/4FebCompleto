@@ -1,1 +1,19 @@
-﻿
+﻿  Copying algebra_matrix.h
+  Copying algebra_vector.h
+  Copying auxil.h
+  Copying error.h
+  Copying glob_opts.h
+  Copying lin_alg.h
+  Copying printing.h
+  Copying scaling.h
+  Copying timing.h
+  Copying types.h
+  Copying util.h
+  Copying version.h
+  Copying osqp.h
+  Copying osqp_api_constants.h
+  Copying osqp_api_functions.h
+  Copying osqp_api_types.h
+  Copying osqp_api_utils.h
+  Copying osqp_export_define.h
+  Building Custom Rule F:/osqp1feb/osqp-1.0.0.beta1/include/CMakeLists.txt

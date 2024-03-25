@@ -129,7 +129,7 @@
     }
     
    
-
+    
     
     //Se verifica que la informacion de entrada es correcta
     if (verificar_entradas(&informacion_sistema) == ERROR) {
@@ -142,7 +142,7 @@
 
     
     printf("El numero de vehiculos que tienen su carga programada antes de lectura es %d\n", informacion_sistema.datos_vehiculos.informacion_vehiculos.filas - 1);
-
+    
     //Se procesa la informacion de entrada
     if (procesar_informacion_entrada(&informacion_sistema, &informacion_procesada) == ERROR) {
       printf("La informacion no ha podido ser procesada correctamente\n");
@@ -152,8 +152,9 @@
     
     printf("El numero de vehiculos que tienen su carga programada es %d\n", informacion_sistema.datos_vehiculos.informacion_vehiculos.filas - 1);
 
-
-     /*
+    
+   
+    
     //Se procesa la informacion 
     if (comprobar_informacion_procesada(informacion_procesada) == ERROR) {
       printf("La informacion procesada no ha sido correctamente\n");
@@ -172,9 +173,9 @@
       goto fin_programa;
     }
    
-   
+    
     //Se muestra la informacion de los terminales.
-    // mostrar_informacion_carga_terminales(&informacion_carga_terminales);
+    mostrar_informacion_carga_terminales(&informacion_carga_terminales);
 
 
     
@@ -214,7 +215,7 @@
       extraer_soluciones_problema_optimizacion(&informacion_procesada,&problema_optimizacion);
     }
     
-    */
+    /**/
     fin_programa:
     
     // Se libera la memoria reservada

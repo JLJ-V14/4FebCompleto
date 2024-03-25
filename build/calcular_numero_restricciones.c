@@ -67,14 +67,14 @@ void calcular_numero_terminos_ecuaciones_baterias(informacion_procesada_t* infor
 
     //Se añade el termino de potencia intercambiado por el terminal y el termino de la bateria del punto anterior
     //conectado al terminal
-    (*numero_terminos_adicionales) += 2 * (punto_final - punto_inicial);
+    (*numero_terminos_adicionales) += 2LL * (punto_final - punto_inicial);
   }
 
   for (int bateria = 0; bateria < numero_baterias; bateria++) {
 
     int punto_final = informacion_sistema->informacion_baterias.baterias[bateria].punto_final;
     int punto_inicial = informacion_sistema->informacion_baterias.baterias[bateria].punto_inicio;
-    (*numero_terminos_adicionales) += 2 * (punto_final - punto_inicial);
+    (*numero_terminos_adicionales) += 2LL * (punto_final - punto_inicial);
 
   }
 
@@ -87,7 +87,7 @@ void calcular_numero_terminos_ecuaciones_baterias(informacion_procesada_t* infor
 
 
 /*En este subprograma se utiliza el numero de restricciones que existen en el problema de optimizacion*/
-int calcular_numero_restricciones(informacion_procesada_t* informacion_sistema,OSQPInt* numero_restricciones) {
+void calcular_numero_restricciones(informacion_procesada_t* informacion_sistema,OSQPInt* numero_restricciones) {
   //Primero se hace un recopilatorio de cuantas restricciones en total se necesitan
   //Cuenta->
   //12-> Baterías de los vehículos umbral minimos y maximos

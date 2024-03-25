@@ -3,7 +3,7 @@
 
 //Subprograma para calcular el numero de variables que existen en el problema de optimizacion.
 
-int calcular_numero_variables(informacion_procesada_t* informacion_sistema,OSQPInt* numero_variables ) {
+void calcular_numero_variables(informacion_procesada_t* informacion_sistema,OSQPInt* numero_variables ) {
 
   //Para calcular el numero de variables es necesario saber cuantos puntos de simulacion se tienen en total
   OSQPInt numero_puntos_simulacion = informacion_sistema->informacion_puntos_simulacion.numero_puntos_simulacion;

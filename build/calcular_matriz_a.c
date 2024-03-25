@@ -70,12 +70,12 @@ int calcular_vector_A_x(informacion_procesada_t* informacion_sistema, OSQPFloat*
 
 // Se calcula el vector A_i contiene los índices de las filas donde se encuentre los valores
 //  diferentes de 0
-int calcular_vector_A_i(informacion_procesada_t* informacion_sistema, OSQPFloat** A_i,OSQPInt A_nnz,
+int calcular_vector_A_i(informacion_procesada_t* informacion_sistema, OSQPInt** A_i,OSQPInt A_nnz,
   informacion_carga_terminales_t* elementos_programados_terminales) {
 
   //Primeramente hay que dimensionar el tamaño del vector A_i este vector será tan grande como
   //A_x y tan grande como número de elementos diferentes de 0 haya.
-  *A_i = (OSQPFloat*)malloc(A_nnz * sizeof(OSQPFloat));
+  *A_i = (OSQPInt*)malloc(A_nnz * sizeof(OSQPInt));
   if (*A_i == NULL) {
     printf("No se ha podido reservar memoria para el vector A_i\n");
     registrar_error("No se ha podido reservar memoria para el vector A_i", REGISTRO_ERRORES);
@@ -89,17 +89,13 @@ int calcular_vector_A_i(informacion_procesada_t* informacion_sistema, OSQPFloat*
   //Se define la primera fila en la cual se situa la ecuacion del balance de bateria
   int fila_actual_balance_bateria  = (NUMERO_VARIABLES +3) * numero_puntos_simulacion;
 
-  if (incluir_filas_baterias(informacion_sistema, *A_i, &index_actual, &fila_actual_balance_bateria,elementos_programados_terminales) == ERROR) {
-    printf("No se ha podido indicar las filas del termino estado de bateria en la matriz A_i\n");
-    registrar_error("No se ha podido indicar las filas del termino del estado de bateria en la matriz A_i", REGISTRO_ERRORES);
-    return ERROR;
-  }
+  incluir_filas_baterias(informacion_sistema, *A_i, &index_actual, &fila_actual_balance_bateria, elementos_programados_terminales);
+   
   
-  if (incluir_filas_potencias_terminales(informacion_sistema, *A_i, &index_actual, &fila_actual_balance_bateria,elementos_programados_terminales) == ERROR) {
-    printf("No se ha podido indicar las filas del termino de la potencia del terminal en la matriz A_i\n");
-    registrar_error("No se ha podido indicar las filas del termino de la potencia del terminal en la matriz A_i", REGISTRO_ERRORES);
-    return ERROR;
-  }
+  
+  incluir_filas_potencias_terminales(informacion_sistema, *A_i, &index_actual, &fila_actual_balance_bateria, elementos_programados_terminales);
+   
+  
   
   int ultima_fila_balance_bateria = fila_actual_balance_bateria;
 
@@ -109,23 +105,59 @@ int calcular_vector_A_i(informacion_procesada_t* informacion_sistema, OSQPFloat*
   
   incluir_filas_potencia_salida_red(informacion_sistema, *A_i, &ultima_fila_balance_bateria, &index_actual);
   
-  incluir_filas_potencia_red_fase(informacion_sistema, *A_i, &ultima_fila_balance_bateria, &index_actual, 'R');
+  if (incluir_filas_potencia_red_fase(informacion_sistema, *A_i, &ultima_fila_balance_bateria, &index_actual, 'R') == ERROR) {
+    printf("No se ha podido incluir las filas del termino Pgrid p,t en la fase R correctamente\n");
+    registrar_error("No se ha podido incluir las filas del termino Pgrid p,t correctamente\n", REGISTRO_ERRORES);
+    return ERROR;
+  }
   
-  incluir_filas_potencia_red_fase(informacion_sistema, *A_i, &ultima_fila_balance_bateria, &index_actual, 'S');
+  if (incluir_filas_potencia_red_fase(informacion_sistema, *A_i, &ultima_fila_balance_bateria, &index_actual, 'S') == ERROR) {
+    printf("No se ha podido incluir las filas del termino Pgrid p,t en la fase S correctamente\n");
+    registrar_error("No se ha podido incluir las filas del termino Pgrid p,t de la fase S correctamente\n", REGISTRO_ERRORES);
+    return ERROR;
+  }
 
-  incluir_filas_potencia_red_fase(informacion_sistema, *A_i, &ultima_fila_balance_bateria, &index_actual, 'T');
+  if (incluir_filas_potencia_red_fase(informacion_sistema, *A_i, &ultima_fila_balance_bateria, &index_actual, 'T') == ERROR) {
+    printf("No se ha podido incluir las filas del termino P grid p,t en la fase T correctamente\n");
+    registrar_error("No se ha podido incluir las filas del termino P grid p,t en la fase T correctamente\n",REGISTRO_ERRORES);
+    return ERROR;
+  }
   
-  incluir_filas_potencia_entrada_red_fase(informacion_sistema, *A_i, &ultima_fila_balance_bateria, &index_actual, 'R');
+  if (incluir_filas_potencia_entrada_red_fase(informacion_sistema, *A_i, &ultima_fila_balance_bateria, &index_actual, 'R') == ERROR) {
+    printf("No se ha podido incluir las filas del termino Pin grid p,t en la fase R correctamente\n");
+    registrar_error("No se ha podido incluir las filas del termino Pin grid p,t correctamente\n", REGISTRO_ERRORES);
+    return ERROR;
+  }
   
-  incluir_filas_potencia_entrada_red_fase(informacion_sistema, *A_i, &ultima_fila_balance_bateria, &index_actual, 'S');
+  if (incluir_filas_potencia_entrada_red_fase(informacion_sistema, *A_i, &ultima_fila_balance_bateria, &index_actual, 'S') == ERROR) {
+    printf("No se ha podido incluir las filas del termino Pin grid p,T en la fase S correctamente\n");
+    registrar_error("No se ha podido incluir las filas del termino Pin grid p,t correctamente\n", REGISTRO_ERRORES);
+    return ERROR;
+  }
   
-  incluir_filas_potencia_entrada_red_fase(informacion_sistema, *A_i, &ultima_fila_balance_bateria, &index_actual, 'T');
+  if (incluir_filas_potencia_entrada_red_fase(informacion_sistema, *A_i, &ultima_fila_balance_bateria, &index_actual, 'T') == ERROR) {
+    printf("No se ha podido incluir las filas del termino Pin grid p,T en la fase T correctamente\n");
+    registrar_error("No se ha podido incluir las filas del termino Pin grid p,t en la fase T correctamente\n", REGISTRO_ERRORES);
+    return ERROR;
+  };
   
-  incluir_filas_potencia_salida_red_fase(informacion_sistema, *A_i, &ultima_fila_balance_bateria, &index_actual, 'R');
+  if (incluir_filas_potencia_salida_red_fase(informacion_sistema, *A_i, &ultima_fila_balance_bateria, &index_actual, 'R') == ERROR) {
+    printf("No se ha podido incluir las filas del termino Pout grid p,t en la fase R correctamente\n");
+    registrar_error("No se ha podido incluir las filas del termino Pout grid p,t en la fase R correctamente\n", REGISTRO_ERRORES);
+    return ERROR;
+  }
   
-  incluir_filas_potencia_salida_red_fase(informacion_sistema, *A_i, &ultima_fila_balance_bateria, &index_actual, 'S');
+  if (incluir_filas_potencia_salida_red_fase(informacion_sistema, *A_i, &ultima_fila_balance_bateria, &index_actual, 'S') == ERROR) {
+    printf("No se ha podido incluir las filas del termino Pout grid p,t en la fase S correctamente\n");
+    registrar_error("No se ha podido incluir las filas del termino Pout grid p,t en la fase S correctamente\n", REGISTRO_ERRORES);
+    return ERROR;
+  }
 
-  incluir_filas_potencia_salida_red_fase(informacion_sistema, *A_i, &ultima_fila_balance_bateria, &index_actual, 'T');
+  if (incluir_filas_potencia_salida_red_fase(informacion_sistema, *A_i, &ultima_fila_balance_bateria, &index_actual, 'T') == ERROR) {
+    printf("No se ha podido incluir las filas del termino Pout grid p,t en la fase T correctamente\n");
+    registrar_error("No se ha podido incluir las filas del termino Pout grid p,t en la fase T correctamente\n", REGISTRO_ERRORES);
+    return ERROR;
+  }
   
   return EXITO;
 }
@@ -150,35 +182,45 @@ int calcular_vector_A_p(informacion_procesada_t* informacion_sistema, OSQPInt** 
     registrar_error("No se ha podido reservar memoria para el vector A_p",REGISTRO_ERRORES);
     return ERROR;
   }
-
+  printf("Comprobando vector A_p\n");
+  printf("El index actual es %d\n", index_actual);
  
 
   //Se incluyen las columnas en las que se encuentran los terminos de los estados de bateria
-  if (incluir_columnas_baterias(informacion_sistema, *A_p, &index_actual, &columna_a_actual,informacion_carga_terminales) == ERROR) {
-    printf("No se ha podido incluir las columnas en las que se encuentran los terminos de estados de bateria\n");
-    registrar_error("No se ha podido incluir las columnas en las que se encuentran los terminos de estados de bateria\n",REGISTRO_ERRORES);
-    return ERROR;
- }
+  incluir_columnas_baterias(informacion_sistema, *A_p, &index_actual, &columna_a_actual, informacion_carga_terminales);
+  printf("Comprobando vector A_p\n");
+  printf("El index actual es %d\n", index_actual);
   
   //Se incluyen las columnas en la que se encuentran los terminos de las potencias que intercambian los terminales
-  if (incluir_columnas_potencias_terminales(informacion_sistema, *A_p, &index_actual, &columna_a_actual,informacion_carga_terminales) == ERROR) {
-    printf("No se ha podido incluir las columnas en las que se encuentran los terminos de potencia de los terminales\n");
-    registrar_error("No se ha podido incluir las columnas en las que se encuentran los terminos de potencia de los terminales\n", REGISTRO_ERRORES);
-    return ERROR;
-  }
-  
+  incluir_columnas_potencias_terminales(informacion_sistema, *A_p, &index_actual, &columna_a_actual, informacion_carga_terminales);
+
+  printf("Comprobando vector A_p\n");
+  printf("El index actual es %d\n", index_actual);
+
   incluir_columnas_potencia_red(informacion_sistema,*A_p,&index_actual,&columna_a_actual);
+  printf("Comprobando vector A_p\n");
+  printf("El index actual es %d\n", index_actual);
   
   incluir_columnas_potencia_entrada_red(informacion_sistema, *A_p, &index_actual, &columna_a_actual);
+  printf("Comprobando vector A_p\n");
+  printf("El index actual es %d\n", index_actual);
 
   incluir_columnas_potencia_salida_red(informacion_sistema, *A_p, &index_actual, &columna_a_actual);
+  printf("Comprobando vector A_p\n");
+  printf("El index actual es %d\n", index_actual);
   
   incluir_columnas_potencias_red_fase(informacion_sistema, *A_p, &index_actual, &columna_a_actual);
+  printf("Comprobando vector A_p\n");
+  printf("El index actual es %d\n", index_actual);
   
   incluir_columnas_potencia_entrada_red_fase(informacion_sistema, *A_p, &index_actual, &columna_a_actual);
+  printf("Comprobando vector A_p\n");
+  printf("El index actual es %d\n", index_actual);
   
   incluir_columnas_potencia_salida_red_fase(informacion_sistema, *A_p, &index_actual, &columna_a_actual);
-  
+
+  printf("Comprobando vector A_p\n");
+  printf("El index actual es %d\n", index_actual);
   return EXITO;
 }
 
@@ -247,8 +289,8 @@ int calcular_matriz_a(informacion_procesada_t * informacion_sistema, problema_op
   calcular_numero_terminos(informacion_sistema, &A_nnz);
   matriz_a->A_nnz = A_nnz;
 
-  printf("El numero de variables es %d\n", n);
-  printf("El numero de restricciones es %d\n", m);
+  printf("El numero de variables es %lld\n", n);
+  printf("El numero de restricciones es %lld\n", m);
   
   //Se procede a calcular el vector A_x
   if (calcular_vector_A_x(informacion_sistema, &(matriz_a->A_x),A_nnz,programacion_carga_terminales) == ERROR) {

@@ -1,1 +1,17 @@
-﻿
+﻿  Copying algebra_impl.h
+  Copying csc_math.h
+  Copying csc_utils.h
+  Copying kkt.h
+  Copying qdldl.h
+  Copying qdldl_interface.h
+  Copying qdldl_types.h
+  Copying qdldl_version.h
+  Copying algebra_libs.c
+  Copying csc_math.c
+  Copying csc_utils.c
+  Copying kkt.c
+  Copying matrix.c
+  Copying qdldl.c
+  Copying qdldl_interface.c
+  Copying vector.c
+  Building Custom Rule F:/osqp1feb/osqp-1.0.0.beta1/algebra/builtin/CMakeLists.txt

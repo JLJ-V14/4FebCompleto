@@ -30,7 +30,7 @@
 	//Es un numero y que
 	//Los terminales son consecutivos.
 
-static int comprobar_numero_terminal(const char* terminal, const int terminal_actual) {
+static int comprobar_numero_terminal(char* terminal, const int terminal_actual) {
 
 
 	if (!es_un_numero(terminal, DECIMAL_NO_INCLUIDO)) {

@@ -19,7 +19,7 @@ int imprimir_vectores_p(problema_optimizacion_t* informacion_problema_optimizaci
     return ERROR;
   }
   //Se cargan el numero de elementos que se tienen diferentes de 0
-  OSQPInt* P_nnz = informacion_problema_optimizacion->matriz_p.P_nnz;
+  OSQPInt P_nnz = informacion_problema_optimizacion->matriz_p.P_nnz;
 
   //Se cargan los diferentes vectorees P
   OSQPFloat* P_x = informacion_problema_optimizacion->matriz_p.P_x;
@@ -37,11 +37,11 @@ int imprimir_vectores_p(problema_optimizacion_t* informacion_problema_optimizaci
   }
 
   for (int i = 0; i < P_nnz; i++) {
-    fprintf(archivo_comprobacion_P_i, "%d\n", P_i[i]);
+    fprintf(archivo_comprobacion_P_i, "%lld\n", P_i[i]);
   }
 
   for (int i = 0; i < numero_columnas; i++) {
-    fprintf(archivo_comprobacion_P_p, "%d\n", P_p[i]);
+    fprintf(archivo_comprobacion_P_p, "%lld\n", P_p[i]);
   }
 
   fclose(archivo_comprobacion_P_i);
@@ -85,11 +85,11 @@ int imprimir_vectores_a(problema_optimizacion_t* informacion_problema_optimizaci
   }
 
   for (int i = 0; i < A_nnz; i++) {
-    fprintf(archivo_comprobacion_A_i, "%d\n", A_i[i]);
+    fprintf(archivo_comprobacion_A_i, "%lld\n", A_i[i]);
   }
 
   for (int i = 0; i <numero_columnas; i++) {
-    fprintf(archivo_comprobacion_A_p, "%d\n", A_p[i]);
+    fprintf(archivo_comprobacion_A_p, "%lld\n", A_p[i]);
   }
 
   fclose(archivo_comprobacion_A_x);
@@ -177,11 +177,11 @@ int imprimir_matriz_P(problema_optimizacion_t* informacion_problema_optimizacion
   OSQPCscMatrix* P = informacion_problema_optimizacion->matriz_p.P;
 
   // Se escribe las dimensiones de las matrices en la primera fila
-  fprintf(archivo, "%d,%d\n", P->n, P->n);
+  fprintf(archivo, "%lld,%lld\n", P->n, P->n);
 
 
 
-  printf("n es %d\n", P->n);
+  printf("n es %lld\n", P->n);
 
 
   // Se escribe los elementos de la matriz en el CSV
@@ -225,12 +225,12 @@ int imprimir_matriz_A(problema_optimizacion_t* informacion_problema_optimizacion
   OSQPCscMatrix* A = informacion_problema_optimizacion->matriz_a.A;
 
   // Se escribe las dimensiones de las matrices en la primera fila
-  fprintf(archivo, "%d,%d\n", A->m, A->n);
+  fprintf(archivo, "%lld,%lld\n", A->m, A->n);
 
 
 
-  printf("m es %d\n", A->m);
-  printf("n es %d\n", A->n);
+  printf("m es %lld\n", A->m);
+  printf("n es %lld\n", A->n);
 
 
   // Se escribe los elementos de la matriz en el CSV

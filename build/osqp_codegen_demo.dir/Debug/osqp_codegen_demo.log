@@ -1,1 +1,4 @@
-﻿  osqp_codegen_demo.vcxproj -> F:\osqp1feb\osqp-1.0.0.beta1\build\out\osqp_codegen_demo.exe
+﻿  Building Custom Rule F:/osqp1feb/osqp-1.0.0.beta1/CMakeLists.txt
+  osqp_codegen_demo.c
+  osqp_codegen_demo.vcxproj -> F:\osqp1feb\osqp-1.0.0.beta1\build\out\osqp_codegen_demo.exe
+F:\osqp1feb\osqp-1.0.0.beta1\examples\osqp_codegen_demo.c(86): warning C6011: Dereferencing NULL pointer 'defs'. 

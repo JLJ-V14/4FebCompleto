@@ -11,11 +11,11 @@
 extern "C" {
 #endif
 
-	int incluir_columnas_baterias(informacion_procesada_t* informacion_sistema, OSQPInt* A_p, int* index_actual,
-		int* columna_a_actual,informacion_carga_terminales_t* programacion_elementos_carga_terminal);
-	
-	int incluir_columnas_potencias_terminales(informacion_procesada_t* informacion_sistema, OSQPInt* A_p, int* index_actual,
-		int* comienzo_columna_actual,informacion_carga_terminales_t* programacion_elementos_carga_terminal);
+	void incluir_columnas_baterias(informacion_procesada_t* informacion_sistema, OSQPInt* A_p, int* index_actual,
+		int* columna_a_actual, informacion_carga_terminales_t* programacion_elementos_carga_terminal);
+
+	void incluir_columnas_potencias_terminales(informacion_procesada_t* informacion_sistema, OSQPInt* A_p, int* index_actual,
+		int* comienzo_columna_actual, informacion_carga_terminales_t* programacion_elementos_carga_terminal);
 
 	void incluir_columnas_potencia_red(informacion_procesada_t* informacion_sistema, OSQPInt* A_p, int* index_actual,
 		int* comienzo_columna_actual);

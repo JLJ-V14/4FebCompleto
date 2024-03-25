@@ -162,6 +162,7 @@ OSQPInt osqp_setup(OSQPSolver**         solverp,
   // Validate settings
   if (validate_settings(settings, 1)) return osqp_error(OSQP_SETTINGS_VALIDATION_ERROR);
 
+ 
   // Allocate empty solver
   solver = c_calloc(1, sizeof(OSQPSolver));
   if (!(solver)) return osqp_error(OSQP_MEM_ALLOC_ERROR);
@@ -205,7 +206,7 @@ OSQPInt osqp_setup(OSQPSolver**         solverp,
   work->data->u = OSQPVectorf_new(u,m);
   if (!(work->data->l) || !(work->data->u))
     return osqp_error(OSQP_MEM_ALLOC_ERROR);
-
+  
   if (settings->rho_is_vec) {
     // Vectorized rho parameter
     work->rho_vec     = OSQPVectorf_malloc(m);
@@ -221,7 +222,7 @@ OSQPInt osqp_setup(OSQPSolver**         solverp,
     work->rho_vec     = OSQP_NULL;
     work->rho_inv_vec = OSQP_NULL;
   }
-
+  
   // Allocate internal solver variables (ADMM steps)
   work->x           = OSQPVectorf_calloc(n);
   work->z           = OSQPVectorf_calloc(m);
@@ -258,11 +259,11 @@ OSQPInt osqp_setup(OSQPSolver**         solverp,
     return osqp_error(OSQP_MEM_ALLOC_ERROR);
   if (!(work->delta_x) || !(work->Pdelta_x) || !(work->Adelta_x))
     return osqp_error(OSQP_MEM_ALLOC_ERROR);
-
+  
   // Copy settings
   solver->settings = copy_settings(settings);
   if (!(solver->settings)) return osqp_error(OSQP_MEM_ALLOC_ERROR);
-
+ 
   // Perform scaling
   if (settings->scaling) {
     // Allocate scaling structure
@@ -276,7 +277,7 @@ OSQPInt osqp_setup(OSQPSolver**         solverp,
         !(work->scaling->E) || !(work->scaling->Einv))
       return osqp_error(OSQP_MEM_ALLOC_ERROR);
 
-
+    
     // Allocate workspace variables used in scaling
     work->D_temp   = OSQPVectorf_calloc(n);
     work->D_temp_A = OSQPVectorf_calloc(n);
@@ -286,13 +287,14 @@ OSQPInt osqp_setup(OSQPSolver**         solverp,
 
     // Scale data
     scale_data(solver);
+    
   } else {
     work->scaling  = OSQP_NULL;
     work->D_temp   = OSQP_NULL;
     work->D_temp_A = OSQP_NULL;
     work->E_temp   = OSQP_NULL;
   }
-
+ 
   if (settings->rho_is_vec) {
     // Set type of constraints.  Ignore return value
     // because we will definitely factor KKT.
@@ -307,7 +309,7 @@ OSQPInt osqp_setup(OSQPSolver**         solverp,
   exitflag = osqp_algebra_init_linsys_solver(&(work->linsys_solver), work->data->P, work->data->A,
                                              work->rho_vec, solver->settings,
                                              &work->scaled_prim_res, &work->scaled_dual_res, 0);
-
+  
   if (exitflag == OSQP_NONCVX_ERROR) {
     update_status(solver->info, OSQP_NON_CVX);
     return osqp_error(exitflag);
@@ -330,7 +332,7 @@ OSQPInt osqp_setup(OSQPSolver**         solverp,
   if (!(work->pol->active_flags) ||
       !(work->pol->z) || !(work->pol->y))
     return osqp_error(OSQP_MEM_ALLOC_ERROR);
-
+  
   // Allocate solution
   solver->solution = c_calloc(1, sizeof(OSQPSolution));
   if (!(solver->solution)) return osqp_error(OSQP_MEM_ALLOC_ERROR);

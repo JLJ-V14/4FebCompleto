@@ -361,6 +361,7 @@ typedef struct {
 typedef struct {
     int numero_horas;
     precio_t* precios;
+    int numero_precios;
 }informacion_precio_t ;
 
 /*Se define un tipo para almacenar las fechas que deben estar presenten en la simulacion

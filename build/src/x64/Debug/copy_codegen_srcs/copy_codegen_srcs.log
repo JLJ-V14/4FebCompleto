@@ -1,1 +1,6 @@
-﻿
+﻿  Copying auxil.c
+  Copying error.c
+  Copying osqp_api.c
+  Copying scaling.c
+  Copying util.c
+  Building Custom Rule F:/osqp1feb/osqp-1.0.0.beta1/src/CMakeLists.txt

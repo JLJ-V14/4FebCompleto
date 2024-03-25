@@ -47,7 +47,7 @@ bool comprobar_porcentaje_bateria(const double porcentaje_bateria) {
 	return ((porcentaje_bateria >= 0) && (porcentaje_bateria <= 1));
 }
 
-int verificar_numero_terminal(const char* numero_terminal_string, const int numero_fila) {
+int verificar_numero_terminal( char* numero_terminal_string, int numero_fila) {
 	//Este subprograma se utiliza
 	//para verificar que el dato 
 	//de terminal es correcto.
