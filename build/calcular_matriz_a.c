@@ -50,29 +50,29 @@ int calcular_vector_A_x(informacion_procesada_t* informacion_sistema, OSQPFloat*
   //Se llama al siguiente subprograma para incluir en la matriz de restricciones los terminos de la variable SOC
  
   incluir_terminos_baterias_A_x(informacion_sistema, *A_x, &index_actual, elementos_programados_terminales);
-  printf("La ultima posicion añadida despues de las baterias es %d \n",index_actual-1);
+ 
 
 
   incluir_terminos_potencias_A_x(informacion_sistema, *A_x, &index_actual, elementos_programados_terminales);
-  printf("La ultima posicion añadida despues de las potencias de terminal es %d \n", index_actual-1);
+  
   
   incluir_termino_potencia_red(informacion_sistema, *A_x, &index_actual);
-  printf("La ultima posicion añadida despues de las potencias de red es %d \n", index_actual-1);
+ 
  
   incluir_termino_potencia_entrada_sistema(informacion_sistema, *A_x, &index_actual);
-  printf("La ultima posicion añadida despues de las potencias de entrada de red es %d \n", index_actual-1);
+  
   
   incluir_termino_potencia_salida_sistema(informacion_sistema, *A_x, &index_actual);
-  printf("La ultima posicion añadida despues de las potencias de salida de red es %d \n", index_actual-1);
+  
  
   incluir_terminos_potencia_red_fase(informacion_sistema, *A_x, &index_actual);
-  printf("La ultima posicion añadida despues de las potencias de red de fase es %d \n", index_actual-1);
+  
   
   incluir_terminos_potencia_entrada_fase(informacion_sistema, *A_x, &index_actual);
-  printf("La ultima posicion añadida despues de las potencias de entrada de fase es %d \n", index_actual-1);
+  
   
   incluir_terminos_potencia_salida_fase(informacion_sistema,*A_x,&index_actual);
-  printf("La ultima posicion añadida despues de las potencias de salida de red es %d \n", index_actual-1);
+  
   
 
   return EXITO;
@@ -100,83 +100,83 @@ int calcular_vector_A_i(informacion_procesada_t* informacion_sistema, OSQPInt** 
   int fila_actual_balance_bateria  = (NUMERO_VARIABLES +3) * numero_puntos_simulacion;
 
   incluir_filas_baterias(informacion_sistema, *A_i, &index_actual, &fila_actual_balance_bateria, elementos_programados_terminales);
-  printf("El ultimo index en A_i añadido despues de las baterias es %d\n", index_actual - 1);
+  
   
   
   incluir_filas_potencias_terminales(informacion_sistema, *A_i, &index_actual, &fila_actual_balance_bateria, elementos_programados_terminales);
-  printf("El ultimo index en A_i añadido despues de las baterias es %d\n", index_actual - 1);
+  
   
   
   int ultima_fila_balance_bateria = fila_actual_balance_bateria;
 
   incluir_filas_potencia_red(informacion_sistema, *A_i, &ultima_fila_balance_bateria, &index_actual);
-  printf("El ultimo index en A_i añadido despues de las potencias de red es %d\n", index_actual - 1);
+  
 
 
 
   incluir_filas_potencia_entrada_red(informacion_sistema, *A_i, &ultima_fila_balance_bateria, &index_actual);
-  printf("El ultimo index en A_i añadido despues de las potencias de entrada de red es %d\n", index_actual - 1);
+  
 
 
   incluir_filas_potencia_salida_red(informacion_sistema, *A_i, &ultima_fila_balance_bateria, &index_actual);
-  printf("El ultimo index en A_i añadido despues de las potencias de salida de red es %d\n", index_actual - 1);
+  
 
   if (incluir_filas_potencia_red_fase(informacion_sistema, *A_i, &ultima_fila_balance_bateria, &index_actual, 'R') == ERROR) {
     printf("No se ha podido incluir las filas del termino Pgrid p,t en la fase R correctamente\n");
     registrar_error("No se ha podido incluir las filas del termino Pgrid p,t correctamente\n", REGISTRO_ERRORES);
     return ERROR;
   }
-  printf("El ultimo index en A_i añadido despues de las potencias de red de fase R es %d\n", index_actual - 1);
+ 
   
   if (incluir_filas_potencia_red_fase(informacion_sistema, *A_i, &ultima_fila_balance_bateria, &index_actual, 'S') == ERROR) {
     printf("No se ha podido incluir las filas del termino Pgrid p,t en la fase S correctamente\n");
     registrar_error("No se ha podido incluir las filas del termino Pgrid p,t de la fase S correctamente\n", REGISTRO_ERRORES);
     return ERROR;
   }
-  printf("El ultimo index en A_i añadido despues de las potencias de red de fase S es %d\n", index_actual - 1);
+ 
   if (incluir_filas_potencia_red_fase(informacion_sistema, *A_i, &ultima_fila_balance_bateria, &index_actual, 'T') == ERROR) {
     printf("No se ha podido incluir las filas del termino P grid p,t en la fase T correctamente\n");
     registrar_error("No se ha podido incluir las filas del termino P grid p,t en la fase T correctamente\n",REGISTRO_ERRORES);
     return ERROR;
   }
-  printf("El ultimo index en A_i añadido despues de las potencias de red de fase T es %d\n", index_actual - 1);
+  
   if (incluir_filas_potencia_entrada_red_fase(informacion_sistema, *A_i, &ultima_fila_balance_bateria, &index_actual, 'R') == ERROR) {
     printf("No se ha podido incluir las filas del termino Pin grid p,t en la fase R correctamente\n");
     registrar_error("No se ha podido incluir las filas del termino Pin grid p,t correctamente\n", REGISTRO_ERRORES);
     return ERROR;
   }
-  printf("El ultimo index en A_i añadido despues de las potencias de entrada de fase R es %d\n", index_actual - 1);
+  
 
   if (incluir_filas_potencia_entrada_red_fase(informacion_sistema, *A_i, &ultima_fila_balance_bateria, &index_actual, 'S') == ERROR) {
     printf("No se ha podido incluir las filas del termino Pin grid p,T en la fase S correctamente\n");
     registrar_error("No se ha podido incluir las filas del termino Pin grid p,t correctamente\n", REGISTRO_ERRORES);
     return ERROR;
   }
-  printf("El ultimo index en A_i añadido despues de las potencias de red de fase S es %d\n", index_actual - 1);
+  
   if (incluir_filas_potencia_entrada_red_fase(informacion_sistema, *A_i, &ultima_fila_balance_bateria, &index_actual, 'T') == ERROR) {
     printf("No se ha podido incluir las filas del termino Pin grid p,T en la fase T correctamente\n");
     registrar_error("No se ha podido incluir las filas del termino Pin grid p,t en la fase T correctamente\n", REGISTRO_ERRORES);
     return ERROR;
   };
-  printf("El ultimo index en A_i añadido despues de las potencias de red de fase T es %d\n", index_actual - 1);
+  
   if (incluir_filas_potencia_salida_red_fase(informacion_sistema, *A_i, &ultima_fila_balance_bateria, &index_actual, 'R') == ERROR) {
     printf("No se ha podido incluir las filas del termino Pout grid p,t en la fase R correctamente\n");
     registrar_error("No se ha podido incluir las filas del termino Pout grid p,t en la fase R correctamente\n", REGISTRO_ERRORES);
     return ERROR;
   }
-  printf("El ultimo index en A_i añadido despues de las potencias de Salida red de fase R es %d\n", index_actual - 1);
+  
   if (incluir_filas_potencia_salida_red_fase(informacion_sistema, *A_i, &ultima_fila_balance_bateria, &index_actual, 'S') == ERROR) {
     printf("No se ha podido incluir las filas del termino Pout grid p,t en la fase S correctamente\n");
     registrar_error("No se ha podido incluir las filas del termino Pout grid p,t en la fase S correctamente\n", REGISTRO_ERRORES);
     return ERROR;
   }
-  printf("El ultimo index en A_i añadido despues de las potencias de red de fase S es %d\n", index_actual - 1);
+  
   if (incluir_filas_potencia_salida_red_fase(informacion_sistema, *A_i, &ultima_fila_balance_bateria, &index_actual, 'T') == ERROR) {
     printf("No se ha podido incluir las filas del termino Pout grid p,t en la fase T correctamente\n");
     registrar_error("No se ha podido incluir las filas del termino Pout grid p,t en la fase T correctamente\n", REGISTRO_ERRORES);
     return ERROR;
   }
-  printf("El ultimo index en A_i añadido despues de las potencias de red de fase T es %d\n", index_actual - 1);
+ 
   return EXITO;
 }
 
@@ -206,36 +206,36 @@ int calcular_vector_A_p(informacion_procesada_t* informacion_sistema, OSQPInt** 
   //Se incluyen las columnas en las que se encuentran los terminos de los estados de bateria
   
   incluir_columnas_baterias(informacion_sistema, *A_p, &index_actual, &columna_a_actual, informacion_carga_terminales);
-  printf("La siguiente columna a añadir %d\n", columna_a_actual);
+  
   
   //Se incluyen las columnas en la que se encuentran los terminos de las potencias que intercambian los terminales
  
   incluir_columnas_potencias_terminales(informacion_sistema, *A_p, &index_actual, &columna_a_actual, informacion_carga_terminales);
-  printf("La siguiente columna a añadir %d\n", columna_a_actual);
+ 
  
   
   incluir_columnas_potencia_red(informacion_sistema,*A_p,&index_actual,&columna_a_actual);
-  printf("La siguiente columna a añadir %d\n", columna_a_actual);
+  
 
   
   incluir_columnas_potencia_entrada_red(informacion_sistema, *A_p, &index_actual, &columna_a_actual);
-  printf("La siguiente columna a añadir %d\n", columna_a_actual);
+  
 
   
   incluir_columnas_potencia_salida_red(informacion_sistema, *A_p, &index_actual, &columna_a_actual);
-  printf("La siguiente columna a añadir %d\n", columna_a_actual);
+  
 
   
   incluir_columnas_potencias_red_fase(informacion_sistema, *A_p, &index_actual, &columna_a_actual);
-  printf("La siguiente columna a añadir %d\n", columna_a_actual);
+  
 
   
   incluir_columnas_potencia_entrada_red_fase(informacion_sistema, *A_p, &index_actual, &columna_a_actual);
-  printf("La siguiente columna a añadir %d\n", columna_a_actual);
+  
 
   
   incluir_columnas_potencia_salida_red_fase(informacion_sistema, *A_p, &index_actual, &columna_a_actual);
-  printf("La siguiente columna a añadir %d\n", columna_a_actual);
+  
   
   return EXITO;
 }

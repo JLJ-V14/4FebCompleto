@@ -185,7 +185,7 @@ void incluir_objetivo_cuadratico_vehiculo(informacion_procesada_t* informacion_s
   }
 
   else {
-    printf("El punto final es %d\n", punto_final);
+   
     matriz_p->P_x[(*index_actual)] = COEFICIENTE_CARGA;
     matriz_p->P_i[(*index_actual)] = offset_fila_bateria_terminal + punto_final;
     (*index_actual)++;
@@ -564,7 +564,7 @@ int calcular_matriz_p(informacion_procesada_t* informacion_sistema,problema_opti
   
   calcular_vector_P_p(informacion_sistema, matriz_p, elementos_programados_carga_terminales);
   
-  printf("El numero de elementos diferentes de 0 es %lld\n", matriz_p->P_nnz);
+ ;
   //Se rellenan los datos de la matriz P
   csc_set_data(matriz_p->P,numero_variables,numero_variables,matriz_p->P_nnz,matriz_p->P_x,matriz_p->P_i,matriz_p->P_p);
  

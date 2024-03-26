@@ -400,7 +400,7 @@ int leer_fechas_adicionales(datos_csv_vehiculos_t* datos_vehiculos, struct tm** 
   struct tm*fecha_final_algoritmo) {
 
 
-
+ 
   
   /*Se carga las fechas adicionales de los vehiculos que es necesario añadir*/
   if (cargar_fechas_adicionales_vehiculos(datos_vehiculos, fechas_adicionales, numero_fechas_adicionales) == ERROR) {

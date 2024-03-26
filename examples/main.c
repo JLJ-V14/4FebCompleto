@@ -129,7 +129,7 @@
     }
     
    
-    
+   
     
     //Se verifica que la informacion de entrada es correcta
     if (verificar_entradas(&informacion_sistema) == ERROR) {
@@ -139,7 +139,7 @@
     }
 
    
-
+   
    
     
     
@@ -149,11 +149,11 @@
       registrar_error("La informacion no ha podido ser procesada correctamente\n", REGISTRO_ERRORES);
       goto fin_programa;
     }
-    
+   
    
     
     
-   
+    
     
     //Se procesa la informacion 
     if (comprobar_informacion_procesada(informacion_procesada) == ERROR) {
@@ -172,14 +172,14 @@
       registrar_error("La informacion de los elementos que tienen su carga programada en los terminales no ha podido ser cargada correctamente\n",REGISTRO_ERRORES);
       goto fin_programa;
     }
-   
+    
     
     //Se muestra la informacion de los terminales.
     mostrar_informacion_carga_terminales(&informacion_carga_terminales);
 
-
     
-   
+    
+    
     if (preparar_problema_optimizacion(&informacion_procesada,&problema_optimizacion,&informacion_carga_terminales) == ERROR){
       printf("Las matrices del problema de optimizacion no han sido calculadas correctamente\n");
       registrar_error("Las matrices del problema de optimización no han sido calculadas correctamente\n", REGISTRO_ERRORES);

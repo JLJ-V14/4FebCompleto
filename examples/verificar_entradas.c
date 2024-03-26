@@ -73,19 +73,21 @@ int verificar_entradas(informacion_entrada_t* informacion_sistema) {
 		registrar_error("La informacion de los vehiculos es incorrecta\n", REGISTRO_ERRORES);
 		return ERROR;
 	}
+ 
   
-
 	if (verificar_baterias(datos_baterias, datos_algoritmo,datos_terminales) == ERROR) {
 		printf("los datos del csv de las baterias son incorrectas\n");
 		registrar_error("La informacion de las baterias es incorrecta\n", REGISTRO_ERRORES);
 		return ERROR;
 	}
-  
+ 
 	if(verificar_simultaneidad_vehiculos_baterias(datos_vehiculos, datos_baterias) == ERROR){
 		printf("Hay problemas de simultaneidad de elementos conectados al mismo terminal al mismo tiempo\n");
 		registrar_error("Hay problemas de simultaneidad de elementos conectados al mismo terminal al mismo tiempo\n",REGISTRO_ERRORES);
 		return ERROR;
 	}
+
+ 
   /**/
 	return EXITO;
 }

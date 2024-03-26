@@ -1,3 +1,4 @@
+#include "calcular_puntos_simulacion.h"
 #include "definiciones_globales.h"
 #include "operaciones_fecha.h"
 #include "operaciones_string.h"
@@ -14,7 +15,10 @@
 */
 bool comprobar_superposicion(struct tm fecha_inicio_elemento_1, struct tm fecha_final_elemento_1,
 	                         struct tm fecha_inicio_elemento_2, struct tm fecha_final_elemento_2) {
-	
+
+
+
+
 
 		struct tm start1_copy = fecha_inicio_elemento_1;
 		struct tm end1_copy = fecha_final_elemento_1;
@@ -52,7 +56,7 @@ int comprobar_simultaneidad_vehiculo (datos_csv_vehiculos_t* datos_vehiculos,
 	int columna_mes_inicial = datos_vehiculos->posiciones_informacion_vehiculos.ubicacion_fecha_inicial_vehiculo.columna_mes;
 	int columna_dia_inicial = datos_vehiculos->posiciones_informacion_vehiculos.ubicacion_fecha_inicial_vehiculo.columna_dia;
 	int columna_hora_inicial = datos_vehiculos->posiciones_informacion_vehiculos.ubicacion_fecha_inicial_vehiculo.columna_hora;
-	int columna_minuto_inicial = datos_vehiculos->posiciones_informacion_vehiculos.ubicacion_fecha_final_vehiculo.columna_minuto;
+	int columna_minuto_inicial = datos_vehiculos->posiciones_informacion_vehiculos.ubicacion_fecha_inicial_vehiculo.columna_minuto;
 	
 	//Se carga las columnas donde se encuentra la fecha final
 	int columna_anyo_final = datos_vehiculos->posiciones_informacion_vehiculos.ubicacion_fecha_final_vehiculo.columna_anyo;
@@ -83,12 +87,13 @@ int comprobar_simultaneidad_vehiculo (datos_csv_vehiculos_t* datos_vehiculos,
 
 			if (comprobar_superposicion(fecha_inicial_vehiculo,fecha_final_vehiculo,
 				                        *fecha_inicial_elemento,*fecha_final_elemento)) {
-				
+
+        
 				char mensaje_error[512];
-				snprintf(mensaje_error, 512, "Error en el terminal %s "
-				"Hay un problema de simultaneidad con el vehiculo en la fila %d"
-				"la fecha inicial del vehiculo es Año %d Mes %d Dia %d Hora %d Minuto %d"
-				"la fecha final del vehiculo es Año %d Mes %d Dia %d Hora %d Minuto %d",
+				snprintf(mensaje_error, 512, "Error en el terminal \n%s "
+				"Hay un problema de simultaneidad con el vehiculo en la fila \n%d"
+				"la fecha inicial del vehiculo es Año %d Mes %d Dia %d Hora %d Minuto \n%d"
+				"la fecha final del vehiculo es Año %d Mes %d Dia %d Hora %d Minuto \n%d",
 				numero_terminal,fila_inicial,fecha_inicial_vehiculo.tm_year+DESPLAZAMIENTO_ANYO, 
 				fecha_inicial_vehiculo.tm_mon + DESPLAZAMIENTO_MES,
 				fecha_inicial_vehiculo.tm_mday, fecha_inicial_vehiculo.tm_hour,
@@ -190,7 +195,7 @@ int comprobar_simultaneidad_baterias (datos_csv_baterias_t* datos_baterias,
 	int columna_mes_inicial = datos_baterias->posiciones_informacion_baterias.ubicacion_fecha_inicial_baterias.columna_mes;
 	int columna_dia_inicial = datos_baterias->posiciones_informacion_baterias.ubicacion_fecha_inicial_baterias.columna_dia;
 	int columna_hora_inicial = datos_baterias->posiciones_informacion_baterias.ubicacion_fecha_inicial_baterias.columna_hora;
-	int columna_minuto_inicial = datos_baterias->posiciones_informacion_baterias.ubicacion_fecha_final_baterias.columna_minuto;
+	int columna_minuto_inicial = datos_baterias->posiciones_informacion_baterias.ubicacion_fecha_inicial_baterias.columna_minuto;
 
 	//Se carga las columnas donde se encuentra la fecha final
 	int columna_anyo_final = datos_baterias->posiciones_informacion_baterias.ubicacion_fecha_final_baterias.columna_anyo;
@@ -376,22 +381,24 @@ int verificar_simultaneidad_vehiculos_baterias(datos_csv_vehiculos_t* datos_vehi
 
 	if (verificar_simultaneidad_vehiculos(datos_vehiculos) == ERROR) {
 		printf("Hay vehiculos que estan conectados al mismo terminal al mismo tiempo \n");
-		registrar_error("Hay vehiculos que estan conectados al mismo terminal al mismo tiempo", REGISTRO_ERRORES);
+		registrar_error("Hay vehiculos que estan conectados al mismo terminal al mismo tiempo\n", REGISTRO_ERRORES);
 		return ERROR;
 	}
-	
+  
 	
 	if (verificar_simultaneidad_baterias(datos_baterias) == ERROR) {
 		printf("Hay baterias conectadas al mismo terminal al mismo tiempo \n");
-		registrar_error("Hay baterias conectadas al mismo terminal al mismo tiempo", REGISTRO_ERRORES);
+		registrar_error("Hay baterias conectadas al mismo terminal al mismo tiempo\n", REGISTRO_ERRORES);
 		return ERROR;
 	}
 
-	
+  
 	if (verificar_simultaneidad_cruzada_vehiculos_baterias(datos_vehiculos, datos_baterias) == ERROR) {
 		printf("Hay vehiculos y baterias conectadas al mismo tiempo \n");
-		registrar_error("Hay vehiculos y baterias conectadas al mismo terminal al mismo tiempo", REGISTRO_ERRORES);
+		registrar_error("Hay vehiculos y baterias conectadas al mismo terminal al mismo tiempo\n", REGISTRO_ERRORES);
 		return ERROR;
 	}
+
+  
 	return EXITO;
 }

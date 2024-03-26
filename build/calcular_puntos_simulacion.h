@@ -19,7 +19,7 @@ extern "C" {
 		datos_csv_baterias_t* datos_baterias, int* numero_fechas_adicionales, struct tm* fecha_inicial_algoritmo,
 		struct tm* fecha_final_algoritmo);
 	void obtener_punto_simulacion(OSQPInt* punto_simulacion, struct tm* fecha, puntos_adicionales_t* puntos_adicionales);
-
+	void printTm(struct tm* date);
 #ifdef __cplusplus
 }
 #endif

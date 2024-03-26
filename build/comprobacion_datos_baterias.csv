@@ -1,1 +1,5 @@
 ﻿Terminal,Capacidad Bateria,Bateria Inicial,Bateria Final,Maxima Potencia,Año Inicial,Mes Inicial,Dia Inicial,Hora Inicial,Minuto Inicial,Año Final,Mes Final,Dia Final,Hora Final,Minuto Final,¿Considerar Objetivo?,Año Objetivo,Mes Objetivo,Dia Objetivo,Hora Objetivo,Minuto Objetivo
+12,80,0.9,0.9,80,2023,1,1,0,0,2023,1,1,9,10,no,,(null),(null),(null),(null)
+12,80,0.9,0.9,80,2023,1,1,9,11,2023,1,1,23,10,no,,(null),(null),(null),(null)
+7,80,0.9,0.9,80,2023,1,1,0,0,2023,1,1,9,10,no,,(null),(null),(null),(null)
+7,80,0.9,0.9,80,2023,1,1,9,11,2023,1,1,23,10,no,,(null),(null),(null),(null)

@@ -181,7 +181,7 @@ int imprimir_matriz_P(problema_optimizacion_t* informacion_problema_optimizacion
 
 
 
-  printf("n es %lld\n", P->n);
+  
 
 
   // Se escribe los elementos de la matriz en el CSV
@@ -229,8 +229,7 @@ int imprimir_matriz_A(problema_optimizacion_t* informacion_problema_optimizacion
 
 
 
-  printf("m es %lld\n", A->m);
-  printf("n es %lld\n", A->n);
+  
 
 
   // Se escribe los elementos de la matriz en el CSV
@@ -268,6 +267,7 @@ int imprimir_matrices_problema_optimizacion(problema_optimizacion_t* informacion
 
   
 
+  /*
   if (imprimir_vector_l(informacion_problema_optimizacion) == ERROR) {
     printf("No se han podido imprimir los datos del vector l en el csv de comprobación\n");
     registrar_error("No se han podido imprimir los datos del vector l en el csv de comprobación\n", REGISTRO_ERRORES);
@@ -300,7 +300,7 @@ int imprimir_matrices_problema_optimizacion(problema_optimizacion_t* informacion
     registrar_error("No se ha podido imprimir los datos del vector q en el csv de comprobación\n", REGISTRO_ERRORES);
     return ERROR;
   }
-
+  
   
   if (imprimir_vectores_a(informacion_problema_optimizacion, informacion_sistema) == ERROR) {
     printf("No se ha podido imprimir los datos de los vectores A_x, A_i y A_p\n");
@@ -313,6 +313,6 @@ int imprimir_matrices_problema_optimizacion(problema_optimizacion_t* informacion
     registrar_error("No se ha podido imprimir los datos de los vectores P_x, P_i y P_p\n", REGISTRO_ERRORES);
     return ERROR;
   }
-
+  */
   return EXITO;
 }

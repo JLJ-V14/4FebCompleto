@@ -373,7 +373,7 @@ int procesar_informacion_precio(informacion_entrada_t* informacion_entrada, info
     registrar_error("No se ha podido reservar memoria para la informacion de los precios de compra correctamente\n", REGISTRO_ERRORES);
     return ERROR;
   }
-
+  
 
 
 
@@ -555,7 +555,7 @@ int configurar_puntos_simulacion(informacion_entrada_t* informacion_entrada, inf
   //Se carga la resolution temporal de la simulacion
   int delta_resolucion = atoi(informacion_entrada->datos_algoritmo.informacion_algoritmo.datos[fila_valores][columna_resolucion_minutos]);
   
-
+  
   
 
   //Se cargan las fechas iniciales y finales del algoritmo
@@ -569,8 +569,8 @@ int configurar_puntos_simulacion(informacion_entrada_t* informacion_entrada, inf
     fila_valores, SI_INCLUIR_MINUTO);
 
   
-
- 
+  
+  
   
   if (leer_fechas_adicionales(&(informacion_entrada->datos_vehiculos),fechas_adicionales, &(informacion_entrada->datos_baterias),
     &(informacion_puntos_adicionales->numero_puntos), fecha_inicial_algoritmo, fecha_final_algoritmo) == ERROR) {

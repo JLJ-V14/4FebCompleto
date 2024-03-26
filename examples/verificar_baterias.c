@@ -516,7 +516,10 @@ int verificar_baterias(datos_csv_baterias_t* datos_csv_baterias,  datos_csv_algo
 		registrar_error("error en las dimensiones del csv de las baterias", REGISTRO_ERRORES);
 		return ERROR;
 	}
+
   
+
+
 	if ((verificar_encabezados_baterias(informacion_baterias)) == ERROR) {
 		printf("error en los encabezados del csv de las baterias\n");
 		registrar_error("error en los encabezados del csv de las baterias\n", REGISTRO_ERRORES);
@@ -536,13 +539,18 @@ int verificar_baterias(datos_csv_baterias_t* datos_csv_baterias,  datos_csv_algo
 			registrar_error("Las fechas de las baterias son incorrectas\n",REGISTRO_ERRORES);
 			return ERROR;
 		}
+
+
     
+
 		//Se comprueba que los datos de la bateria son correctos.
 		if (comprobar_datos_bateria(datos_csv_baterias, numero_bateria) == ERROR) {
 			printf("Los datos de las baterias son incorrectos\n");
 			registrar_error("Los datos de las baterias son incorrectos\n", REGISTRO_ERRORES);
 			return ERROR;
 		}
+
+
 
     //Se comprueba la fase a la que está conectada la batería
     if (verificar_fase_bateria(datos_csv_baterias, datos_terminales, numero_bateria) == ERROR) {

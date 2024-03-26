@@ -19,7 +19,7 @@ int preparar_problema_optimizacion(informacion_procesada_t* informacion_sistema,
   //Se procede a calcular el numero de variables que tiene el problema de optimizacion
   calcular_numero_variables(informacion_sistema, &(problema_optimizacion->numero_variables));
   
-
+  
   
   //Se procede a calcular el numero de restricciones que tiene el problema de optimizacion
   calcular_numero_restricciones(informacion_sistema,&(problema_optimizacion->numero_restricciones));
@@ -43,7 +43,7 @@ int preparar_problema_optimizacion(informacion_procesada_t* informacion_sistema,
   }
  
  
-
+  
   
   
   //Se muestra la informacion de las matrices para comprobar si se han escrito correctamente
@@ -54,7 +54,7 @@ int preparar_problema_optimizacion(informacion_procesada_t* informacion_sistema,
   }
   /* */
   
-
+ 
   
   
   //Se procede a preparar el solver del problema de optimizacion.

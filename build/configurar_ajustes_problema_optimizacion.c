@@ -25,8 +25,8 @@ int configurar_ajustes_problema_optimizacion(OSQPSettings ** ajustes) {
     osqp_set_default_settings(*ajustes);
     //Se mejora la precisión de la optimización
     (*ajustes)->alpha = 1.0;
-    (*ajustes)->eps_rel = 1e-6;
-    (*ajustes)->eps_abs = 1e-6;
+    (*ajustes)->eps_rel = 1e-8;
+    (*ajustes)->eps_abs = 1e-8;
     (*ajustes)->max_iter = 100000;
     (*ajustes)->adaptive_rho = true;
     //(*ajustes)->polishing = true;

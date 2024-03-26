@@ -150,15 +150,13 @@ void incluir_columnas_potencia_terminal(informacion_procesada_t* informacion_sis
 
       for (int punto_actual = 0; punto_actual < numero_puntos_simulacion; punto_actual++) {
 
-        printf("La columna actual anyadida es %d\n", *comienzo_columna_actual);
+        
         //Si hay elementos que tienen su carga programada en el terminal, hay que tener en cuenta a la hora de añadir
         //los elementos en el vector A_p
 
         if (numero_elementos_terminales > index_adicional) {
 
-          printf("El punto actual es %d\n", punto_actual);
-          printf("El punto inicial es %d\n", punto_inicial);
-          printf("El punto final es %d\n", punto_final);
+         
           if (comprobar_rango(punto_actual,punto_inicial,punto_final) == true) {
 
             //Si coincide con el primer punto de la simulacion en el cual la batería o vehículo está presente, solo
@@ -254,7 +252,7 @@ void incluir_columnas_potencias_terminales(informacion_procesada_t* informacion_
     incluir_columnas_potencia_terminal(informacion_sistema, A_p, index_actual, numero_terminal, comienzo_columna_actual, fase,
       programacion_elementos_carga_terminales);
 
-    printf("La ultima potencia de terminal de columna anyadida es %d\n", A_p[*index_actual - 1]);
+ 
     }
   
   
