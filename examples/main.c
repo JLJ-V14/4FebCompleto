@@ -140,8 +140,8 @@
 
    
 
+   
     
-    printf("El numero de vehiculos que tienen su carga programada antes de lectura es %d\n", informacion_sistema.datos_vehiculos.informacion_vehiculos.filas - 1);
     
     //Se procesa la informacion de entrada
     if (procesar_informacion_entrada(&informacion_sistema, &informacion_procesada) == ERROR) {
@@ -150,8 +150,8 @@
       goto fin_programa;
     }
     
-    printf("El numero de vehiculos que tienen su carga programada es %d\n", informacion_sistema.datos_vehiculos.informacion_vehiculos.filas - 1);
-
+   
+    
     
    
     

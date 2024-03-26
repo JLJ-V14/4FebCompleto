@@ -216,14 +216,13 @@ int imprimir_informacion_precios(const informacion_precio_t* informacion_precios
   //Se imprimme los encabezados en el csv de comprobacion de la informacion procesada de los precios
   fprintf(archivo, "FechaAsociada,Precio,PuntoInicial,PuntoFinal\n");
 
-  printf("El numero de horas que tienen precio es %d",informacion_puntos_simulacion->numero_puntos_simulacion);
+  
 
   //Se itera por cada precio
   for (int i = 0; i <informacion_precios->numero_precios; i++) {
-    printf("Iteracion\n");
+    
     const precio_t* precio = &(informacion_precios->precios[i]);
-    printf("El punto inicial es %lld \n", informacion_precios->precios[i].punto_inicial);
-    printf("El punto final es %lld\n", informacion_precios->precios[i].punto_final);
+ 
    
     fprintf(archivo, "%s,%.2f,%lld,%lld\n",
       tm_to_string(&(precio->fecha_asociada)),
@@ -252,7 +251,7 @@ int imprimir_informacion_terminales(informacion_terminales_t* informacion_termin
   fprintf(archivo, "Numero Terminal,Fase\n");
   //Se imprimime 
   for (int numero_terminal = 0; numero_terminal < NUMERO_TERMINALES; numero_terminal++) {
-    printf("La fase es %c\n", informacion_terminales->fases_electricas[numero_terminal]);
+    
     fprintf(archivo, "%d,%c\n", numero_terminal + 1, informacion_terminales->fases_electricas[numero_terminal]);
   }
   fclose(archivo);

@@ -1,2 +1,6 @@
-﻿  preparar_solver_optimizacion.c
+﻿  funcionces_calcular_a_p.c
+funcionces_calcular_a_p.c(257,12): warning C4477: 'printf' : format string '%d' requires an argument of type 'int', but variadic argument 1 has type 'OSQPInt'
+funcionces_calcular_a_p.c(257,12): message : consider using '%lld' in the format string
+funcionces_calcular_a_p.c(257,12): message : consider using '%Id' in the format string
+funcionces_calcular_a_p.c(257,12): message : consider using '%I64d' in the format string
   osqp_demo.vcxproj -> F:\osqp1feb\osqp-1.0.0.beta1\build\out\osqp_demo.exe

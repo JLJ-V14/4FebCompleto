@@ -46,7 +46,7 @@ void procesar_informacion_terminales(informacion_entrada_t *informacion_entrada,
     }
     else {
       informacion_procesada->informacion_terminales.fases_electricas[fila_actual] = *(informacion_entrada->datos_terminales.informacion_terminales.datos[fila_actual + 1][columna_valores_fases]);
-      printf("La fase es %c \n", informacion_procesada->informacion_terminales.fases_electricas[fila_actual]);
+      
     }
     
   }
@@ -440,9 +440,7 @@ int procesar_informacion_precio(informacion_entrada_t* informacion_entrada, info
     if (comprobar_hora(informacion_procesada->informacion_precio_compra.precios[precio_actual].fecha_asociada,
       informacion_procesada->informacion_puntos_simulacion.puntos_simulacion[punto_actual].fecha_punto) == false) {
 
-      printf("Entra en la alteracion de precios\n");
-      printf("El numero de puntos de simulacion es %d\n", numero_puntos_simulacion);
-      printf("El punto actual es %d\n", punto_actual);
+      
 
 
 
@@ -581,7 +579,7 @@ int configurar_puntos_simulacion(informacion_entrada_t* informacion_entrada, inf
     return ERROR;
   }
 
-  printf("Marca\n");
+  
   //Se guarda la informacion de las fechas adicionales a añadir en las variables correspondiente
    
  
@@ -623,7 +621,6 @@ int procesar_informacion_entrada(informacion_entrada_t*    informacion_entrada,
 
   
   
-  
   //Se configuran cuantos puntos de simulacion son necesarios 
   if (configurar_puntos_simulacion(informacion_entrada, informacion_procesada) == ERROR) {
     printf("No se ha podido configurar los puntos de simulacion correctamente\n");
@@ -632,6 +629,7 @@ int procesar_informacion_entrada(informacion_entrada_t*    informacion_entrada,
   }
   
   
+
   
   if (&(informacion_procesada->informacion_puntos_adicionales )== NULL) {
     // Handle memory allocation failure

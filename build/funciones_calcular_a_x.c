@@ -11,7 +11,7 @@
 
 //Este subprograma se utiliza para actualizar la posicion a comprobar de baterias presentes en el terminal
 void  actualizar_index_elemento_carga(int* index_elemento_carga,int punto_final_actual,int punto_actual) {
-  if (punto_final_actual < punto_actual){
+  if (punto_final_actual == punto_actual){
     (*index_elemento_carga) ++;
   }
 }
@@ -115,17 +115,20 @@ void incluir_terminos_baterias_terminal_A_x(informacion_procesada_t* informacion
 
   if (numero_elementos_terminales > 0) {
 
+
+    //Se carga el punto inicial del vehiculo o bateria cuyo termino SOC se está considerando
+    int punto_inicial = elementos_programados_carga_terminal->informacion_carga_terminales[terminal_actual].elementos_terminal[index_elemento_terminal].punto_inicio;
+
+    //Cargo el punto final del vehiculo o bateria cuyo termino SOC, se está considerando
+    int punto_final = elementos_programados_carga_terminal->informacion_carga_terminales[terminal_actual].elementos_terminal[index_elemento_terminal].punto_final;
+
+
+
     //Se itera por todos los puntos de simualacion.
     for (int punto_actual = 0; punto_actual < numero_puntos_simulacion; punto_actual++) {
 
-      //Se carga el punto inicial del vehiculo o bateria cuyo termino SOC se está considerando
-      int punto_inicial = elementos_programados_carga_terminal->informacion_carga_terminales[terminal_actual].elementos_terminal[index_elemento_terminal].punto_inicio;
+    
 
-      //Cargo el punto final del vehiculo o bateria cuyo termino SOC, se está considerando
-      int punto_final = elementos_programados_carga_terminal->informacion_carga_terminales[terminal_actual].elementos_terminal[index_elemento_terminal].punto_final;
-
-      //Se comprueba si es necesario actualizar el index del elemento que tiene su carga programada en el terminal 
-      actualizar_index_elemento_carga(&index_elemento_terminal, punto_final, punto_actual);
 
       if (numero_elementos_terminales > index_elemento_terminal) {
 
@@ -148,8 +151,12 @@ void incluir_terminos_baterias_terminal_A_x(informacion_procesada_t* informacion
             (*index_actual)++;
           }
 
+
+
+
           //Si no se esta en el punto inicial se añaden la restricción de borde, el termino de la bateria
           //anterior y el actual, el termino inicial de la bateria es negativa.
+
 
           else {
             A_x[*index_actual] = -1;
@@ -158,7 +165,19 @@ void incluir_terminos_baterias_terminal_A_x(informacion_procesada_t* informacion
             (*index_actual)++;
             A_x[*index_actual] = +1;
             (*index_actual)++;
+
+            //Se comprueba si el punto actual coincide con el punto final, es necesario actualizar el punto inicial y el punto final
+            //Si hay más elementos que tengan su carga prgoramada
+            if (punto_actual == punto_final) {
+              //Se comprueba si es necesario actualizar el index del elemento que tiene su carga programada en el terminal 
+              actualizar_index_elemento_carga(&index_elemento_terminal, punto_final, punto_actual);
+              if (numero_elementos_terminales > index_elemento_terminal) {
+                punto_inicial = elementos_programados_carga_terminal->informacion_carga_terminales[terminal_actual].elementos_terminal[index_elemento_terminal].punto_inicio;
+                punto_final = elementos_programados_carga_terminal->informacion_carga_terminales[terminal_actual].elementos_terminal[index_elemento_terminal].punto_final;
+              }
+            }
           }
+
         }
         else {
           A_x[*index_actual] = 1;

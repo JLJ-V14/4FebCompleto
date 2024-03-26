@@ -22,7 +22,7 @@ void incluir_columnas_potencia_salida_red_fase(informacion_procesada_t* informac
       (*comienzo_columna_actual) += 3;
     }
   }
-  printf("El index actual es %d\n", *index_actual);
+  
   //Hay que indicar la ultima columna cual es su ultimo elemento 
   A_p[(*index_actual)] = (*comienzo_columna_actual);
 }
@@ -150,11 +150,15 @@ void incluir_columnas_potencia_terminal(informacion_procesada_t* informacion_sis
 
       for (int punto_actual = 0; punto_actual < numero_puntos_simulacion; punto_actual++) {
 
+        printf("La columna actual anyadida es %d\n", *comienzo_columna_actual);
         //Si hay elementos que tienen su carga programada en el terminal, hay que tener en cuenta a la hora de añadir
         //los elementos en el vector A_p
 
         if (numero_elementos_terminales > index_adicional) {
 
+          printf("El punto actual es %d\n", punto_actual);
+          printf("El punto inicial es %d\n", punto_inicial);
+          printf("El punto final es %d\n", punto_final);
           if (comprobar_rango(punto_actual,punto_inicial,punto_final) == true) {
 
             //Si coincide con el primer punto de la simulacion en el cual la batería o vehículo está presente, solo
@@ -178,6 +182,12 @@ void incluir_columnas_potencia_terminal(informacion_procesada_t* informacion_sis
 
               if (punto_final == punto_actual) {
                 index_adicional++;
+
+                //Se comprueba si hay mas elementos que tengan programada su carga en el terminal
+                if (numero_elementos_terminales > index_adicional) {
+                  punto_inicial = programacion_elementos_carga_terminales->informacion_carga_terminales[terminal_actual].elementos_terminal[index_adicional].punto_inicio;
+                  punto_final = programacion_elementos_carga_terminales->informacion_carga_terminales[terminal_actual].elementos_terminal[index_adicional].punto_final;
+                }
               }
             }
             //Se actualiza el index de los puntos adicionales si ya el vehiculo o bateria no estaba presene
@@ -243,7 +253,8 @@ void incluir_columnas_potencias_terminales(informacion_procesada_t* informacion_
 
     incluir_columnas_potencia_terminal(informacion_sistema, A_p, index_actual, numero_terminal, comienzo_columna_actual, fase,
       programacion_elementos_carga_terminales);
-      
+
+    printf("La ultima potencia de terminal de columna anyadida es %d\n", A_p[*index_actual - 1]);
     }
   
   
@@ -273,7 +284,8 @@ void incluir_columnas_bateria_terminal(informacion_procesada_t* informacion_sist
 
 
   if (numero_elementos_terminales > 0) {
-    
+
+   
 
     //Se carga el punto inicial y el punto final del primer elemento a poner en la carga
     int punto_inicial = programacion_elementos_carga_terminal->informacion_carga_terminales[terminal_actual].elementos_terminal[index_elemento_carga].punto_inicio;
@@ -298,6 +310,13 @@ void incluir_columnas_bateria_terminal(informacion_procesada_t* informacion_sist
           (*comienzo_columna_actual) = (*comienzo_columna_actual) + 2;
           (*index_actual)++;
           index_elemento_carga++;
+
+          //Si hay mas elementos que tengan su carga programada en el terminal se actualiza el punto inicial y el
+          // punto final
+          if (numero_elementos_terminales >index_elemento_carga) {
+            punto_inicial = programacion_elementos_carga_terminal->informacion_carga_terminales[terminal_actual].elementos_terminal[index_elemento_carga].punto_inicio;
+            punto_final = programacion_elementos_carga_terminal->informacion_carga_terminales[terminal_actual].elementos_terminal[index_elemento_carga].punto_final;
+          }
 
           }
         }

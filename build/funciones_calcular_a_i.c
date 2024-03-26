@@ -40,12 +40,15 @@ int incluir_filas_potencia_salida_red_fase(informacion_procesada_t* informacion_
 
   for (int i = 0; i < numero_puntos_simulacion; i++) {
     A_i[(*index_actual)] = fila_restriccion_borde;
+    
     (*index_actual)++;
     (fila_restriccion_borde)++;
     A_i[(*index_actual)] = fila_ecuacion_35;
+    
     (*index_actual)++;
     (fila_ecuacion_35)++;
     A_i[(*index_actual)] = fila_ecuacion_37;
+    
     (*index_actual)++;
     (fila_ecuacion_37)++;
   }
@@ -330,6 +333,16 @@ void incluir_filas_potencias_terminal(informacion_procesada_t* informacion_siste
           //Se actualiza el index_adicional
           if (punto_final == punto_actual) {
             (index_elemento_carga_terminal)++;
+
+            //Se actualiza el punto inicial y el punto final si hay más elementos que tienen su carga
+            //programada en el terminal
+            if (numero_elementos_terminal > index_elemento_carga_terminal) {
+              punto_inicial = programacion_elementos_carga_terminales->informacion_carga_terminales[numero_terminal].elementos_terminal[index_elemento_carga_terminal].punto_inicio;
+              punto_final = programacion_elementos_carga_terminales->informacion_carga_terminales[numero_terminal].elementos_terminal[index_elemento_carga_terminal].punto_final;
+
+            }
+            
+
           }
 
         }

@@ -228,7 +228,7 @@ int obtener_informacion_carga_terminales(informacion_procesada_t* informacion_si
   }
 
  
-  
+ 
   //Se llama al subprograma que almacena la programacion de carga de las baterias
   if (obtener_informacion_carga_baterias(informacion_sistema, programacion_carga_terminales) == ERROR) {
     printf("No se ha podido programar la carga de las baterias de los terminales por problemas de reserva de memoria\n");

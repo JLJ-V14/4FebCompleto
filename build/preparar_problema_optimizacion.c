@@ -18,13 +18,13 @@ int preparar_problema_optimizacion(informacion_procesada_t* informacion_sistema,
 
   //Se procede a calcular el numero de variables que tiene el problema de optimizacion
   calcular_numero_variables(informacion_sistema, &(problema_optimizacion->numero_variables));
-   
+  
 
   
   //Se procede a calcular el numero de restricciones que tiene el problema de optimizacion
   calcular_numero_restricciones(informacion_sistema,&(problema_optimizacion->numero_restricciones));
 
-
+  
   
   //Se procede a calcular las diferentes matrices del problema de optimizacion
   if ((calcular_matrices(informacion_sistema,problema_optimizacion,programacion_carga_terminales)) == ERROR) {
@@ -32,7 +32,7 @@ int preparar_problema_optimizacion(informacion_procesada_t* informacion_sistema,
     registrar_error("No se han podido calcular las matrices del problema de optimizacion\n", REGISTRO_ERRORES);
     return ERROR;
   }
-
+  
   
   
   //Se procede a configurar los ajustes del problema de optimizacion
@@ -44,7 +44,7 @@ int preparar_problema_optimizacion(informacion_procesada_t* informacion_sistema,
  
  
 
-  /*
+  
   
   //Se muestra la informacion de las matrices para comprobar si se han escrito correctamente
   if ((imprimir_matrices_problema_optimizacion(problema_optimizacion,informacion_sistema)) == ERROR) {
@@ -52,10 +52,10 @@ int preparar_problema_optimizacion(informacion_procesada_t* informacion_sistema,
     registrar_error("No se han podido escribir las matrices del problema de optimización en el csv\n", REGISTRO_ERRORES);
     return ERROR;
   }
-  */
+  /* */
   
 
-  printf("Prueba1\n");
+  
   
   //Se procede a preparar el solver del problema de optimizacion.
   if (preparar_solver_optimizacion(problema_optimizacion,informacion_sistema) == ERROR) {
@@ -64,7 +64,7 @@ int preparar_problema_optimizacion(informacion_procesada_t* informacion_sistema,
     return ERROR;
   }
   /*
-  printf("Prueba2\n");
+  
   */
   return EXITO;
 }

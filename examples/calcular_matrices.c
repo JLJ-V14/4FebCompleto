@@ -25,7 +25,7 @@ int calcular_matrices(informacion_procesada_t *informacion_sistema, problema_opt
     return ERROR;
   }
 
-
+  
   
 
   if (calcular_matriz_p(informacion_sistema,problema_optimizacion,elementos_programados_terminales) == ERROR) {
