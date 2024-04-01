@@ -143,13 +143,18 @@ void obtener_precio_compra_venta(informacion_procesada_t* informacion_sistema, O
   OSQPFloat* precio_venta, OSQPInt punto_simulacion, int* index_actual) {
 
   //Cargo el punto final del precio actual
-  int punto_final = informacion_sistema->informacion_precio_compra.precios[*index_actual].punto_final;
+  OSQPInt punto_final = informacion_sistema->informacion_precio_compra.precios[*index_actual].punto_final;
+  
 
   //Si el punto de simulacion actual está por delante del punto final del precio actual es necesario
   //actualizar
 
   if (punto_final < punto_simulacion) {
+  
+
+    
     (*index_actual)++;
+   
     (*precio_compra) = informacion_sistema->informacion_precio_compra.precios[*index_actual].precio;
     (*precio_venta) = informacion_sistema->informacion_precio_venta.precios[*index_actual].precio;
   }
@@ -188,8 +193,8 @@ void calcular_objetivo_precio(informacion_procesada_t* informacion_sistema, OSQP
     obtener_precio_compra_venta(informacion_sistema, &precio_compra, &precio_venta, punto_actual, &index_actual_precio);
     //Cargo el delta de simulacion
     OSQPFloat delta_simulacion = informacion_sistema->informacion_puntos_simulacion.puntos_simulacion[punto_actual].delta;
-    q[offset_potencia_entrada_red + punto_actual] = +coeficiente_precio *((OSQPFloat)(delta_simulacion/60) *precio_compra);
-    q[offset_potencia_salida_red + punto_actual]  = -coeficiente_precio *((OSQPFloat)(delta_simulacion/60) *precio_venta);
+    q[offset_potencia_entrada_red + punto_actual] = +COEFICIENTE_REDUCIR_PRECIO *((OSQPFloat)(delta_simulacion/60) *precio_compra);
+    q[offset_potencia_salida_red + punto_actual]  = -COEFICIENTE_REDUCIR_PRECIO *((OSQPFloat)(delta_simulacion/60) *precio_venta);
   }
 
 }

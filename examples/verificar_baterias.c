@@ -400,9 +400,9 @@ static int comprobar_fecha_baterias(const int numero_bateria,  datos_csv_bateria
 	
 	
 	//Se comprueba que la fecha inicial de la bateria es anterior a la de finalizacion.
-	if (verificar_orden_fechas(fecha_inicial_bateria, fecha_final_bateria,INCLUIR_FECHA_IGUAL) == ERROR) {
-		printf("Error la fecha inicial de carga de la bateria no puede ser posterior a la fecha final de carga\n");
-		registrar_error("Error la fecha inicial de carga de la bateria no puede ser posterior a la fecha final de carga\n", REGISTRO_ERRORES);
+	if (verificar_orden_fechas(fecha_inicial_bateria, fecha_final_bateria,NO_INCLUIR_FECHA_IGUAL) == ERROR) {
+		printf("Error la fecha inicial de carga de la bateria no puede ser posterior o igual a la fecha final de carga\n");
+		registrar_error("Error la fecha inicial de carga de la bateria no puede ser posterior o igual a la fecha final de carga\n", REGISTRO_ERRORES);
 		return ERROR;
 	}
 

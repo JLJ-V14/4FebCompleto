@@ -251,7 +251,7 @@ int comprobar_fecha_carga(struct tm fecha_inicial_algoritmo, struct tm fecha_fin
 		return ERROR;
 	}
 	if (verificar_orden_fechas(fecha_inicial_carga, fecha_final_carga,
-		INCLUIR_FECHA_IGUAL) == ERROR) {
+		NO_INCLUIR_FECHA_IGUAL) == ERROR) {
 		printf("Error la fecha de inicio de la carga debe ser anterior a la fecha del posterior\n");
     registrar_error("Error la fecha de inicio de la carga debe ser anterior a la fecha del posterior\n", REGISTRO_ERRORES);
 		return ERROR;

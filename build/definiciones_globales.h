@@ -88,8 +88,9 @@ typedef enum {
 
 
 //Se definen los coeficientes de importancia en las funciones objetivos:
-#define COEFICIENTE_REDUCIR_PRECIO 1
-#define COEFICIENTE_CARGA  30
+#define COEFICIENTE_REDUCIR_PRECIO 100
+#define COEFICIENTE_CARGA  30000
+#define COEFICIENTE_PRESERVACION_BATERIA 10
 
 
 

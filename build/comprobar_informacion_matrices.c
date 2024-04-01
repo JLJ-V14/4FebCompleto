@@ -267,7 +267,7 @@ int imprimir_matrices_problema_optimizacion(problema_optimizacion_t* informacion
 
   
 
-  /*
+  
   if (imprimir_vector_l(informacion_problema_optimizacion) == ERROR) {
     printf("No se han podido imprimir los datos del vector l en el csv de comprobación\n");
     registrar_error("No se han podido imprimir los datos del vector l en el csv de comprobación\n", REGISTRO_ERRORES);
@@ -313,6 +313,6 @@ int imprimir_matrices_problema_optimizacion(problema_optimizacion_t* informacion
     registrar_error("No se ha podido imprimir los datos de los vectores P_x, P_i y P_p\n", REGISTRO_ERRORES);
     return ERROR;
   }
-  */
+  /**/
   return EXITO;
 }

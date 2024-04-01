@@ -326,19 +326,22 @@ int procesar_informacion_baterias(informacion_entrada_t * informacion_entrada,in
        cargar_fecha(&(informacion_entrada->datos_baterias.informacion_baterias), &(informacion_procesada->informacion_baterias.baterias[numero_bateria].fecha_objetivo),
          columna_anyo_objetivo, columna_mes_objetivo, columna_dia_objetivo, columna_hora_objetivo, columna_minuto_objetivo,
          numero_bateria + 1, SI_INCLUIR_MINUTO);
-
+       
        obtener_punto_simulacion(&(informacion_procesada->informacion_baterias.baterias[numero_bateria].punto_objetivo),
          &(informacion_procesada->informacion_baterias.baterias[numero_bateria].fecha_objetivo), puntos_adicionales);
 
+       
        informacion_procesada->informacion_baterias.baterias[numero_bateria].considerar_objetivo = true;
      }
      else {
        
-       informacion_procesada->informacion_baterias.baterias->punto_objetivo = 0;
+       informacion_procesada->informacion_baterias.baterias[numero_bateria].punto_objetivo = 0;
        memset(&(informacion_procesada->informacion_baterias.baterias[numero_bateria].fecha_objetivo), 0, sizeof(struct tm));
        informacion_procesada->informacion_baterias.baterias[numero_bateria].considerar_objetivo = false;
+       
      }
   }
+  
   return EXITO;
 }
 
@@ -440,10 +443,7 @@ int procesar_informacion_precio(informacion_entrada_t* informacion_entrada, info
     if (comprobar_hora(informacion_procesada->informacion_precio_compra.precios[precio_actual].fecha_asociada,
       informacion_procesada->informacion_puntos_simulacion.puntos_simulacion[punto_actual].fecha_punto) == false) {
 
-      
-
-
-
+     
       informacion_procesada->informacion_precio_compra.precios[precio_actual].punto_final = punto_actual;
       informacion_procesada->informacion_precio_venta.precios[precio_actual].punto_final = punto_actual;
       precio_actual++;
@@ -463,9 +463,12 @@ int procesar_informacion_precio(informacion_entrada_t* informacion_entrada, info
         registrar_error("Error procesando la informacion de los precios en la carga de las fechas de los precios de venta\n", REGISTRO_ERRORES);
         return ERROR;
       }
-      OSQPFloat precio_actual_compra = atof(informacion_entrada->datos_precio_compra.informacion_precio.datos[precio_actual][columna_precio_compra]);
-      OSQPFloat precio_actual_venta = atof(informacion_entrada->datos_precio_venta.informacion_precio.datos[precio_actual][columna_precio_venta]);
+      OSQPFloat precio_actual_compra = atof(informacion_entrada->datos_precio_compra.informacion_precio.datos[precio_actual+1][columna_precio_compra]);
+      OSQPFloat precio_actual_venta = atof(informacion_entrada->datos_precio_venta.informacion_precio.datos[precio_actual+1][columna_precio_venta]);
+      
+
       informacion_procesada->informacion_precio_compra.precios[precio_actual].precio = precio_actual_compra;
+      //printf("El precio actual de compra es %f\n", informacion_procesada->informacion_precio_compra.precios[precio_actual].precio);
       informacion_procesada->informacion_precio_venta.precios[precio_actual].precio = precio_actual_venta;
       informacion_procesada->informacion_precio_compra.precios[precio_actual].punto_inicial = punto_actual + 1;
       informacion_procesada->informacion_precio_venta.precios[precio_actual].punto_inicial = punto_actual + 1;
@@ -486,7 +489,7 @@ int procesar_informacion_precio(informacion_entrada_t* informacion_entrada, info
 
   if (comprobar_hora(informacion_procesada->informacion_precio_compra.precios[precio_actual].fecha_asociada,
     informacion_procesada->informacion_puntos_simulacion.puntos_simulacion[punto_actual].fecha_punto) == false) {
-    informacion_procesada->informacion_precio_compra.precios[precio_actual].punto_final = punto_actual;
+    informacion_procesada->informacion_precio_compra.precios[precio_actual].punto_final= punto_actual;
     informacion_procesada->informacion_precio_venta.precios[precio_actual].punto_final  = punto_actual;
   }
   //Si no existe esa coincidencia

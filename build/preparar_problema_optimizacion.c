@@ -45,14 +45,14 @@ int preparar_problema_optimizacion(informacion_procesada_t* informacion_sistema,
  
   
   
-  
+  /*
   //Se muestra la informacion de las matrices para comprobar si se han escrito correctamente
   if ((imprimir_matrices_problema_optimizacion(problema_optimizacion,informacion_sistema)) == ERROR) {
     printf("No se ha podido escribir las matrices del problema de optimización en el csv\n");
     registrar_error("No se han podido escribir las matrices del problema de optimización en el csv\n", REGISTRO_ERRORES);
     return ERROR;
   }
-  /* */
+  */
   
  
   

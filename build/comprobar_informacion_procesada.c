@@ -224,7 +224,7 @@ int imprimir_informacion_precios(const informacion_precio_t* informacion_precios
     const precio_t* precio = &(informacion_precios->precios[i]);
  
    
-    fprintf(archivo, "%s,%.2f,%lld,%lld\n",
+    fprintf(archivo, "%s,%f,%lld,%lld\n",
       tm_to_string(&(precio->fecha_asociada)),
       precio->precio,
       precio->punto_inicial,
