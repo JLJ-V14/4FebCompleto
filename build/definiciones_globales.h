@@ -36,6 +36,12 @@
 
 #define NO_INCLUIR_MINUTO        0
 #define SI_INCLUIR_MINUTO        1
+
+//Se define si se incluye el segundo en una fecha si  
+//o no.
+
+#define NO_INCLUIR_SEGUNDO 0 
+#define SI_INCLUIR_SEGUNDO 1
 //Numero de segundos que hay en una hora->
 
 #define SEGUNDOS_HORA           3600
@@ -58,7 +64,7 @@ typedef enum {
 //diferentes datos de entrada en los diferentes CSVS.
 // 
 //Datos_Algoritmo:
-#define NUM_COLUMNAS_CSV_INFO_ALGORITMO 11
+#define NUM_COLUMNAS_CSV_INFO_ALGORITMO 7
 #define NUM_FILAS_CSV_INFO_ALGORITMO    2
 
 

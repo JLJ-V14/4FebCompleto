@@ -20,7 +20,8 @@ extern "C" {
 
 	int cargar_fecha(const datos_csv_t* datos_entrada, struct tm* fecha, const int columna_csv_anyo,
 		const int columna_csv_mes, const int columna_csv_dia, const int columna_csv_hora,
-		const int columna_csv_minuto, const int numero_fila, const int incluir_minuto);
+		const int columna_csv_minuto, const int numero_fila, const int incluir_minuto,
+		const int incluir_segundo);
 
 	int  verificar_orden_fechas(const struct tm fecha_anterior, const struct tm fecha_posterior,
 		const int incluir_igual);

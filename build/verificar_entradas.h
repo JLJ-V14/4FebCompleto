@@ -13,7 +13,7 @@
 extern "C" {
 #endif
 
-	int verificar_entradas(informacion_entrada_t* informacion_sistema);
+	int verificar_entradas(informacion_entrada_t* informacion_sistema, struct tm*fecha_inicial_algoritmo);
 
 #ifdef __cplusplus
 }

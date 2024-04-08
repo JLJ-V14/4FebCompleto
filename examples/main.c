@@ -99,15 +99,16 @@
     //Se establece como separador decimal el punto
     ajustes_punto_decimal();
    
-    
+
+    //Se borran los errores de ejecuciones anteriores del programa
     borrar_contenido_log(REGISTRO_ERRORES);
 
     //Se inicializa la informacion procesada.
     inicializar_informacion_procesada(&informacion_procesada);
 
     
-    //Se borran los errores de ejecuciones anteriores del programa
-    
+ 
+    /*Se procede a hacer una lectura inicial de los datos del sistema*/
 
     
     // Se inicializan las variables que almacenan los datos de entrada.
@@ -140,7 +141,7 @@
    
     
     //Se verifica que la informacion de entrada es correcta
-    if (verificar_entradas(&informacion_sistema) == ERROR) {
+    if (verificar_entradas(&informacion_sistema,&fecha_inicial_algoritmo) == ERROR) {
         printf("Las entradas son incorrectas\n");
         registrar_error("Fallo las entradas son incorrectas\n", REGISTRO_ERRORES);
         goto fin_programa;
@@ -148,7 +149,9 @@
 
    
    
-   
+
+
+
     
     
     //Se procesa la informacion de entrada
