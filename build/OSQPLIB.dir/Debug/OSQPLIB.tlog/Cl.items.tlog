@@ -1,28 +1,28 @@
-F:\osqp1feb\osqp-1.0.0.beta1\src\auxil.c;F:\osqp1feb\osqp-1.0.0.beta1\build\OSQPLIB.dir\Debug\auxil.obj
-F:\osqp1feb\osqp-1.0.0.beta1\src\error.c;F:\osqp1feb\osqp-1.0.0.beta1\build\OSQPLIB.dir\Debug\error.obj
-F:\osqp1feb\osqp-1.0.0.beta1\src\scaling.c;F:\osqp1feb\osqp-1.0.0.beta1\build\OSQPLIB.dir\Debug\scaling.obj
-F:\osqp1feb\osqp-1.0.0.beta1\src\util.c;F:\osqp1feb\osqp-1.0.0.beta1\build\OSQPLIB.dir\Debug\util.obj
-F:\osqp1feb\osqp-1.0.0.beta1\src\polish.c;F:\osqp1feb\osqp-1.0.0.beta1\build\OSQPLIB.dir\Debug\polish.obj
-F:\osqp1feb\osqp-1.0.0.beta1\src\derivative.c;F:\osqp1feb\osqp-1.0.0.beta1\build\OSQPLIB.dir\Debug\derivative.obj
-F:\osqp1feb\osqp-1.0.0.beta1\src\interrupt_windows.c;F:\osqp1feb\osqp-1.0.0.beta1\build\OSQPLIB.dir\Debug\interrupt_windows.obj
-F:\osqp1feb\osqp-1.0.0.beta1\src\timing_windows.c;F:\osqp1feb\osqp-1.0.0.beta1\build\OSQPLIB.dir\Debug\timing_windows.obj
-F:\osqp1feb\osqp-1.0.0.beta1\src\codegen.c;F:\osqp1feb\osqp-1.0.0.beta1\build\OSQPLIB.dir\Debug\codegen.obj
-F:\osqp1feb\osqp-1.0.0.beta1\algebra\_common\csc_math.c;F:\osqp1feb\osqp-1.0.0.beta1\build\OSQPLIB.dir\Debug\csc_math.obj
-F:\osqp1feb\osqp-1.0.0.beta1\algebra\_common\csc_utils.c;F:\osqp1feb\osqp-1.0.0.beta1\build\OSQPLIB.dir\Debug\csc_utils.obj
-F:\osqp1feb\osqp-1.0.0.beta1\algebra\builtin\algebra_libs.c;F:\osqp1feb\osqp-1.0.0.beta1\build\OSQPLIB.dir\Debug\algebra_libs.obj
-F:\osqp1feb\osqp-1.0.0.beta1\algebra\builtin\vector.c;F:\osqp1feb\osqp-1.0.0.beta1\build\OSQPLIB.dir\Debug\vector.obj
-F:\osqp1feb\osqp-1.0.0.beta1\algebra\builtin\matrix.c;F:\osqp1feb\osqp-1.0.0.beta1\build\OSQPLIB.dir\Debug\matrix.obj
-F:\osqp1feb\osqp-1.0.0.beta1\algebra\_common\lin_sys\qdldl\amd\src\SuiteSparse_config.c;F:\osqp1feb\osqp-1.0.0.beta1\build\OSQPLIB.dir\Debug\SuiteSparse_config.obj
-F:\osqp1feb\osqp-1.0.0.beta1\algebra\_common\lin_sys\qdldl\amd\src\amd_1.c;F:\osqp1feb\osqp-1.0.0.beta1\build\OSQPLIB.dir\Debug\amd_1.obj
-F:\osqp1feb\osqp-1.0.0.beta1\algebra\_common\lin_sys\qdldl\amd\src\amd_2.c;F:\osqp1feb\osqp-1.0.0.beta1\build\OSQPLIB.dir\Debug\amd_2.obj
-F:\osqp1feb\osqp-1.0.0.beta1\algebra\_common\lin_sys\qdldl\amd\src\amd_aat.c;F:\osqp1feb\osqp-1.0.0.beta1\build\OSQPLIB.dir\Debug\amd_aat.obj
-F:\osqp1feb\osqp-1.0.0.beta1\algebra\_common\lin_sys\qdldl\amd\src\amd_control.c;F:\osqp1feb\osqp-1.0.0.beta1\build\OSQPLIB.dir\Debug\amd_control.obj
-F:\osqp1feb\osqp-1.0.0.beta1\algebra\_common\lin_sys\qdldl\amd\src\amd_defaults.c;F:\osqp1feb\osqp-1.0.0.beta1\build\OSQPLIB.dir\Debug\amd_defaults.obj
-F:\osqp1feb\osqp-1.0.0.beta1\algebra\_common\lin_sys\qdldl\amd\src\amd_info.c;F:\osqp1feb\osqp-1.0.0.beta1\build\OSQPLIB.dir\Debug\amd_info.obj
-F:\osqp1feb\osqp-1.0.0.beta1\algebra\_common\lin_sys\qdldl\amd\src\amd_order.c;F:\osqp1feb\osqp-1.0.0.beta1\build\OSQPLIB.dir\Debug\amd_order.obj
-F:\osqp1feb\osqp-1.0.0.beta1\algebra\_common\lin_sys\qdldl\amd\src\amd_post_tree.c;F:\osqp1feb\osqp-1.0.0.beta1\build\OSQPLIB.dir\Debug\amd_post_tree.obj
-F:\osqp1feb\osqp-1.0.0.beta1\algebra\_common\lin_sys\qdldl\amd\src\amd_postorder.c;F:\osqp1feb\osqp-1.0.0.beta1\build\OSQPLIB.dir\Debug\amd_postorder.obj
-F:\osqp1feb\osqp-1.0.0.beta1\algebra\_common\lin_sys\qdldl\amd\src\amd_preprocess.c;F:\osqp1feb\osqp-1.0.0.beta1\build\OSQPLIB.dir\Debug\amd_preprocess.obj
-F:\osqp1feb\osqp-1.0.0.beta1\algebra\_common\lin_sys\qdldl\amd\src\amd_valid.c;F:\osqp1feb\osqp-1.0.0.beta1\build\OSQPLIB.dir\Debug\amd_valid.obj
-F:\osqp1feb\osqp-1.0.0.beta1\algebra\_common\kkt.c;F:\osqp1feb\osqp-1.0.0.beta1\build\OSQPLIB.dir\Debug\kkt.obj
-F:\osqp1feb\osqp-1.0.0.beta1\algebra\_common\lin_sys\qdldl\qdldl_interface.c;F:\osqp1feb\osqp-1.0.0.beta1\build\OSQPLIB.dir\Debug\qdldl_interface.obj
+F:\osqp1feb\osqp-1.0.0.beta1\src\auxil.c;F:\osqp1feb\Copia de seguridad 4\osqp-1.0.0.beta1\build\OSQPLIB.dir\Debug\auxil.obj
+F:\osqp1feb\osqp-1.0.0.beta1\src\error.c;F:\osqp1feb\Copia de seguridad 4\osqp-1.0.0.beta1\build\OSQPLIB.dir\Debug\error.obj
+F:\osqp1feb\osqp-1.0.0.beta1\src\scaling.c;F:\osqp1feb\Copia de seguridad 4\osqp-1.0.0.beta1\build\OSQPLIB.dir\Debug\scaling.obj
+F:\osqp1feb\osqp-1.0.0.beta1\src\util.c;F:\osqp1feb\Copia de seguridad 4\osqp-1.0.0.beta1\build\OSQPLIB.dir\Debug\util.obj
+F:\osqp1feb\osqp-1.0.0.beta1\src\polish.c;F:\osqp1feb\Copia de seguridad 4\osqp-1.0.0.beta1\build\OSQPLIB.dir\Debug\polish.obj
+F:\osqp1feb\osqp-1.0.0.beta1\src\derivative.c;F:\osqp1feb\Copia de seguridad 4\osqp-1.0.0.beta1\build\OSQPLIB.dir\Debug\derivative.obj
+F:\osqp1feb\osqp-1.0.0.beta1\src\interrupt_windows.c;F:\osqp1feb\Copia de seguridad 4\osqp-1.0.0.beta1\build\OSQPLIB.dir\Debug\interrupt_windows.obj
+F:\osqp1feb\osqp-1.0.0.beta1\src\timing_windows.c;F:\osqp1feb\Copia de seguridad 4\osqp-1.0.0.beta1\build\OSQPLIB.dir\Debug\timing_windows.obj
+F:\osqp1feb\osqp-1.0.0.beta1\src\codegen.c;F:\osqp1feb\Copia de seguridad 4\osqp-1.0.0.beta1\build\OSQPLIB.dir\Debug\codegen.obj
+F:\osqp1feb\osqp-1.0.0.beta1\algebra\_common\csc_math.c;F:\osqp1feb\Copia de seguridad 4\osqp-1.0.0.beta1\build\OSQPLIB.dir\Debug\csc_math.obj
+F:\osqp1feb\osqp-1.0.0.beta1\algebra\_common\csc_utils.c;F:\osqp1feb\Copia de seguridad 4\osqp-1.0.0.beta1\build\OSQPLIB.dir\Debug\csc_utils.obj
+F:\osqp1feb\osqp-1.0.0.beta1\algebra\builtin\algebra_libs.c;F:\osqp1feb\Copia de seguridad 4\osqp-1.0.0.beta1\build\OSQPLIB.dir\Debug\algebra_libs.obj
+F:\osqp1feb\osqp-1.0.0.beta1\algebra\builtin\vector.c;F:\osqp1feb\Copia de seguridad 4\osqp-1.0.0.beta1\build\OSQPLIB.dir\Debug\vector.obj
+F:\osqp1feb\osqp-1.0.0.beta1\algebra\builtin\matrix.c;F:\osqp1feb\Copia de seguridad 4\osqp-1.0.0.beta1\build\OSQPLIB.dir\Debug\matrix.obj
+F:\osqp1feb\osqp-1.0.0.beta1\algebra\_common\lin_sys\qdldl\amd\src\SuiteSparse_config.c;F:\osqp1feb\Copia de seguridad 4\osqp-1.0.0.beta1\build\OSQPLIB.dir\Debug\SuiteSparse_config.obj
+F:\osqp1feb\osqp-1.0.0.beta1\algebra\_common\lin_sys\qdldl\amd\src\amd_1.c;F:\osqp1feb\Copia de seguridad 4\osqp-1.0.0.beta1\build\OSQPLIB.dir\Debug\amd_1.obj
+F:\osqp1feb\osqp-1.0.0.beta1\algebra\_common\lin_sys\qdldl\amd\src\amd_2.c;F:\osqp1feb\Copia de seguridad 4\osqp-1.0.0.beta1\build\OSQPLIB.dir\Debug\amd_2.obj
+F:\osqp1feb\osqp-1.0.0.beta1\algebra\_common\lin_sys\qdldl\amd\src\amd_aat.c;F:\osqp1feb\Copia de seguridad 4\osqp-1.0.0.beta1\build\OSQPLIB.dir\Debug\amd_aat.obj
+F:\osqp1feb\osqp-1.0.0.beta1\algebra\_common\lin_sys\qdldl\amd\src\amd_control.c;F:\osqp1feb\Copia de seguridad 4\osqp-1.0.0.beta1\build\OSQPLIB.dir\Debug\amd_control.obj
+F:\osqp1feb\osqp-1.0.0.beta1\algebra\_common\lin_sys\qdldl\amd\src\amd_defaults.c;F:\osqp1feb\Copia de seguridad 4\osqp-1.0.0.beta1\build\OSQPLIB.dir\Debug\amd_defaults.obj
+F:\osqp1feb\osqp-1.0.0.beta1\algebra\_common\lin_sys\qdldl\amd\src\amd_info.c;F:\osqp1feb\Copia de seguridad 4\osqp-1.0.0.beta1\build\OSQPLIB.dir\Debug\amd_info.obj
+F:\osqp1feb\osqp-1.0.0.beta1\algebra\_common\lin_sys\qdldl\amd\src\amd_order.c;F:\osqp1feb\Copia de seguridad 4\osqp-1.0.0.beta1\build\OSQPLIB.dir\Debug\amd_order.obj
+F:\osqp1feb\osqp-1.0.0.beta1\algebra\_common\lin_sys\qdldl\amd\src\amd_post_tree.c;F:\osqp1feb\Copia de seguridad 4\osqp-1.0.0.beta1\build\OSQPLIB.dir\Debug\amd_post_tree.obj
+F:\osqp1feb\osqp-1.0.0.beta1\algebra\_common\lin_sys\qdldl\amd\src\amd_postorder.c;F:\osqp1feb\Copia de seguridad 4\osqp-1.0.0.beta1\build\OSQPLIB.dir\Debug\amd_postorder.obj
+F:\osqp1feb\osqp-1.0.0.beta1\algebra\_common\lin_sys\qdldl\amd\src\amd_preprocess.c;F:\osqp1feb\Copia de seguridad 4\osqp-1.0.0.beta1\build\OSQPLIB.dir\Debug\amd_preprocess.obj
+F:\osqp1feb\osqp-1.0.0.beta1\algebra\_common\lin_sys\qdldl\amd\src\amd_valid.c;F:\osqp1feb\Copia de seguridad 4\osqp-1.0.0.beta1\build\OSQPLIB.dir\Debug\amd_valid.obj
+F:\osqp1feb\osqp-1.0.0.beta1\algebra\_common\kkt.c;F:\osqp1feb\Copia de seguridad 4\osqp-1.0.0.beta1\build\OSQPLIB.dir\Debug\kkt.obj
+F:\osqp1feb\osqp-1.0.0.beta1\algebra\_common\lin_sys\qdldl\qdldl_interface.c;F:\osqp1feb\Copia de seguridad 4\osqp-1.0.0.beta1\build\OSQPLIB.dir\Debug\qdldl_interface.obj

@@ -20,6 +20,7 @@
 #include "main.h"
 #include "mostrar_informacion_terminales.h"
 #include "obtener_informacion_carga_terminales.h"
+#include "obtener_fechas_algoritmo.h"
 #include "osqp.h"
 #include "preparar_problema_optimizacion.h"
 #include "procesar_informacion_entrada.h"
@@ -75,15 +76,22 @@
 
     informacion_entrada_t          informacion_sistema;
     informacion_procesada_t        informacion_procesada;
-    //informacion_fases_t            informacion_fases = { 0 };
     informacion_carga_terminales_t informacion_carga_terminales = { 0 };
    
     //Se define la estructura donde van a ir contenidas las matrices del problema de optimizacion
     problema_optimizacion_t problema_optimizacion = { 0 };
 
+    //Se define una variable para almacenar la fecha inicial del algoritmo y otra para almacenar la
+    //fecha final del algoritmo.
+    struct tm fecha_inicial_algoritmo;
+    
+
+    obtener_fecha_actual(&fecha_inicial_algoritmo);
+   
+
     // Se asume éxito inicialmente.
     int estado = EXITO;
-
+    
   
     //Se establece como idioma el español.
     ajustes_idioma();

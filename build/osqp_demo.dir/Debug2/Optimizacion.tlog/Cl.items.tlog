@@ -1,50 +1,51 @@
-F:\osqp1feb\osqp-1.0.0.beta1\examples\calcular_matrices.c;F:\osqp1feb\osqp-1.0.0.beta1\build\osqp_demo.dir\Debug2\calcular_matrices.obj
-F:\osqp1feb\osqp-1.0.0.beta1\examples\comprobar_lectura_datos.c;F:\osqp1feb\osqp-1.0.0.beta1\build\osqp_demo.dir\Debug2\comprobar_lectura_datos.obj
-F:\osqp1feb\osqp-1.0.0.beta1\examples\conversion_numeros.c;F:\osqp1feb\osqp-1.0.0.beta1\build\osqp_demo.dir\Debug2\conversion_numeros.obj
-F:\osqp1feb\osqp-1.0.0.beta1\examples\funciones_plataforma_dependiente.c;F:\osqp1feb\osqp-1.0.0.beta1\build\osqp_demo.dir\Debug2\funciones_plataforma_dependiente.obj
-F:\osqp1feb\osqp-1.0.0.beta1\examples\inicializacion_algoritmo.c;F:\osqp1feb\osqp-1.0.0.beta1\build\osqp_demo.dir\Debug2\inicializacion_algoritmo.obj
-F:\osqp1feb\osqp-1.0.0.beta1\examples\inicializar_csv.c;F:\osqp1feb\osqp-1.0.0.beta1\build\osqp_demo.dir\Debug2\inicializar_csv.obj
-F:\osqp1feb\osqp-1.0.0.beta1\examples\inicializar_posiciones.c;F:\osqp1feb\osqp-1.0.0.beta1\build\osqp_demo.dir\Debug2\inicializar_posiciones.obj
-F:\osqp1feb\osqp-1.0.0.beta1\examples\leer_entradas.c;F:\osqp1feb\osqp-1.0.0.beta1\build\osqp_demo.dir\Debug2\leer_entradas.obj
-F:\osqp1feb\osqp-1.0.0.beta1\examples\libcsv.c;F:\osqp1feb\osqp-1.0.0.beta1\build\osqp_demo.dir\Debug2\libcsv.obj
-F:\osqp1feb\osqp-1.0.0.beta1\examples\liberar_memoria.c;F:\osqp1feb\osqp-1.0.0.beta1\build\osqp_demo.dir\Debug2\liberar_memoria.obj
-F:\osqp1feb\osqp-1.0.0.beta1\examples\main.c;F:\osqp1feb\osqp-1.0.0.beta1\build\osqp_demo.dir\Debug2\main.obj
-F:\osqp1feb\osqp-1.0.0.beta1\examples\operaciones_csv.c;F:\osqp1feb\osqp-1.0.0.beta1\build\osqp_demo.dir\Debug2\operaciones_csv.obj
-F:\osqp1feb\osqp-1.0.0.beta1\examples\operaciones_fecha.c;F:\osqp1feb\osqp-1.0.0.beta1\build\osqp_demo.dir\Debug2\operaciones_fecha.obj
-F:\osqp1feb\osqp-1.0.0.beta1\examples\operaciones_string.c;F:\osqp1feb\osqp-1.0.0.beta1\build\osqp_demo.dir\Debug2\operaciones_string.obj
-F:\osqp1feb\osqp-1.0.0.beta1\examples\registrar_errores.c;F:\osqp1feb\osqp-1.0.0.beta1\build\osqp_demo.dir\Debug2\registrar_errores.obj
-F:\osqp1feb\osqp-1.0.0.beta1\examples\validaciones.c;F:\osqp1feb\osqp-1.0.0.beta1\build\osqp_demo.dir\Debug2\validaciones.obj
-F:\osqp1feb\osqp-1.0.0.beta1\examples\verificar_baterias.c;F:\osqp1feb\osqp-1.0.0.beta1\build\osqp_demo.dir\Debug2\verificar_baterias.obj
-F:\osqp1feb\osqp-1.0.0.beta1\examples\verificar_conexiones_simultaneas.c;F:\osqp1feb\osqp-1.0.0.beta1\build\osqp_demo.dir\Debug2\verificar_conexiones_simultaneas.obj
-F:\osqp1feb\osqp-1.0.0.beta1\examples\verificar_datos_algoritmo.c;F:\osqp1feb\osqp-1.0.0.beta1\build\osqp_demo.dir\Debug2\verificar_datos_algoritmo.obj
-F:\osqp1feb\osqp-1.0.0.beta1\examples\verificar_datos_terminales.c;F:\osqp1feb\osqp-1.0.0.beta1\build\osqp_demo.dir\Debug2\verificar_datos_terminales.obj
-F:\osqp1feb\osqp-1.0.0.beta1\examples\verificar_entradas.c;F:\osqp1feb\osqp-1.0.0.beta1\build\osqp_demo.dir\Debug2\verificar_entradas.obj
-F:\osqp1feb\osqp-1.0.0.beta1\examples\verificar_precios.c;F:\osqp1feb\osqp-1.0.0.beta1\build\osqp_demo.dir\Debug2\verificar_precios.obj
-F:\osqp1feb\osqp-1.0.0.beta1\examples\verificar_restricciones.c;F:\osqp1feb\osqp-1.0.0.beta1\build\osqp_demo.dir\Debug2\verificar_restricciones.obj
-F:\osqp1feb\osqp-1.0.0.beta1\examples\verificar_vehiculos.c;F:\osqp1feb\osqp-1.0.0.beta1\build\osqp_demo.dir\Debug2\verificar_vehiculos.obj
-F:\osqp1feb\osqp-1.0.0.beta1\build\calcular_dimensiones_problema.c;F:\osqp1feb\osqp-1.0.0.beta1\build\osqp_demo.dir\Debug2\calcular_dimensiones_problema.obj
-F:\osqp1feb\osqp-1.0.0.beta1\build\calcular_matriz_a.c;F:\osqp1feb\osqp-1.0.0.beta1\build\osqp_demo.dir\Debug2\calcular_matriz_a.obj
-F:\osqp1feb\osqp-1.0.0.beta1\build\calcular_matriz_p.c;F:\osqp1feb\osqp-1.0.0.beta1\build\osqp_demo.dir\Debug2\calcular_matriz_p.obj
-F:\osqp1feb\osqp-1.0.0.beta1\build\calcular_matriz_q.c;F:\osqp1feb\osqp-1.0.0.beta1\build\osqp_demo.dir\Debug2\calcular_matriz_q.obj
-F:\osqp1feb\osqp-1.0.0.beta1\build\calcular_numero_restricciones.c;F:\osqp1feb\osqp-1.0.0.beta1\build\osqp_demo.dir\Debug2\calcular_numero_restricciones.obj
-F:\osqp1feb\osqp-1.0.0.beta1\build\calcular_numero_variables.c;F:\osqp1feb\osqp-1.0.0.beta1\build\osqp_demo.dir\Debug2\calcular_numero_variables.obj
-F:\osqp1feb\osqp-1.0.0.beta1\build\calcular_puntos_simulacion.c;F:\osqp1feb\osqp-1.0.0.beta1\build\osqp_demo.dir\Debug2\calcular_puntos_simulacion.obj
-F:\osqp1feb\osqp-1.0.0.beta1\build\calcular_vector_l_u.c;F:\osqp1feb\osqp-1.0.0.beta1\build\osqp_demo.dir\Debug2\calcular_vector_l_u.obj
-F:\osqp1feb\osqp-1.0.0.beta1\build\comprobar_informacion_matrices.c;F:\osqp1feb\osqp-1.0.0.beta1\build\osqp_demo.dir\Debug2\comprobar_informacion_matrices.obj
-F:\osqp1feb\osqp-1.0.0.beta1\build\comprobar_informacion_procesada.c;F:\osqp1feb\osqp-1.0.0.beta1\build\osqp_demo.dir\Debug2\comprobar_informacion_procesada.obj
-F:\osqp1feb\osqp-1.0.0.beta1\build\configurar_ajustes_problema_optimizacion.c;F:\osqp1feb\osqp-1.0.0.beta1\build\osqp_demo.dir\Debug2\configurar_ajustes_problema_optimizacion.obj
-F:\osqp1feb\osqp-1.0.0.beta1\build\extraer_soluciones_problema_optimizacion.c;F:\osqp1feb\osqp-1.0.0.beta1\build\osqp_demo.dir\Debug2\extraer_soluciones_problema_optimizacion.obj
-F:\osqp1feb\osqp-1.0.0.beta1\build\funcionces_calcular_a_p.c;F:\osqp1feb\osqp-1.0.0.beta1\build\osqp_demo.dir\Debug2\funcionces_calcular_a_p.obj
-F:\osqp1feb\osqp-1.0.0.beta1\build\funciones_auxiliares_l_u.c;F:\osqp1feb\osqp-1.0.0.beta1\build\osqp_demo.dir\Debug2\funciones_auxiliares_l_u.obj
-F:\osqp1feb\osqp-1.0.0.beta1\build\funciones_calcular_a_i.c;F:\osqp1feb\osqp-1.0.0.beta1\build\osqp_demo.dir\Debug2\funciones_calcular_a_i.obj
-F:\osqp1feb\osqp-1.0.0.beta1\build\funciones_calcular_a_x.c;F:\osqp1feb\osqp-1.0.0.beta1\build\osqp_demo.dir\Debug2\funciones_calcular_a_x.obj
-F:\osqp1feb\osqp-1.0.0.beta1\build\funciones_calcular_restricciones_ecuaciones.c;F:\osqp1feb\osqp-1.0.0.beta1\build\osqp_demo.dir\Debug2\funciones_calcular_restricciones_ecuaciones.obj
-F:\osqp1feb\osqp-1.0.0.beta1\build\funciones_calcular_vector_l.c;F:\osqp1feb\osqp-1.0.0.beta1\build\osqp_demo.dir\Debug2\funciones_calcular_vector_l.obj
-F:\osqp1feb\osqp-1.0.0.beta1\build\funciones_calcular_vector_u.c;F:\osqp1feb\osqp-1.0.0.beta1\build\osqp_demo.dir\Debug2\funciones_calcular_vector_u.obj
-F:\osqp1feb\osqp-1.0.0.beta1\build\inicializar_informacion_procesada.c;F:\osqp1feb\osqp-1.0.0.beta1\build\osqp_demo.dir\Debug2\inicializar_informacion_procesada.obj
-F:\osqp1feb\osqp-1.0.0.beta1\build\mostrar_informacion_terminales.c;F:\osqp1feb\osqp-1.0.0.beta1\build\osqp_demo.dir\Debug2\mostrar_informacion_terminales.obj
-F:\osqp1feb\osqp-1.0.0.beta1\build\obtener_informacion_carga_terminales.c;F:\osqp1feb\osqp-1.0.0.beta1\build\osqp_demo.dir\Debug2\obtener_informacion_carga_terminales.obj
-F:\osqp1feb\osqp-1.0.0.beta1\build\preparar_problema_optimizacion.c;F:\osqp1feb\osqp-1.0.0.beta1\build\osqp_demo.dir\Debug2\preparar_problema_optimizacion.obj
-F:\osqp1feb\osqp-1.0.0.beta1\build\preparar_solver_optimizacion.c;F:\osqp1feb\osqp-1.0.0.beta1\build\osqp_demo.dir\Debug2\preparar_solver_optimizacion.obj
-F:\osqp1feb\osqp-1.0.0.beta1\build\procesar_informacion_entrada.c;F:\osqp1feb\osqp-1.0.0.beta1\build\osqp_demo.dir\Debug2\procesar_informacion_entrada.obj
-F:\osqp1feb\osqp-1.0.0.beta1\build\procesar_informacion_fases.c;F:\osqp1feb\osqp-1.0.0.beta1\build\osqp_demo.dir\Debug2\procesar_informacion_fases.obj
+F:\osqp1feb\Copia de seguridad 4\osqp-1.0.0.beta1\examples\calcular_matrices.c;F:\osqp1feb\Copia de seguridad 4\osqp-1.0.0.beta1\build\osqp_demo.dir\Debug2\calcular_matrices.obj
+F:\osqp1feb\Copia de seguridad 4\osqp-1.0.0.beta1\examples\comprobar_lectura_datos.c;F:\osqp1feb\Copia de seguridad 4\osqp-1.0.0.beta1\build\osqp_demo.dir\Debug2\comprobar_lectura_datos.obj
+F:\osqp1feb\Copia de seguridad 4\osqp-1.0.0.beta1\examples\conversion_numeros.c;F:\osqp1feb\Copia de seguridad 4\osqp-1.0.0.beta1\build\osqp_demo.dir\Debug2\conversion_numeros.obj
+F:\osqp1feb\Copia de seguridad 4\osqp-1.0.0.beta1\examples\funciones_plataforma_dependiente.c;F:\osqp1feb\Copia de seguridad 4\osqp-1.0.0.beta1\build\osqp_demo.dir\Debug2\funciones_plataforma_dependiente.obj
+F:\osqp1feb\Copia de seguridad 4\osqp-1.0.0.beta1\examples\inicializacion_algoritmo.c;F:\osqp1feb\Copia de seguridad 4\osqp-1.0.0.beta1\build\osqp_demo.dir\Debug2\inicializacion_algoritmo.obj
+F:\osqp1feb\Copia de seguridad 4\osqp-1.0.0.beta1\examples\inicializar_csv.c;F:\osqp1feb\Copia de seguridad 4\osqp-1.0.0.beta1\build\osqp_demo.dir\Debug2\inicializar_csv.obj
+F:\osqp1feb\Copia de seguridad 4\osqp-1.0.0.beta1\examples\inicializar_posiciones.c;F:\osqp1feb\Copia de seguridad 4\osqp-1.0.0.beta1\build\osqp_demo.dir\Debug2\inicializar_posiciones.obj
+F:\osqp1feb\Copia de seguridad 4\osqp-1.0.0.beta1\examples\leer_entradas.c;F:\osqp1feb\Copia de seguridad 4\osqp-1.0.0.beta1\build\osqp_demo.dir\Debug2\leer_entradas.obj
+F:\osqp1feb\Copia de seguridad 4\osqp-1.0.0.beta1\examples\libcsv.c;F:\osqp1feb\Copia de seguridad 4\osqp-1.0.0.beta1\build\osqp_demo.dir\Debug2\libcsv.obj
+F:\osqp1feb\Copia de seguridad 4\osqp-1.0.0.beta1\examples\liberar_memoria.c;F:\osqp1feb\Copia de seguridad 4\osqp-1.0.0.beta1\build\osqp_demo.dir\Debug2\liberar_memoria.obj
+F:\osqp1feb\Copia de seguridad 4\osqp-1.0.0.beta1\examples\main.c;F:\osqp1feb\Copia de seguridad 4\osqp-1.0.0.beta1\build\osqp_demo.dir\Debug2\main.obj
+F:\osqp1feb\Copia de seguridad 4\osqp-1.0.0.beta1\examples\operaciones_csv.c;F:\osqp1feb\Copia de seguridad 4\osqp-1.0.0.beta1\build\osqp_demo.dir\Debug2\operaciones_csv.obj
+F:\osqp1feb\Copia de seguridad 4\osqp-1.0.0.beta1\examples\operaciones_fecha.c;F:\osqp1feb\Copia de seguridad 4\osqp-1.0.0.beta1\build\osqp_demo.dir\Debug2\operaciones_fecha.obj
+F:\osqp1feb\Copia de seguridad 4\osqp-1.0.0.beta1\examples\operaciones_string.c;F:\osqp1feb\Copia de seguridad 4\osqp-1.0.0.beta1\build\osqp_demo.dir\Debug2\operaciones_string.obj
+F:\osqp1feb\Copia de seguridad 4\osqp-1.0.0.beta1\examples\registrar_errores.c;F:\osqp1feb\Copia de seguridad 4\osqp-1.0.0.beta1\build\osqp_demo.dir\Debug2\registrar_errores.obj
+F:\osqp1feb\Copia de seguridad 4\osqp-1.0.0.beta1\examples\validaciones.c;F:\osqp1feb\Copia de seguridad 4\osqp-1.0.0.beta1\build\osqp_demo.dir\Debug2\validaciones.obj
+F:\osqp1feb\Copia de seguridad 4\osqp-1.0.0.beta1\examples\verificar_baterias.c;F:\osqp1feb\Copia de seguridad 4\osqp-1.0.0.beta1\build\osqp_demo.dir\Debug2\verificar_baterias.obj
+F:\osqp1feb\Copia de seguridad 4\osqp-1.0.0.beta1\examples\verificar_conexiones_simultaneas.c;F:\osqp1feb\Copia de seguridad 4\osqp-1.0.0.beta1\build\osqp_demo.dir\Debug2\verificar_conexiones_simultaneas.obj
+F:\osqp1feb\Copia de seguridad 4\osqp-1.0.0.beta1\examples\verificar_datos_algoritmo.c;F:\osqp1feb\Copia de seguridad 4\osqp-1.0.0.beta1\build\osqp_demo.dir\Debug2\verificar_datos_algoritmo.obj
+F:\osqp1feb\Copia de seguridad 4\osqp-1.0.0.beta1\examples\verificar_datos_terminales.c;F:\osqp1feb\Copia de seguridad 4\osqp-1.0.0.beta1\build\osqp_demo.dir\Debug2\verificar_datos_terminales.obj
+F:\osqp1feb\Copia de seguridad 4\osqp-1.0.0.beta1\examples\verificar_entradas.c;F:\osqp1feb\Copia de seguridad 4\osqp-1.0.0.beta1\build\osqp_demo.dir\Debug2\verificar_entradas.obj
+F:\osqp1feb\Copia de seguridad 4\osqp-1.0.0.beta1\examples\verificar_precios.c;F:\osqp1feb\Copia de seguridad 4\osqp-1.0.0.beta1\build\osqp_demo.dir\Debug2\verificar_precios.obj
+F:\osqp1feb\Copia de seguridad 4\osqp-1.0.0.beta1\examples\verificar_restricciones.c;F:\osqp1feb\Copia de seguridad 4\osqp-1.0.0.beta1\build\osqp_demo.dir\Debug2\verificar_restricciones.obj
+F:\osqp1feb\Copia de seguridad 4\osqp-1.0.0.beta1\examples\verificar_vehiculos.c;F:\osqp1feb\Copia de seguridad 4\osqp-1.0.0.beta1\build\osqp_demo.dir\Debug2\verificar_vehiculos.obj
+F:\osqp1feb\Copia de seguridad 4\osqp-1.0.0.beta1\build\calcular_dimensiones_problema.c;F:\osqp1feb\Copia de seguridad 4\osqp-1.0.0.beta1\build\osqp_demo.dir\Debug2\calcular_dimensiones_problema.obj
+F:\osqp1feb\Copia de seguridad 4\osqp-1.0.0.beta1\build\calcular_matriz_a.c;F:\osqp1feb\Copia de seguridad 4\osqp-1.0.0.beta1\build\osqp_demo.dir\Debug2\calcular_matriz_a.obj
+F:\osqp1feb\Copia de seguridad 4\osqp-1.0.0.beta1\build\calcular_matriz_p.c;F:\osqp1feb\Copia de seguridad 4\osqp-1.0.0.beta1\build\osqp_demo.dir\Debug2\calcular_matriz_p.obj
+F:\osqp1feb\Copia de seguridad 4\osqp-1.0.0.beta1\build\calcular_matriz_q.c;F:\osqp1feb\Copia de seguridad 4\osqp-1.0.0.beta1\build\osqp_demo.dir\Debug2\calcular_matriz_q.obj
+F:\osqp1feb\Copia de seguridad 4\osqp-1.0.0.beta1\build\calcular_numero_restricciones.c;F:\osqp1feb\Copia de seguridad 4\osqp-1.0.0.beta1\build\osqp_demo.dir\Debug2\calcular_numero_restricciones.obj
+F:\osqp1feb\Copia de seguridad 4\osqp-1.0.0.beta1\build\calcular_numero_variables.c;F:\osqp1feb\Copia de seguridad 4\osqp-1.0.0.beta1\build\osqp_demo.dir\Debug2\calcular_numero_variables.obj
+F:\osqp1feb\Copia de seguridad 4\osqp-1.0.0.beta1\build\calcular_puntos_simulacion.c;F:\osqp1feb\Copia de seguridad 4\osqp-1.0.0.beta1\build\osqp_demo.dir\Debug2\calcular_puntos_simulacion.obj
+F:\osqp1feb\Copia de seguridad 4\osqp-1.0.0.beta1\build\calcular_vector_l_u.c;F:\osqp1feb\Copia de seguridad 4\osqp-1.0.0.beta1\build\osqp_demo.dir\Debug2\calcular_vector_l_u.obj
+F:\osqp1feb\Copia de seguridad 4\osqp-1.0.0.beta1\build\comprobar_informacion_matrices.c;F:\osqp1feb\Copia de seguridad 4\osqp-1.0.0.beta1\build\osqp_demo.dir\Debug2\comprobar_informacion_matrices.obj
+F:\osqp1feb\Copia de seguridad 4\osqp-1.0.0.beta1\build\comprobar_informacion_procesada.c;F:\osqp1feb\Copia de seguridad 4\osqp-1.0.0.beta1\build\osqp_demo.dir\Debug2\comprobar_informacion_procesada.obj
+F:\osqp1feb\Copia de seguridad 4\osqp-1.0.0.beta1\build\configurar_ajustes_problema_optimizacion.c;F:\osqp1feb\Copia de seguridad 4\osqp-1.0.0.beta1\build\osqp_demo.dir\Debug2\configurar_ajustes_problema_optimizacion.obj
+F:\osqp1feb\Copia de seguridad 4\osqp-1.0.0.beta1\build\extraer_soluciones_problema_optimizacion.c;F:\osqp1feb\Copia de seguridad 4\osqp-1.0.0.beta1\build\osqp_demo.dir\Debug2\extraer_soluciones_problema_optimizacion.obj
+F:\osqp1feb\Copia de seguridad 4\osqp-1.0.0.beta1\build\funcionces_calcular_a_p.c;F:\osqp1feb\Copia de seguridad 4\osqp-1.0.0.beta1\build\osqp_demo.dir\Debug2\funcionces_calcular_a_p.obj
+F:\osqp1feb\Copia de seguridad 4\osqp-1.0.0.beta1\build\funciones_auxiliares_l_u.c;F:\osqp1feb\Copia de seguridad 4\osqp-1.0.0.beta1\build\osqp_demo.dir\Debug2\funciones_auxiliares_l_u.obj
+F:\osqp1feb\Copia de seguridad 4\osqp-1.0.0.beta1\build\funciones_calcular_a_i.c;F:\osqp1feb\Copia de seguridad 4\osqp-1.0.0.beta1\build\osqp_demo.dir\Debug2\funciones_calcular_a_i.obj
+F:\osqp1feb\Copia de seguridad 4\osqp-1.0.0.beta1\build\funciones_calcular_a_x.c;F:\osqp1feb\Copia de seguridad 4\osqp-1.0.0.beta1\build\osqp_demo.dir\Debug2\funciones_calcular_a_x.obj
+F:\osqp1feb\Copia de seguridad 4\osqp-1.0.0.beta1\build\funciones_calcular_restricciones_ecuaciones.c;F:\osqp1feb\Copia de seguridad 4\osqp-1.0.0.beta1\build\osqp_demo.dir\Debug2\funciones_calcular_restricciones_ecuaciones.obj
+F:\osqp1feb\Copia de seguridad 4\osqp-1.0.0.beta1\build\funciones_calcular_vector_l.c;F:\osqp1feb\Copia de seguridad 4\osqp-1.0.0.beta1\build\osqp_demo.dir\Debug2\funciones_calcular_vector_l.obj
+F:\osqp1feb\Copia de seguridad 4\osqp-1.0.0.beta1\build\funciones_calcular_vector_u.c;F:\osqp1feb\Copia de seguridad 4\osqp-1.0.0.beta1\build\osqp_demo.dir\Debug2\funciones_calcular_vector_u.obj
+F:\osqp1feb\Copia de seguridad 4\osqp-1.0.0.beta1\build\inicializar_informacion_procesada.c;F:\osqp1feb\Copia de seguridad 4\osqp-1.0.0.beta1\build\osqp_demo.dir\Debug2\inicializar_informacion_procesada.obj
+F:\osqp1feb\Copia de seguridad 4\osqp-1.0.0.beta1\build\mostrar_informacion_terminales.c;F:\osqp1feb\Copia de seguridad 4\osqp-1.0.0.beta1\build\osqp_demo.dir\Debug2\mostrar_informacion_terminales.obj
+F:\osqp1feb\Copia de seguridad 4\osqp-1.0.0.beta1\build\obtener_fechas_algoritmo.c;F:\osqp1feb\Copia de seguridad 4\osqp-1.0.0.beta1\build\osqp_demo.dir\Debug2\obtener_fechas_algoritmo.obj
+F:\osqp1feb\Copia de seguridad 4\osqp-1.0.0.beta1\build\obtener_informacion_carga_terminales.c;F:\osqp1feb\Copia de seguridad 4\osqp-1.0.0.beta1\build\osqp_demo.dir\Debug2\obtener_informacion_carga_terminales.obj
+F:\osqp1feb\Copia de seguridad 4\osqp-1.0.0.beta1\build\preparar_problema_optimizacion.c;F:\osqp1feb\Copia de seguridad 4\osqp-1.0.0.beta1\build\osqp_demo.dir\Debug2\preparar_problema_optimizacion.obj
+F:\osqp1feb\Copia de seguridad 4\osqp-1.0.0.beta1\build\preparar_solver_optimizacion.c;F:\osqp1feb\Copia de seguridad 4\osqp-1.0.0.beta1\build\osqp_demo.dir\Debug2\preparar_solver_optimizacion.obj
+F:\osqp1feb\Copia de seguridad 4\osqp-1.0.0.beta1\build\procesar_informacion_entrada.c;F:\osqp1feb\Copia de seguridad 4\osqp-1.0.0.beta1\build\osqp_demo.dir\Debug2\procesar_informacion_entrada.obj
+F:\osqp1feb\Copia de seguridad 4\osqp-1.0.0.beta1\build\procesar_informacion_fases.c;F:\osqp1feb\Copia de seguridad 4\osqp-1.0.0.beta1\build\osqp_demo.dir\Debug2\procesar_informacion_fases.obj

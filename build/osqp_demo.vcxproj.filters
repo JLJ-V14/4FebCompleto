@@ -151,6 +151,9 @@
     <ClCompile Include="procesar_informacion_fases.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="obtener_fechas_algoritmo.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="F:\osqp1feb\osqp-1.0.0.beta1\CMakeLists.txt" />
@@ -318,6 +321,9 @@
       <Filter>Head Files</Filter>
     </ClInclude>
     <ClInclude Include="procesar_informacion_fases.h">
+      <Filter>Head Files</Filter>
+    </ClInclude>
+    <ClInclude Include="obtener_fechas_algoritmo.h">
       <Filter>Head Files</Filter>
     </ClInclude>
   </ItemGroup>
